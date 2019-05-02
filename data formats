@@ -1,0 +1,38 @@
+samus.vram[ // each index = a frame of animation
+  {
+    top: {
+      _address,
+      _id,
+      parts: {
+        part1: {
+          _address,
+          _id,
+          tiles: [
+            {
+              _updated: <timestamp>,
+              _address: '$e9020',
+              _id: 954400,
+              data: [
+                [ 7, 3, 0, 0, 0, 3, 7, 7 ],
+                [ 7, 0, 0, 0, 0, 0, 7, 5 ],
+                [ 7, 0, 0, 0, 0, 0, 7, 5 ],
+                [ 7, 0, 0, 0, 0, 0, 7, 5 ],
+                [ 7, 0, 0, 0, 0, 0, 7, 5 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 7 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 7 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 7 ]
+              ]
+            },
+            ...
+          ]
+        },
+        part2: { // see part1
+          ...
+        }
+      }
+    },
+    bottom: { // see top
+      ...
+    }
+  }
+]

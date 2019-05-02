@@ -1,0 +1,761 @@
+[
+  {
+    "pose": "00: Facing forward, ala Elevator pose"
+  },
+  {
+    "pose": "01: Facing right, normal"
+  },
+  {
+    "pose": "02: Facing left, normal"
+  },
+  {
+    "pose": "03: Facing right, aiming up"
+  },
+  {
+    "pose": "04: Facing left, aiming up"
+  },
+  {
+    "pose": "05: Facing right, aiming upright"
+  },
+  {
+    "pose": "06: Facing left, aiming upleft"
+  },
+  {
+    "pose": "07: Facing right, aiming downright"
+  },
+  {
+    "pose": "08: Facing left, aiming downleft"
+  },
+  {
+    "pose": "09: Moving right, not aiming"
+  },
+  {
+    "pose": "0A: Moving left, not aiming"
+  },
+  {
+    "pose": "0B: Moving right, gun extended forward (not aiming)"
+  },
+  {
+    "pose": "0C: Moving left, gun extended forward (not aiming)"
+  },
+  {
+    "pose": "0D: Moving right, aiming straight up*"
+  },
+  {
+    "pose": "0E: Moving left, aiming straight up*"
+  },
+  {
+    "pose": "0F: Moving right, aiming upright"
+  },
+  {
+    "pose": "10: Moving left, aiming upleft"
+  },
+  {
+    "pose": "11: Moving right, aiming downright"
+  },
+  {
+    "pose": "12: Moving left, aiming downleft"
+  },
+  {
+    "pose": "13: Normal jump facing right, gun extended, not aiming or moving"
+  },
+  {
+    "pose": "14: Normal jump facing left, gun extended, not aiming or moving"
+  },
+  {
+    "pose": "15: Normal jump facing right, aiming up"
+  },
+  {
+    "pose": "16: Normal jump facing left, aiming up"
+  },
+  {
+    "pose": "17: Normal jump facing right, aiming down"
+  },
+  {
+    "pose": "18: Normal jump facing left, aiming down"
+  },
+  {
+    "pose": "19: Spin Jump right"
+  },
+  {
+    "pose": "1A: Spin Jump left"
+  },
+  {
+    "pose": "1B: Space jump right"
+  },
+  {
+    "pose": "1C: Space jump left"
+  },
+  {
+    "pose": "1D: Facing right as morphball, no springball"
+  },
+  {
+    "pose": "1E: Moving right as a morphball on ground without springball"
+  },
+  {
+    "pose": "1F: Moving left as a morphball on ground without springball"
+  },
+  {
+    "pose": "20: Spinjump right*"
+  },
+  {
+    "pose": "21: Spinjump right*"
+  },
+  {
+    "pose": "22: Spinjump right*"
+  },
+  {
+    "pose": "23: Spinjump right*"
+  },
+  {
+    "pose": "24: Spinjump right*"
+  },
+  {
+    "pose": "25: Starting standing right, turning left"
+  },
+  {
+    "pose": "26: Starting standing left, turning right"
+  },
+  {
+    "pose": "27: Crouching, facing right"
+  },
+  {
+    "pose": "28: Crouching, facing left"
+  },
+  {
+    "pose": "29: Falling facing right, normal pose"
+  },
+  {
+    "pose": "2A: Falling facing left, normal pose"
+  },
+  {
+    "pose": "2B: Falling facing right, aiming up"
+  },
+  {
+    "pose": "2C: Falling facing left, aiming down"
+  },
+  {
+    "pose": "2D: Falling facing right, aiming down"
+  },
+  {
+    "pose": "2E: Falling facing left, aiming down"
+  },
+  {
+    "pose": "2F: Starting with normal jump facing right, turning left"
+  },
+  {
+    "pose": "30: Starting with normal jump facing left, turning right"
+  },
+  {
+    "pose": "31: Midair morphball facing right without springball"
+  },
+  {
+    "pose": "32: Midair morphball facing left without springball"
+  },
+  {
+    "pose": "33: Spinjump right*"
+  },
+  {
+    "pose": "34: Spinjump right*"
+  },
+  {
+    "pose": "35: Crouch transition, facing right"
+  },
+  {
+    "pose": "36: Crouch transition, facing left"
+  },
+  {
+    "pose": "37: Morphing into ball, facing right Ground and mid-air"
+  },
+  {
+    "pose": "38: Morphing into ball, facing left Ground and mid-air"
+  },
+  {
+    "pose": "39: Midair morphing into ball, facing right*"
+  },
+  {
+    "pose": "3A: Midair morphing into ball, facing left*"
+  },
+  {
+    "pose": "3B: Standing from crouching, facing right"
+  },
+  {
+    "pose": "3C: Standing from crouching, facing left"
+  },
+  {
+    "pose": "3D: Demorph while facing right Mid-air and on ground"
+  },
+  {
+    "pose": "3E: Demorph while facing left Mid-air and on ground"
+  },
+  {
+    "pose": "3F: Something with morphball, facing right*"
+  },
+  {
+    "pose": "40: Something with morphball, facing left*"
+  },
+  {
+    "pose": "41: Staying still with morphball, facing left, no springball"
+  },
+  {
+    "pose": "42: Spinjump right*"
+  },
+  {
+    "pose": "43: Starting from crouching right, turning left"
+  },
+  {
+    "pose": "44: Starting from crouching left, turning right"
+  },
+  {
+    "pose": "45: Garbage pose*"
+  },
+  {
+    "pose": "46: Garbage pose*"
+  },
+  {
+    "pose": "47: Standing, facing right*"
+  },
+  {
+    "pose": "48: Standing, facing left*"
+  },
+  {
+    "pose": "49: Moonwalk, facing left"
+  },
+  {
+    "pose": "4A: Moonwalk, facing right"
+  },
+  {
+    "pose": "4B: Normal jump transition from ground(standing or crouching), facing right"
+  },
+  {
+    "pose": "4C: Normal jump transition from ground(standing or crouching), facing left"
+  },
+  {
+    "pose": "4D: Normal jump facing right, gun not extended, not aiming, not moving"
+  },
+  {
+    "pose": "4E: Normal jump facing left, gun not extended, not aiming, not moving"
+  },
+  {
+    "pose": "4F: Hurt roll back, moving right/facing left"
+  },
+  {
+    "pose": "50: Hurt roll back, moving left/facing right"
+  },
+  {
+    "pose": "51: Normal jump facing right, moving forward (gun extended)"
+  },
+  {
+    "pose": "52: Normal jump facing left, moving forward (gun extended)"
+  },
+  {
+    "pose": "53: Hurt, facing right"
+  },
+  {
+    "pose": "54: Hurt, facing left"
+  },
+  {
+    "pose": "55: Normal jump transition from ground, facing right and aiming up"
+  },
+  {
+    "pose": "56: Normal jump transition from ground, facing left and aiming up"
+  },
+  {
+    "pose": "57: Normal jump transition from ground, facing right and aiming upright"
+  },
+  {
+    "pose": "58: Normal jump transition from ground, facing left and aiming upleft"
+  },
+  {
+    "pose": "59: Normal jump transition from ground, facing right and aiming downright"
+  },
+  {
+    "pose": "5A: Normal jump transition from ground, facing left and aiming downleft"
+  },
+  {
+    "pose": "5B: Something for grapple (wall jump?)*"
+  },
+  {
+    "pose": "5C: Something for grapple (wall jump?)*"
+  },
+  {
+    "pose": "5D: Broken grapple? Facing clockwise*"
+  },
+  {
+    "pose": "5E: Broken grapple? Facing clockwise*"
+  },
+  {
+    "pose": "5F: Broken grapple? Facing clockwise*"
+  },
+  {
+    "pose": "60: Better broken grapple Facing clockwise*"
+  },
+  {
+    "pose": "61: Nearly normal grapple Facing clockwise*"
+  },
+  {
+    "pose": "62: Nearly normal grapple Facing counterclockwise*"
+  },
+  {
+    "pose": "63: Facing left on grapple blocks, ready to jump*"
+  },
+  {
+    "pose": "64: Facing right on grapple blocks, ready to jump*"
+  },
+  {
+    "pose": "65: Glitchy grapple jump, facing left?*"
+  },
+  {
+    "pose": "66: Glitchy grapple jump, facing right?*"
+  },
+  {
+    "pose": "67: Facing right, falling, fired a shot"
+  },
+  {
+    "pose": "68: Facing left, falling, fired a shot"
+  },
+  {
+    "pose": "69: Normal jump facing right, aiming upright Moving optional"
+  },
+  {
+    "pose": "6A: Normal jump facing left, aiming upleft Moving optional"
+  },
+  {
+    "pose": "6B: Normal jump facing right, aiming downright Moving optional"
+  },
+  {
+    "pose": "6C: Normal jump facing left, aiming downleft Moving optional"
+  },
+  {
+    "pose": "6D: Falling facing right, aiming upright"
+  },
+  {
+    "pose": "6E: Falling facing left, aiming upleft"
+  },
+  {
+    "pose": "6F: Falling facing right, aiming downright"
+  },
+  {
+    "pose": "70: Falling facing left, aiming downleft"
+  },
+  {
+    "pose": "71: Standing to crouching, facing right and aiming upright"
+  },
+  {
+    "pose": "72: Standing to crouching, facing left and aiming upleft"
+  },
+  {
+    "pose": "73: Standing to crouching, facing right and aiming downright"
+  },
+  {
+    "pose": "74: Standing to crouching, facing left and aiming downleft"
+  },
+  {
+    "pose": "75: Moonwalk, facing left aiming upleft"
+  },
+  {
+    "pose": "76: Moonwalk, facing right aiming upright"
+  },
+  {
+    "pose": "77: Moonwalk, facing left aiming downleft"
+  },
+  {
+    "pose": "78: Moonwalk, facing right aiming downright"
+  },
+  {
+    "pose": "79: Spring ball on ground, facing right"
+  },
+  {
+    "pose": "7A: Spring ball on ground, facing left"
+  },
+  {
+    "pose": "7B: Spring ball on ground, moving right"
+  },
+  {
+    "pose": "7C: Spring ball on ground, moving left"
+  },
+  {
+    "pose": "7D: Spring ball falling, facing/moving right"
+  },
+  {
+    "pose": "7E: Spring ball falling, facing/moving left"
+  },
+  {
+    "pose": "7F: Spring ball jump in air, facing/moving right"
+  },
+  {
+    "pose": "80: Spring ball jump in air, facing/moving left"
+  },
+  {
+    "pose": "81: Screw attack right"
+  },
+  {
+    "pose": "82: Screw attack left"
+  },
+  {
+    "pose": "83: Walljump right"
+  },
+  {
+    "pose": "84: Walljump left"
+  },
+  {
+    "pose": "85: Crouching, facing right aiming up"
+  },
+  {
+    "pose": "86: Crouching, facing left aiming up"
+  },
+  {
+    "pose": "87: Turning from right to left while falling"
+  },
+  {
+    "pose": "88: Turning from left to right while falling"
+  },
+  {
+    "pose": "89: Ran into a wall on right (facing right)"
+  },
+  {
+    "pose": "8A: Ran into a wall on left (facing left)"
+  },
+  {
+    "pose": "8B: Turn around while standing (Probably used, but not sure when)"
+  },
+  {
+    "pose": "8C: Turn around while standing (Probably used, but not sure when)"
+  },
+  {
+    "pose": "8D: Turn around from right to left while aiming diagonal down while standing"
+  },
+  {
+    "pose": "8E: Turn around from left to right while aiming diagonal down while standing"
+  },
+  {
+    "pose": "8F: Turning around from right to left while aiming straight up in midair"
+  },
+  {
+    "pose": "90: Turning around from left to right while aiming straight up in midair"
+  },
+  {
+    "pose": "91: Turning around from right to left while aiming down or diagonal down in midair"
+  },
+  {
+    "pose": "92: Turning around from left to right while aiming down or diagonal down in midair"
+  },
+  {
+    "pose": "93: Turning around from right to left while aiming straight up while falling"
+  },
+  {
+    "pose": "94: Turning around from left to right while aiming straight up while falling"
+  },
+  {
+    "pose": "95: Turning around from right to left while aiming down or diagonal down while falling"
+  },
+  {
+    "pose": "96: Turning around from left to right while aiming down or diagonal down while falling"
+  },
+  {
+    "pose": "97: Turning around from right to left while aiming straight up while crouching"
+  },
+  {
+    "pose": "98: Turning around from left to right while aiming straight up while crouching"
+  },
+  {
+    "pose": "99: Turning around from right to left while aiming diagonal down while crouching"
+  },
+  {
+    "pose": "9A: Turning around from left to right while aiming diagonal down while crouching"
+  },
+  {
+    "pose": "9B: Facing forward, ala Elevator pose with the Varia and/or Gravity Suit"
+  },
+  {
+    "pose": "9C: Turning around from right to left while aiming diagonal up while standing"
+  },
+  {
+    "pose": "9D: Turning around from left to right while aiming diagonal up while standing"
+  },
+  {
+    "pose": "9E: Turning around from right to left while aiming diagonal up in midair"
+  },
+  {
+    "pose": "9F: Turning around from left to right while aiming diagonal up in midair"
+  },
+  {
+    "pose": "A0: Turning around from right to left while aiming diagonal up while falling"
+  },
+  {
+    "pose": "A1: Turning around from left to right while aiming diagonal up while falling"
+  },
+  {
+    "pose": "A2: Turn around from right to left while aiming diagonal up while crouching"
+  },
+  {
+    "pose": "A3: Turn around from left to right while aiming diagonal up while crouching"
+  },
+  {
+    "pose": "A4: Landing from normal jump, facing right"
+  },
+  {
+    "pose": "A5: Landing from normal jump, facing left"
+  },
+  {
+    "pose": "A6: Landing from spin jump, facing right"
+  },
+  {
+    "pose": "A7: Landing from spin jump, facing left"
+  },
+  {
+    "pose": "A8: Just standing, facing right*"
+  },
+  {
+    "pose": "A9: Just standing, facing left*"
+  },
+  {
+    "pose": "AA: Just standing, facing right aiming downright*"
+  },
+  {
+    "pose": "AB: Just standing, facing left aiming downleft*"
+  },
+  {
+    "pose": "AC: Jumping, facing right, gun extended*"
+  },
+  {
+    "pose": "AD: Jumping, facing left, gun extended*"
+  },
+  {
+    "pose": "AE: Jumping, facing right, aiming down*"
+  },
+  {
+    "pose": "AF: Jumping, facing left, aiming down*"
+  },
+  {
+    "pose": "B0: Jumping, facing right, aiming downright*"
+  },
+  {
+    "pose": "B1: Jumping, facing left, aiming downleft*"
+  },
+  {
+    "pose": "B2: Grapple, facing clockwise"
+  },
+  {
+    "pose": "B3: Grapple, facing counterclockwise"
+  },
+  {
+    "pose": "B4: Crouching, facing right*"
+  },
+  {
+    "pose": "B5: Crouching, facing left*"
+  },
+  {
+    "pose": "B6: Crouching, facing right, aiming downright*"
+  },
+  {
+    "pose": "B7: Crouching, facing left, aiming downleft*"
+  },
+  {
+    "pose": "B8: Grapple, attached to a wall on right, facing left"
+  },
+  {
+    "pose": "B9: Grapple, attached to a wall on left, facing right"
+  },
+  {
+    "pose": "BA: Grabbed by Draygon, facing left, not moving"
+  },
+  {
+    "pose": "BB: Grabbed by Draygon, facing left aiming upleft, not moving"
+  },
+  {
+    "pose": "BC: Grabbed by Draygon, facing left and firing"
+  },
+  {
+    "pose": "BD: Grabbed by Draygon, facing left aiming downleft, not moving"
+  },
+  {
+    "pose": "BE: Grabbed by Draygon, facing left, moving"
+  },
+  {
+    "pose": "BF: Turn around while standing Probably used, but not sure when"
+  },
+  {
+    "pose": "C0: Turn around while standing Probably used, but not sure when"
+  },
+  {
+    "pose": "C1: Turn around while standing (Probably used, but not sure when)"
+  },
+  {
+    "pose": "C2: Turn around while standing (Probably used, but not sure when)"
+  },
+  {
+    "pose": "C3: Turn around while standing (Probably used, but not sure when)"
+  },
+  {
+    "pose": "C4: Turn around while standing (Probably used, but not sure when)"
+  },
+  {
+    "pose": "C5: Morph ball, facing right*"
+  },
+  {
+    "pose": "C6: Morph ball, facing left*"
+  },
+  {
+    "pose": "C7: Super jump windup, facing right"
+  },
+  {
+    "pose": "C8: Super jump windup, facing left"
+  },
+  {
+    "pose": "C9: Horizontal super jump, right"
+  },
+  {
+    "pose": "CA: Horizontal super jump, left"
+  },
+  {
+    "pose": "CB: Vertical super jump, facing right"
+  },
+  {
+    "pose": "CC: Vertical super jump, facing left"
+  },
+  {
+    "pose": "CD: Diagonal super jump, right"
+  },
+  {
+    "pose": "CE: Diagonal super jump, left"
+  },
+  {
+    "pose": "CF: Samus ran right into a wall, is still holding right and is now aiming diagonal up"
+  },
+  {
+    "pose": "D0: Samus ran right into a left, is still holding left and is now aiming diagonal up"
+  },
+  {
+    "pose": "D1: Samus ran right into a wall, is still holding right and is now aiming diagonal down"
+  },
+  {
+    "pose": "D2: Samus ran left into a wall, is still holding left and is now aiming diagonal down"
+  },
+  {
+    "pose": "D3: Crystal flash, facing right"
+  },
+  {
+    "pose": "D4: Crystal flash, facing left"
+  },
+  {
+    "pose": "D5: X-raying right, standing"
+  },
+  {
+    "pose": "D6: X-raying left, standing"
+  },
+  {
+    "pose": "D7: Crystal flash ending, facing right"
+  },
+  {
+    "pose": "D8: Crystal flash ending, facing left"
+  },
+  {
+    "pose": "D9: X-raying right, crouching"
+  },
+  {
+    "pose": "DA: X-raying left, crouching"
+  },
+  {
+    "pose": "DB: Standing transition to morphball, facing right?*"
+  },
+  {
+    "pose": "DC: Standing transition to morphball, facing left?*"
+  },
+  {
+    "pose": "DD: Morphball transition to standing, facing right?*"
+  },
+  {
+    "pose": "DE: Morphball transition to standing, facing left?*"
+  },
+  {
+    "pose": "DF: Samus is facing left as a morphball*"
+  },
+  {
+    "pose": "E0: Landing from normal jump, facing right and aiming up"
+  },
+  {
+    "pose": "E1: Landing from normal jump, facing left and aiming up"
+  },
+  {
+    "pose": "E2: Landing from normal jump, facing right and aiming upright"
+  },
+  {
+    "pose": "E3: Landing from normal jump, facing left and aiming upleft"
+  },
+  {
+    "pose": "E4: Landing from normal jump, facing right and aiming downright"
+  },
+  {
+    "pose": "E5: Landing from normal jump, facing left and aiming downleft"
+  },
+  {
+    "pose": "E6: Landing from normal jump, facing right, firing"
+  },
+  {
+    "pose": "E7: Landing from normal jump, facing left, firing"
+  },
+  {
+    "pose": "E8: Samus exhausted(Metroid drain, MB attack), facing right"
+  },
+  {
+    "pose": "E9: Samus exhausted(Metroid drain, MB attack), facing left"
+  },
+  {
+    "pose": "EA: Samus exhausted, looking up to watch Metroid attack MB, facing right"
+  },
+  {
+    "pose": "EB: Samus exhausted, looking up to watch Metroid attack MB, facing left"
+  },
+  {
+    "pose": "EC: Grabbed by Draygon, facing right Not moving"
+  },
+  {
+    "pose": "ED: Grabbed by Draygon, facing right aiming upright Not moving"
+  },
+  {
+    "pose": "EC: Grabbed by Draygon, facing right and firing"
+  },
+  {
+    "pose": "EF: Grabbed by Draygon, facing right aiming downright Not moving"
+  },
+  {
+    "pose": "F0: Grabbed by Draygon, facing right Moving"
+  },
+  {
+    "pose": "F1: Crouch transition, facing right and aiming up"
+  },
+  {
+    "pose": "F2: Crouch transition, facing left and aiming up"
+  },
+  {
+    "pose": "F3: Crouch transition, facing right and aiming upright"
+  },
+  {
+    "pose": "F4: Crouch transition, facing left and aiming upleft"
+  },
+  {
+    "pose": "F5: Crouch transition, facing right and aiming downright"
+  },
+  {
+    "pose": "F6: Crouch transition, facing left and aiming downleft"
+  },
+  {
+    "pose": "F7: Crouching to standing, facing right and aiming up"
+  },
+  {
+    "pose": "F8: Crouching to standing, facing left and aiming upleft"
+  },
+  {
+    "pose": "F9: Crouching to standing, facing right and aiming upright"
+  },
+  {
+    "pose": "FA: Crouching to standing, facing left and aiming upleft"
+  },
+  {
+    "pose": "FB: Crouching to standing, facing right and aiming downright"
+  },
+  {
+    "pose": "FC: Crouching to standing, facing left and aiming downleft"
+  }
+]
