@@ -31,9 +31,6 @@ export const getSubmenu = function (event, mainWindow) {
           })
         }
       }
-    },
-    {
-      label: 'save'
     }
   ]
 }
