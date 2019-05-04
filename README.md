@@ -1,4 +1,4 @@
-<h1>SUPER MUNCHTROID</h1>v.2.0.0 Beta
+<h1>SUPER MUNCHTROID</h1>v.2.1.0
 
 <img alt="Co.Koa header" title="Co.Koa" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
