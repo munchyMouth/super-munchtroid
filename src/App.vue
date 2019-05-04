@@ -28,7 +28,8 @@ export default {
       'setError',
       'setLoading',
       'setPalettes',
-      'setSamus']),
+      'setSamus',
+      'setSettings']),
     fail ({ type, title, message }, color = 'negative', timeout = 120000) {
       if (message) {
         this.$q.notify({
@@ -57,6 +58,7 @@ export default {
   updated () {
     ipcRenderer.on('ROM Loaded', async function (event, object) {
       try {
+        this.setSettings({ PALETTES: object.PALETTES, POSES: object.POSES })
         await this.setSamus(object)
         this.setPalettes(object)
       } catch (e) {

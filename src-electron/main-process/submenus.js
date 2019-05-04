@@ -1,8 +1,28 @@
 import { dialog } from 'electron'
+import { readFileSync } from 'fs'
+import path from 'path'
 
-import { SAMUS_POWERSUIT } from '../../libs/PalettePointers.json'
 import Samus from './Samus'
 import Palette from './Palette'
+
+const projectDirectory = __dirname.replace(
+  (process.env.PROD)
+    ? '/resources/app.asar'
+    : 'src-electron/main-process', '')
+
+const POSES = JSON.parse(
+  readFileSync(
+    path.resolve(
+      projectDirectory,
+      'libs',
+      'SamusPoses.json')))
+
+const PALETTES = JSON.parse(
+  readFileSync(
+    path.resolve(
+      projectDirectory,
+      'libs',
+      'PalettePointers.json')))
 
 export const getSubmenu = function (event, mainWindow) {
   return [
@@ -19,15 +39,16 @@ export const getSubmenu = function (event, mainWindow) {
             })
           if (filePath && filePath.length) {
             const palettes = await Palette({ filePath })
-              .getPalettesById(SAMUS_POWERSUIT)
+              .getPalettesById(PALETTES['01_SAMUS_POWERSUIT'])
             const samus = await Samus({ filePath }).load(0)
-            event.sender.send('ROM Loaded', { ...samus, filePath, palettes })
+            event.sender.send(
+              'ROM Loaded', { ...samus, filePath, palettes, POSES, PALETTES })
           }
         } catch (e) {
           event.sender.send('ROM Error', {
             type: 'RomMainLoadException',
             title: 'Failed to load your ROM: Error in main',
-            message: e.message
+            message: [e.message]
           })
         }
       }

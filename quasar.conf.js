@@ -1,3 +1,4 @@
+const path = require('path')
 // Configuration for your app
 
 module.exports = function (ctx) {
@@ -33,6 +34,11 @@ module.exports = function (ctx) {
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          '@libs': path.resolve(__dirname, 'libs')
+        }
+        cfg.resolve.extensions.push('json')
       }
     },
     devServer: {
@@ -127,6 +133,11 @@ module.exports = function (ctx) {
       // bundler: 'builder', // or 'packager'
       extendWebpack (cfg) {
         // do something with Electron process Webpack cfg
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          '@libs': path.resolve(__dirname, 'libs')
+        }
+        cfg.resolve.extensions.push('json')
       },
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options

@@ -131,6 +131,7 @@ export default {
     state.updatePalette = false
   },
   SET_SELECTED_TILE (state, o) { state.selectedTile = o },
+  SET_SETTINGS (state, o) { state.settings = o },
   SET_SPRITE_DEFAULT (state, o) { state.spriteDefault = o },
   SET_SPRITE_PROPERTY (state, { half, index, property, value }) {
     const sprite = state

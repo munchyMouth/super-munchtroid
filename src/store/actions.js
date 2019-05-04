@@ -120,6 +120,9 @@ export default {
       })
     }
   },
+  setSettings ({ commit }, o) {
+    commit('SET_SETTINGS', o)
+  },
   setSpriteProperty ({ commit, state }, o) {
     commit('SET_SPRITE_PROPERTY', { ...o })
     if (!o.hasOwnProperty('redraw') || o.redraw) {

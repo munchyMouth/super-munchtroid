@@ -5,7 +5,7 @@
       <strong>Pose: </strong>
     </div>
     <select @change="choosePose()">
-      <option v-for="({pose}, i) in poseMenu"
+      <option v-for="({pose}, i) in settings.POSES"
               :key="i"
               :value="pose"
               :selected="i === currentPose ? 'selected' : false">
@@ -16,9 +16,9 @@
       <strong>Palette: </strong>
     </div>
     <select @change="choosePalette()">
-      <option v-for="(it, i) in Object.keys(palettePointers)"
+      <option v-for="(it, i) in Object.keys(settings.PALETTES)"
               :key="i"
-              :value="JSON.stringify(palettePointers[it])"
+              :value="JSON.stringify(settings.PALETTES[it])"
               :selected="i === currentPalette ? 'selected' : false">
         {{ it }}
       </option>
@@ -107,6 +107,7 @@
 
 <script>
 import { ipcRenderer } from 'electron'
+import storage from 'electron-json-storage'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 import 'vue-awesome/icons/arrow-up'
@@ -115,9 +116,10 @@ import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/save'
 import Icon from 'vue-awesome/components/Icon'
 
+// import poseDir from '@libs/SamusPoses'
 import { getUpdatedVramTiles } from './Miscellaneous'
-import palettePointers from '../../libs/PalettePointers.json'
-import poseMenu from '../../libs/SamusPoses.json'
+// import palettePointers from '@libs/PalettePointers.json'
+// import poseMenu from '@libs/SamusPoses.json'
 
 import PlusMinusField from './PlusMinusField.vue'
 import SpriteManager from './SpriteManager.vue'
@@ -145,6 +147,7 @@ export default {
       'hasError',
       'loading',
       'romLoaded',
+      'settings',
       'spriteRatio',
       'updateSprite',
       'tileMapFrame',
@@ -158,8 +161,6 @@ export default {
   data () {
     return {
       activeHalf: undefined,
-      poseMenu,
-      palettePointers,
       previousPaletteIndex: 0,
       previousPoseIndex: 0
     }
@@ -267,6 +268,12 @@ export default {
         this.setSpriteRatio(this.spriteRatio - 1)
       }
     }
+  },
+  created () {
+    storage.getAll(function (error, data) {
+      if (error) throw error
+      console.log(data)
+    })
   }
 }
 </script>
