@@ -42,7 +42,7 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 ### Documentation
 
-- <a href="https://drive.google.com/open?id=1g89szAmAkSo5ExPBgpdtv4r7_H1ib8AP">Manual</a>
+- <a href="https://drive.google.com/open?id=1zmIdCBHzt_F-XKkn6cw3wkQbsdwlJdkI">Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 
 ---------
