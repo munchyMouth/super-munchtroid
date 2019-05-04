@@ -1,4 +1,4 @@
-<h1>SUPER MUNCHTROID</h1>v.2.0.0 Beta
+<h1>SUPER MUNCHTROID</h1>v.2.1.0
 
 <img alt="Co.Koa header" title="Co.Koa" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
@@ -6,8 +6,17 @@
 
 ### Downloads
 
-- <a href="https://drive.google.com/open?id=1XxUIC8Hp8AWWD8gAE-_TDBRP9CqYWPJf">Super Munchtroid-win32-x64</a>
-- <a href="https://drive.google.com/open?id=1bnr-vUzHM_DIHgCyBXta8u5gPqyJ-FcH">Super Munchtroid-linux-x64</a>
+#### 2.1.0
+- <a href="https://drive.google.com/open?id=1gI0NfqBh9JCgTW8vWx2FGQfCvscN_SCo">Super Munchtroid-win32-x64 2.1.0</a>
+- <a href="https://drive.google.com/open?id=1KUjCUWwhuwPo3g_FS9-rfgCKqZHW4mDU">Super Munchtroid-linux-x64 2.1.0</a>
+
+2.1.0 comes with a significant fix to file loading (which may improve performance as well as preventing crashes) and exposes the pose and palette json files so users can add their own custom data 
+
+--
+
+#### 2.0.0 Beta
+- <a href="https://drive.google.com/open?id=1XxUIC8Hp8AWWD8gAE-_TDBRP9CqYWPJf">Super Munchtroid-win32-x64 2.0.0</a>
+- <a href="https://drive.google.com/open?id=1bnr-vUzHM_DIHgCyBXta8u5gPqyJ-FcH">Super Munchtroid-linux-x64 2.0.0</a>
 
 ---------
 
@@ -33,7 +42,7 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 ### Documentation
 
-- <a href="https://drive.google.com/open?id=15UVBVNNEbdRI_i9odrjVoz86I4H-z52Y">Manual</a>
+- <a href="https://drive.google.com/open?id=1zmIdCBHzt_F-XKkn6cw3wkQbsdwlJdkI">Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 
 ---------
