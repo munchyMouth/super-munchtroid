@@ -38,13 +38,14 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 ---------
 
-### To do MoSCoW (Must or Should, Could or Would)
+### To do
 
-Mo*S*CoW
-[] Seek Speed Booster palette 
-[] Seek Hyper Beam palette
-[] Investigate possible active editor save bug (nothing serious) 
+[ ] Seek Speed Booster palette 
 
-MoS*C*oW
-[] Possible Hex mode?
-[] Possible VRAM/Tilemap Repointer menu
+[ ] Seek Hyper Beam palette
+
+[ ] Investigate possible active editor save bug (nothing serious) 
+
+[ ] Possible Hex mode?
+
+[ ] Possible VRAM/Tilemap Repointer menu
