@@ -1,6 +1,6 @@
 import stampit from 'stampit'
 
-import { open, read, write } from 'fs'
+import { close, open, read, write } from 'fs'
 
 export default stampit({
   props: {
@@ -67,6 +67,7 @@ export default stampit({
             if (!err) {
               const buff = Buffer.alloc(length)
               read(fd, buff, 0, length, offset, function (inErr, n, buffer) {
+                close(fd, closeErr => { if (closeErr) throw closeErr })
                 if (!inErr) resolve(buffer)
                 else throw inErr
               })
@@ -96,6 +97,7 @@ export default stampit({
           open(cleanFilePath, 'r+', function (err, fd) {
             if (!err) {
               write(fd, buff, 0, buff.length, offset, function (inErr) {
+                close(fd, closeErr => { if (closeErr) throw closeErr })
                 if (!inErr) resolve(true)
                 else throw inErr
               })
