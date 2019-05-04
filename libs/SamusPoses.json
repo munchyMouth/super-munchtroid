@@ -757,5 +757,8 @@
   },
   {
     "pose": "FC: Crouching to standing, facing left and aiming downleft"
+  },
+  {
+    "pose": "FD: Garbage Pose"
   }
 ]
