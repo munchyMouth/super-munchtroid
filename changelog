@@ -1,0 +1,3 @@
+04/05/19 2.1.0
+- Fixed bug with closing files after .open using fs.
+- Exposed settings files in /libs/ folder.

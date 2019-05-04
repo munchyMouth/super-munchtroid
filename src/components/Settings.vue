@@ -107,7 +107,6 @@
 
 <script>
 import { ipcRenderer } from 'electron'
-import storage from 'electron-json-storage'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 import 'vue-awesome/icons/arrow-up'
@@ -116,10 +115,7 @@ import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/save'
 import Icon from 'vue-awesome/components/Icon'
 
-// import poseDir from '@libs/SamusPoses'
 import { getUpdatedVramTiles } from './Miscellaneous'
-// import palettePointers from '@libs/PalettePointers.json'
-// import poseMenu from '@libs/SamusPoses.json'
 
 import PlusMinusField from './PlusMinusField.vue'
 import SpriteManager from './SpriteManager.vue'
@@ -268,12 +264,6 @@ export default {
         this.setSpriteRatio(this.spriteRatio - 1)
       }
     }
-  },
-  created () {
-    storage.getAll(function (error, data) {
-      if (error) throw error
-      console.log(data)
-    })
   }
 }
 </script>

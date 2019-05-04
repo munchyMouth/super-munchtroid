@@ -7,7 +7,7 @@ import Palette from './Palette'
 
 const projectDirectory = __dirname.replace(
   (process.env.PROD)
-    ? '/resources/app.asar'
+    ? /[/|\\]resources[/|\\]app.asar/g
     : 'src-electron/main-process', '')
 
 const POSES = JSON.parse(
