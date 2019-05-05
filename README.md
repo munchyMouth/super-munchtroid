@@ -44,7 +44,7 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 - <a href="https://drive.google.com/open?id=1zmIdCBHzt_F-XKkn6cw3wkQbsdwlJdkI">Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
-
+- <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 ---------
 
 ### To do
