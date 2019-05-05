@@ -7,8 +7,8 @@
 ### Downloads
 
 #### 2.1.0
-- <a href="https://drive.google.com/open?id=1gI0NfqBh9JCgTW8vWx2FGQfCvscN_SCo">Super Munchtroid-win32-x64 2.1.0</a>
-- <a href="https://drive.google.com/open?id=1KUjCUWwhuwPo3g_FS9-rfgCKqZHW4mDU">Super Munchtroid-linux-x64 2.1.0</a>
+- <a href="https://drive.google.com/open?id=1gI0NfqBh9JCgTW8vWx2FGQfCvscN_SCo">Super Munchtroid-linux-x64 2.1.0</a>
+- <a href="https://drive.google.com/open?id=1KUjCUWwhuwPo3g_FS9-rfgCKqZHW4mDU">Super Munchtroid-win32-x64 2.1.0</a>
 
 2.1.0 comes with a significant fix to file loading (which may improve performance as well as preventing crashes) and exposes the pose and palette json files so users can add their own custom data 
 
