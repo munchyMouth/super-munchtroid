@@ -3,9 +3,13 @@ import stampit from 'stampit'
 export default stampit({ /* extends RomData, SamusProps */
   init () {
     // PRIVATE -----------------------------------------------------------------
-    const ANIMATION_TABLE = 0x9008D
-    const INDEX_OFFSET_TABLE_BOT = 0x9145D
-    const INDEX_OFFSET_TABLE_TOP = 0x91263
+    const obj = this.loadSettingsFile('TableData')
+    const { ANIMATION_TABLE, INDEX_OFFSET_TABLE_BOT, INDEX_OFFSET_TABLE_TOP } =
+      ['ANIMATION_TABLE', 'INDEX_OFFSET_TABLE_BOT', 'INDEX_OFFSET_TABLE_TOP']
+        .reduce((o, key) => {
+          o[key] = parseInt(obj[key], 16)
+          return o
+        }, {})
 
     function tileMapPointerIsEmpty (tileMapPointer) {
       for (let i = 0; i < tileMapPointer.length; i++) {

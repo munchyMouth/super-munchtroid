@@ -3,7 +3,8 @@ import stampit from 'stampit'
 export default stampit({ /* extends RomData */
   init () {
     // PRIVATE -----------------------------------------------------------------
-    const FRAME_DELAY_TABLE = 0x8B010
+    const FRAME_DELAY_TABLE =
+      parseInt(this.loadSettingsFile('TableData').FRAME_DELAY_TABLE, 16)
 
     // PUBLIC ------------------------------------------------------------------
     this.setPose = function (pose) {

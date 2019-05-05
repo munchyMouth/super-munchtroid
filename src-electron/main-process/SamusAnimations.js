@@ -3,15 +3,12 @@ import stampit from 'stampit'
 export default stampit({ /* extends RomData, SamusProps */
   init (frames) {
     // PRIVATE -----------------------------------------------------------------
-    const FRAME_PROGRESS_TABLE = 0x9594E
-    const DMA_TABLES = {
-      TOP: [
-        'EECB', 'CECC', 'A0CD', '80CE', 'F7CE', '6ECF', 'E5CF', '5CD0', 'E8D0', '2ED1', '13D6', 'A6D6', '4ED7'
-      ].map(it => Buffer.from(it, 'hex')),
-      BOTTOM: [
-        '9ED1', '7ED2', '5ED3', 'D7D6', '06D4', 'A7D4', '4FD5', '86D7', 'F0D5', '9BD7', '05D6'
-      ].map(it => Buffer.from(it, 'hex'))
-    }
+    let { FRAME_PROGRESS_TABLE, DMA_TABLES } = this.loadSettingsFile('TableData')
+    DMA_TABLES = ['TOP', 'BOTTOM'].reduce((obj, half) => {
+      obj[half] = DMA_TABLES[half].map(it => Buffer.from(it, 'hex'))
+      return obj
+    }, {})
+    FRAME_PROGRESS_TABLE = parseInt(FRAME_PROGRESS_TABLE, 16)
 
     // PUBLIC ------------------------------------------------------------------
     this.getDMAData = async function (dmaOffsets, arr = []) {

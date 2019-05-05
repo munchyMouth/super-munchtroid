@@ -1,6 +1,6 @@
 import stampit from 'stampit'
-
-import { close, open, read, write } from 'fs'
+import path from 'path'
+import { close, open, read, readFileSync, write } from 'fs'
 
 export default stampit({
   props: {
@@ -77,6 +77,18 @@ export default stampit({
           reject(e)
         }
       })
+    }
+
+    this.loadSettingsFile = function (fileName) {
+      return JSON.parse(
+        readFileSync(
+          path.resolve(
+            __dirname.replace(
+              (process.env.PROD)
+                ? /[/|\\]resources[/|\\]app.asar/g
+                : 'src-electron/main-process', ''),
+            'libs',
+            `${fileName}.json`)))
     }
 
     this.reverseByteWords = function (data, format = 'int') {
