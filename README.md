@@ -15,8 +15,8 @@
 --
 
 #### 2.0.0 Beta
-- <a href="https://drive.google.com/open?id=1XxUIC8Hp8AWWD8gAE-_TDBRP9CqYWPJf">Super Munchtroid-linux-x64 2.0.0</a>
-- <a href="https://drive.google.com/open?id=1bnr-vUzHM_DIHgCyBXta8u5gPqyJ-FcH">Super Munchtroid-win32-x64 2.0.0</a>
+- <a href="https://drive.google.com/open?id=1bnr-vUzHM_DIHgCyBXta8u5gPqyJ-FcH">Super Munchtroid-linux-x64 2.0.0</a>
+- <a href="https://drive.google.com/open?id=1XxUIC8Hp8AWWD8gAE-_TDBRP9CqYWPJf">Super Munchtroid-win32-x64 2.0.0</a>
 
 ---------
 
