@@ -7,8 +7,8 @@
 ### Downloads
 
 #### 2.3.0
-<!-- - <a href="">Super Munchtroid-linux-x64 2.3.0</a>
-- <a href="">Super Munchtroid-win32-x64 2.3.0</a> -->
+- <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.3.0</a>
+- <a href="https://drive.google.com/open?id=18Q8sH7yb7A7D8gLnx6PJbfJPfKsaKvY1">Super Munchtroid-win32-x64 2.3.0</a>
 
 2.3.0 contains what should hopefully be *all* of Samus' palettes.
 
@@ -48,6 +48,6 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 ### Documentation
 
-- <a href="https://drive.google.com/open?id=1zmIdCBHzt_F-XKkn6cw3wkQbsdwlJdkI">Manual</a>
+- <a href="https://drive.google.com/open?id=1dIIWtJS0Lfokaq1hsTgSjmIJ-t5b26DX">Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
