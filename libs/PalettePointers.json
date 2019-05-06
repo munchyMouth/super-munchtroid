@@ -65,14 +65,9 @@
     "length": 32
   },
   {
-    "name": "Samus Gravity Suit Speed Booster",
-    "id": "9B9F20",
-    "length": 128
-  },
-  {
-    "name": "Samus Gravity Suit Speed Booster (redundant?)",
-    "id": "9B9540",
-    "length": 128
+    "name": "Samus Gravity Suit Charge Cycle",
+    "id": "9B9A20",
+    "length": 256
   },
   {
     "name": "Samus Gravity Suit Glow Cycle",
@@ -80,13 +75,18 @@
     "length": 128
   },
   {
-    "name": "Samus Gravity Suit Charge Cycle",
-    "id": "9B9A20",
-    "length": 256
-  },
-  {
     "name": "Samus Gravity Suit Glow Cycle (redundant?)",
     "id": "9B95C0",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Speed Booster",
+    "id": "9B9F20",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Speed Booster (redundant?)",
+    "id": "9B9540",
     "length": 128
   },
   {
