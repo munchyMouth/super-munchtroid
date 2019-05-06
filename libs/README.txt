@@ -7,7 +7,7 @@ The settings files in this folder control pretty much all of the stuff needed to
 
 - PalettePointers.json
   . contains the list of palettes you find in the palette drop down menu
-  . the number of cycles within a given palette is calculated by n * 32 (e.g. 4 cycles = 128)
+  . the number of cycles within a given palette is calculated by no-of-cycles * 32 (e.g. 4 cycles = 4 * 32 = 128)
 
 - TableData.json
   . a complete list of every static pointer SMunch requires to load your ROM.
