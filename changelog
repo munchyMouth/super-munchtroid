@@ -1,3 +1,7 @@
+05/05/19 2.3.0
+- Completely Refactored palette management
+- Added what should be ALL of Samus' Palettes to JSON
+
 05/05/19 2.2.0
 - Exposed all ROM statics as Table.json
 
