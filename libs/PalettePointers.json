@@ -1,25 +1,202 @@
-{
-  "01_SAMUS_POWERSUIT": { "id": "9B9400", "length": 32 },
-  "02_SAMUS_POWERSUIT_SCREWATTACK": { "id": "9B9CA0", "length": 128 },
-  "03_SAMUS_VARIASUIT": { "id": "9B9520", "length": 32 },
-  "04_SAMUS_VARIASUIT_SCREWATTACK": { "id": "9B9EA0", "length": 128 },
-  "05_SAMUS_GRAVITYSUIT": { "id": "9B9800", "length": 32 },
-  "06_SAMUS_GRAVITYSUIT_SCREWATTACK": { "id": "9BA0A0", "length": 128 },
-  "07_SAMUS_HYPER_BEAM": { "id": "9BA240", "length": 320 },
-  "08_TITLE_STUFF": { "id": "8CE1E9", "length": 32 },
-  "09_INTRO1": { "id": "8CE4C9", "length": 32 },
-  "10_INTRO2": { "id": "8CE3E9", "length": 256 },
-  "11_INTRO3": { "id": "8CE569", "length": 32 },
-  "12_PAUSE_SCREEN": { "id": "B6F000", "length": 512 },
-  "13_TITLE_METROID": { "id": "8BA2B9", "length": 128 },
-  "14_BEAM": { "id": "90C3E1", "length": 32 },
-  "15_SPORE_SPAWN_DAMAGE_GRADIENTS": { "id": "A5E359", "length": 32 },
-  "16_SPORE_SPAWN_FOREGROUND_GRADIENTS": { "id": "A5E4F9", "length": 32 },
-  "17_SPORE_SPAWN_BACKGROUND_GRADIENTS": { "id": "A5E5D9", "length": 32 },
-  "18_GOLD_TORIZO": { "id": "AA8787", "length": 32 },
-  "19_PALETTE_BLEND": { "id": "89AA02", "length": 32 },
-  "20_NINTENDO_LOGO": { "id": "8CE2E9", "length": 32 },
-  "21_SAMUS_ENDING1": { "id": "8CE9A9", "length": 32 },
-  "22_SAMUS_ENDING2": { "id": "9A8140", "length": 32 },
-  "23_SAMUS_ENDING3": { "id": "8CE829", "length": 32 }
-}
+[
+  {
+    "name": "Samus Power Suit",
+    "id": "9B9400",
+    "length": 32
+  },
+  {
+    "name": "Samus Power Suit Charge Cycle",
+    "id": "9B9820",
+    "length": 256
+  },
+  {
+    "name": "Samus Power Suit Glow Cycle",
+    "id": "9B9C20",
+    "length": 128
+  },
+  {
+    "name": "Samus Power Suit Screw Attack",
+    "id": "9B9CA0",
+    "length": 128
+  },
+  {
+    "name": "Samus Power Suit Speed Booster",
+    "id": "9B9B20",
+    "length": 128
+  },
+  {
+    "name": "Samus Power Suit White Cycle Fast",
+    "id": "9B9BA0",
+    "length": 128
+  },
+  {
+    "name": "Samus Varia Suit",
+    "id": "9B9520",
+    "length": 32
+  },
+  {
+    "name": "Samus Varia Suit Charge Cycle",
+    "id": "9B9920",
+    "length": 256
+  },
+  {
+    "name": "Samus Varia Suit Glow Cycle",
+    "id": "9B9E20",
+    "length": 128
+  },
+  {
+    "name": "Samus Varia Suit Screw Attack",
+    "id": "9B9EA0",
+    "length": 128
+  },
+  {
+    "name": "Samus Varia Suit Speed Booster",
+    "id": "9B9D20",
+    "length": 128
+  },
+  {
+    "name": "Samus Varia Suit White Cycle Fast",
+    "id": "9B9DA0",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit",
+    "id": "9B9800",
+    "length": 32
+  },
+  {
+    "name": "Samus Gravity Suit Speed Booster",
+    "id": "9B9F20",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Speed Booster (redundant?)",
+    "id": "9B9540",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Glow Cycle",
+    "id": "9BA020",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Charge Cycle",
+    "id": "9B9A20",
+    "length": 256
+  },
+  {
+    "name": "Samus Gravity Suit Glow Cycle (redundant?)",
+    "id": "9B95C0",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Screw Attack",
+    "id": "9BA0A0",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit Screw Attack (redundant?)",
+    "id": "9B9640",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit White Cycle Fast",
+    "id": "9B9FA0",
+    "length": 128
+  },
+  {
+    "name": "Samus Gravity Suit White Cycle Fast (redundant?)",
+    "id": "9B9780",
+    "length": 128
+  },
+  {
+    "name": "Samus Hyper Cycle",
+    "id": "9BA240",
+    "length": 320
+  },
+  {
+    "name": "Samus Flashback?",
+    "id": "9BA3A0",
+    "length": 32
+  },
+  {
+    "name": "Title Stuff",
+    "id": "8CE1E9",
+    "length": 32
+  },
+  {
+    "name": "Intro1",
+    "id": "8CE4C9",
+    "length": 32
+  },
+  {
+    "name": "Intro2",
+    "id": "8CE3E9",
+    "length": 256
+  },
+  {
+    "name": "Intro3",
+    "id": "8CE569",
+    "length": 32
+  },
+  {
+    "name": "Pause Screen",
+    "id": "B6F000",
+    "length": 512
+  },
+  {
+    "name": "Title Metroid",
+    "id": "8BA2B9",
+    "length": 128
+  },
+  {
+    "name": "Beam",
+    "id": "90C3E1",
+    "length": 32
+  },
+  {
+    "name": "Spore Spawn Damage Gradients",
+    "id": "A5E359",
+    "length": 32
+  },
+  {
+    "name": "Spore Spawn Foreground Gradients",
+    "id": "A5E4F9",
+    "length": 32
+  },
+  {
+    "name": "Spore Spawn Background Gradients",
+    "id": "A5E5D9",
+    "length": 32
+  },
+  {
+    "name": "Gold Torizo",
+    "id": "AA8787",
+    "length": 32
+  },
+  {
+    "name": "Palette Blend",
+    "id": "89AA02",
+    "length": 32
+  },
+  {
+    "name": "Nintendo Logo",
+    "id": "8CE2E9",
+    "length": 32
+  },
+  {
+    "name": "Samus Ending1",
+    "id": "8CE9A9",
+    "length": 32
+  },
+  {
+    "name": "Samus Ending2",
+    "id": "9A8140",
+    "length": 32
+  },
+  {
+    "name": "Samus Ending3",
+    "id": "8CE829",
+    "length": 32
+  }
+]

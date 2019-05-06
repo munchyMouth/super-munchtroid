@@ -38,8 +38,7 @@ export const getSubmenu = function (event, mainWindow) {
               }]
             })
           if (filePath && filePath.length) {
-            const palettes = await Palette({ filePath })
-              .getPalettesById(PALETTES['01_SAMUS_POWERSUIT'])
+            const palettes = await Palette({ filePath }).getPalettesByIndex()
             const samus = await Samus({ filePath }).load(0)
             event.sender.send(
               'ROM Loaded', { ...samus, filePath, palettes, POSES, PALETTES })

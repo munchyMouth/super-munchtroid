@@ -16,11 +16,11 @@
       <strong>Palette: </strong>
     </div>
     <select @change="choosePalette()">
-      <option v-for="(it, i) in Object.keys(settings.PALETTES)"
+      <option v-for="(it, i) in settings.PALETTES"
               :key="i"
-              :value="JSON.stringify(settings.PALETTES[it])"
+              :value="it.id"
               :selected="i === currentPalette ? 'selected' : false">
-        {{ it }}
+        {{ it.name }} (cycles: {{ it.length / 32 }})
       </option>
     </select>
     <plus-minus-field
@@ -183,10 +183,10 @@ export default {
         (this.updatePalette &&
         confirm('WARNING: Your palette changes will be lost!'))) {
         this.previousPaletteIndex = event.currentTarget.selectedIndex
-        ipcRenderer.send('Load Palettes',
-          { ...JSON.parse(event.currentTarget.value),
-            filePath: this.filePath,
-            i: this.previousPaletteIndex })
+        ipcRenderer.send('Load Palettes', {
+          filePath: this.filePath,
+          index: this.previousPaletteIndex
+        })
       } else event.currentTarget.selectedIndex = this.previousPaletteIndex
     },
     choosePose () {

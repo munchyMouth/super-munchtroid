@@ -55,12 +55,12 @@ ipcMain.on('attachMenuEvents', (event) => {
   Menu.setApplicationMenu(menu)
 })
 
-ipcMain.on('Load Palettes', (event, { filePath, id, length, i = 0 }) => {
+ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
   try {
     Palette({ filePath })
-      .getPalettesById({ id, length })
+      .getPalettesByIndex(index)
       .then(function (palettes) {
-        event.sender.send('Palettes Loaded', { palettes: palettes, i })
+        event.sender.send('Palettes Loaded', { palettes: palettes, index })
       }, function (e) {
         console.trace(e)
         event.sender.send('Palettes Error', {

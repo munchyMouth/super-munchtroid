@@ -53,7 +53,8 @@ export default stampit(RomData, {
     }
 
     // PUBLIC ------------------------------------------------------------------
-    this.getPalettesById = async function ({ id, length = 32 }) {
+    this.getPalettesByIndex = async function (index = 0) {
+      const { id, length } = this.loadSettingsFile('PalettePointers')[index]
       const romAddr = chunk(id, 2).reverse().map(it => parseInt(it, 16))
       const address = loRomToPc(romAddr[0], romAddr[1], romAddr[2])
       const data = await getOffsetData(address, length)
