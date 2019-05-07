@@ -51,3 +51,7 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 - <a href="https://drive.google.com/open?id=1dIIWtJS0Lfokaq1hsTgSjmIJ-t5b26DX">Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
+
+#### about 2.3.^1
+
+all "version-patch" releases after 2.3.0 (ie. lower than 2.4.0) will focus on tidying logic within the build.  Since this will not have an effect on performance, I'm not going to release builds of these patches unless they resolve a significant bug.
