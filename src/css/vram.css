@@ -1,0 +1,24 @@
+.vram-outer-wrapper--show {
+  padding-top: 83px;
+  transition: margin-top .7s;
+  padding-bottom: 0;
+  width: 100%;
+  height: 97px;
+  background: black;
+  margin-bottom: 16px;
+}
+.vram-outer-wrapper--hide {
+  width: 100%;
+  padding-top: 83px;
+  margin-top: -97px;
+  margin-bottom: 16px;
+  background: black;
+  height: 96px;
+  transition: margin-top .7s;
+}
+.vram-outer-wrapper--show canvas,
+.vram-outer-wrapper--hide canvas {
+  position: relative;
+  height: 96px;
+  margin-top: -96px;
+}

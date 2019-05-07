@@ -75,9 +75,9 @@ export default {
         ? Math.ceil((this.y - this.spriteZeroX) / this.spriteRatio)
         : Math.floor((this.y - this.spriteZeroX) / this.spriteRatio)
     },
-    // I know I know, below is a bit of redundancy, this came about from when I
-    // had the Sprite rendered in the same canvas as VRAM. I've kept it this way
-    // in case it's required for offseting in the future.
+    // The below is a bit redundant, this came about from when I had the Sprite
+    // rendered in the same canvas as VRAM. I've kept it this way in case it's
+    // required for offseting in the future.
     spriteEndX () { return 80 * this.spriteRatio },
     spriteEndY () { return 80 * this.spriteRatio },
     spriteMaxEndX () { return 80 * 6 },
@@ -199,30 +199,4 @@ export default {
 }
 </script>
 
-<style>
-.sprite-outer-wrapper {
-  display:flex;
-  flex-direction: row;
-  align-items:flex-start;
-  justify-items:flex-start
-}
-.sprite-canvas--active-sprite {
-  cursor: move;
-}
-.sprite-outer-wrapper--hide, .sprite-outer-wrapper--hide canvas {
-  width: 0;
-  transition: width 1s;
-}
-.sprite-outer-wrapper--show, .sprite-outer-wrapper--show canvas {
-  border: 1px solid black;
-  transition: width 1s;
-}
-.sprite-undo {
-  margin-top: 5px;
-  margin-left: 7px;
-  position: absolute;
-}
-.sprite-undo > svg {
-  width: 10px;
-}
-</style>
+<style>@import '../css/sprite.css';</style>

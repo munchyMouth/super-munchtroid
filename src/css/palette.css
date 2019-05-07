@@ -1,0 +1,99 @@
+.palette {
+  width: 100%;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.palette > div:first-child {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 24px
+}
+.palette__settings {
+  display: flex;
+  flex-direction: row
+}
+.palette__settings__16 {
+  display: flex;
+  flex-direction: column
+}
+.palette__settings__colors {
+  display: flex;
+  flex-wrap: wrap;
+  width: 256px;
+}
+.palette__settings__colors > button, .palette__settings__16 > button {
+  display: flex;
+  flex-direction: column;
+  width: 32px;
+  height: 32px;
+}
+.palette__settings__colors > button.--active {
+  border: 2px solid white;
+}
+.palette__current-colors > div {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc
+}
+.palette__current-colors {
+  padding-top: 9px
+}
+.palette__current-colors > div:first-child {
+  position: relative;
+  margin-right: 32px;
+  z-index: 10;
+}
+.palette__current-colors > div:last-child {
+  position:absolute;
+  margin-left: 16px;
+  margin-top: -18px;
+  z-index: 5
+}
+.palette__sliders {
+  margin-top: -40px;
+}
+.palette__sliders, .palette__sliders > div > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.palette__sliders > div{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end
+}
+.palette__sliders > div > label {
+  padding-right: 16px
+}
+.palette__settings__misc {
+  display: flex;
+  font-size: 10pt;
+  font-weight: bolder;
+  justify-content: flex-end;
+  padding-bottom: 16px;
+  width: 256px;
+}
+.palette__settings__misc > button {
+  margin-right: -16px;
+}
+.palette__sliders__save, .palette__sliders__undo {
+  width: 20px;
+  height: 60px;
+}
+.palette__sliders__save {
+  border: 1px solid #ccc !important;
+  margin-right: 8px;
+}
+.palette__sliders__save.--active {
+  color: red;
+}
+.palette__sliders__undo {
+  border: 1px solid red !important;
+}
+.palette__sliders__undo > svg {
+  width: 10px;
+}
+.palette__sliders__slider {
+  width: 290px
+}
