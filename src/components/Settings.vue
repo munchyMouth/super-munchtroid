@@ -239,7 +239,8 @@ export default {
                 return arr
                   .concat(this.filterSpritesToSave('top', it))
                   .concat(this.filterSpritesToSave('bottom', it))
-              }.bind(this), [])
+              }.bind(this), []),
+            isFirstPose: !this.currentPose
           })
       }
     },

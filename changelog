@@ -1,3 +1,9 @@
+07/05/19 2.3.2
+- fixes the default lift pose's use of a redundant tile in Common Sprites by blanking the redundant tile if pose === 1st pose
+
+06/05/19 2.3.1
+- decoupled the majority of CSS from components
+
 05/05/19 2.3.0
 - Completely Refactored palette management
 - Added what should be ALL of Samus' Palettes to JSON

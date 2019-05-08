@@ -114,10 +114,10 @@ ipcMain.on('Save Palettes', (event, { filePath, palettes }) => {
   }
 })
 
-ipcMain.on('Save Sprite', (event, { filePath, sprite }) => {
+ipcMain.on('Save Sprite', (event, { filePath, isFirstPose = false, sprite }) => {
   try {
     Samus({ filePath })
-      .saveSpriteToROM(sprite)
+      .saveSpriteToROM(isFirstPose, sprite)
       .then(function () {
         event.sender.send('Sprite Saved', true)
       }, function (e) {
@@ -132,10 +132,10 @@ ipcMain.on('Save Sprite', (event, { filePath, sprite }) => {
     console.trace(e)
   }
 })
-ipcMain.on('Save Sprites', (event, { filePath, sprites }) => {
+ipcMain.on('Save Sprites', (event, { filePath, isFirstPose = false, sprites }) => {
   try {
     Samus({ filePath })
-      .saveSpritesToROM(sprites)
+      .saveSpritesToROM(isFirstPose, sprites)
       .then(function () {
         event.sender.send('Sprites Saved', true)
       }, function (e) {

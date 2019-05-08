@@ -6,6 +6,12 @@
 
 ### Downloads
 
+#### 2.3.2
+- <a href="">Super Munchtroid-linux-x64 2.3.2</a>
+- <a href="">Super Munchtroid-win32-x64 2.3.2</a>
+
+2.3.2 fixes the default lift pose's use of a redundant tile in Common Sprites by blanking the redundant tile. Also decouples the majority of CSS logic for compnents into separate files
+
 #### 2.3.0
 - <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.3.0</a>
 - <a href="https://drive.google.com/open?id=18Q8sH7yb7A7D8gLnx6PJbfJPfKsaKvY1">Super Munchtroid-win32-x64 2.3.0</a>
@@ -13,9 +19,6 @@
 2.3.0 contains what should hopefully be *all* of Samus' palettes.
 
 #### 2.2.0
-- <a href="https://drive.google.com/open?id=16ceS8EYWsCC2OvGENAp-KmBTpok7rN2t">Super Munchtroid-linux-x64 2.2.0</a>
-- <a href="https://drive.google.com/open?id=1KrTCCNDqncYh14l77zHjaeO6A0z0k6LX">Super Munchtroid-win32-x64 2.2.0</a>
-
 2.2.0 exposed all ROM statics in libs/TableData.json
 
 #### 2.1.0
@@ -51,7 +54,3 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 - <a href="https://drive.google.com/open?id=1dIIWtJS0Lfokaq1hsTgSjmIJ-t5b26DX">Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
-
-#### about 2.3.^1
-
-all "version-patch" releases after 2.3.0 (ie. lower than 2.4.0) will focus on tidying logic within the build.  Since this will not have an effect on performance, I'm not going to release builds of these patches unless they resolve a significant bug.

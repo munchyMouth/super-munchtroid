@@ -66,6 +66,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'currentPose',
       'filePath',
       'activeSprite',
       'getSpriteByProps',
@@ -94,7 +95,8 @@ export default {
         this.clearSpriteUpdateFlag(this.$props)
         ipcRenderer.send('Save Sprite', {
           filePath: this.filePath,
-          sprite: this.sprite
+          sprite: this.sprite,
+          isFirstPose: !this.currentPose
         })
       }
     },

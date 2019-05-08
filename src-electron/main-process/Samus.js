@@ -14,7 +14,17 @@ export default stampit(
   SamusVRAM,
   {
     init () {
-      const { each, pojoToSpriteBuffer, setOffsetData } = this
+      const { each, loadSettingsFile, pojoToSpriteBuffer, setOffsetData } = this
+
+      const { REDUNDANT_LIFT_POSE_TORSO_TILE } = loadSettingsFile('TableData')
+
+      async function eraseCommonTileForLiftPose (isFirstPose) {
+        if (isFirstPose) {
+          const buff = Buffer.alloc(32)
+          await setOffsetData(
+            buff, parseInt(REDUNDANT_LIFT_POSE_TORSO_TILE, 16), buff.length)
+        }
+      }
 
       this.load = async function (pose) {
         const { frames, loadVRAMTiles, loadDMAEntries, loadTileMaps } =
@@ -27,16 +37,18 @@ export default stampit(
         }
       }
 
-      this.saveSpriteToROM = async function (pojo) {
+      this.saveSpriteToROM = async function (isFirstPose, pojo) {
         const buff = pojoToSpriteBuffer(pojo)
         await setOffsetData(buff, pojo._id, buff.length)
+        await eraseCommonTileForLiftPose(isFirstPose)
       }
 
-      this.saveSpritesToROM = async function (pojoArray) {
+      this.saveSpritesToROM = async function (isFirstPose, pojoArray) {
         await each(pojoArray, async pojo => {
           const buff = pojoToSpriteBuffer(pojo)
           await setOffsetData(buff, pojo._id, buff.length)
         })
+        await eraseCommonTileForLiftPose(isFirstPose)
       }
 
       this.saveVRAMTileToROM = async function (tile) {
