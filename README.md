@@ -7,8 +7,8 @@
 ### Downloads
 
 #### 2.3.2
-- <a href="">Super Munchtroid-linux-x64 2.3.2</a>
-- <a href="">Super Munchtroid-win32-x64 2.3.2</a>
+- <a href="https://drive.google.com/open?id=1TaLiAbylx5gioLtTEdp0tZ18c3l9vZ1i">Super Munchtroid-linux-x64 2.3.2</a>
+- <a href="https://drive.google.com/open?id=1wLfEN4MMojDJCvBAZSjidLDDEp1p52of">Super Munchtroid-win32-x64 2.3.2</a>
 
 2.3.2 fixes the default lift pose's use of a redundant tile in Common Sprites by blanking the redundant tile. Also decouples the majority of CSS logic for compnents into separate files
 
