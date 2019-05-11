@@ -1,6 +1,5 @@
 <template>
   <div class="settings">
-    <template v-if="!hasError && romLoaded">
     <div class="settings__dropdown-label">
       <strong>Pose: </strong>
     </div>
@@ -82,26 +81,7 @@
         </button>
       </div>
     </div>
-    </template>
-    <template v-else-if="hasError">
-      <strong class="settings__error-list">{{ error.type }}</strong>
-      <ul class="settings__error-list">
-        <li v-for="(message, i) in error.message"
-            :key="i">
-          {{ message }}
-        </li>
-      </ul>
-    </template>
-    <template v-else>
-      <div class="settings__init">
-        <div>
-          <icon name="arrow-up" />
-        </div>
-        <div>
-          Please load a ROM using the File menu above.
-        </div>
-      </div>
-    </template>
+    {{ tileMaps[0].top }}
   </div>
 </template>
 
@@ -138,14 +118,9 @@ export default {
       'currentFrameIndex',
       'currentPalette',
       'currentPose',
-      'error',
       'filePath',
-      'hasError',
-      'loading',
-      'romLoaded',
       'settings',
       'spriteRatio',
-      'updateSprite',
       'tileMapFrame',
       'tileMaps',
       'updateVram',

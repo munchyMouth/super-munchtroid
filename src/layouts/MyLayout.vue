@@ -34,7 +34,33 @@
       v-model="leftDrawerOpen"
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
     >
-      <settings />
+      <template v-if="romLoaded">
+        <q-tabs animated inverted align="justify">
+          <q-tab default name="normal" slot="title" icon="videogame_asset" label="Normal" />
+          <q-tab name="special" slot="title" icon="offline_bolt" label="Special" />
+          <q-tab-pane name="normal"><settings /></q-tab-pane>
+          <q-tab-pane name="special"><special-settings /></q-tab-pane>
+        </q-tabs>
+      </template>
+      <template v-else>
+        <div class="settings__init">
+          <div>
+            <icon name="arrow-up" />
+          </div>
+          <div>
+            Please load a ROM using the File menu above.
+          </div>
+        </div>
+      </template>
+      <template v-if="hasError">
+        <strong class="settings__error-list">{{ error.type }}</strong>
+        <ul class="settings__error-list">
+          <li v-for="(message, i) in error.message"
+              :key="i">
+            {{ message }}
+          </li>
+        </ul>
+      </template>
     </q-layout-drawer>
 
     <q-page-container>
@@ -52,15 +78,23 @@ import 'vue-awesome/icons/eye'
 import Icon from 'vue-awesome/components/Icon'
 
 import Settings from '../components/Settings.vue'
+import SpecialSettings from '../components/SpecialSettings.vue'
 
 export default {
   name: 'MyLayout',
   components: {
     Icon,
-    Settings
+    Settings,
+    SpecialSettings
   },
   computed: {
-    ...mapGetters(['activeSpriteAddress', 'filePath', 'showVram'])
+    ...mapGetters([
+      'activeSpriteAddress',
+      'error',
+      'filePath',
+      'hasError',
+      'romLoaded',
+      'showVram'])
   },
   data () {
     return {

@@ -78,22 +78,6 @@ export default {
       this.setError(error)
     }.bind(this))
 
-    ipcRenderer.on('Pose loaded', async function (event, object) {
-      try {
-        await this.setSamus(object)
-      } catch (e) {
-        this.setError({
-          type: 'PoseRendererLoadException',
-          title: 'Failed to load a pose: Error in renderer',
-          message: [e.message]
-        })
-      }
-    }.bind(this))
-    ipcRenderer.on('Pose Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-    }.bind(this))
-
     ipcRenderer.on('Palettes Loaded', function (event, object) {
       try {
         this.setPalettes(object)
@@ -114,6 +98,31 @@ export default {
       this.setLoading(false)
       this.setError(object)
       this.fail(object)
+    }.bind(this))
+
+    ipcRenderer.on('Pose loaded', async function (event, object) {
+      try {
+        await this.setSamus(object)
+      } catch (e) {
+        this.setError({
+          type: 'PoseRendererLoadException',
+          title: 'Failed to load a pose: Error in renderer',
+          message: [e.message]
+        })
+      }
+    }.bind(this))
+    ipcRenderer.on('Pose Error', function (event, object) {
+      this.setLoading(false)
+      this.setError(object)
+    }.bind(this))
+
+    ipcRenderer.on('Special Pose Loaded', async function (event, object) {
+      await this.setSamus(object)
+      // this.success('Sprite Saved!')
+    }.bind(this))
+    ipcRenderer.on('Special Pose Error', function (event, object) {
+      this.setLoading(false)
+      this.setError(object)
     }.bind(this))
 
     ipcRenderer.on('Sprite Saved', function () {

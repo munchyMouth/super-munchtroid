@@ -51,7 +51,8 @@ app.on('activate', () => {
 
 ipcMain.on('attachMenuEvents', (event) => {
   const menu = Menu.buildFromTemplate([{
-    label: 'File', submenu: getSubmenu(event, mainWindow) }])
+    label: 'File', submenu: getSubmenu(event, mainWindow)
+  }])
   Menu.setApplicationMenu(menu)
 })
 
@@ -85,6 +86,26 @@ ipcMain.on('Load Pose', (event, { filePath, pose }) => {
         event.sender.send('Pose Error', {
           type: 'PoseMainLoadException',
           title: 'Failed to load a pose: Error in main',
+          message: [e.message]
+        })
+      })
+  } catch (e) {
+    console.trace(e)
+  }
+})
+
+ipcMain.on('Load Special Pose', (event, { filePath, top, bottom }) => {
+  try {
+    Samus({ filePath })
+      .manualLoadSpecialPose({ bottom, top })
+      .then(function (samus) {
+        console.log('TEST')
+        event.sender.send('Special Pose Loaded', { ...samus, filePath })
+      }, function (e) {
+        console.trace(e)
+        event.sender.send('Special Pose Error', {
+          type: 'SpecialPoseMainLoadException',
+          title: 'Failed to load a special pose: Error in main',
           message: [e.message]
         })
       })

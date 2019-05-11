@@ -16,13 +16,13 @@ export default stampit(
     init () {
       const { each, loadSettingsFile, pojoToSpriteBuffer, setOffsetData } = this
 
-      const { REDUNDANT_LIFT_POSE_TORSO_TILE } = loadSettingsFile('TableData')
+      const { COMMON_LIFT_POSE_TORSO_TILE } = loadSettingsFile('TableData')
 
       async function eraseCommonTileForLiftPose (isFirstPose) {
         if (isFirstPose) {
           const buff = Buffer.alloc(32)
           await setOffsetData(
-            buff, parseInt(REDUNDANT_LIFT_POSE_TORSO_TILE, 16), buff.length)
+            buff, parseInt(COMMON_LIFT_POSE_TORSO_TILE, 16), buff.length)
         }
       }
 
@@ -34,6 +34,36 @@ export default stampit(
           frames,
           tileMaps: await loadTileMaps(),
           vram: await loadVRAMTiles()
+        }
+      }
+
+      this.manualLoadSpecialPose = async function ({ bottom, top }) {
+        const dma = await this.manualLoadDMAData({ bottom, top })
+        return {
+          vram: [{
+            bottom: {
+              parts: await this.getVRAMByDMAEntry(dma[0].bottom)
+            },
+            top: {
+              parts: await this.getVRAMByDMAEntry(dma[0].top)
+            }
+          },
+          {
+            bottom: {
+              parts: await this.getVRAMByDMAEntry(dma[0].bottom)
+            },
+            top: {
+              parts: await this.getVRAMByDMAEntry(dma[0].top)
+            }
+          },
+          {
+            bottom: {
+              parts: await this.getVRAMByDMAEntry(dma[0].bottom)
+            },
+            top: {
+              parts: await this.getVRAMByDMAEntry(dma[0].top)
+            }
+          }]
         }
       }
 

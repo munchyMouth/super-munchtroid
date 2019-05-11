@@ -69,7 +69,7 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
     }.bind(this)
 
     // LOADS THE RAW REPRESENTATION OF THE TILE INTO MEMORY.
-    this.getVRAMByDMAEntry = async function (dmaEntry, i = 0) {
+    this.getVRAMByDMAEntry = async function (dmaEntry) {
       const firstTile = this.getPCAddressFromBufferData(dmaEntry, dmaEntry[2])
       const vramCount1 = dmaEntry.readUIntLE(3, 2)
       const vramCount2 = dmaEntry.readUIntLE(5, 2)
@@ -86,10 +86,10 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
       if (i < this.dmaEntries.length) {
         const length = arr.push({
           bottom: {
-            parts: await this.getVRAMByDMAEntry(this.dmaEntries[i].bottom, i + 'bottom')
+            parts: await this.getVRAMByDMAEntry(this.dmaEntries[i].bottom)
           },
           top: {
-            parts: await this.getVRAMByDMAEntry(this.dmaEntries[i].top, 'top')
+            parts: await this.getVRAMByDMAEntry(this.dmaEntries[i].top)
           }
         })
         Object.keys(arr[length - 1]).forEach(key => {

@@ -14,6 +14,7 @@ export default stampit({ /* extends RomData, SamusProps */
     this.getDMAData = async function (dmaOffsets, arr = []) {
       if (dmaOffsets.length) {
         const dmaOffset = dmaOffsets.shift()
+        if (dmaOffset[2] === 8) console.log('YOU FOUND 8')
         const dmaTable = {
           top: this.getPCAddressFromBufferData(DMA_TABLES.TOP[dmaOffset[0]], 0x92),
           bottom: this.getPCAddressFromBufferData(DMA_TABLES.BOTTOM[dmaOffset[2]], 0x92)
@@ -44,5 +45,22 @@ export default stampit({ /* extends RomData, SamusProps */
       this.dmaEntries._id = dmaOffsetsPointerLong
       this.dmaEntries._pose = `$${this.pose.toString(16)}`
     }.bind(this)
+
+    this.manualLoadDMAData = async function ({ bottom, top }) {
+      debugger
+      const dmaTable = {
+        top: this.getPCAddressFromBufferData(DMA_TABLES.TOP[top], 0x92),
+        bottom: this.getPCAddressFromBufferData(DMA_TABLES.BOTTOM[bottom], 0x92)
+      }
+      const data = {
+        top: await this.getOffsetData(dmaTable.top + 9 * 7, 7),
+        bottom: await this.getOffsetData(dmaTable.bottom + 0 * 7, 7) // 0 & 1 refer to samus' power and var/grav suits respectively.
+      }
+      Object.keys(dmaTable).forEach(key => {
+        data[key]._id = dmaTable[key]
+        data[key]._address = `$${dmaTable[key].toString(16)}`
+      })
+      return [data]
+    }
   }
 })
