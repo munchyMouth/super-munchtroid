@@ -1,25 +1,36 @@
 <template>
   <div class="settings">
+    <div class="settings__show-unused" v-if="!special">
+      <div>show unused poses:</div>
+      <div>
+        <button class="no-style"
+                @click="setshowUnused()">
+          <icon :name="showUnused ? 'regular/check-circle' : 'regular/circle'" />
+        </button>
+      </div>
+    </div>
+    <hr />
     <div class="settings__dropdown-label">
       <strong>Pose: </strong>
     </div>
-    <select @change="choosePose()">
-      <option v-for="({pose}, i) in settings.POSES"
-              :key="i"
-              :value="pose"
-              :selected="i === currentPose ? 'selected' : false">
-        {{ pose }}
+    <select class="settings__dropdown" @change="choosePose()">
+      <option v-for="({ name, index, unused }) in poses"
+              :key="index"
+              :value="index"
+              :class="unused ? '--unused' : ''"
+              :selected="index === currentPose ? 'selected' : false">
+        {{ name }}
       </option>
     </select>
     <div class="settings__dropdown-label">
       <strong>Palette: </strong>
     </div>
     <select @change="choosePalette()">
-      <option v-for="(it, i) in settings.PALETTES"
+      <option v-for="({ name, id, length }, i) in settings.PALETTES"
               :key="i"
-              :value="it.id"
+              :value="id"
               :selected="i === currentPalette ? 'selected' : false">
-        {{ it.name }} (cycles: {{ it.length / 32 }})
+        {{ name }} (cycles: {{ length / 32 }})
       </option>
     </select>
     <plus-minus-field
@@ -92,6 +103,8 @@ import 'vue-awesome/icons/arrow-up'
 import 'vue-awesome/icons/minus'
 import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/save'
+import 'vue-awesome/icons/regular/check-circle'
+import 'vue-awesome/icons/regular/circle'
 import Icon from 'vue-awesome/components/Icon'
 
 import { getUpdatedVramTiles } from './Miscellaneous'
@@ -103,6 +116,7 @@ import TreeLi from './TreeLi.vue'
 
 export default {
   name: 'settings',
+  props: ['special'],
   components: {
     Icon,
     PlusMinusField,
@@ -127,13 +141,23 @@ export default {
       'updatePalette',
       'updateSprite',
       'vram'
-    ])
+    ]),
+    poses () {
+      return this.settings.POSES
+        .map(function (it, i) {
+          return (!this.showUnused && it.unused)
+            ? undefined
+            : { ...it, index: i }
+        }.bind(this))
+        .filter((it) => it)
+    }
   },
   data () {
     return {
       activeHalf: undefined,
       previousPaletteIndex: 0,
-      previousPoseIndex: 0
+      previousPoseIndex: 0,
+      showUnused: false
     }
   },
   methods: {
@@ -164,18 +188,20 @@ export default {
         })
       } else event.currentTarget.selectedIndex = this.previousPaletteIndex
     },
-    choosePose () {
-      if ((!this.updateVram && !this.updateSprite) ||
+    choosePose (zero = false) {
+      if ((!this.updateVram && !this.updateSprite) || zero ||
       ((this.updateSprite || this.updateVram) &&
       confirm('WARNING: Your pose edits to VRAM and/or Sprites will be lost!'))) {
-        this.previousPoseIndex = event.currentTarget.selectedIndex
+        this.previousPoseIndex = zero ? 0 : event.currentTarget.selectedIndex
         this.clearActiveSprite()
         this.setLoading(true)
         ipcRenderer.send('Load Pose', {
           filePath: this.filePath,
-          pose: this.previousPoseIndex
+          pose: zero ? 0 : parseInt(event.currentTarget.value)
         })
-      } else event.currentTarget.selectedIndex = this.previousPoseIndex
+        return true
+      } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
+      return false
     },
     filterSpritesToSave (half, tileMapFrame) {
       return tileMapFrame[half]
@@ -230,6 +256,13 @@ export default {
           })
       }
     },
+    setshowUnused () {
+      if ((!this.updateVram && !this.updateSprite) ||
+        ((this.updateSprite || this.updateVram) &&
+        confirm('WARNING: Your pose edits to VRAM and/or Sprites will be lost!'))) {
+        this.showUnused = !this.showUnused
+      }
+    },
     spriteZoomIn () {
       if (this.spriteRatio < 6) {
         this.setSpriteRatio(this.spriteRatio + 1)
@@ -239,6 +272,11 @@ export default {
       if (this.spriteRatio > 1) {
         this.setSpriteRatio(this.spriteRatio - 1)
       }
+    }
+  },
+  watch: {
+    showUnused (newValue, oldValue) {
+      this.choosePose(true)
     }
   }
 }

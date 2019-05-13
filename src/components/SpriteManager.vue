@@ -123,7 +123,7 @@ export default {
 
 <style>
   .sprite-manager {
-    border: 1px solid #ccc;
+    border: .01rem solid #ccc;
     padding: .5rem;
     margin: 0 .5rem .5rem .5rem;
   }

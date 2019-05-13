@@ -1,764 +1,1018 @@
 [
   {
-    "pose": "00: Elevator pose, Power Armor"
+    "name": "00: Elevator pose - Power Armor",
+    "unused": false
   },
   {
-    "pose": "01: Facing right, normal"
+    "name": "01: Facing right - normal",
+    "unused": false
   },
   {
-    "pose": "02: Facing left, normal"
+    "name": "02: Facing left - normal",
+    "unused": false
   },
   {
-    "pose": "03: Facing right, aiming up"
+    "name": "03: Facing right - aiming up",
+    "unused": false
   },
   {
-    "pose": "04: Facing left, aiming up"
+    "name": "04: Facing left - aiming up",
+    "unused": false
   },
   {
-    "pose": "05: Facing right, aiming upright"
+    "name": "05: Facing right - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "06: Facing left, aiming upleft"
+    "name": "06: Facing left - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "07: Facing right, aiming downright"
+    "name": "07: Facing right - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "08: Facing left, aiming downleft"
+    "name": "08: Facing left - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "09: Moving right, not aiming"
+    "name": "09: Moving right - not aiming",
+    "unused": false
   },
   {
-    "pose": "0A: Moving left, not aiming"
+    "name": "0A: Moving left - not aiming",
+    "unused": false
   },
   {
-    "pose": "0B: Moving right, gun extended forward (not aiming)"
+    "name": "0B: Moving right - gun extended forward (not aiming)",
+    "unused": false
   },
   {
-    "pose": "0C: Moving left, gun extended forward (not aiming)"
+    "name": "0C: Moving left - gun extended forward (not aiming)",
+    "unused": false
   },
   {
-    "pose": "0D: Moving right, aiming straight up*"
+    "name": "0D: Moving right - aiming straight up*",
+    "unused": true
   },
   {
-    "pose": "0E: Moving left, aiming straight up*"
+    "name": "0E: Moving left - aiming straight up*",
+    "unused": true
   },
   {
-    "pose": "0F: Moving right, aiming upright"
+    "name": "0F: Moving right - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "10: Moving left, aiming upleft"
+    "name": "10: Moving left - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "11: Moving right, aiming downright"
+    "name": "11: Moving right - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "12: Moving left, aiming downleft"
+    "name": "12: Moving left - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "13: Normal jump facing right, gun extended, not aiming or moving"
+    "name": "13: Facing right - normal jump - not aiming - not moving - gun extended",
+    "unused": false
   },
   {
-    "pose": "14: Normal jump facing left, gun extended, not aiming or moving"
+    "name": "14: Facing left  - normal jump - not aiming - not moving - gun extended",
+    "unused": false
   },
   {
-    "pose": "15: Normal jump facing right, aiming up"
+    "name": "15: Facing right - normal jump - aiming up",
+    "unused": false
   },
   {
-    "pose": "16: Normal jump facing left, aiming up"
+    "name": "16: Facing left - normal jump - aiming up",
+    "unused": false
   },
   {
-    "pose": "17: Normal jump facing right, aiming down"
+    "name": "17: Facing right - normal jump - aiming down",
+    "unused": false
   },
   {
-    "pose": "18: Normal jump facing left, aiming down"
+    "name": "18: Facing left  - normal jump - aiming down",
+    "unused": false
   },
   {
-    "pose": "19: Spin Jump right"
+    "name": "19: Facing right - spin jump",
+    "unused": false
   },
   {
-    "pose": "1A: Spin Jump left"
+    "name": "1A: Facing left - spin jump",
+    "unused": false
   },
   {
-    "pose": "1B: Space jump right"
+    "name": "1B: Facing right - space jump",
+    "unused": false
   },
   {
-    "pose": "1C: Space jump left"
+    "name": "1C: Facing left - space jump",
+    "unused": false
   },
   {
-    "pose": "1D: Facing right as morphball, no springball"
+    "name": "1D: Facing right - morph ball - no springball - on ground",
+    "unused": false
   },
   {
-    "pose": "1E: Moving right as a morphball on ground without springball"
+    "name": "1E: Moving right - morph ball - no springball - on ground",
+    "unused": false
   },
   {
-    "pose": "1F: Moving left as a morphball on ground without springball"
+    "name": "1F: Moving left  - morph ball - no springball - on ground",
+    "unused": false
   },
   {
-    "pose": "20: Spinjump right*"
+    "name": "20: Facing right - spin jump",
+    "unused": true
   },
   {
-    "pose": "21: Spinjump right*"
+    "name": "21: Facing right - spin jump",
+    "unused": true
   },
   {
-    "pose": "22: Spinjump right*"
+    "name": "22: Facing right - spin jump",
+    "unused": true
   },
   {
-    "pose": "23: Spinjump right*"
+    "name": "23: Facing right - spin jump",
+    "unused": true
   },
   {
-    "pose": "24: Spinjump right*"
+    "name": "24: Facing right - spin jump",
+    "unused": true
   },
   {
-    "pose": "25: Starting standing right, turning left"
+    "name": "25: Facing right - turning - standing",
+    "unused": false
   },
   {
-    "pose": "26: Starting standing left, turning right"
+    "name": "26: Facing left - turning - standing",
+    "unused": false
   },
   {
-    "pose": "27: Crouching, facing right"
+    "name": "27: Facing right - crouching",
+    "unused": false
   },
   {
-    "pose": "28: Crouching, facing left"
+    "name": "28: Facing left - crouching",
+    "unused": false
   },
   {
-    "pose": "29: Falling facing right, normal pose"
+    "name": "29: Facing right - falling",
+    "unused": false
   },
   {
-    "pose": "2A: Falling facing left, normal pose"
+    "name": "2A: Facing left - falling",
+    "unused": false
   },
   {
-    "pose": "2B: Falling facing right, aiming up"
+    "name": "2B: Facing right - falling - aiming up",
+    "unused": false
   },
   {
-    "pose": "2C: Falling facing left, aiming down"
+    "name": "2C: Facing left - falling - aiming up",
+    "unused": false
   },
   {
-    "pose": "2D: Falling facing right, aiming down"
+    "name": "2D: Facing right - falling - aiming down",
+    "unused": false
   },
   {
-    "pose": "2E: Falling facing left, aiming down"
+    "name": "2E: Facing left - falling - aiming down",
+    "unused": false
   },
   {
-    "pose": "2F: Starting with normal jump facing right, turning left"
+    "name": "2F: Facing right - turning - jumping",
+    "unused": false
   },
   {
-    "pose": "30: Starting with normal jump facing left, turning right"
+    "name": "30: Facing left - turning - jumping",
+    "unused": false
   },
   {
-    "pose": "31: Midair morphball facing right without springball"
+    "name": "31: Facing right - morph ball - no springball - in air",
+    "unused": false
   },
   {
-    "pose": "32: Midair morphball facing left without springball"
+    "name": "32: Facing left - morph ball - no springball - in air",
+    "unused": false
   },
   {
-    "pose": "33: Spinjump right*"
+    "name": "33: Facing right - spin jump*",
+    "unused": true
   },
   {
-    "pose": "34: Spinjump right*"
+    "name": "34: Facing left - spin jump*",
+    "unused": true
   },
   {
-    "pose": "35: Crouch transition, facing right"
+    "name": "35: Facing right - crouching transition",
+    "unused": false
   },
   {
-    "pose": "36: Crouch transition, facing left"
+    "name": "36: Facing left - crouching transition",
+    "unused": false
   },
   {
-    "pose": "37: Morphing into ball, facing right Ground and mid-air"
+    "name": "37: Facing right - morphing transition",
+    "unused": false
   },
   {
-    "pose": "38: Morphing into ball, facing left Ground and mid-air"
+    "name": "38: Facing left - morphing transition",
+    "unused": false
   },
   {
-    "pose": "39: Midair morphing into ball, facing right*"
+    "name": "39: Facing right - Midair morphing into ball*",
+    "unused": true
   },
   {
-    "pose": "3A: Midair morphing into ball, facing left*"
+    "name": "3A: Facing left - Midair morphing into ball*",
+    "unused": true
   },
   {
-    "pose": "3B: Standing from crouching, facing right"
+    "name": "3B: Facing right - Standing from crouching",
+    "unused": false
   },
   {
-    "pose": "3C: Standing from crouching, facing left"
+    "name": "3C: Facing left - Standing from crouching",
+    "unused": false
   },
   {
-    "pose": "3D: Demorph while facing right Mid-air and on ground"
+    "name": "3D: Facing right - unmorphing transition",
+    "unused": false
   },
   {
-    "pose": "3E: Demorph while facing left Mid-air and on ground"
+    "name": "3E: Facing left - unmorphing transition",
+    "unused": false
   },
   {
-    "pose": "3F: Something with morphball, facing right*"
+    "name": "3F: Facing right - Something with morphball*",
+    "unused": true
   },
   {
-    "pose": "40: Something with morphball, facing left*"
+    "name": "40: Facing left - Something with morphball*",
+    "unused": true
   },
   {
-    "pose": "41: Staying still with morphball, facing left, no springball"
+    "name": "41: Facing left  - morph ball - no springball - on ground",
+    "unused": false
   },
   {
-    "pose": "42: Spinjump right*"
+    "name": "42: Facing right - spin jump*",
+    "unused": true
   },
   {
-    "pose": "43: Starting from crouching right, turning left"
+    "name": "43: Facing right - turning - crouching",
+    "unused": false
   },
   {
-    "pose": "44: Starting from crouching left, turning right"
+    "name": "44: Facing left - turning - crouching",
+    "unused": false
   },
   {
-    "pose": "45: Garbage pose*"
+    "name": "45: Garbage pose*",
+    "unused": true
   },
   {
-    "pose": "46: Garbage pose*"
+    "name": "46: Garbage pose*",
+    "unused": true
   },
   {
-    "pose": "47: Standing, facing right*"
+    "name": "47: Facing right - Standing*",
+    "unused": true
   },
   {
-    "pose": "48: Standing, facing left*"
+    "name": "48: Facing left - Standing*",
+    "unused": true
   },
   {
-    "pose": "49: Moonwalk, facing left"
+    "name": "49: Facing left - moonwalk",
+    "unused": false
   },
   {
-    "pose": "4A: Moonwalk, facing right"
+    "name": "4A: Facing right - moonwalk",
+    "unused": false
   },
   {
-    "pose": "4B: Normal jump transition from ground(standing or crouching), facing right"
+    "name": "4B: Facing right - normal jump transition",
+    "unused": false
   },
   {
-    "pose": "4C: Normal jump transition from ground(standing or crouching), facing left"
+    "name": "4C: Facing left - normal jump transition",
+    "unused": false
   },
   {
-    "pose": "4D: Normal jump facing right, gun not extended, not aiming, not moving"
+    "name": "4D: Facing right - normal jump - not aiming - not moving",
+    "unused": false
   },
   {
-    "pose": "4E: Normal jump facing left, gun not extended, not aiming, not moving"
+    "name": "4E: Facing left  - normal jump - not aiming - not moving - gun not extended",
+    "unused": false
   },
   {
-    "pose": "4F: Hurt roll back, moving right/facing left"
+    "name": "4F: Facing left - damage boost",
+    "unused": false
   },
   {
-    "pose": "50: Hurt roll back, moving left/facing right"
+    "name": "50: Facing right - damage boost",
+    "unused": false
   },
   {
-    "pose": "51: Normal jump facing right, moving forward (gun extended)"
+    "name": "51: Facing right - normal jump - not aiming - moving forward",
+    "unused": false
   },
   {
-    "pose": "52: Normal jump facing left, moving forward (gun extended)"
+    "name": "52: Facing left - normal jump - not aiming - moving forward",
+    "unused": false
   },
   {
-    "pose": "53: Hurt, facing right"
+    "name": "53: Facing right - knockback",
+    "unused": false
   },
   {
-    "pose": "54: Hurt, facing left"
+    "name": "54: Facing left - knockback",
+    "unused": false
   },
   {
-    "pose": "55: Normal jump transition from ground, facing right and aiming up"
+    "name": "55: Facing right - normal jump transition - aiming up",
+    "unused": false
   },
   {
-    "pose": "56: Normal jump transition from ground, facing left and aiming up"
+    "name": "56: Facing left - normal jump transition - aiming up",
+    "unused": false
   },
   {
-    "pose": "57: Normal jump transition from ground, facing right and aiming upright"
+    "name": "57: Facing right - normal jump transition - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "58: Normal jump transition from ground, facing left and aiming upleft"
+    "name": "58: Facing left - normal jump transition - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "59: Normal jump transition from ground, facing right and aiming downright"
+    "name": "59: Facing right - normal jump transition - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "5A: Normal jump transition from ground, facing left and aiming downleft"
+    "name": "5A: Facing left - normal jump transition - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "5B: Something for grapple (wall jump?)*"
+    "name": "5B: Broken grapple - wall jump*",
+    "unused": true
   },
   {
-    "pose": "5C: Something for grapple (wall jump?)*"
+    "name": "5C: Broken grapple - wall jump*",
+    "unused": true
   },
   {
-    "pose": "5D: Broken grapple? Facing clockwise*"
+    "name": "5D: Broken grapple - clockwise*",
+    "unused": true
   },
   {
-    "pose": "5E: Broken grapple? Facing clockwise*"
+    "name": "5E: Broken grapple - clockwise*",
+    "unused": true
   },
   {
-    "pose": "5F: Broken grapple? Facing clockwise*"
+    "name": "5F: Broken grapple - clockwise*",
+    "unused": true
   },
   {
-    "pose": "60: Better broken grapple Facing clockwise*"
+    "name": "60: Better broken grapple - clockwise*",
+    "unused": true
   },
   {
-    "pose": "61: Nearly normal grapple Facing clockwise*"
+    "name": "61: Nearly normal grapple - clockwise*",
+    "unused": true
   },
   {
-    "pose": "62: Nearly normal grapple Facing counterclockwise*"
+    "name": "62: Nearly normal grapple - counter-clockwise*",
+    "unused": true
   },
   {
-    "pose": "63: Facing left on grapple blocks, ready to jump*"
+    "name": "63: Facing left - grapple blocks - ready to jump*",
+    "unused": true
   },
   {
-    "pose": "64: Facing right on grapple blocks, ready to jump*"
+    "name": "64: Facing right - grapple blocks - ready to jump*",
+    "unused": true
   },
   {
-    "pose": "65: Glitchy grapple jump, facing left?*"
+    "name": "65: Facing left - Broken grapple jump*",
+    "unused": true
   },
   {
-    "pose": "66: Glitchy grapple jump, facing right?*"
+    "name": "66: Facing right - Broken grapple jump*",
+    "unused": true
   },
   {
-    "pose": "67: Facing right, falling, fired a shot"
+    "name": "67: Facing right - falling - gun extended",
+    "unused": false
   },
   {
-    "pose": "68: Facing left, falling, fired a shot"
+    "name": "68: Facing left - falling - gun extended",
+    "unused": false
   },
   {
-    "pose": "69: Normal jump facing right, aiming upright Moving optional"
+    "name": "69: Facing left - normal jump - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "6A: Normal jump facing left, aiming upleft Moving optional"
+    "name": "6A: Facing left - normal jump - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "6B: Normal jump facing right, aiming downright Moving optional"
+    "name": "6B: Facing right - normal jump - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "6C: Normal jump facing left, aiming downleft Moving optional"
+    "name": "6C: Facing left - normal jump - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "6D: Falling facing right, aiming upright"
+    "name": "6D: Facing right - falling - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "6E: Falling facing left, aiming upleft"
+    "name": "6E: Facing left - falling - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "6F: Falling facing right, aiming downright"
+    "name": "6F: Facing right - falling - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "70: Falling facing left, aiming downleft"
+    "name": "70: Facing left - falling - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "71: Standing to crouching, facing right and aiming upright"
+    "name": "71: Facing right - standing to crouching - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "72: Standing to crouching, facing left and aiming upleft"
+    "name": "72: Facing left - standing to crouching - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "73: Standing to crouching, facing right and aiming downright"
+    "name": "73: Facing right - standing to crouching - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "74: Standing to crouching, facing left and aiming downleft"
+    "name": "74: Facing left - standing to crouching - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "75: Moonwalk, facing left aiming upleft"
+    "name": "75: Facing left - moonwalk - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "76: Moonwalk, facing right aiming upright"
+    "name": "76: Facing right - moonwalk - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "77: Moonwalk, facing left aiming downleft"
+    "name": "77: Facing left - moonwalk - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "78: Moonwalk, facing right aiming downright"
+    "name": "78: Facing right - moonwalk - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "79: Spring ball on ground, facing right"
+    "name": "79: Facing right - morph ball - spring ball - on ground",
+    "unused": false
   },
   {
-    "pose": "7A: Spring ball on ground, facing left"
+    "name": "7A: Facing left - morph ball - spring ball - on ground",
+    "unused": false
   },
   {
-    "pose": "7B: Spring ball on ground, moving right"
+    "name": "7B: Moving right - morph ball - spring ball - on ground",
+    "unused": false
   },
   {
-    "pose": "7C: Spring ball on ground, moving left"
+    "name": "7C: Moving left - morph ball - spring ball - on ground",
+    "unused": false
   },
   {
-    "pose": "7D: Spring ball falling, facing/moving right"
+    "name": "7D: Moving right - morph ball - spring ball - falling",
+    "unused": false
   },
   {
-    "pose": "7E: Spring ball falling, facing/moving left"
+    "name": "7E: Moving left - morph ball - spring ball - falling",
+    "unused": false
   },
   {
-    "pose": "7F: Spring ball jump in air, facing/moving right"
+    "name": "7F: Moving right - morph ball - spring ball - jump in air",
+    "unused": false
   },
   {
-    "pose": "80: Spring ball jump in air, facing/moving left"
+    "name": "80: Moving left - morph ball - spring ball - jump in air",
+    "unused": false
   },
   {
-    "pose": "81: Screw attack right"
+    "name": "81: Facing right - screw attack",
+    "unused": false
   },
   {
-    "pose": "82: Screw attack left"
+    "name": "82: Facing left - screw attack",
+    "unused": false
   },
   {
-    "pose": "83: Walljump right"
+    "name": "83: Facing right - wall jump",
+    "unused": false
   },
   {
-    "pose": "84: Walljump left"
+    "name": "84: Facing left - wall jump",
+    "unused": false
   },
   {
-    "pose": "85: Crouching, facing right aiming up"
+    "name": "85: Facing right - crouching - aiming up",
+    "unused": false
   },
   {
-    "pose": "86: Crouching, facing left aiming up"
+    "name": "86: Facing left - crouching - aiming up",
+    "unused": false
   },
   {
-    "pose": "87: Turning from right to left while falling"
+    "name": "87: Facing right - turning - falling",
+    "unused": false
   },
   {
-    "pose": "88: Turning from left to right while falling"
+    "name": "88: Facing left - turning - falling",
+    "unused": false
   },
   {
-    "pose": "89: Ran into a wall on right (facing right)"
+    "name": "89: Facing right - ran into a wall",
+    "unused": false
   },
   {
-    "pose": "8A: Ran into a wall on left (facing left)"
+    "name": "8A: Facing left - ran into a wall",
+    "unused": false
   },
   {
-    "pose": "8B: Turn around while standing (Probably used, but not sure when)"
+    "name": "8B: Facing right - turning - standing - aiming up",
+    "unused": false
   },
   {
-    "pose": "8C: Turn around while standing (Probably used, but not sure when)"
+    "name": "8C: Facing left - turning - standing - aiming up",
+    "unused": false
   },
   {
-    "pose": "8D: Turn around from right to left while aiming diagonal down while standing"
+    "name": "8D: Facing right - turning - standing - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "8E: Turn around from left to right while aiming diagonal down while standing"
+    "name": "8E: Facing left - turning - standing - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "8F: Turning around from right to left while aiming straight up in midair"
+    "name": "8F: Facing right - turning - in air - aiming up",
+    "unused": false
   },
   {
-    "pose": "90: Turning around from left to right while aiming straight up in midair"
+    "name": "90: Facing left - turning - in air - aiming up",
+    "unused": false
   },
   {
-    "pose": "91: Turning around from right to left while aiming down or diagonal down in midair"
+    "name": "91: Facing right - turning - in air - aiming down",
+    "unused": false
   },
   {
-    "pose": "92: Turning around from left to right while aiming down or diagonal down in midair"
+    "name": "92: Facing left - turning - in air - aiming down",
+    "unused": false
   },
   {
-    "pose": "93: Turning around from right to left while aiming straight up while falling"
+    "name": "93: Facing right - turning - falling - aiming up",
+    "unused": false
   },
   {
-    "pose": "94: Turning around from left to right while aiming straight up while falling"
+    "name": "94: Facing left - turning - falling - aiming up",
+    "unused": false
   },
   {
-    "pose": "95: Turning around from right to left while aiming down or diagonal down while falling"
+    "name": "95: Facing right - turning - falling - aiming down",
+    "unused": false
   },
   {
-    "pose": "96: Turning around from left to right while aiming down or diagonal down while falling"
+    "name": "96: Facing left - turning - falling - aiming down",
+    "unused": false
   },
   {
-    "pose": "97: Turning around from right to left while aiming straight up while crouching"
+    "name": "97: Facing right - turning - crouching - aiming up",
+    "unused": false
   },
   {
-    "pose": "98: Turning around from left to right while aiming straight up while crouching"
+    "name": "98: Facing left - turning - crouching - aiming up",
+    "unused": false
   },
   {
-    "pose": "99: Turning around from right to left while aiming diagonal down while crouching"
+    "name": "99: Facing right - turning - crouching - aiming down",
+    "unused": false
   },
   {
-    "pose": "9A: Turning around from left to right while aiming diagonal down while crouching"
+    "name": "9A: Facing left - turning - crouching - aiming down",
+    "unused": false
   },
   {
-    "pose": "9B: Facing forward, ala Elevator pose with the Varia and/or Gravity Suit"
+    "name": "9B: Facing forward - ala Elevator pose with the Varia and/or Gravity Suit",
+    "unused": false
   },
   {
-    "pose": "9C: Turning around from right to left while aiming diagonal up while standing"
+    "name": "9C: Facing right - turning -  standing - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "9D: Turning around from left to right while aiming diagonal up while standing"
+    "name": "9D: Facing left - turning -  standing - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "9E: Turning around from right to left while aiming diagonal up in midair"
+    "name": "9E: Facing right - turning -  midair - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "9F: Turning around from left to right while aiming diagonal up in midair"
+    "name": "9F: Facing left - turning -  midair - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "A0: Turning around from right to left while aiming diagonal up while falling"
+    "name": "A0: Facing right - turning - falling - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "A1: Turning around from left to right while aiming diagonal up while falling"
+    "name": "A1: Facing left - turning - falling - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "A2: Turn around from right to left while aiming diagonal up while crouching"
+    "name": "A2: Facing right - turning - crouching - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "A3: Turn around from left to right while aiming diagonal up while crouching"
+    "name": "A3: Facing left - turning - crouching - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "A4: Landing from normal jump, facing right"
+    "name": "A4: Facing right - Landing from normal jump",
+    "unused": false
   },
   {
-    "pose": "A5: Landing from normal jump, facing left"
+    "name": "A5: Facing left - Landing from normal jump",
+    "unused": false
   },
   {
-    "pose": "A6: Landing from spin jump, facing right"
+    "name": "A6: Facing right - Landing from spin jump",
+    "unused": false
   },
   {
-    "pose": "A7: Landing from spin jump, facing left"
+    "name": "A7: Facing left - Landing from spin jump",
+    "unused": false
   },
   {
-    "pose": "A8: Just standing, facing right*"
+    "name": "A8: Facing right - standing*",
+    "unused": true
   },
   {
-    "pose": "A9: Just standing, facing left*"
+    "name": "A9: Facing left - standing*",
+    "unused": true
   },
   {
-    "pose": "AA: Just standing, facing right aiming downright*"
+    "name": "AA: Facing right - standing - aiming down-right*",
+    "unused": true
   },
   {
-    "pose": "AB: Just standing, facing left aiming downleft*"
+    "name": "AB: Facing left - standing - aiming down-left*",
+    "unused": true
   },
   {
-    "pose": "AC: Jumping, facing right, gun extended*"
+    "name": "AC: Facing right - jumping - gun extended*",
+    "unused": true
   },
   {
-    "pose": "AD: Jumping, facing left, gun extended*"
+    "name": "AD: Facing left - jumping - gun extended*",
+    "unused": true
   },
   {
-    "pose": "AE: Jumping, facing right, aiming down*"
+    "name": "AE: Facing right - jumping - aiming down*",
+    "unused": true
   },
   {
-    "pose": "AF: Jumping, facing left, aiming down*"
+    "name": "AF: Facing left - jumping - aiming down*",
+    "unused": true
   },
   {
-    "pose": "B0: Jumping, facing right, aiming downright*"
+    "name": "B0: Facing right - jumping - aiming down-right*",
+    "unused": true
   },
   {
-    "pose": "B1: Jumping, facing left, aiming downleft*"
+    "name": "B1: Facing left - jumping - aiming down-left*",
+    "unused": true
   },
   {
-    "pose": "B2: Grapple, facing clockwise"
+    "name": "B2: Facing clockwise - grapple",
+    "unused": false
   },
   {
-    "pose": "B3: Grapple, facing counterclockwise"
+    "name": "B3: Facing counter-clockwise - grapple",
+    "unused": false
   },
   {
-    "pose": "B4: Crouching, facing right*"
+    "name": "B4: Facing right - crouching*",
+    "unused": true
   },
   {
-    "pose": "B5: Crouching, facing left*"
+    "name": "B5: Facing left - crouching*",
+    "unused": true
   },
   {
-    "pose": "B6: Crouching, facing right, aiming downright*"
+    "name": "B6: Facing right - crouching - aiming down-right*",
+    "unused": true
   },
   {
-    "pose": "B7: Crouching, facing left, aiming downleft*"
+    "name": "B7: Facing left - crouching - aiming down-left*",
+    "unused": true
   },
   {
-    "pose": "B8: Grapple, attached to a wall on right, facing left"
+    "name": "B8: Facing left - grapple - attached to a wall on right",
+    "unused": false
   },
   {
-    "pose": "B9: Grapple, attached to a wall on left, facing right"
+    "name": "B9: Facing right - grapple - attached to a wall on left",
+    "unused": false
   },
   {
-    "pose": "BA: Grabbed by Draygon, facing left, not moving"
+    "name": "BA: Facing left - grabbed by Draygon - not moving",
+    "unused": false
   },
   {
-    "pose": "BB: Grabbed by Draygon, facing left aiming upleft, not moving"
+    "name": "BB: Facing left - grabbed by Draygon - aiming up-left - not moving",
+    "unused": false
   },
   {
-    "pose": "BC: Grabbed by Draygon, facing left and firing"
+    "name": "BC: Facing left - grabbed by Draygon - and firing",
+    "unused": false
   },
   {
-    "pose": "BD: Grabbed by Draygon, facing left aiming downleft, not moving"
+    "name": "BD: Facing left - grabbed by Draygon - aiming down-left - not moving",
+    "unused": false
   },
   {
-    "pose": "BE: Grabbed by Draygon, facing left, moving"
+    "name": "BE: Facing left - grabbed by Draygon - moving",
+    "unused": false
   },
   {
-    "pose": "BF: Turn around while standing Probably used, but not sure when"
+    "name": "BF: Facing right - moonwalking - turn/jump left",
+    "unused": false
   },
   {
-    "pose": "C0: Turn around while standing Probably used, but not sure when"
+    "name": "C0: Facing left  - moonwalking - turn/jump right",
+    "unused": false
   },
   {
-    "pose": "C1: Turn around while standing (Probably used, but not sure when)"
+    "name": "C1: Facing right - moonwalking - turn/jump left  - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "C2: Turn around while standing (Probably used, but not sure when)"
+    "name": "C2: Facing left  - moonwalking - turn/jump right - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "C3: Turn around while standing (Probably used, but not sure when)"
+    "name": "C3: Facing right - moonwalking - turn/jump left  - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "C4: Turn around while standing (Probably used, but not sure when)"
+    "name": "C4: Facing left  - moonwalking - turn/jump right - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "C5: Morph ball, facing right*"
+    "name": "C5: Facing right - morph ball*",
+    "unused": true
   },
   {
-    "pose": "C6: Morph ball, facing left*"
+    "name": "C6: Facing left - morph ball*",
+    "unused": true
   },
   {
-    "pose": "C7: Super jump windup, facing right"
+    "name": "C7: Facing right - vertical shine-spark - windup",
+    "unused": false
   },
   {
-    "pose": "C8: Super jump windup, facing left"
+    "name": "C8: Facing left - vertical shine-spark - windup",
+    "unused": false
   },
   {
-    "pose": "C9: Horizontal super jump, right"
+    "name": "C9: Facing right - horizontal shine-spark",
+    "unused": false
   },
   {
-    "pose": "CA: Horizontal super jump, left"
+    "name": "CA: Facing left - horizontal shine-spark",
+    "unused": false
   },
   {
-    "pose": "CB: Vertical super jump, facing right"
+    "name": "CB: Facing right - vertical shine-spark",
+    "unused": false
   },
   {
-    "pose": "CC: Vertical super jump, facing left"
+    "name": "CC: Facing left - vertical shine-spark",
+    "unused": false
   },
   {
-    "pose": "CD: Diagonal super jump, right"
+    "name": "CD: Facing right - Diagonal shinespark",
+    "unused": false
   },
   {
-    "pose": "CE: Diagonal super jump, left"
+    "name": "CE: Facing left - Diagonal shinespark",
+    "unused": false
   },
   {
-    "pose": "CF: Samus ran right into a wall, is still holding right and is now aiming diagonal up"
+    "name": "CF: Facing right - ran into a wall - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "D0: Samus ran right into a left, is still holding left and is now aiming diagonal up"
+    "name": "D0: Facing left - ran into a wall - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "D1: Samus ran right into a wall, is still holding right and is now aiming diagonal down"
+    "name": "D1: Facing right - ran into a wall - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "D2: Samus ran left into a wall, is still holding left and is now aiming diagonal down"
+    "name": "D2: Facing left - ran into a wall - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "D3: Crystal flash, facing right"
+    "name": "D3: Facing right - crystal flash",
+    "unused": false
   },
   {
-    "pose": "D4: Crystal flash, facing left"
+    "name": "D4: Facing left - crystal flash",
+    "unused": false
   },
   {
-    "pose": "D5: X-raying right, standing"
+    "name": "D5: Facing right - x-ray - standing",
+    "unused": false
   },
   {
-    "pose": "D6: X-raying left, standing"
+    "name": "D6: Facing left - x-ray - standing",
+    "unused": false
   },
   {
-    "pose": "D7: Crystal flash ending, facing right"
+    "name": "D7: Facing right - Crystal flash - ending",
+    "unused": false
   },
   {
-    "pose": "D8: Crystal flash ending, facing left"
+    "name": "D8: Facing left - Crystal flash - ending",
+    "unused": false
   },
   {
-    "pose": "D9: X-raying right, crouching"
+    "name": "D9: Facing right - x-ray - crouching",
+    "unused": false
   },
   {
-    "pose": "DA: X-raying left, crouching"
+    "name": "DA: Facing left - x-ray - crouching",
+    "unused": false
   },
   {
-    "pose": "DB: Standing transition to morphball, facing right?*"
+    "name": "DB: Facing right - transition to morphball*",
+    "unused": true
   },
   {
-    "pose": "DC: Standing transition to morphball, facing left?*"
+    "name": "DC: Facing left - transition to morphball*",
+    "unused": true
   },
   {
-    "pose": "DD: Morphball transition to standing, facing right?*"
+    "name": "DD: Facing right - morphball - transition to standing*",
+    "unused": true
   },
   {
-    "pose": "DE: Morphball transition to standing, facing left?*"
+    "name": "DE: Facing left - morphball - transition to standing*",
+    "unused": true
   },
   {
-    "pose": "DF: Samus is facing left as a morphball*"
+    "name": "DF: Facing left - morphball*",
+    "unused": true
   },
   {
-    "pose": "E0: Landing from normal jump, facing right and aiming up"
+    "name": "E0: Facing right - landing from normal jump - aiming up",
+    "unused": false
   },
   {
-    "pose": "E1: Landing from normal jump, facing left and aiming up"
+    "name": "E1: Facing left - landing from normal jump - aiming up",
+    "unused": false
   },
   {
-    "pose": "E2: Landing from normal jump, facing right and aiming upright"
+    "name": "E2: Facing right - landing from normal jump - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "E3: Landing from normal jump, facing left and aiming upleft"
+    "name": "E3: Facing left - landing from normal jump - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "E4: Landing from normal jump, facing right and aiming downright"
+    "name": "E4: Facing right - landing from normal jump - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "E5: Landing from normal jump, facing left and aiming downleft"
+    "name": "E5: Facing left - landing from normal jump - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "E6: Landing from normal jump, facing right, firing"
+    "name": "E6: Facing right - landing from normal jump - firing",
+    "unused": false
   },
   {
-    "pose": "E7: Landing from normal jump, facing left, firing"
+    "name": "E7: Facing left - landing from normal jump - firing",
+    "unused": false
   },
   {
-    "pose": "E8: Samus exhausted(Metroid drain, MB attack), facing right"
+    "name": "E8: Facing right - Samus drained - crouching",
+    "unused": false
   },
   {
-    "pose": "E9: Samus exhausted(Metroid drain, MB attack), facing left"
+    "name": "E9: Facing left - Samus drained - crouching",
+    "unused": false
   },
   {
-    "pose": "EA: Samus exhausted, looking up to watch Metroid attack MB, facing right"
+    "name": "EA: Facing right - exhausted - watching Metroid attack MB",
+    "unused": false
   },
   {
-    "pose": "EB: Samus exhausted, looking up to watch Metroid attack MB, facing left"
+    "name": "EB: Facing left - exhausted - watching Metroid attack MB",
+    "unused": false
   },
   {
-    "pose": "EC: Grabbed by Draygon, facing right Not moving"
+    "name": "EC: Facing right - grabbed by Draygon - Not moving",
+    "unused": false
   },
   {
-    "pose": "ED: Grabbed by Draygon, facing right aiming upright Not moving"
+    "name": "ED: Facing right - grabbed by Draygon - aiming up-right Not moving",
+    "unused": false
   },
   {
-    "pose": "EC: Grabbed by Draygon, facing right and firing"
+    "name": "EC: Facing right - grabbed by Draygon - firing",
+    "unused": false
   },
   {
-    "pose": "EF: Grabbed by Draygon, facing right aiming downright Not moving"
+    "name": "EF: Facing right - grabbed by Draygon - aiming down-right Not moving",
+    "unused": false
   },
   {
-    "pose": "F0: Grabbed by Draygon, facing right Moving"
+    "name": "F0: Facing right - grabbed by Draygon - Moving",
+    "unused": false
   },
   {
-    "pose": "F1: Crouch transition, facing right and aiming up"
+    "name": "F1: Facing right - crouch transition - aiming up",
+    "unused": false
   },
   {
-    "pose": "F2: Crouch transition, facing left and aiming up"
+    "name": "F2: Facing left - crouch transition - aiming up",
+    "unused": false
   },
   {
-    "pose": "F3: Crouch transition, facing right and aiming upright"
+    "name": "F3: Facing right - crouch transition - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "F4: Crouch transition, facing left and aiming upleft"
+    "name": "F4: Facing left - crouch transition - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "F5: Crouch transition, facing right and aiming downright"
+    "name": "F5: Facing right - crouch transition - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "F6: Crouch transition, facing left and aiming downleft"
+    "name": "F6: Facing left - crouch transition - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "F7: Crouching to standing, facing right and aiming up"
+    "name": "F7: Facing right - crouching to standing - aiming up",
+    "unused": false
   },
   {
-    "pose": "F8: Crouching to standing, facing left and aiming upleft"
+    "name": "F8: Facing left - crouching to standing - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "F9: Crouching to standing, facing right and aiming upright"
+    "name": "F9: Facing right - crouching to standing - aiming up-right",
+    "unused": false
   },
   {
-    "pose": "FA: Crouching to standing, facing left and aiming upleft"
+    "name": "FA: Facing left - crouching to standing - aiming up-left",
+    "unused": false
   },
   {
-    "pose": "FB: Crouching to standing, facing right and aiming downright"
+    "name": "FB: Facing right - crouching to standing - aiming down-right",
+    "unused": false
   },
   {
-    "pose": "FC: Crouching to standing, facing left and aiming downleft"
+    "name": "FC: Facing left - crouching to standing - aiming down-left",
+    "unused": false
   },
   {
-    "pose": "FD: Garbage Pose"
+    "name": "FD: Garbage Pose",
+    "unused": false
   }
 ]
