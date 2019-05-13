@@ -12,12 +12,14 @@ export default stampit({ /* extends RomData */
       return this
     }
 
-    this.setFrames = async function () {
-      const frameDelayPointerAddress =
-        await this.getOffsetData(FRAME_DELAY_TABLE + (this.pose * 2), 2)
-      this.frameOffset =
-        this.getPCAddressFromBufferData(frameDelayPointerAddress, 0x91)
-      this.frames = await this.iterateFrameDelays(this.frameOffset)
+    this.setFrames = async function (frameOverride) {
+      if (!frameOverride) {
+        const frameDelayPointerAddress =
+          await this.getOffsetData(FRAME_DELAY_TABLE + (this.pose * 2), 2)
+        this.frameOffset =
+          this.getPCAddressFromBufferData(frameDelayPointerAddress, 0x91)
+        this.frames = await this.iterateFrameDelays(this.frameOffset)
+      } else this.frames = frameOverride
       return this
     }.bind(this)
   }

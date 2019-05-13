@@ -51,7 +51,8 @@ app.on('activate', () => {
 
 ipcMain.on('attachMenuEvents', (event) => {
   const menu = Menu.buildFromTemplate([{
-    label: 'File', submenu: getSubmenu(event, mainWindow) }])
+    label: 'File', submenu: getSubmenu(event, mainWindow)
+  }])
   Menu.setApplicationMenu(menu)
 })
 
@@ -74,10 +75,12 @@ ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
   }
 })
 
-ipcMain.on('Load Pose', (event, { filePath, pose }) => {
+// dmaOffset and frameCount are used to load in special poses.
+ipcMain.on('Load Pose', (event,
+  { filePath, pose, dmaOffset = undefined, frameCount = undefined }) => {
   try {
     Samus({ filePath })
-      .load(pose)
+      .load(pose, frameCount, dmaOffset)
       .then(function (samus) {
         event.sender.send('Pose loaded', { ...samus, filePath, pose })
       }, function (e) {

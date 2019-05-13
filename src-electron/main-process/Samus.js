@@ -26,10 +26,10 @@ export default stampit(
         }
       }
 
-      this.load = async function (pose) {
+      this.load = async function (pose, frameCount, dmaOffset) {
         const { frames, loadVRAMTiles, loadDMAEntries, loadTileMaps } =
-          await this.setPose(pose).setFrames()
-        await loadDMAEntries()
+          await this.setPose(pose).setFrames(frameCount)
+        await loadDMAEntries(dmaOffset)
         return {
           frames,
           tileMaps: await loadTileMaps(),

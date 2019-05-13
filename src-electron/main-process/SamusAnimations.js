@@ -32,9 +32,9 @@ export default stampit({ /* extends RomData, SamusProps */
       return arr
     }.bind(this)
 
-    this.loadDMAEntries = async function () {
+    this.loadDMAEntries = async function (manualOffset = 0) {
       const dmaOffsetsPointer = await this.getOffsetData(
-        FRAME_PROGRESS_TABLE + (this.pose * 2), 2)
+        FRAME_PROGRESS_TABLE + (this.pose * 2) + manualOffset, 2)
       const dmaOffsetsPointerLong =
         this.getPCAddressFromBufferData(dmaOffsetsPointer, 0x92)
       const dmaOffsets = await this.getOffsetData(

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Loading pose, Power Armor",
+    "index": 0,
+    "dmaOffset": 8,
+    "frameCount": 94
+  },
+  {
+    "name": "Loading pose, Varia/Gravity Armor",
+    "index": 155,
+    "dmaOffset": 8,
+    "frameCount": 94
+  }
+]
