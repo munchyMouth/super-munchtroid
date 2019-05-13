@@ -133,7 +133,7 @@ export default {
     justify-content: space-between
   }
   .sprite-manager__flips > div.sprite-manager__group {
-    padding-right: 1rem
+    padding-right: .5rem
   }
   .sprite-manager__offsets {
     display: flex;

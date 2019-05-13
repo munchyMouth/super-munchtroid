@@ -78,7 +78,10 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
         _id: firstTile
       }
       obj.part1 = await this.getPart(firstTile, vramCount1, 'PART1')
-      obj.part2 = await this.getPart(firstTile + vramCount1, vramCount2, `PART2$${dmaEntry + ' ' + dmaEntry[2]}`)
+      obj.part2 = await this.getPart(
+        firstTile + vramCount1,
+        vramCount2,
+        `PART2$${dmaEntry + ' ' + dmaEntry[2]}`)
       return obj
     }.bind(this)
 
@@ -101,8 +104,7 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
       return arr
     }.bind(this)
 
-    this.pixelate = function (bytes) {
-      const row = []
+    this.pixelate = function (bytes, row = []) {
       for (let i = 0; i < 8; i++) {
         row.push( // read bytes reversed and read from high 16 to low 16
           parseInt(bytes[3][i] + bytes[2][i] + bytes[1][i] + bytes[0][i], 2)

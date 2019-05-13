@@ -34,7 +34,37 @@
       v-model="leftDrawerOpen"
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
     >
-      <settings />
+      <template v-if="!hasError && romLoaded">
+        <q-tabs color="secondary" align="justify">
+            <q-tab default name="basic" slot="title" label="Basic" />
+            <q-tab name="special" slot="title" label="Special" />
+            <q-tab-pane name="basic">
+              <settings />
+            </q-tab-pane>
+            <q-tab-pane name="special">
+              TO DO
+            </q-tab-pane>
+        </q-tabs>
+      </template>
+      <template v-else-if="hasError">
+        <strong class="settings__error-list">{{ error.type }}</strong>
+        <ul class="settings__error-list">
+          <li v-for="(message, i) in error.message"
+              :key="i">
+            {{ message }}
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <div class="settings__init">
+          <div>
+            <icon name="arrow-up" />
+          </div>
+          <div>
+            Please load a ROM using the File menu above.
+          </div>
+        </div>
+      </template>
     </q-layout-drawer>
 
     <q-page-container>
@@ -60,7 +90,13 @@ export default {
     Settings
   },
   computed: {
-    ...mapGetters(['activeSpriteAddress', 'filePath', 'showVram'])
+    ...mapGetters([
+      'activeSpriteAddress',
+      'error',
+      'hasError',
+      'filePath',
+      'romLoaded',
+      'showVram'])
   },
   data () {
     return {
