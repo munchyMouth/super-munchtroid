@@ -15,7 +15,6 @@
     <div class="settings__dropdown-label">
       <strong>{{ special ? 'Special ' : '' }}Pose: </strong>
     </div>
-    {{ currentPose }}
     <select class="settings__dropdown" @change="choosePose()">
       <option v-for="({ name, index, unused }, i) in poses"
               :key="i"
@@ -38,7 +37,7 @@
     </select>
     <plus-minus-field
       title="Frame No:"
-      :value="`${currentFrameIndex + 1} of ${tileMaps.length}`"
+      :value="`${currentFrameIndex + 1} of ${frames.length}`"
       @decrement="frameDec()"
       @increment="frameInc()" />
     <plus-minus-field
@@ -136,6 +135,7 @@ export default {
       'currentPalette',
       'currentPose',
       'filePath',
+      'frames',
       'settings',
       'spriteRatio',
       'updateSprite',
@@ -231,12 +231,12 @@ export default {
       this.setCurrentFrameIndex(
         this.currentFrameIndex - 1 > -1
           ? this.currentFrameIndex - 1
-          : this.tileMaps.length - 1)
+          : this.frames.length - 1)
     },
     frameInc () {
       this.clearActiveSprite()
       this.setCurrentFrameIndex(
-        this.tileMaps.length > this.currentFrameIndex + 1
+        this.frames.length > this.currentFrameIndex + 1
           ? this.currentFrameIndex + 1
           : 0)
     },

@@ -31,7 +31,7 @@ export default stampit(
           await this.setPose(pose).setFrames(frameCount)
         await loadDMAEntries(dmaOffset)
         return {
-          frames,
+          frames: frameCount ? new Array(frameCount).fill(0) : frames,
           tileMaps: await loadTileMaps(dmaOffset),
           vram: await loadVRAMTiles()
         }
