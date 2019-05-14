@@ -58,7 +58,11 @@ export default {
   updated () {
     ipcRenderer.on('ROM Loaded', async function (event, object) {
       try {
-        this.setSettings({ PALETTES: object.PALETTES, POSES: object.POSES })
+        this.setSettings({
+          PALETTES: object.PALETTES,
+          POSES: object.POSES,
+          SPECIAL_POSES: object.SPECIAL_POSES
+        })
         await this.setSamus(object)
         this.setPalettes(object)
       } catch (e) {

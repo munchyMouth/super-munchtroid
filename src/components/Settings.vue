@@ -1,17 +1,19 @@
 <template>
   <div class="settings">
-    <div class="settings__show-unused" v-if="!special">
-      <div>show unused poses:</div>
-      <div>
-        <button class="no-style"
-                @click="setshowUnused()">
-          <icon :name="showUnused ? 'regular/check-circle' : 'regular/circle'" />
-        </button>
+    <template v-if="!special">
+      <div class="settings__show-unused">
+        <div>Show unused poses:</div>
+        <div>
+          <button class="no-style"
+                  @click="setshowUnused()">
+            <icon :name="showUnused ? 'regular/check-circle' : 'regular/circle'" />
+          </button>
+        </div>
       </div>
-    </div>
-    <hr />
+      <hr />
+    </template>
     <div class="settings__dropdown-label">
-      <strong>Pose: </strong>
+      <strong>{{ special ? 'Special ' : '' }}Pose: </strong>
     </div>
     <select class="settings__dropdown" @change="choosePose()">
       <option v-for="({ name, index, unused }) in poses"
@@ -143,13 +145,15 @@ export default {
       'vram'
     ]),
     poses () {
-      return this.settings.POSES
-        .map(function (it, i) {
-          return (!this.showUnused && it.unused)
-            ? undefined
-            : { ...it, index: i }
-        }.bind(this))
-        .filter((it) => it)
+      return this.special
+        ? this.settings.SPECIAL_POSES
+        : this.settings.POSES
+          .map(function (it, i) {
+            return (!this.showUnused && it.unused)
+              ? undefined
+              : { ...it, index: i }
+          }.bind(this))
+          .filter((it) => it)
     }
   },
   data () {
@@ -197,7 +201,7 @@ export default {
         this.setLoading(true)
         ipcRenderer.send('Load Pose', {
           filePath: this.filePath,
-          pose: zero ? 0 : parseInt(event.currentTarget.value)
+          index: zero ? 0 : parseInt(event.currentTarget.value)
         })
         return true
       } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex

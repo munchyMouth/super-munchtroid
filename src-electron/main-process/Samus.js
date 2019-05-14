@@ -32,7 +32,7 @@ export default stampit(
         await loadDMAEntries(dmaOffset)
         return {
           frames,
-          tileMaps: await loadTileMaps(),
+          tileMaps: await loadTileMaps(dmaOffset),
           vram: await loadVRAMTiles()
         }
       }

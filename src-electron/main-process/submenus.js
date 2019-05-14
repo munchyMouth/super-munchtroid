@@ -24,6 +24,13 @@ const PALETTES = JSON.parse(
       'libs',
       'PalettePointers.json')))
 
+const SPECIAL_POSES = JSON.parse(
+  readFileSync(
+    path.resolve(
+      projectDirectory,
+      'libs',
+      'SamusSpecialPoses.json')))
+
 export const getSubmenu = function (event, mainWindow) {
   return [
     {
@@ -41,7 +48,7 @@ export const getSubmenu = function (event, mainWindow) {
             const palettes = await Palette({ filePath }).getPalettesByIndex()
             const samus = await Samus({ filePath }).load(0)
             event.sender.send(
-              'ROM Loaded', { ...samus, filePath, palettes, POSES, PALETTES })
+              'ROM Loaded', { ...samus, filePath, palettes, POSES, PALETTES, SPECIAL_POSES })
           }
         } catch (e) {
           event.sender.send('ROM Error', {

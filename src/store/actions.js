@@ -104,13 +104,13 @@ export default {
       commit('CLEAR_ERROR')
       commit('CLEAR_SELECTED_TILE')
       commit('CLEAR_UNDO_REDO_CACHES')
-      commit('SET_LOADING', false)
       commit('SET_FILEPATH', filePath)
       commit('SET_FRAMES', frames)
       commit('SET_CURRENT_FRAME_INDEX', 0)
       commit('SET_CURRENT_POSE', pose)
       commit('SET_TILEMAPS', tileMaps)
       commit('SET_VRAM', vram)
+      commit('SET_LOADING', false)
     } catch (e) {
       // this is most likely to be hit if the main process has sent crap data to the renderer
       commit('SET_ERROR', {

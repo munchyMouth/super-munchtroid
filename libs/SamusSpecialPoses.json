@@ -1,12 +1,12 @@
 [
   {
-    "name": "Loading pose, Power Armor",
+    "name": "Facing forward - Power armor - loading",
     "index": 0,
     "dmaOffset": 8,
     "frameCount": 94
   },
   {
-    "name": "Loading pose, Varia/Gravity Armor",
+    "name": "Facing forward - Varia/Gravity suit",
     "index": 155,
     "dmaOffset": 8,
     "frameCount": 94

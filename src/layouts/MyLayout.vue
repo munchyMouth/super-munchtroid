@@ -35,16 +35,30 @@
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
     >
       <template v-if="!hasError && romLoaded">
-        <q-tabs color="secondary" align="justify">
-            <q-tab default name="basic" slot="title" label="Basic" />
-            <q-tab name="special" slot="title" label="Special" />
-            <q-tab-pane name="basic">
-              <settings />
-            </q-tab-pane>
-            <q-tab-pane name="special">
-              TO DO
-            </q-tab-pane>
-        </q-tabs>
+        <div class="settings__tab">
+          <button :class="`no-style ${currentTab === 'basic' ? '' : '--inactive'}`" @click="changeTab('basic')">Basic</button>
+          <button :class="`no-style ${currentTab === 'special' ? '' : '--inactive'}`" @click="changeTab('special')">Special</button>
+        </div>
+        <template v-if="currentTab === 'basic'">
+            <settings />
+        </template>
+        <template v-else-if="currentTab === 'special'">
+            <settings special="true"/>
+        </template>
+
+        <!-- <q-tabs color="secondary"
+                animated align="justify"
+                v-model="currentTab">
+            <q-tab default name="basic"
+                   slot="title"
+                   label="Basic"
+                    />
+            <q-tab name="special"
+                   slot="title"
+                   label="Special"
+                   @click="changeTab($event)" />
+
+        </q-tabs> -->
       </template>
       <template v-else-if="hasError">
         <strong class="settings__error-list">{{ error.type }}</strong>
@@ -74,6 +88,7 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron'
 import { openURL } from 'quasar'
 import { mapActions, mapGetters } from 'vuex'
 
@@ -93,19 +108,50 @@ export default {
     ...mapGetters([
       'activeSpriteAddress',
       'error',
+      'filePath',
       'hasError',
       'filePath',
       'romLoaded',
-      'showVram'])
+      'settings',
+      'showVram',
+      'updateSprite',
+      'updateVram'])
   },
   data () {
     return {
+      currentTab: 'basic',
       leftDrawerOpen: this.$q.platform.is.desktop
     }
   },
   methods: {
-    ...mapActions(['toggleVram']),
-    openURL
+    ...mapActions([
+      'setActiveSprite',
+      'setLoading',
+      'toggleVram']),
+    openURL,
+    changeTab (tab) {
+      if ((!this.updateVram && !this.updateSprite) ||
+        ((this.updateSprite || this.updateVram) &&
+        confirm('WARNING: Your pose edits to VRAM and/or Sprites will be lost!'))) {
+        this.currentTab = tab
+        this.setLoading(true)
+        switch (tab) {
+          case 'basic':
+            this.setActiveSprite()
+            ipcRenderer.send('Load Pose', {
+              filePath: this.filePath,
+              index: 0
+            })
+            break
+          case 'special':
+            this.setActiveSprite()
+            ipcRenderer.send('Load Pose', {
+              ...this.settings.SPECIAL_POSES[0],
+              filePath: this.filePath
+            })
+        }
+      }
+    }
   }
 }
 </script>
@@ -113,5 +159,14 @@ export default {
 <style>
 .munch-layout, .q-layout-page-container {
   height: 100%;
+}
+.settings__tab button {
+  padding: .5rem !important;
+  width: 50%;
+  margin-bottom: 1rem;
+  font-weight: bolder;
+}
+.settings__tab button.--inactive {
+  background: lightslategray;
 }
 </style>
