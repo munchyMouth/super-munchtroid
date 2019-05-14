@@ -51,6 +51,7 @@ const store = {
     loading: false,
     frames: [],
     palettes: [],
+    preventClearSelecteTile: false,
     redoCache: [],
     refreshPalette: true, // value is irrelevant, simply forces a refresh when color changed
     selectedTile: undefined,
@@ -64,6 +65,7 @@ const store = {
     spriteRatio: 6,
     spriteRefresh: false,
     spriteDefaulted: false,
+    tab: 'basic',
     tileMaps: {},
     undoCache: [],
     undoRedoInterim: [],

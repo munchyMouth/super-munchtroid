@@ -81,7 +81,7 @@ ipcMain.on('Load Pose', (event,
     index,
     dmaOffset = undefined,
     frameCount = undefined,
-    frameOverride = false,
+    resetFrame = true,
     specialPoseIndexOverride = undefined }) => {
   try {
     Samus({ filePath })
@@ -90,7 +90,7 @@ ipcMain.on('Load Pose', (event,
         event.sender.send('Pose loaded', {
           ...samus,
           filePath,
-          frameOverride,
+          resetFrame,
           pose: specialPoseIndexOverride || index
         })
       }, function (e) {

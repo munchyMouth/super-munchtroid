@@ -166,10 +166,7 @@ export default {
     selectedTile () { this.redraw() },
     spriteRefresh () { this.redraw() },
     showVram (newVal) { this.redraw() },
-    vram () {
-      this.clearSelectedTile()
-      this.redraw()
-    },
+    vram () { this.redraw() },
     vramX () { this.redraw() },
     vramY () { this.redraw() }
   },

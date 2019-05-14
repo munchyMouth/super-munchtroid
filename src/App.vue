@@ -16,7 +16,11 @@ export default {
     ...mapGetters([
       'loading',
       'currentFrameIndex',
+      'currentPose',
+      'filePath',
       'selectedTile',
+      'settings',
+      'tab',
       'vram'])
   },
   methods: {
@@ -39,6 +43,24 @@ export default {
           timeout,
           detail: message
         })
+      }
+    },
+    reload () {
+      switch (this.tab) {
+        case 'basic':
+          ipcRenderer.send('Load Pose', {
+            filePath: this.filePath,
+            index: this.currentPose || 0,
+            resetFrame: false
+          })
+          break
+        case 'special':
+          ipcRenderer.send('Load Pose', {
+            ...this.settings.SPECIAL_POSES[this.currentPose],
+            filePath: this.filePath,
+            resetFrame: false,
+            specialPoseIndexOverride: this.currentPose
+          })
       }
     },
     success (message, color = 'positive') {
@@ -147,7 +169,7 @@ export default {
         ...this.selectedTile
       })
       if (!getUpdatedVramTiles(this.vram).length) this.clearUpdateVram()
-      this.setLoading(false)
+      this.reload()
       this.success('Tile Saved!')
     }.bind(this))
     ipcRenderer.on('VRAM Tile Error', function (event, object) {
@@ -160,8 +182,8 @@ export default {
         this.clearVramUpdateFlag(obj)
       }.bind(this))
       this.clearUpdateVram()
+      this.reload()
       this.success('Tile(s) Saved!')
-      this.setLoading(false)
     }.bind(this))
     ipcRenderer.on('VRAM Tiles Error', function (event, object) {
       this.setLoading(false)

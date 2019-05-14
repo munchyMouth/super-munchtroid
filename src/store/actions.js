@@ -5,7 +5,9 @@ import { cloneDeep } from 'lodash'
 // Vuex refers to the execution of Actions as "dispatches"
 // -----------------------------------------------------------------------------
 export default {
-  clearSelectedTile ({ commit }) { commit('CLEAR_SELECTED_TILE') },
+  clearSelectedTile ({ commit, state }) {
+    if (!state.preventClearSelecteTile) commit('CLEAR_SELECTED_TILE')
+  },
   clearPalettesUpdateFlag ({ commit }, o) {
     commit('CLEAR_PALETTES_UPDATE_FLAG', o)
   },
@@ -98,16 +100,18 @@ export default {
   },
   // Because of the overhead of Samus' full pose load, the function is async as
   // this avoids a race condition in initial rendering behaviour.
-  async setSamus ({ commit }, { filePath, frames, pose, tileMaps, vram }) {
+  async setSamus ({ commit }, { filePath, frames, pose, resetFrame = true, tileMaps, vram }) {
     try {
-      commit('CLEAR_EDITOR_FLIP')
       commit('CLEAR_ERROR')
-      commit('CLEAR_SELECTED_TILE')
-      commit('CLEAR_UNDO_REDO_CACHES')
       commit('SET_FILEPATH', filePath)
-      commit('SET_FRAMES', frames)
-      commit('SET_CURRENT_FRAME_INDEX', 0)
-      commit('SET_CURRENT_POSE', pose)
+      if (resetFrame) {
+        commit('SET_FRAMES', frames)
+        commit('CLEAR_EDITOR_FLIP')
+        commit('SET_CURRENT_FRAME_INDEX', 0)
+        commit('CLEAR_UNDO_REDO_CACHES')
+        commit('CLEAR_SELECTED_TILE')
+        commit('SET_CURRENT_POSE', pose)
+      } else commit('TOGGLE_PREVENT_CLEAR_SELECTED_TILE')
       commit('SET_TILEMAPS', tileMaps)
       commit('SET_VRAM', vram)
       commit('SET_LOADING', false)
@@ -145,6 +149,7 @@ export default {
     commit('CLEAR_UNDO_REDO_CACHES')
     commit('SET_SELECTED_TILE', o)
   },
+  setTab ({ commit }, o) { commit('SET_TAB', o) },
   setUserIsDrawing ({ commit, state }, o) {
     if (o) commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTile))
     commit('SET_USER_IS_DRAWING', o)

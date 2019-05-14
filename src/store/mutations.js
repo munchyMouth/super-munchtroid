@@ -143,6 +143,7 @@ export default {
   },
   SET_SPRITE_RATIO (state, o) { state.spriteRatio = o },
   SET_SPRITE_REFRESH (state) { state.spriteRefresh = !state.spriteRefresh },
+  SET_TAB (state, o) { state.tab = o },
   SET_TILEMAPS (state, o) { state.tileMaps = o },
   SET_USER_IS_DRAWING (state, o) { state.userIsDrawing = o },
   SET_VRAM (state, o) {
@@ -178,6 +179,9 @@ export default {
   },
   TOGGLE_EDITOR_FLIP (state, flip) {
     state.editorFlip[flip] = !state.editorFlip[flip]
+  },
+  TOGGLE_PREVENT_CLEAR_SELECTED_TILE (state) {
+    state.clearSelectedTile = !state.clearSelectedTile
   },
   TOGGLE_SPRITE (state) { state.showSprite = !state.showSprite },
   TOGGLE_VRAM (state) { state.showVram = !state.showVram },

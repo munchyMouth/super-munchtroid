@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <template v-if="!special">
+    <template v-if="tab === 'basic'">
       <div class="settings__show-unused">
         <div>Show unused poses:</div>
         <div>
@@ -13,7 +13,7 @@
       <hr />
     </template>
     <div class="settings__dropdown-label">
-      <strong>{{ special ? 'Special ' : '' }}Pose: </strong>
+      <strong>{{ tab[0].toUpperCase() + tab.slice(1) }} Pose: </strong>
     </div>
     <select class="settings__dropdown" @change="choosePose()">
       <option v-for="({ name, index, unused }, i) in poses"
@@ -119,7 +119,6 @@ import TreeLi from './TreeLi.vue'
 
 export default {
   name: 'settings',
-  props: ['special'],
   components: {
     Icon,
     PlusMinusField,
@@ -139,6 +138,7 @@ export default {
       'settings',
       'spriteRatio',
       'updateSprite',
+      'tab',
       'tileMapFrame',
       'tileMaps',
       'updateVram',
@@ -147,7 +147,7 @@ export default {
       'vram'
     ]),
     poses () {
-      return this.special
+      return this.tab === 'special'
         ? this.settings.SPECIAL_POSES
         : this.settings.POSES
           .map(function (it, i) {
@@ -199,17 +199,19 @@ export default {
         this.clearActiveSprite()
         this.setLoading(true)
         this.previousPoseIndex = zero ? 0 : event.currentTarget.selectedIndex
-        if (!this.special) {
-          ipcRenderer.send('Load Pose', {
-            filePath: this.filePath,
-            index: zero ? 0 : parseInt(event.currentTarget.value)
-          })
-        } else {
-          ipcRenderer.send('Load Pose', {
-            ...this.settings.SPECIAL_POSES[this.previousPoseIndex],
-            filePath: this.filePath,
-            specialPoseIndexOverride: this.previousPoseIndex
-          })
+        switch (this.tab) {
+          case 'basic':
+            ipcRenderer.send('Load Pose', {
+              filePath: this.filePath,
+              index: zero ? 0 : parseInt(event.currentTarget.value)
+            })
+            break
+          case 'special':
+            ipcRenderer.send('Load Pose', {
+              ...this.settings.SPECIAL_POSES[this.previousPoseIndex],
+              filePath: this.filePath,
+              specialPoseIndexOverride: this.previousPoseIndex
+            })
         }
         return true
       } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
