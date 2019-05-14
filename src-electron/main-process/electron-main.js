@@ -77,13 +77,17 @@ ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
 
 // dmaOffset and frameCount are used to load in special poses.
 ipcMain.on('Load Pose', (event,
-  { filePath, index, dmaOffset = undefined, frameCount = undefined }) => {
+  { filePath,
+    index,
+    dmaOffset = undefined,
+    frameCount = undefined,
+    specialPoseIndexOverride = undefined }) => {
   try {
-    console.log(dmaOffset)
     Samus({ filePath })
       .load(index, frameCount, dmaOffset)
       .then(function (samus) {
-        event.sender.send('Pose loaded', { ...samus, filePath, pose: index })
+        event.sender.send('Pose loaded',
+          { ...samus, filePath, pose: specialPoseIndexOverride || index })
       }, function (e) {
         console.trace(e)
         event.sender.send('Pose Error', {

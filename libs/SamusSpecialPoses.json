@@ -1,14 +1,26 @@
 [
   {
-    "name": "Facing forward - Power armor - loading",
+    "name": "PART 1: Facing forward - Power armor - loading",
     "index": 0,
     "dmaOffset": 8,
-    "frameCount": 94
+    "frameCount": 47
   },
   {
-    "name": "Facing forward - Varia/Gravity suit",
+    "name": "PART 2: Facing forward - Power armor - loading",
+    "index": 0,
+    "dmaOffset": 196,
+    "frameCount": 47
+  },
+  {
+    "name": "PART 1: Facing forward - Varia/Gravity suit - loading",
     "index": 155,
     "dmaOffset": 8,
-    "frameCount": 94
+    "frameCount": 47
+  },
+  {
+    "name": "PART 2: Facing forward - Varia/Gravity suit - loading",
+    "index": 155,
+    "dmaOffset": 196,
+    "frameCount": 47
   }
 ]

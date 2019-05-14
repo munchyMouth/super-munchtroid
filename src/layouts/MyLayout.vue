@@ -96,6 +96,7 @@ import 'vue-awesome/icons/eye-slash'
 import 'vue-awesome/icons/eye'
 import Icon from 'vue-awesome/components/Icon'
 
+import { poseWarning } from '../libs/messages.json'
 import Settings from '../components/Settings.vue'
 
 export default {
@@ -130,27 +131,27 @@ export default {
       'toggleVram']),
     openURL,
     changeTab (tab) {
-      if ((!this.updateVram && !this.updateSprite) ||
+      if (tab !== this.currentTab &&
+        ((!this.updateVram && !this.updateSprite) ||
         ((this.updateSprite || this.updateVram) &&
-        confirm('WARNING: Your pose edits to VRAM and/or Sprites will be lost!'))) {
+        confirm(poseWarning)))) {
         this.currentTab = tab
         this.setLoading(true)
+        this.setActiveSprite()
         switch (tab) {
-          case 'basic':
-            this.setActiveSprite()
-            ipcRenderer.send('Load Pose', {
-              filePath: this.filePath,
-              index: 0
-            })
-            break
-          case 'special':
-            this.setActiveSprite()
-            ipcRenderer.send('Load Pose', {
-              ...this.settings.SPECIAL_POSES[0],
-              filePath: this.filePath
-            })
+          case 'basic': return this.loadBasicSettings()
+          case 'special': return this.loadSpecialSettings()
         }
       }
+    },
+    loadBasicSettings () {
+      ipcRenderer.send('Load Pose', { filePath: this.filePath, index: 0 })
+    },
+    loadSpecialSettings () {
+      ipcRenderer.send('Load Pose', {
+        ...this.settings.SPECIAL_POSES[0],
+        filePath: this.filePath
+      })
     }
   }
 }

@@ -15,12 +15,13 @@
     <div class="settings__dropdown-label">
       <strong>{{ special ? 'Special ' : '' }}Pose: </strong>
     </div>
+    {{ currentPose }}
     <select class="settings__dropdown" @change="choosePose()">
-      <option v-for="({ name, index, unused }) in poses"
-              :key="index"
+      <option v-for="({ name, index, unused }, i) in poses"
+              :key="i"
               :value="index"
               :class="unused ? '--unused' : ''"
-              :selected="index === currentPose ? 'selected' : false">
+              :selected="i === currentPose ? 'selected' : false">
         {{ name }}
       </option>
     </select>
@@ -110,6 +111,7 @@ import 'vue-awesome/icons/regular/circle'
 import Icon from 'vue-awesome/components/Icon'
 
 import { getUpdatedVramTiles } from './Miscellaneous'
+import { poseWarning, paletteWarning } from '../libs/messages.json'
 
 import PlusMinusField from './PlusMinusField.vue'
 import SpriteManager from './SpriteManager.vue'
@@ -184,7 +186,7 @@ export default {
     choosePalette () {
       if (!this.updatePalette ||
         (this.updatePalette &&
-        confirm('WARNING: Your palette changes will be lost!'))) {
+        confirm(paletteWarning))) {
         this.previousPaletteIndex = event.currentTarget.selectedIndex
         ipcRenderer.send('Load Palettes', {
           filePath: this.filePath,
@@ -193,16 +195,22 @@ export default {
       } else event.currentTarget.selectedIndex = this.previousPaletteIndex
     },
     choosePose (zero = false) {
-      if ((!this.updateVram && !this.updateSprite) || zero ||
-      ((this.updateSprite || this.updateVram) &&
-      confirm('WARNING: Your pose edits to VRAM and/or Sprites will be lost!'))) {
-        this.previousPoseIndex = zero ? 0 : event.currentTarget.selectedIndex
+      if (zero || this.validatePose()) {
         this.clearActiveSprite()
         this.setLoading(true)
-        ipcRenderer.send('Load Pose', {
-          filePath: this.filePath,
-          index: zero ? 0 : parseInt(event.currentTarget.value)
-        })
+        this.previousPoseIndex = zero ? 0 : event.currentTarget.selectedIndex
+        if (!this.special) {
+          ipcRenderer.send('Load Pose', {
+            filePath: this.filePath,
+            index: zero ? 0 : parseInt(event.currentTarget.value)
+          })
+        } else {
+          ipcRenderer.send('Load Pose', {
+            ...this.settings.SPECIAL_POSES[this.previousPoseIndex],
+            filePath: this.filePath,
+            specialPoseIndexOverride: this.previousPoseIndex
+          })
+        }
         return true
       } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
       return false
@@ -263,7 +271,7 @@ export default {
     setshowUnused () {
       if ((!this.updateVram && !this.updateSprite) ||
         ((this.updateSprite || this.updateVram) &&
-        confirm('WARNING: Your pose edits to VRAM and/or Sprites will be lost!'))) {
+        confirm(poseWarning))) {
         this.showUnused = !this.showUnused
       }
     },
@@ -276,6 +284,11 @@ export default {
       if (this.spriteRatio > 1) {
         this.setSpriteRatio(this.spriteRatio - 1)
       }
+    },
+    validatePose () {
+      return (!this.updateVram && !this.updateSprite) ||
+        ((this.updateSprite || this.updateVram) &&
+        confirm(poseWarning))
     }
   },
   watch: {
