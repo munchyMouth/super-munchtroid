@@ -81,13 +81,18 @@ ipcMain.on('Load Pose', (event,
     index,
     dmaOffset = undefined,
     frameCount = undefined,
+    frameOverride = false,
     specialPoseIndexOverride = undefined }) => {
   try {
     Samus({ filePath })
       .load(index, frameCount, dmaOffset)
       .then(function (samus) {
-        event.sender.send('Pose loaded',
-          { ...samus, filePath, pose: specialPoseIndexOverride || index })
+        event.sender.send('Pose loaded', {
+          ...samus,
+          filePath,
+          frameOverride,
+          pose: specialPoseIndexOverride || index
+        })
       }, function (e) {
         console.trace(e)
         event.sender.send('Pose Error', {
