@@ -160,6 +160,11 @@ export default {
     frameDMAOffset () {
       return this.tab === 'special'
         ? this.settings.SPECIAL_POSES[this.currentPose].dmaOffset : 0
+    },
+    frameIndex () {
+      return this.tab === 'basic'
+        ? this.currentPose || 0
+        : this.settings.SPECIAL_POSES[this.currentPose || 0].index
     }
   },
   data () {
@@ -211,11 +216,12 @@ export default {
             })
             break
           case 'special':
-            const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex || 0]
+            const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex]
             ipcRenderer.send('Load Pose', {
               ...pose,
               filePath: this.filePath,
-              specialPoseFrameOverride: this.frameDMAOffset / 4
+              specialPoseFrameOverride: pose.dmaOffset / 4,
+              specialPoseIndexOverride: this.previousPoseIndex
             })
             break
         }
@@ -257,15 +263,14 @@ export default {
       }
     },
     frameLoad (oldFrame) {
-      if (this.currentFrameIndex !== oldFrame) {
-        ipcRenderer.send('Load Pose', {
-          index: this.currentPose || 0,
-          dmaOffset: (this.currentFrameIndex * 4) + this.frameDMAOffset,
-          frameCount: this.frames.length,
-          filePath: this.filePath,
-          specialPoseFrameOverride: this.frameDMAOffset / 4
-        })
-      }
+      ipcRenderer.send('Load Pose', {
+        index: this.frameIndex,
+        dmaOffset: (this.currentFrameIndex * 4) + this.frameDMAOffset,
+        frameCount: this.frames.length,
+        filePath: this.filePath,
+        specialPoseFrameOverride: this.frameDMAOffset / 4,
+        specialPoseIndexOverride: this.tab === 'special' ? this.currentPose : 0
+      })
     },
     saveSprites () {
       if (this.updateSprite) {

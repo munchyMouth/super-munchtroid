@@ -79,8 +79,9 @@ ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
 ipcMain.on('Load Pose', (event,
   { filePath,
     index,
-    dmaOffset,
+    dmaOffset = undefined,
     frameCount = undefined,
+    specialPoseIndexOverride = undefined,
     specialPoseFrameOverride = undefined
   }) => {
   try {
@@ -93,7 +94,7 @@ ipcMain.on('Load Pose', (event,
           frameIndex: typeof specialPoseFrameOverride !== 'undefined'
             ? (dmaOffset / 4) - specialPoseFrameOverride
             : dmaOffset / 4,
-          pose: index
+          pose: specialPoseIndexOverride || index
         })
       }, function (e) {
         console.trace(e)
