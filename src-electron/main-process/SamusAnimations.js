@@ -38,7 +38,7 @@ export default stampit({ /* extends RomData, SamusProps */
       const dmaOffsetsPointerLong =
         this.getPCAddressFromBufferData(dmaOffsetsPointer, 0x92)
       const dmaOffsets = await this.getOffsetData(
-        dmaOffsetsPointerLong + manualOffset, this.frames.length * 4)
+        dmaOffsetsPointerLong + manualOffset, 4) // this.frames.length * 4)
       this.dmaEntries = await this.getDMAData(this.chunk(dmaOffsets, 4))
       this.dmaEntries._address = `$${dmaOffsetsPointerLong.toString(16)}`
       this.dmaEntries._id = dmaOffsetsPointerLong

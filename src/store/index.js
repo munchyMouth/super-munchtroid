@@ -64,6 +64,7 @@ const store = {
     spriteRatio: 6,
     spriteRefresh: false,
     spriteDefaulted: false,
+    tab: 'basic',
     tileMaps: {},
     undoCache: [],
     undoRedoInterim: [],

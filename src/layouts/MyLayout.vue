@@ -36,29 +36,10 @@
     >
       <template v-if="!hasError && romLoaded">
         <div class="settings__tab">
-          <button :class="`no-style ${currentTab === 'basic' ? '' : '--inactive'}`" @click="changeTab('basic')">Basic</button>
-          <button :class="`no-style ${currentTab === 'special' ? '' : '--inactive'}`" @click="changeTab('special')">Special</button>
+          <button :class="`no-style ${tab === 'basic' ? '' : '--inactive'}`" @click="changeTab('basic')">Basic</button>
+          <button :class="`no-style ${tab === 'special' ? '' : '--inactive'}`" @click="changeTab('special')">Special</button>
         </div>
-        <template v-if="currentTab === 'basic'">
-            <settings />
-        </template>
-        <template v-else-if="currentTab === 'special'">
-            <settings special="true"/>
-        </template>
-
-        <!-- <q-tabs color="secondary"
-                animated align="justify"
-                v-model="currentTab">
-            <q-tab default name="basic"
-                   slot="title"
-                   label="Basic"
-                    />
-            <q-tab name="special"
-                   slot="title"
-                   label="Special"
-                   @click="changeTab($event)" />
-
-        </q-tabs> -->
+        <settings/>
       </template>
       <template v-else-if="hasError">
         <strong class="settings__error-list">{{ error.type }}</strong>
@@ -115,12 +96,12 @@ export default {
       'romLoaded',
       'settings',
       'showVram',
+      'tab',
       'updateSprite',
       'updateVram'])
   },
   data () {
     return {
-      currentTab: 'basic',
       leftDrawerOpen: this.$q.platform.is.desktop
     }
   },
@@ -128,14 +109,15 @@ export default {
     ...mapActions([
       'setActiveSprite',
       'setLoading',
+      'setTab',
       'toggleVram']),
     openURL,
     changeTab (tab) {
-      if (tab !== this.currentTab &&
+      if (tab !== this.tab &&
         ((!this.updateVram && !this.updateSprite) ||
         ((this.updateSprite || this.updateVram) &&
         confirm(poseWarning)))) {
-        this.currentTab = tab
+        this.setTab(tab)
         this.setLoading(true)
         this.setActiveSprite()
         switch (tab) {
@@ -148,9 +130,11 @@ export default {
       ipcRenderer.send('Load Pose', { filePath: this.filePath, index: 0 })
     },
     loadSpecialSettings () {
+      const pose = this.settings.SPECIAL_POSES[0]
       ipcRenderer.send('Load Pose', {
-        ...this.settings.SPECIAL_POSES[0],
-        filePath: this.filePath
+        ...pose,
+        filePath: this.filePath,
+        specialPoseFrameOverride: pose.dmaOffset / 4
       })
     }
   }

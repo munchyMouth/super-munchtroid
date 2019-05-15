@@ -13,7 +13,7 @@ export default {
   activeSpriteAddress: state => state.activeSprite
     ? state.activeSprite._address : undefined,
   currentFrame: state => (state.vram)
-    ? state.vram[state.currentFrameIndex] : undefined,
+    ? state.vram[0] : undefined,
   editorHFlip: state => state.editorFlip.h,
   editorVFlip: state => state.editorFlip.v,
   getActivePaletteChunked: state => paletteIndex =>
@@ -34,7 +34,7 @@ export default {
       : undefined
   },
   getSpritesByHalf: state => ({ half }) => {
-    return state.tileMaps[state.currentFrameIndex][half]
+    return state.tileMaps[0][half]
       .tileMap
       .sprites
       .slice()
@@ -44,11 +44,11 @@ export default {
     // how Samus's tiles overlap with each other, you'll have to reorder her in reverse sprite order like the game.
   },
   getSpriteByProps: state => ({ half, index }) =>
-    state.tileMaps[state.currentFrameIndex][half].tileMap.sprites[index],
+    state.tileMaps[0][half].tileMap.sprites[index],
   getVramByProps: state => ({ half, part }) =>
-    state.vram[state.currentFrameIndex][half].parts[part],
+    state.vram[0][half].parts[part],
   getVramTileByProps: state => ({ half, index, part }) =>
-    state.vram[state.currentFrameIndex][half].parts[part].tiles[index],
+    state.vram[0][half].parts[part].tiles[index],
   hasError: state => state.error.type || state.error.message.length,
   hasSelectedTile: state =>
     state.selectedTile &&
@@ -67,7 +67,7 @@ export default {
       const _half = handleIrregularHalfLogic({ half, vramIndex })
       for (let i = 1; i < 3; i++) {
         const { tiles } =
-          state.vram[state.currentFrameIndex][_half].parts[`part${i}`]
+          state.vram[0][_half].parts[`part${i}`]
         const modifier = _half === 'bottom' ? 8 : 0
         if (tiles.length + modifier < vramIndex + 2) return false
       }
@@ -76,5 +76,5 @@ export default {
   },
   tileMapFrame: state =>
     state.tileMaps && typeof state.currentFrameIndex === 'number'
-      ? state.tileMaps[state.currentFrameIndex] : undefined
+      ? state.tileMaps[0] : undefined
 }

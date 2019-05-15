@@ -98,7 +98,9 @@ export default {
   },
   // Because of the overhead of Samus' full pose load, the function is async as
   // this avoids a race condition in initial rendering behaviour.
-  async setSamus ({ commit }, { filePath, frames, pose, tileMaps, vram }) {
+  async setSamus (
+    { commit },
+    { filePath, frames, frameIndex = 0, pose, tileMaps, vram }) {
     try {
       commit('CLEAR_EDITOR_FLIP')
       commit('CLEAR_ERROR')
@@ -106,7 +108,7 @@ export default {
       commit('CLEAR_UNDO_REDO_CACHES')
       commit('SET_FILEPATH', filePath)
       commit('SET_FRAMES', frames)
-      commit('SET_CURRENT_FRAME_INDEX', 0)
+      commit('SET_CURRENT_FRAME_INDEX', frameIndex)
       commit('SET_CURRENT_POSE', pose)
       commit('SET_TILEMAPS', tileMaps)
       commit('SET_VRAM', vram)
@@ -132,7 +134,7 @@ export default {
         half,
         index,
         ...state
-          .tileMaps[state.currentFrameIndex][half]
+          .tileMaps[0][half]
           .tileMap
           .sprites[index]
       })
@@ -145,6 +147,7 @@ export default {
     commit('CLEAR_UNDO_REDO_CACHES')
     commit('SET_SELECTED_TILE', o)
   },
+  setTab ({ commit }, o) { commit('SET_TAB', o) },
   setUserIsDrawing ({ commit, state }, o) {
     if (o) commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTile))
     commit('SET_USER_IS_DRAWING', o)

@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <template v-if="!special">
+    <template v-if="tab === 'basic'">
       <div class="settings__show-unused">
         <div>Show unused poses:</div>
         <div>
@@ -13,7 +13,7 @@
       <hr />
     </template>
     <div class="settings__dropdown-label">
-      <strong>{{ special ? 'Special ' : '' }}Pose: </strong>
+      <strong>{{ this.tab === 'special' ? 'Special ' : '' }}Pose: </strong>
     </div>
     <select class="settings__dropdown" @change="choosePose()">
       <option v-for="({ name, index, unused }, i) in poses"
@@ -119,7 +119,6 @@ import TreeLi from './TreeLi.vue'
 
 export default {
   name: 'settings',
-  props: ['special'],
   components: {
     Icon,
     PlusMinusField,
@@ -139,6 +138,7 @@ export default {
       'settings',
       'spriteRatio',
       'updateSprite',
+      'tab',
       'tileMapFrame',
       'tileMaps',
       'updateVram',
@@ -147,7 +147,7 @@ export default {
       'vram'
     ]),
     poses () {
-      return this.special
+      return this.tab === 'special'
         ? this.settings.SPECIAL_POSES
         : this.settings.POSES
           .map(function (it, i) {
@@ -156,6 +156,10 @@ export default {
               : { ...it, index: i }
           }.bind(this))
           .filter((it) => it)
+    },
+    frameDMAOffset () {
+      return this.tab === 'special'
+        ? this.settings.SPECIAL_POSES[this.currentPose].dmaOffset : 0
     }
   },
   data () {
@@ -199,17 +203,21 @@ export default {
         this.clearActiveSprite()
         this.setLoading(true)
         this.previousPoseIndex = zero ? 0 : event.currentTarget.selectedIndex
-        if (!this.special) {
-          ipcRenderer.send('Load Pose', {
-            filePath: this.filePath,
-            index: zero ? 0 : parseInt(event.currentTarget.value)
-          })
-        } else {
-          ipcRenderer.send('Load Pose', {
-            ...this.settings.SPECIAL_POSES[this.previousPoseIndex],
-            filePath: this.filePath,
-            specialPoseIndexOverride: this.previousPoseIndex
-          })
+        switch (this.tab) {
+          case 'basic':
+            ipcRenderer.send('Load Pose', {
+              filePath: this.filePath,
+              index: zero ? 0 : parseInt(event.currentTarget.value)
+            })
+            break
+          case 'special':
+            const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex || 0]
+            ipcRenderer.send('Load Pose', {
+              ...pose,
+              filePath: this.filePath,
+              specialPoseFrameOverride: this.frameDMAOffset / 4
+            })
+            break
         }
         return true
       } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
@@ -227,18 +235,37 @@ export default {
         })
     },
     frameDec () {
-      this.clearActiveSprite()
-      this.setCurrentFrameIndex(
-        this.currentFrameIndex - 1 > -1
-          ? this.currentFrameIndex - 1
-          : this.frames.length - 1)
+      const oldFrame = this.currentFrameIndex
+      const newFrame = this.currentFrameIndex - 1 > -1
+        ? this.currentFrameIndex - 1
+        : this.frames.length - 1
+      if (oldFrame !== newFrame && this.validatePose()) {
+        this.clearActiveSprite()
+        this.setCurrentFrameIndex(newFrame)
+        this.frameLoad()
+      }
     },
     frameInc () {
-      this.clearActiveSprite()
-      this.setCurrentFrameIndex(
-        this.frames.length > this.currentFrameIndex + 1
-          ? this.currentFrameIndex + 1
-          : 0)
+      const oldFrame = this.currentFrameIndex
+      const newFrame = this.frames.length > this.currentFrameIndex + 1
+        ? this.currentFrameIndex + 1
+        : 0
+      if (oldFrame !== newFrame && this.validatePose()) {
+        this.clearActiveSprite()
+        this.setCurrentFrameIndex(newFrame)
+        this.frameLoad()
+      }
+    },
+    frameLoad (oldFrame) {
+      if (this.currentFrameIndex !== oldFrame) {
+        ipcRenderer.send('Load Pose', {
+          index: this.currentPose || 0,
+          dmaOffset: (this.currentFrameIndex * 4) + this.frameDMAOffset,
+          frameCount: this.frames.length,
+          filePath: this.filePath,
+          specialPoseFrameOverride: this.frameDMAOffset / 4
+        })
+      }
     },
     saveSprites () {
       if (this.updateSprite) {

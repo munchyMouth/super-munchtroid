@@ -79,15 +79,22 @@ ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
 ipcMain.on('Load Pose', (event,
   { filePath,
     index,
-    dmaOffset = undefined,
+    dmaOffset,
     frameCount = undefined,
-    specialPoseIndexOverride = undefined }) => {
+    specialPoseFrameOverride = undefined
+  }) => {
   try {
     Samus({ filePath })
       .load(index, frameCount, dmaOffset)
       .then(function (samus) {
-        event.sender.send('Pose loaded',
-          { ...samus, filePath, pose: specialPoseIndexOverride || index })
+        event.sender.send('Pose loaded', {
+          ...samus,
+          filePath,
+          frameIndex: typeof specialPoseFrameOverride !== 'undefined'
+            ? (dmaOffset / 4) - specialPoseFrameOverride
+            : dmaOffset / 4,
+          pose: index
+        })
       }, function (e) {
         console.trace(e)
         event.sender.send('Pose Error', {
@@ -111,9 +118,7 @@ ipcMain.on('Save Palettes', (event, { filePath, palettes }) => {
         console.trace(e)
         event.sender.send('Palettes Error', {
           type: 'PaletteMainSaveException',
-          title: 'Failed to save a palette: Error in main. ' +
-            'You are advised to save the rest of your stuff and restart the program. ' +
-            'throw an issue on gitlab with the error below or write me on metconst.',
+          title: 'Failed to save a palette: Error in main. ',
           message: [e.message]
         })
       })

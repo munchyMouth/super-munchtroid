@@ -34,17 +34,9 @@ export default {
   CLEAR_SPRITE_UPDATE_FLAG (state, { half, index }) {
     Vue.delete(
       state
-        .tileMaps[state.currentFrameIndex][half]
+        .tileMaps[0][half]
         .tileMap
         .sprites[index],
-      '_updated')
-  },
-  CLEAR_VRAM_UPDATE_FLAG (state, { frameIndex, half, index, part }) {
-    Vue.delete(
-      state
-        .vram[frameIndex][half]
-        .parts[part]
-        .tiles[index],
       '_updated')
   },
   CLEAR_UNDO_REDO_CACHES (state) {
@@ -60,6 +52,14 @@ export default {
   },
   CLEAR_UPDATE_VRAM (state) {
     state.updateVram = false
+  },
+  CLEAR_VRAM_UPDATE_FLAG (state, { half, index, part }) {
+    Vue.delete(
+      state
+        .vram[0][half]
+        .parts[part]
+        .tiles[index],
+      '_updated')
   },
   // pull newest item from the undo array history
   POP_FROM_UNDO_CACHE (state) {
@@ -135,7 +135,7 @@ export default {
   SET_SPRITE_DEFAULT (state, o) { state.spriteDefault = o },
   SET_SPRITE_PROPERTY (state, { half, index, property, value }) {
     const sprite = state
-      .tileMaps[state.currentFrameIndex][half]
+      .tileMaps[0][half]
       .tileMap.sprites[index]
     sprite[property] = value
     sprite._updated = new Date().getTime()
@@ -143,6 +143,7 @@ export default {
   },
   SET_SPRITE_RATIO (state, o) { state.spriteRatio = o },
   SET_SPRITE_REFRESH (state) { state.spriteRefresh = !state.spriteRefresh },
+  SET_TAB (state, o) { state.tab = o },
   SET_TILEMAPS (state, o) { state.tileMaps = o },
   SET_USER_IS_DRAWING (state, o) { state.userIsDrawing = o },
   SET_VRAM (state, o) {
@@ -153,7 +154,7 @@ export default {
   SET_VRAM_RATIO (state, o) { state.vramRatio = o },
   SET_VRAM_PIXEL (state, { half, part, index, x, y, colorIndex }) {
     const vTile = state
-      .vram[state.currentFrameIndex][half]
+      .vram[0][half]
       .parts[part]
       .tiles[index]
     if (vTile &&
@@ -168,7 +169,7 @@ export default {
   SET_VRAM_TILE (state, { half, part, index, tile }) {
     if (tile && !tile.hasOwnProperty('empty')) {
       const vTile = state
-        .vram[state.currentFrameIndex][half]
+        .vram[0][half]
         .parts[part]
         .tiles[index]
       vTile.data = tile.data
