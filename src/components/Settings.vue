@@ -229,8 +229,8 @@ export default {
       } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
       return false
     },
-    filterSpritesToSave (half, tileMapFrame) {
-      return tileMapFrame[half]
+    filterSpritesToSave (half) {
+      return this.tileMaps[half]
         .tileMap
         .sprites
         .filter((it, index) => {
@@ -279,12 +279,9 @@ export default {
           'Save Sprites',
           {
             filePath: this.filePath,
-            sprites: [this.tileMaps].reduce(
-              function (arr, it) {
-                return arr
-                  .concat(this.filterSpritesToSave('top', it))
-                  .concat(this.filterSpritesToSave('bottom', it))
-              }.bind(this), []),
+            sprites:
+              this.filterSpritesToSave('top')
+                .concat(this.filterSpritesToSave('bottom')),
             isFirstPose: !this.currentPose
           })
       }

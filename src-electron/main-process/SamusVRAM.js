@@ -113,9 +113,7 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
     this.tileDataToVRAMBuffers = function ({ data }) {
       return data
         .map(td => chunkTileDataToROMWords(td))
-        .reduce(
-          toConcatenatedHighAndLowBuffers,
-          new Array(2))
+        .reduce(toConcatenatedHighAndLowBuffers, new Array(2))
     }
   }
 })

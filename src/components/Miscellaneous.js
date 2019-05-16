@@ -20,19 +20,19 @@ export function createBlankTemplate () {
 // trying to rig reactivity through some kind of workaround. The optional 2nd
 // argument allows you to perform actions on the given VRAM tiles.
 export function getUpdatedVramTiles (vram, _callback) {
-  return [vram].reduce((arr, frame, frameIndex) => {
-    ['bottom', 'top'].forEach(half => {
-      ['part1', 'part2'].forEach(part => {
-        frame[half].parts[part].tiles.forEach((tile, index) => {
-          if (tile._updated) {
-            if (_callback) _callback({ frameIndex, half, part, tile, index })
-            arr.push(tile)
-          }
-        })
+  // [vram].reduce((arr, frame, frameIndex) => {
+  return ['bottom', 'top'].reduce((arr, half) => {
+    ['part1', 'part2'].forEach(part => {
+      vram[half].parts[part].tiles.forEach((tile, index) => {
+        if (tile._updated) {
+          if (_callback) _callback({ half, part, tile, index })
+          arr.push(tile)
+        }
       })
     })
     return arr
   }, [])
+  // }, [])
 }
 
 // handle weird morph ball logic edge-case -------------------------------------
