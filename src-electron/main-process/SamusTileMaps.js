@@ -109,18 +109,19 @@ export default stampit({ /* extends RomData, SamusProps */
       }
     }.bind(this)
 
-    this.loadTileMaps = async function (offset, arr = [], i = 0, count = 0) {
+    this.loadTileMaps = async function (offset, data = {}, i = 0, count = 0) {
       try {
         const sum = offset ? offset / 4 : 0
-        if (count === sum) { // this.frames.length + sum) {
-          // if (count >= sum) {
-          arr.push({
-            bottom: await this.loadSpriteTileMaps(INDEX_OFFSET_TABLE_BOT, i),
-            top: await this.loadSpriteTileMaps(INDEX_OFFSET_TABLE_TOP, i)
-          })
-        } else await this.loadTileMaps(offset, arr, i + 1, count + 1)
+        // for (let count === 0; count <= sum)
+        // if (count === sum) { // this.frames.length + sum) {
+        // if (count >= sum) {
+        // arr.push({
+        data.bottom = await this.loadSpriteTileMaps(INDEX_OFFSET_TABLE_BOT, sum)
+        data.top = await this.loadSpriteTileMaps(INDEX_OFFSET_TABLE_TOP, sum)
+        // })
+        // } else await this.loadTileMaps(offset, data, i + 1, count + 1)
         // }
-        return arr
+        return data
       } catch (err) {
         console.error(err.message)
       }

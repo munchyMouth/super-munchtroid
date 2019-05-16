@@ -20,7 +20,7 @@ export function createBlankTemplate () {
 // trying to rig reactivity through some kind of workaround. The optional 2nd
 // argument allows you to perform actions on the given VRAM tiles.
 export function getUpdatedVramTiles (vram, _callback) {
-  return vram.reduce((arr, frame, frameIndex) => {
+  return [vram].reduce((arr, frame, frameIndex) => {
     ['bottom', 'top'].forEach(half => {
       ['part1', 'part2'].forEach(part => {
         frame[half].parts[part].tiles.forEach((tile, index) => {

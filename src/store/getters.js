@@ -13,7 +13,7 @@ export default {
   activeSpriteAddress: state => state.activeSprite
     ? state.activeSprite._address : undefined,
   currentFrame: state => (state.vram)
-    ? state.vram[0] : undefined,
+    ? state.vram : undefined,
   editorHFlip: state => state.editorFlip.h,
   editorVFlip: state => state.editorFlip.v,
   getActivePaletteChunked: state => paletteIndex =>
@@ -34,7 +34,7 @@ export default {
       : undefined
   },
   getSpritesByHalf: state => ({ half }) => {
-    return state.tileMaps[0][half]
+    return state.tileMaps[half]
       .tileMap
       .sprites
       .slice()
@@ -44,11 +44,11 @@ export default {
     // how Samus's tiles overlap with each other, you'll have to reorder her in reverse sprite order like the game.
   },
   getSpriteByProps: state => ({ half, index }) =>
-    state.tileMaps[0][half].tileMap.sprites[index],
+    state.tileMaps[half].tileMap.sprites[index],
   getVramByProps: state => ({ half, part }) =>
-    state.vram[0][half].parts[part],
+    state.vram[half].parts[part],
   getVramTileByProps: state => ({ half, index, part }) =>
-    state.vram[0][half].parts[part].tiles[index],
+    state.vram[half].parts[part].tiles[index],
   hasError: state => state.error.type || state.error.message.length,
   hasSelectedTile: state =>
     state.selectedTile &&
@@ -58,7 +58,7 @@ export default {
     !state.selectedTile ||
     (state.selectedTile &&
       state.selectedTile.hasOwnProperty('empty')),
-  romLoaded: state => !!state.vram.length, // the `!!` syntax forces primitive boolean rather than truthy.
+  romLoaded: state => !!Object.keys(state.vram).length, // the `!!` syntax forces primitive boolean rather than truthy.
   vram16x16TileIsValid: state => ({ half, vramIndex, part }) => {
     if (part === 'part1' &&
       state.activeSprite &&
@@ -67,7 +67,7 @@ export default {
       const _half = handleIrregularHalfLogic({ half, vramIndex })
       for (let i = 1; i < 3; i++) {
         const { tiles } =
-          state.vram[0][_half].parts[`part${i}`]
+          state.vram[_half].parts[`part${i}`]
         const modifier = _half === 'bottom' ? 8 : 0
         if (tiles.length + modifier < vramIndex + 2) return false
       }
@@ -76,5 +76,5 @@ export default {
   },
   tileMapFrame: state =>
     state.tileMaps && typeof state.currentFrameIndex === 'number'
-      ? state.tileMaps[0] : undefined
+      ? state.tileMaps : undefined
 }

@@ -134,7 +134,7 @@ export default {
         half,
         index,
         ...state
-          .tileMaps[0][half]
+          .tileMaps[half]
           .tileMap
           .sprites[index]
       })

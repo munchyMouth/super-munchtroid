@@ -279,7 +279,7 @@ export default {
           'Save Sprites',
           {
             filePath: this.filePath,
-            sprites: this.tileMaps.reduce(
+            sprites: [this.tileMaps].reduce(
               function (arr, it) {
                 return arr
                   .concat(this.filterSpritesToSave('top', it))

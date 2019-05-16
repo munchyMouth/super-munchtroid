@@ -85,23 +85,20 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
       return obj
     }.bind(this)
 
-    this.loadVRAMTiles = async function (i = 0, arr = []) {
-      if (i < this.dmaEntries.length) {
-        const length = arr.push({
-          bottom: {
-            parts: await this.getVRAMByDMAEntry(this.dmaEntries[i].bottom, i + 'bottom')
-          },
-          top: {
-            parts: await this.getVRAMByDMAEntry(this.dmaEntries[i].top, 'top')
-          }
-        })
-        Object.keys(arr[length - 1]).forEach(key => {
-          arr[length - 1][key]._id = this.dmaEntries[i][key]._id
-          arr[length - 1][key]._address = this.dmaEntries[i][key]._address
-        })
-        await this.loadVRAMTiles(i + 1, arr)
+    this.loadVRAMTiles = async function (i = 0) {
+      const data = {
+        bottom: {
+          parts: await this.getVRAMByDMAEntry(this.dmaEntries.bottom, i + 'bottom')
+        },
+        top: {
+          parts: await this.getVRAMByDMAEntry(this.dmaEntries.top, 'top')
+        }
       }
-      return arr
+      Object.keys(data).forEach(key => {
+        data[key]._id = this.dmaEntries[key]._id
+        data[key]._address = this.dmaEntries[key]._address
+      })
+      return data
     }.bind(this)
 
     this.pixelate = function (bytes, row = []) {

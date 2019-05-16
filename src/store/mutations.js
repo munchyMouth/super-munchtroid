@@ -34,7 +34,7 @@ export default {
   CLEAR_SPRITE_UPDATE_FLAG (state, { half, index }) {
     Vue.delete(
       state
-        .tileMaps[0][half]
+        .tileMaps[half]
         .tileMap
         .sprites[index],
       '_updated')
@@ -56,7 +56,7 @@ export default {
   CLEAR_VRAM_UPDATE_FLAG (state, { half, index, part }) {
     Vue.delete(
       state
-        .vram[0][half]
+        .vram[half]
         .parts[part]
         .tiles[index],
       '_updated')
@@ -135,7 +135,7 @@ export default {
   SET_SPRITE_DEFAULT (state, o) { state.spriteDefault = o },
   SET_SPRITE_PROPERTY (state, { half, index, property, value }) {
     const sprite = state
-      .tileMaps[0][half]
+      .tileMaps[half]
       .tileMap.sprites[index]
     sprite[property] = value
     sprite._updated = new Date().getTime()
@@ -154,7 +154,7 @@ export default {
   SET_VRAM_RATIO (state, o) { state.vramRatio = o },
   SET_VRAM_PIXEL (state, { half, part, index, x, y, colorIndex }) {
     const vTile = state
-      .vram[0][half]
+      .vram[half]
       .parts[part]
       .tiles[index]
     if (vTile &&
@@ -169,7 +169,7 @@ export default {
   SET_VRAM_TILE (state, { half, part, index, tile }) {
     if (tile && !tile.hasOwnProperty('empty')) {
       const vTile = state
-        .vram[0][half]
+        .vram[half]
         .parts[part]
         .tiles[index]
       vTile.data = tile.data

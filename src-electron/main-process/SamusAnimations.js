@@ -11,25 +11,26 @@ export default stampit({ /* extends RomData, SamusProps */
     FRAME_PROGRESS_TABLE = parseInt(FRAME_PROGRESS_TABLE, 16)
 
     // PUBLIC ------------------------------------------------------------------
-    this.getDMAData = async function (dmaOffsets, arr = []) {
+    this.getDMAData = async function (dmaOffsets, data = {}) {
       if (dmaOffsets.length) {
         const dmaOffset = dmaOffsets.shift()
         const dmaTable = {
           top: this.getPCAddressFromBufferData(DMA_TABLES.TOP[dmaOffset[0]], 0x92),
           bottom: this.getPCAddressFromBufferData(DMA_TABLES.BOTTOM[dmaOffset[2]], 0x92)
         }
-        const data = {
-          top: await this.getOffsetData(dmaTable.top + dmaOffset[1] * 7, 7),
-          bottom: await this.getOffsetData(dmaTable.bottom + dmaOffset[3] * 7, 7)
-        }
+
+        // const data = {
+        data.top = await this.getOffsetData(dmaTable.top + dmaOffset[1] * 7, 7)
+        data.bottom = await this.getOffsetData(dmaTable.bottom + dmaOffset[3] * 7, 7)
+        // }
         Object.keys(dmaTable).forEach(key => {
           data[key]._id = dmaTable[key]
           data[key]._address = `$${dmaTable[key].toString(16)}`
         })
-        arr.push(data)
-        await this.getDMAData(dmaOffsets, arr)
+        // arr.push(data)
+        // await this.getDMAData(dmaOffsets, data)
       }
-      return arr
+      return data
     }.bind(this)
 
     this.loadDMAEntries = async function (manualOffset = 0) {

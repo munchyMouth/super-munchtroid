@@ -72,7 +72,7 @@ const store = {
     updateSprite: false,
     updateVram: false,
     userIsDrawing: undefined, // 'left' | 'right' | undefined
-    vram: [],
+    vram: {},
     vramRatio: 6
   }
 }

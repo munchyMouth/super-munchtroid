@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="tileMaps.length">
+  <q-page v-if="Object.keys(tileMaps).length">
     <div class="munch-index-wrapper"
          @mouseenter="setUserIsDrawing(undefined)"
          @mousedown="draw"
