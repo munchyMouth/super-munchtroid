@@ -108,10 +108,12 @@ export default {
   SET_EDITOR_ACTIVE (state, o) { state.editorActive = o },
   SET_EDITOR_RATIO (state, o) { state.editorRatio = o },
   SET_ERROR (state, { title, type, message }) {
+    state.loading = false
     state.error.type = type
     state.error.title = title
     state.error.message = message
   },
+  SET_EVENT_OBSERVER (state, o) { state.eventObserver = o },
   SET_FILEPATH (state, o) { state.filePath = o },
   SET_FRAMES (state, o) { state.frames = o },
   SET_LOADING (state, o) { state.loading = o },

@@ -8,6 +8,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import { ipcRenderer } from 'electron'
 
+import { genericException } from './libs/messages.json'
 import { getUpdatedVramTiles } from './components/Miscellaneous.js'
 
 export default {
@@ -16,6 +17,7 @@ export default {
     ...mapGetters([
       'loading',
       'currentFrameIndex',
+      'eventObserver',
       'selectedTile',
       'vram'])
   },
@@ -25,6 +27,7 @@ export default {
       'clearUpdateSprite',
       'clearUpdateVram',
       'clearVramUpdateFlag',
+      'setEventObserver',
       'setError',
       'setLoading',
       'setPalettes',
@@ -41,6 +44,9 @@ export default {
         })
       }
     },
+    renderEvent (title, callback) {
+      ipcRenderer.on(title, callback)
+    },
     success (message, color = 'positive') {
       if (message) {
         this.$q.notify({
@@ -56,118 +62,118 @@ export default {
     ipcRenderer.send('attachMenuEvents')
   },
   updated () {
-    ipcRenderer.on('ROM Loaded', async function (event, object) {
-      try {
-        this.setSettings({
-          PALETTES: object.PALETTES,
-          POSES: object.POSES,
-          SPECIAL_POSES: object.SPECIAL_POSES
-        })
-        await this.setSamus(object)
-        this.setPalettes(object)
-      } catch (e) {
-        this.setError({
-          type: 'RomRendererLoadException',
-          title: 'Failed to load your ROM: Error in renderer',
-          message: [
-            'Check that the ROM is valid',
-            'The ROM must be unheadered',
-            'If you are using a modified ROM, check DMA and animation data'
-          ]
-        })
-      }
-    }.bind(this))
-    ipcRenderer.on('ROM Error', function (event, error) {
-      this.setLoading(false)
-      this.setError(error)
-    }.bind(this))
-
-    ipcRenderer.on('Pose loaded', async function (event, object) {
-      try {
-        await this.setSamus(object)
-      } catch (e) {
-        this.setError({
-          type: 'PoseRendererLoadException',
-          title: 'Failed to load a pose: Error in renderer',
-          message: [e.message]
-        })
-      }
-    }.bind(this))
-    ipcRenderer.on('Pose Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-    }.bind(this))
-
-    ipcRenderer.on('Palettes Loaded', function (event, object) {
-      try {
-        this.setPalettes(object)
-      } catch (e) {
-        this.setError({
-          type: 'PaletteRendererLoadException',
-          title: 'Failed to load a palette: Error in renderer',
-          message: [e.message]
-        })
-      }
-    }.bind(this))
-    ipcRenderer.on('Palettes Saved', function () {
-      this.setLoading(false)
-      this.clearUpdatePalette()
-      this.success('Palette(s) Saved!')
-    }.bind(this))
-    ipcRenderer.on('Palettes Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-      this.fail(object)
-    }.bind(this))
-
-    ipcRenderer.on('Sprite Saved', function () {
-      this.setLoading(false)
-      this.clearUpdateSprite()
-      this.success('Sprite Saved!')
-    }.bind(this))
-    ipcRenderer.on('Sprite Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-      this.fail(object)
-    }.bind(this))
-    ipcRenderer.on('Sprites Saved', function () {
-      this.setLoading(false)
-      this.clearUpdateSprite()
-      this.success('All Sprites Saved!')
-    }.bind(this))
-    ipcRenderer.on('Sprites Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-      this.fail(object)
-    }.bind(this))
-
-    ipcRenderer.on('VRAM Tile Saved', function () {
-      this.clearVramUpdateFlag({
-        frameIndex: this.currentFrameIndex,
-        ...this.selectedTile
-      })
-      if (!getUpdatedVramTiles(this.vram).length) this.clearUpdateVram()
-      this.setLoading(false)
-      this.success('Tile Saved!')
-    }.bind(this))
-    ipcRenderer.on('VRAM Tile Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-      this.fail(object)
-    }.bind(this))
-    ipcRenderer.on('VRAM Tiles Saved', function () {
-      getUpdatedVramTiles(this.vram, function (obj) {
-        this.clearVramUpdateFlag(obj)
+    try {
+      const events = ['Palettes', 'Pose', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
+      events.forEach(function (it) {
+        ipcRenderer.on(`${it} Error`, function (event, error) {
+          this.setError(error)
+        }.bind(this))
       }.bind(this))
-      this.clearUpdateVram()
-      this.success('Tile(s) Saved!')
-      this.setLoading(false)
-    }.bind(this))
-    ipcRenderer.on('VRAM Tiles Error', function (event, object) {
-      this.setLoading(false)
-      this.setError(object)
-      this.fail(object)
-    }.bind(this))
+
+      this.renderEvent(
+        'ROM Loaded',
+        async function (event, object) {
+          try {
+            this.setSettings({
+              PALETTES: object.PALETTES,
+              POSES: object.POSES,
+              SPECIAL_POSES: object.SPECIAL_POSES
+            })
+            await this.setSamus(object)
+            this.setPalettes(object)
+          } catch (e) {
+            this.setError({
+              type: 'RomRendererLoadException',
+              title: 'Failed to load your ROM: Error in renderer',
+              message: [
+                'Check that the ROM is valid',
+                'The ROM must be unheadered',
+                'If you are using a modified ROM, check DMA and animation data'
+              ]
+            })
+          }
+        }.bind(this))
+
+      this.renderEvent(
+        'Pose loaded',
+        async function (event, object) {
+          try {
+            await this.setSamus(object)
+          } catch (e) {
+            this.setError({
+              type: 'PoseRendererLoadException',
+              title: 'Failed to load a pose: Error in renderer',
+              message: [e.message]
+            })
+          }
+        }.bind(this))
+
+      this.renderEvent(
+        'Palettes Loaded',
+        function (event, object) {
+          try {
+            this.setPalettes(object)
+          } catch (e) {
+            this.setError({
+              type: 'PaletteRendererLoadException',
+              title: 'Failed to load a palette: Error in renderer',
+              message: [e.message]
+            })
+          }
+        }.bind(this))
+
+      this.renderEvent(
+        'Palettes Saved',
+        function () {
+          this.setLoading(false)
+          this.clearUpdatePalette()
+          this.success('Palette(s) Saved!')
+        }.bind(this))
+
+      this.renderEvent(
+        'Sprite Saved',
+        function () {
+          this.setLoading(false)
+          this.clearUpdateSprite()
+          this.success('Sprite Saved!')
+        }.bind(this))
+
+      this.renderEvent(
+        'Sprites Saved',
+        function () {
+          this.setLoading(false)
+          this.clearUpdateSprite()
+          this.success('All Sprites Saved!')
+        }.bind(this))
+
+      this.renderEvent(
+        'VRAM Tile Saved',
+        function () {
+          this.clearVramUpdateFlag({
+            frameIndex: this.currentFrameIndex,
+            ...this.selectedTile
+          })
+          if (!getUpdatedVramTiles(this.vram).length) this.clearUpdateVram()
+          this.setLoading(false)
+          this.success('Tile Saved!')
+        }.bind(this))
+      this.renderEvent(
+        'VRAM Tiles Saved',
+        function () {
+          getUpdatedVramTiles(this.vram, function (obj) {
+            this.clearVramUpdateFlag(obj)
+          }.bind(this))
+          this.clearUpdateVram()
+          this.success('Tile(s) Saved!')
+          this.setLoading(false)
+        }.bind(this))
+    } catch (e) {
+      this.setError({
+        type: 'genericRendererException',
+        title: 'Generic Renderer Exception',
+        message: [genericException, this.eventObserver, e.message]
+      })
+    }
   },
   watch: {
     loading (val) {

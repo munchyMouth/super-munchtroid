@@ -47,6 +47,7 @@ const store = {
     editorUpdate: false,
     editorFlip: { h: false, v: false },
     error: { type: '', message: [] },
+    eventObserver: '',
     filePath: '',
     loading: false,
     frames: [],

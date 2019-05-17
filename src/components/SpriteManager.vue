@@ -49,9 +49,6 @@
 import { ipcRenderer } from 'electron'
 import { mapActions, mapGetters } from 'vuex'
 
-// import 'vue-awesome/icons/arrow-down'
-// import 'vue-awesome/icons/arrow-up'
-// import 'vue-awesome/icons/arrow-left'
 import 'vue-awesome/icons/save'
 import 'vue-awesome/icons/regular/check-circle'
 import 'vue-awesome/icons/regular/circle'
@@ -93,6 +90,7 @@ export default {
       if (this.sprite._updated) {
         this.setLoading(true)
         this.clearSpriteUpdateFlag(this.$props)
+        this.setEventObserver('transaction in SpriteManager.vue: Save Sprite')
         ipcRenderer.send('Save Sprite', {
           filePath: this.filePath,
           sprite: this.sprite,

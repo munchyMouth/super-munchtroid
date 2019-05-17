@@ -10,5 +10,47 @@
     "index": 155,
     "dmaOffset": 8,
     "frameCount": 94
+  },
+  {
+    "name": "Facing right - Samus trying to stand after MB attack - index 1 (?)",
+    "index": 233,
+    "dmaOffset": 56,
+    "frameCount": 3
+  },
+  {
+    "name": "Facing right - Samus trying to stand after MB attack - index 2 (?)",
+    "index": 233,
+    "dmaOffset": 76,
+    "frameCount": 3
+  },
+  {
+    "name": "Facing right - crystal flash - recharging stage",
+    "index": 211,
+    "dmaOffset": 24,
+    "frameCount": 4
+  },
+  {
+    "name": "Facing left - crystal flash - recharging stage",
+    "index": 211,
+    "dmaOffset": 54,
+    "frameCount": 4
+  },
+  {
+    "name": "Right wall jump (and yes, it really does look weird)",
+    "index": 26,
+    "dmaOffset": 44,
+    "frameCount": 1
+  },
+  {
+    "name": "Left wall jump",
+    "index": 25,
+    "dmaOffset": 44,
+    "frameCount": 1
+  },
+  {
+    "name": "DEATH FINDER",
+    "index": 211,
+    "dmaOffset": 0,
+    "frameCount": 150
   }
 ]

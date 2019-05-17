@@ -71,6 +71,7 @@ export default {
   setEditorActive ({ commit }, active) { commit('SET_EDITOR_ACTIVE', active) },
   setEditorRatio ({ commit }, ratio) { commit('SET_EDITOR_RATIO', ratio) },
   setError ({ commit }, error) { commit('SET_ERROR', error) },
+  setEventObserver ({ commit }, obs) { commit('SET_EVENT_OBSERVER', obs) },
   setLoading ({ commit }, loading) { commit('SET_LOADING', loading) },
   setPalettes ({ commit }, { palettes, i }) {
     try {

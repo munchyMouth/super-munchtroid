@@ -1,4 +1,5 @@
 {
   "poseWarning": "WARNING: Your pose edits to VRAM and/or Sprites will be lost!",
-  "paletteWarning": "WARNING: Your palette changes will be lost!"
+  "paletteWarning": "WARNING: Your palette changes will be lost!",
+  "genericException": "Something prevented the action you just tried to call from happening.  Please send me info about what caused this message to appear along with the following error message: "
 }
