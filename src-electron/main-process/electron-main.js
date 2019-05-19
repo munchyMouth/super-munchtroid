@@ -1,10 +1,24 @@
 'use strict'
 
 import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import { readFileSync } from 'fs'
+import path from 'path'
 
 import Palette from './Palette'
 import Samus from './Samus'
 import { getSubmenu } from './submenus.js'
+
+const projectDirectory = __dirname.replace(
+  (process.env.PROD)
+    ? /[/|\\]resources[/|\\]app.asar/g
+    : 'src-electron/main-process', '')
+
+const POSES = JSON.parse(
+  readFileSync(
+    path.resolve(
+      projectDirectory,
+      'libs',
+      'SamusPoses.json')))
 
 /**
  * Set `__statics` path to static files in production;
@@ -35,6 +49,26 @@ function createWindow () {
   })
 }
 
+function setRendererPoseIndex (index, indexToRender) {
+  console.log(POSES
+    .map((it, i) => {
+      return !it.unused && i === indexToRender ? i : -1
+    })
+    .filter(it => {
+      console.log(it)
+      return it > -1
+    }))
+  const result = indexToRender
+    ? POSES
+      .map((it, i) => {
+        return !it.unused && i === indexToRender ? i : -1
+      })
+      .filter(it => it > -1)
+    : [index]
+  console.log(result)
+  return result.length ? result[0] : 0
+}
+
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
@@ -51,7 +85,7 @@ app.on('activate', () => {
 
 ipcMain.on('attachMenuEvents', (event) => {
   const menu = Menu.buildFromTemplate([{
-    label: 'File', submenu: getSubmenu(event, mainWindow)
+    label: 'File', submenu: getSubmenu(event, mainWindow, POSES)
   }])
   Menu.setApplicationMenu(menu)
 })
@@ -81,7 +115,7 @@ ipcMain.on('Load Pose', (event,
     index,
     dmaOffset = undefined,
     frameCount = undefined,
-    specialPoseIndexOverride = undefined,
+    optionsetIndex = undefined,
     specialPoseFrameOverride = undefined
   }) => {
   try {
@@ -94,7 +128,7 @@ ipcMain.on('Load Pose', (event,
           frameIndex: typeof specialPoseFrameOverride !== 'undefined'
             ? (dmaOffset / 4) - specialPoseFrameOverride
             : dmaOffset / 4,
-          pose: specialPoseIndexOverride || index
+          pose: optionsetIndex || index
         })
       }, function (e) {
         console.trace(e)

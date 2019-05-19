@@ -10,13 +10,6 @@ const projectDirectory = __dirname.replace(
     ? /[/|\\]resources[/|\\]app.asar/g
     : 'src-electron/main-process', '')
 
-const POSES = JSON.parse(
-  readFileSync(
-    path.resolve(
-      projectDirectory,
-      'libs',
-      'SamusPoses.json')))
-
 const PALETTES = JSON.parse(
   readFileSync(
     path.resolve(
@@ -31,7 +24,7 @@ const SPECIAL_POSES = JSON.parse(
       'libs',
       'SamusSpecialPoses.json')))
 
-export const getSubmenu = function (event, mainWindow) {
+export const getSubmenu = function (event, mainWindow, POSES) {
   return [
     {
       label: 'load ROM',

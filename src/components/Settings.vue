@@ -163,7 +163,7 @@ export default {
     },
     frameIndex () {
       return this.tab === 'basic'
-        ? this.currentPose || 0
+        ? this.poses[this.currentPose].index || 0
         : this.settings.SPECIAL_POSES[this.currentPose || 0].index
     }
   },
@@ -212,7 +212,8 @@ export default {
           case 'basic':
             ipcRenderer.send('Load Pose', {
               filePath: this.filePath,
-              index: zero ? 0 : parseInt(event.currentTarget.value)
+              index: zero ? 0 : parseInt(event.currentTarget.value),
+              optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
             })
             break
           case 'special':
@@ -221,7 +222,7 @@ export default {
               ...pose,
               filePath: this.filePath,
               specialPoseFrameOverride: pose.dmaOffset / 4,
-              specialPoseIndexOverride: this.previousPoseIndex
+              optionsetIndex: this.previousPoseIndex
             })
             break
         }
@@ -268,8 +269,8 @@ export default {
         dmaOffset: (this.currentFrameIndex * 4) + this.frameDMAOffset,
         frameCount: this.frames.length,
         filePath: this.filePath,
-        specialPoseFrameOverride: this.frameDMAOffset / 4,
-        specialPoseIndexOverride: this.tab === 'special' ? this.currentPose : 0
+        optionsetIndex: this.currentPose,
+        specialPoseFrameOverride: this.frameDMAOffset / 4
       })
     },
     saveSprites () {

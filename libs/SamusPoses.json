@@ -1012,7 +1012,7 @@
     "unused": false
   },
   {
-    "name": "FD: Garbage Pose",
-    "unused": false
+    "name": "FD: Garbage Pose*",
+    "unused": true
   }
 ]
