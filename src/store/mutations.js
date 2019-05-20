@@ -105,6 +105,7 @@ export default {
   SET_CURRENT_FRAME_INDEX (state, o) { state.currentFrameIndex = o },
   SET_CURRENT_PALETTE (state, o) { state.currentPalette = o },
   SET_CURRENT_POSE (state, o) { state.currentPose = o },
+  SET_EDIT_16X16 (state, o) { state.edit16x16 = o },
   SET_EDITOR_ACTIVE (state, o) { state.editorActive = o },
   SET_EDITOR_RATIO (state, o) { state.editorRatio = o },
   SET_ERROR (state, { title, type, message }) {

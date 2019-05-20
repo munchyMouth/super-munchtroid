@@ -42,6 +42,7 @@ const store = {
     currentPalette: 0,
     currentPose: 0,
     copiedTileData: undefined,
+    edit16x16: false,
     editorActive: false,
     editorRatio: 1.1, // Size = Ratio * 32 for Editor.
     editorUpdate: false,

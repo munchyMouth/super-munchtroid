@@ -19,14 +19,22 @@
             <icon name="th-large" />
           </button>
           <template v-if="!noSelectedTile">
+            <button class="no-style editor__canvas__tools__16x16"
+                  :disabled="editor16x16TileIsValid(selectedTile) ? false : 'disabled'"
+                  title="set 16x16 mode"
+                  @click="setEdit16x16(!edit16x16)">
+              <div>
+                <span :class="edit16x16 ? '--active' : ''">16²</span>
+              </div>
+            </button>
             <button :class="`no-style editor__canvas__tools__save${updated ? '--active' : ''}`"
                   @click="saveVramTile()"
                   title="save current tile">
               <icon name="save" />
             </button>
-          <strong class="editor__canvas__tools__address">
-            {{ this.selectedTile.tile._address }}
-          </strong>
+            <strong class="editor__canvas__tools__address">
+              {{ this.selectedTile.tile._address }}
+            </strong>
           </template>
         </div>
         <canvas :class="!noSelectedTile ? '--active' : ''"
@@ -111,20 +119,22 @@ export default {
       'activePaletteColor',
       'activePaletteIndex',
       'copiedTileData',
+      'edit16x16',
       'editorHFlip',
       'editorVFlip',
+      'editor16x16TileIsValid',
       'editorRatio',
       'filePath',
       'getVramTileByProps',
       'noSelectedTile',
       'palettes',
+      'redoCache',
       'refreshPalette',
       'selectedTile',
       'userIsDrawing',
       'undoRedoInterim',
       'undoCache',
-      'updateVram',
-      'redoCache'
+      'updateVram'
     ]),
     editorSize () { return this.tileSize * 8 },
     pixelX () { return Math.floor(this.x / this.tileSize) },
@@ -146,6 +156,7 @@ export default {
       'setCopiedTileData',
       'pastecopiedTile',
       'popFromUndoCache',
+      'setEdit16x16',
       'setEditorActive',
       'setEditorRatio',
       'setUserIsDrawing',
@@ -292,7 +303,8 @@ export default {
       this.testTileUpdated()
     },
     refreshPalette () { this.redraw() },
-    selectedTile () {
+    selectedTile (newVal) {
+      this.setEdit16x16(false)
       this.redraw()
       this.testTileUpdated()
     },

@@ -25,6 +25,7 @@ export default {
       'activeSprite',
       'currentFrame',
       'currentFrameIndex',
+      'edit16x16',
       'editorUpdate',
       'getSpriteByProps',
       'getSpritesByHalf',
@@ -160,6 +161,7 @@ export default {
       this.clearSelectedTile()
       this.redraw()
     },
+    edit16x16 () { this.redraw() },
     editorUpdate () { this.redraw() },
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },

@@ -68,6 +68,7 @@ export default {
     commit('SET_CURRENT_FRAME_INDEX', i)
   },
   setCurrentPalette ({ commit }, i) { commit('SET_CURRENT_PALETTE', i) },
+  setEdit16x16 ({ commit }, o) { commit('SET_EDIT_16X16', o) },
   setEditorActive ({ commit }, active) { commit('SET_EDITOR_ACTIVE', active) },
   setEditorRatio ({ commit }, ratio) { commit('SET_EDITOR_RATIO', ratio) },
   setError ({ commit }, error) { commit('SET_ERROR', error) },

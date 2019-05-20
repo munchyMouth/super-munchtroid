@@ -74,6 +74,15 @@ export default {
       return true
     } else return false
   },
+  editor16x16TileIsValid: state => ({ half, index, part }) => {
+    if (part === 'part1') {
+      for (let i = 1; i < 3; i++) {
+        const { tiles } = state.vram[half].parts[`part${i}`]
+        if (tiles.length < index + 2) return false
+      }
+      return true
+    } else return false
+  },
   tileMapFrame: state =>
     state.tileMaps && typeof state.currentFrameIndex === 'number'
       ? state.tileMaps : undefined

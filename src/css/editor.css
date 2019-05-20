@@ -1,7 +1,6 @@
 .editor {
   display: flex;
   flex-direction: column;
-  /* overflow: auto; */
 }
 .editor__canvas {
   display: flex;
@@ -46,6 +45,20 @@
 .editor__canvas__tools__grid--hide svg,
 .editor__canvas__tools__flip--flip svg {
   background: rgba(255, 50, 0, 0.25);
+}
+
+.editor__canvas__tools__16x16 > div {
+  display: flex;
+  margin-top: -14px;
+  align-items: flex-start;
+  justify-items: flex-start
+}
+.editor__canvas__tools__16x16 > div > span {
+  font-weight: bolder !important;
+  font-size: 11pt !important;
+}
+.editor__canvas__tools__16x16 > div > span.--active {
+  background: rgba(255, 50, 0, 0.25)
 }
 
 .editor__canvas__tools__save--active svg {

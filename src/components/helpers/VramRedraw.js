@@ -61,7 +61,7 @@ export default {
       const { no, part } = this.selectedTile
       const x = (no * 8) * R
       const y = (part === 'part1' ? 0 : 8) * R
-      this.redrawHilightSquare('magenta', R, x, y, false, this.activeSprite ? 3 : 1)
+      this.redrawHilightSquare('magenta', R, x, y, this.edit16x16, this.activeSprite ? 3 : 1)
     }
   },
   renderTilesOrBlank ({ tiles }, i, x, y = 0, R) {
