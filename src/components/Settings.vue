@@ -11,8 +11,9 @@
         </div>
       </div>
       <hr />
+      <search-box @load-entry="choosePoseFromSearchEntry($event)"/>
     </template>
-    <div class="settings__dropdown-label">
+    <div class="settings__dropdown-label pose">
       <strong>{{ this.tab === 'special' ? 'Special ' : '' }}Pose: </strong>
     </div>
     <select class="settings__dropdown" @change="choosePose()">
@@ -114,6 +115,7 @@ import { poseWarning, paletteWarning } from '../libs/messages.json'
 
 import PlusMinusField from './PlusMinusField.vue'
 import SpriteManager from './SpriteManager.vue'
+import SearchBox from './SearchBox.vue'
 import Tree from './Tree.vue'
 import TreeLi from './TreeLi.vue'
 
@@ -122,6 +124,7 @@ export default {
   components: {
     Icon,
     PlusMinusField,
+    SearchBox,
     SpriteManager,
     Tree,
     TreeLi
@@ -165,6 +168,11 @@ export default {
       return this.tab === 'basic'
         ? this.poses[this.currentPose].index || 0
         : this.settings.SPECIAL_POSES[this.currentPose || 0].index
+    }
+  },
+  provide () {
+    return {
+      poses: this.poses
     }
   },
   data () {
@@ -229,6 +237,20 @@ export default {
         return true
       } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
       return false
+    },
+    choosePoseFromSearchEntry ({ entry }) {
+      if (this.validatePose()) {
+        this.previousPoseIndex = !this.showUnused
+          ? this.poses
+            .map((it, i) => (it.index === entry.index) ? i : -1)
+            .filter(it => it > -1)[0]
+          : this.previousPoseIndex
+        ipcRenderer.send('Load Pose', {
+          filePath: this.filePath,
+          index: entry.index,
+          optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
+        })
+      }
     },
     filterSpritesToSave (half) {
       return this.tileMaps[half]

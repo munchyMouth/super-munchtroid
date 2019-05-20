@@ -90,7 +90,6 @@ export default {
       if (this.sprite._updated) {
         this.setLoading(true)
         this.clearSpriteUpdateFlag(this.$props)
-        this.setEventObserver('transaction in SpriteManager.vue: Save Sprite')
         ipcRenderer.send('Save Sprite', {
           filePath: this.filePath,
           sprite: this.sprite,

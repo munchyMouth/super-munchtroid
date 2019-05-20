@@ -8,10 +8,14 @@
   justify-content: space-evenly
 }
 
-.settings input, .settings select {
+.settings select {
   width: 100%;
-  height: 30px;
-  margin-bottom: 10px;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.settings__dropdown-label.pose {
+  margin-top: 1rem;
 }
 
 .settings__dropdown > option.--unused {
@@ -40,5 +44,5 @@
   font-weight: bold;
 }
 .settings__frame-tree__save > button.--active {
-  color: red
+  color: red;
 }
