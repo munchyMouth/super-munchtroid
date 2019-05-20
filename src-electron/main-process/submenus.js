@@ -40,7 +40,6 @@ export const getSubmenu = function (event, mainWindow, POSES) {
           if (filePath && filePath.length) {
             const palettes = await Palette({ filePath }).getPalettesByIndex()
             const samus = await Samus({ filePath }).load(0)
-            debugger
             event.sender.send(
               'ROM Loaded', { ...samus, filePath, palettes, POSES, PALETTES, SPECIAL_POSES })
           }

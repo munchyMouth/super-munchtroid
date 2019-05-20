@@ -20,8 +20,9 @@ export default stampit(RomData, {
       let hex = ''
       for (let i = 0; i < 3; i++) {
         let h = (parseInt(bits[i], 2) << 3).toString(16)
-        hex += h.length === 1 ? h + '0' : h
+        hex += h.length === 1 ? '0' + h : h
       }
+      console.log(hex)
       return `#${hex}`
     }
 
