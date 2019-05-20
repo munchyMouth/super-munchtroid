@@ -1,10 +1,16 @@
-<h1>SUPER MUNCHTROID</h1>v.2.3.0
+<h1>SUPER MUNCHTROID</h1>v.2.6.1
 
 <img alt="Co.Koa header" title="Co.Koa" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
 ----
 
 ### Downloads
+
+#### 2.6.1
+- <a href="https://drive.google.com/file/d/1xdQcD7yAhloVSno8lo_GdLgVjVIo21Vl/view">Super Munchtroid-linux-x64 2.6.1</a>
+- <a href="https://drive.google.com/file/d/1Cg1NwMUcyrZLJHbUjO3U7rs3D7W18HiF/view">Super Munchtroid-win32-x64 2.6.1</a>
+
+2.6.1 Features special poses, a search bar, significant bug/palette fixes and frame by frame loading (ergo, massive performance boost)
 
 #### 2.3.2
 - <a href="https://drive.google.com/open?id=1TaLiAbylx5gioLtTEdp0tZ18c3l9vZ1i">Super Munchtroid-linux-x64 2.3.2</a>
@@ -13,10 +19,7 @@
 2.3.2 fixes the default lift pose's use of a redundant tile in Common Sprites by blanking the redundant tile. Also decouples the majority of CSS logic for compnents into separate files
 
 #### 2.3.0
-- <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.3.0</a>
-- <a href="https://drive.google.com/open?id=18Q8sH7yb7A7D8gLnx6PJbfJPfKsaKvY1">Super Munchtroid-win32-x64 2.3.0</a>
-
-2.3.0 contains what should hopefully be *all* of Samus' palettes.
+2.3.0 added what should hopefully be *all* of Samus' palettes.
 
 #### 2.2.0
 2.2.0 exposed all ROM statics in libs/TableData.json
