@@ -54,7 +54,7 @@ export default {
               ? this.hilightedIndex - 1
               : this.entries.length - 1
             if (this.$el.querySelector('.search-box__entries').scrollTop > 0) {
-              this.$el.querySelector('.search-box__entries').scrollTop -= 50
+              this.$el.querySelector('.search-box__entries').scrollTop = (this.hilightedIndex * 50) - 125
             } else if (this.hilightedIndex >= this.entries.length - 1) {
               this.$el.querySelector('.search-box__entries').scrollTop =
                 50 * this.entries.length - 1
@@ -65,7 +65,7 @@ export default {
               ? this.hilightedIndex + 1
               : 0
             if (this.hilightedIndex > 3) {
-              this.$el.querySelector('.search-box__entries').scrollTop += 50
+              this.$el.querySelector('.search-box__entries').scrollTop = (this.hilightedIndex * 50) - 125
             } else this.$el.querySelector('.search-box__entries').scrollTop = 0
         }
       }
