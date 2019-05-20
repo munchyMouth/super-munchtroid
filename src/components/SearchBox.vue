@@ -3,6 +3,7 @@
     <q-search v-model="entry"
               class="search-box__input"
               clearable
+              placeholder="Search used poses"
               @keyup.up="scrollThroughEntries('up')"
               @keyup.down="scrollThroughEntries('down')"
               @keyup.enter="submitEntry()"/>
