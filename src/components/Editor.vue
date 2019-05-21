@@ -1,6 +1,7 @@
 <template>
   <div class="editor">
     <div class="editor__canvas">
+      {{ currentTileIndex }}
       <div>
         <div class="editor__canvas__top-tools">
           <button
@@ -173,6 +174,16 @@ export default {
     pixelY () {
       return Math.floor(this.y / this.variableTileSize)
     },
+    currentTileIndex () {
+      if (this.edit16x16) {
+        switch (true) {
+          case this.pixelX >= 8 && this.pixelY < 8: return 1
+          case this.pixelX < 8 && this.pixelY >= 8: return 2
+          case this.pixelX >= 8 && this.pixelY >= 8: return 3
+          default: return 0
+        }
+      } else return -1
+    },
     tileSize () {
       return this.editorRatio * 32
     },
@@ -251,11 +262,12 @@ export default {
       this.context.beginPath()
       this.context.lineWidth = 1
       this.context.strokeStyle = 'black'
-      for (let i = 1; i < 8; i++) {
-        this.context.moveTo(0, i * this.tileSize)
-        this.context.lineTo(this.editorSize, i * this.tileSize)
-        this.context.moveTo(i * this.tileSize, 0)
-        this.context.lineTo(i * this.tileSize, this.editorSize)
+      const count = this.edit16x16 ? 16 : 8
+      for (let i = 1; i < count; i++) {
+        this.context.moveTo(0, i * this.variableTileSize)
+        this.context.lineTo(this.editorSize, i * this.variableTileSize)
+        this.context.moveTo(i * this.variableTileSize, 0)
+        this.context.lineTo(i * this.variableTileSize, this.editorSize)
       }
       this.context.stroke()
     },
