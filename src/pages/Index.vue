@@ -71,9 +71,7 @@ export default {
       'setUserIsDrawing',
       'toggleSprite'
     ]),
-    hmm () {
-      console.log('herenow')
-    },
+    // assigning draw here prevents the user's drawing actions being lost by accident when their cursor leaves the editor window
     draw (evt) {
       if (!this.noSelectedTile && this.editorActive) {
         this.setUserIsDrawing(evt.button < 1 ? 'left' : 'right')

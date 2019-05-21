@@ -1,7 +1,7 @@
+<!-- Note: the actual drawing command is defined in index.vue. -->
 <template>
   <div class="editor">
     <div class="editor__canvas">
-      {{ currentTileIndex }}
       <div>
         <div class="editor__canvas__top-tools">
           <button
@@ -79,7 +79,8 @@
           <button
             class="no-style editor__canvas__tools__copy"
             @click="setCopiedTileData()"
-            title="copy"
+            :disabled="!edit16x16 ? false : 'disabled'"
+            :title="!edit16x16 ? 'copy' : 'you can only copy/paste a single tile!'"
           >
             <icon name="copy" />&nbsp;
             <label>(copy)</label>
@@ -87,7 +88,8 @@
           <button
             class="no-style editor__canvas__tools__paste"
             @click="pastecopiedTile()"
-            title="paste"
+            :disabled="!edit16x16 ? false : 'disabled'"
+            :title="!edit16x16 ? 'paste' : 'you can only copy/paste a single tile!'"
           >
             <icon name="paste" />&nbsp;
             <label>(paste)</label>
@@ -158,13 +160,23 @@ export default {
       'palettes',
       'redoCache',
       'refreshPalette',
+      'saveEventListener',
       'selectedTile',
       'selectedTiles',
       'userIsDrawing',
       'undoRedoInterim',
-      'undoCache',
       'updateVram'
     ]),
+    currentTileIndex () {
+      if (this.edit16x16) {
+        switch (true) {
+          case this.pixelX >= 8 && this.pixelY < 8: return this.incorporateFlipOn16x16(1)
+          case this.pixelX < 8 && this.pixelY >= 8: return this.incorporateFlipOn16x16(2)
+          case this.pixelX >= 8 && this.pixelY >= 8: return this.incorporateFlipOn16x16(3)
+          default: return this.incorporateFlipOn16x16(0)
+        }
+      } else return -1
+    },
     editorSize () {
       return this.tileSize * 8
     },
@@ -174,15 +186,11 @@ export default {
     pixelY () {
       return Math.floor(this.y / this.variableTileSize)
     },
-    currentTileIndex () {
-      if (this.edit16x16) {
-        switch (true) {
-          case this.pixelX >= 8 && this.pixelY < 8: return 1
-          case this.pixelX < 8 && this.pixelY >= 8: return 2
-          case this.pixelX >= 8 && this.pixelY >= 8: return 3
-          default: return 0
-        }
-      } else return -1
+    pixelX16x16Context () {
+      return this.pixelX > 7 ? this.pixelX - 8 : this.pixelX
+    },
+    pixelY16x16Context () {
+      return this.pixelY > 7 ? this.pixelY - 8 : this.pixelY
     },
     tileSize () {
       return this.editorRatio * 32
@@ -223,17 +231,35 @@ export default {
       this.redraw()
     },
     colorPixel (newVal = 0) {
+      if (!this.edit16x16) {
+        if (
+          newVal > -1 &&
+          newVal < 8 &&
+          this.userIsDrawing &&
+          this.selectedTile &&
+          this.activePaletteColor
+        ) {
+          this.setVramPixel({
+            ...this.selectedTile,
+            x: this.editorHFlip ? 7 - this.pixelX : this.pixelX,
+            y: this.editorVFlip ? 7 - this.pixelY : this.pixelY,
+            colorIndex: this.activePaletteColor[this.userIsDrawing]
+          })
+        }
+      } else this.colorPixel16x16Context(newVal)
+    },
+    colorPixel16x16Context (newVal = 0) {
       if (
         newVal > -1 &&
-        newVal < 8 &&
+        newVal < 16 &&
         this.userIsDrawing &&
-        this.selectedTile &&
+        this.selectedTiles &&
         this.activePaletteColor
       ) {
         this.setVramPixel({
-          ...this.selectedTile,
-          x: this.editorHFlip ? 7 - this.pixelX : this.pixelX,
-          y: this.editorVFlip ? 7 - this.pixelY : this.pixelY,
+          ...this.selectedTiles[this.currentTileIndex],
+          x: this.editorHFlip ? 7 - this.pixelX16x16Context : this.pixelX16x16Context,
+          y: this.editorVFlip ? 7 - this.pixelY16x16Context : this.pixelY16x16Context,
           colorIndex: this.activePaletteColor[this.userIsDrawing]
         })
       }
@@ -323,31 +349,87 @@ export default {
     },
     redrawTiles () {
       if (this.edit16x16) {
-        this.redrawTile(0)
-        this.redrawTile(1, this.variableTileSize * 8, 0)
-        this.redrawTile(2, 0, this.variableTileSize * 8)
-        this.redrawTile(3, this.variableTileSize * 8, this.variableTileSize * 8)
+        this.redrawTile(this.incorporateFlipOn16x16(0))
+        this.redrawTile(this.incorporateFlipOn16x16(1), this.variableTileSize * 8, 0)
+        this.redrawTile(this.incorporateFlipOn16x16(2), 0, this.variableTileSize * 8)
+        this.redrawTile(this.incorporateFlipOn16x16(3), this.variableTileSize * 8, this.variableTileSize * 8)
       } else if (this.selectedTile && this.selectedTile.hasOwnProperty('tile')) {
         this.redrawTile()
+      }
+    },
+    incorporateFlipOn16x16 (index) {
+      switch (index) {
+        case 0:
+          switch (true) {
+            case !this.editorHFlip && !this.editorVFlip: return 0
+            case this.editorHFlip && !this.editorVFlip: return 1
+            case !this.editorHFlip && this.editorVFlip: return 2
+            case this.editorHFlip && this.editorVFlip: return 3
+          }
+          break
+        case 1:
+          switch (true) {
+            case !this.editorHFlip && !this.editorVFlip: return 1
+            case this.editorHFlip && !this.editorVFlip: return 0
+            case !this.editorHFlip && this.editorVFlip: return 3
+            case this.editorHFlip && this.editorVFlip: return 2
+          }
+          break
+        case 2:
+          switch (true) {
+            case !this.editorHFlip && !this.editorVFlip: return 2
+            case this.editorHFlip && !this.editorVFlip: return 3
+            case !this.editorHFlip && this.editorVFlip: return 0
+            case this.editorHFlip && this.editorVFlip: return 1
+          }
+          break
+        case 3:
+          switch (true) {
+            case !this.editorHFlip && !this.editorVFlip: return 3
+            case this.editorHFlip && !this.editorVFlip: return 2
+            case !this.editorHFlip && this.editorVFlip: return 1
+            case this.editorHFlip && this.editorVFlip: return 0
+          }
       }
     },
     saveVramTile () {
       if (this.updated) {
         this.setLoading(true)
-        ipcRenderer.send('Save VRAM Tile', {
-          filePath: this.filePath,
-          tile: this.getVramTileByProps(this.selectedTile)
-        })
+        if (!this.edit16x16) {
+          ipcRenderer.send('Save VRAM Tile', {
+            filePath: this.filePath,
+            tile: this.getVramTileByProps(this.selectedTile)
+          })
+        } else {
+          ipcRenderer.send('Save VRAM Tiles', {
+            filePath: this.filePath,
+            tiles: this.selectedTiles.reduce((arr, it) => {
+              arr.push(this.getVramTileByProps(it))
+              return arr
+            }, []),
+            save16x16: true
+          })
+        }
       }
     },
     shrinkEditor () {
       if (this.editorRatio > 0.7) this.setEditorRatio(this.editorRatio - 0.1)
     },
     testTileUpdated () {
-      this.updated =
-        this.selectedTile &&
-        !this.selectedTile.hasOwnProperty('empty') &&
-        this.getVramTileByProps(this.selectedTile)._updated
+      if (!this.edit16x16) {
+        this.updated =
+          this.selectedTile &&
+          !this.selectedTile.hasOwnProperty('empty') &&
+          this.getVramTileByProps(this.selectedTile)._updated
+      } else {
+        for (let i = 0; i < 4; i++) {
+          if (this.getVramTileByProps(this.selectedTiles[i])._updated) {
+            this.updated = true
+            return
+          }
+        }
+        this.updated = false
+      }
     },
     toggleGrid () {
       this.showGrid = !this.showGrid
@@ -394,11 +476,18 @@ export default {
     },
     selectedTile (newVal) {
       this.setEdit16x16(false)
-      this.redraw()
       this.testTileUpdated()
+      this.redraw()
+    },
+    selectedTiles (newVal) {
+      this.testTileUpdated()
+      this.redraw()
     },
     showGrid () {
       this.redraw()
+    },
+    saveEventListener () {
+      this.testTileUpdated()
     },
     updateVram () {
       this.testTileUpdated()

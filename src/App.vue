@@ -19,6 +19,7 @@ export default {
       'currentFrameIndex',
       'eventObserver',
       'selectedTile',
+      'selectedTiles',
       'vram'])
   },
   methods: {
@@ -32,7 +33,9 @@ export default {
       'setLoading',
       'setPalettes',
       'setSamus',
-      'setSettings']),
+      'setSettings',
+      'toggleSaveEventListener'
+    ]),
     fail ({ type, title, message }, color = 'negative', timeout = 120000) {
       if (message) {
         this.$q.notify({
@@ -154,16 +157,27 @@ export default {
             ...this.selectedTile
           })
           if (!getUpdatedVramTiles(this.vram).length) this.clearUpdateVram()
+          this.toggleSaveEventListener()
           this.setLoading(false)
           this.success('Tile Saved!')
         }.bind(this))
       this.renderEvent(
         'VRAM Tiles Saved',
-        function () {
-          getUpdatedVramTiles(this.vram, function (obj) {
-            this.clearVramUpdateFlag(obj)
-          }.bind(this))
-          this.clearUpdateVram()
+        function (event, { save16x16 }) {
+          if (!save16x16) {
+            getUpdatedVramTiles(this.vram, function (obj) {
+              this.clearVramUpdateFlag(obj)
+            }.bind(this))
+          } else {
+            this.selectedTiles.forEach(function (it) {
+              this.clearVramUpdateFlag({
+                frameIndex: this.currentFrameIndex,
+                ...it
+              })
+            }.bind(this))
+            this.toggleSaveEventListener()
+          }
+          if (!getUpdatedVramTiles(this.vram).length) this.clearUpdateVram()
           this.success('Tile(s) Saved!')
           this.setLoading(false)
         }.bind(this))

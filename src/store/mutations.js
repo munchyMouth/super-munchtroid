@@ -69,7 +69,10 @@ export default {
     state.redoCache.unshift(
       state.undoRedoInterim.length
         ? state.undoRedoInterim.pop()
-        : cloneDeep(state.selectedTile))
+        : cloneDeep(
+          state.edit16x16
+            ? state.selectedTiles
+            : state.selectedTile))
     state.undoRedoInterim.unshift(state.undoCache.pop())
   },
   // [...] <= insert into end of undo array
@@ -160,10 +163,7 @@ export default {
   },
   SET_VRAM_RATIO (state, o) { state.vramRatio = o },
   SET_VRAM_PIXEL (state, { half, part, index, x, y, colorIndex }) {
-    const vTile = state
-      .vram[half]
-      .parts[part]
-      .tiles[index]
+    const vTile = state.vram[half].parts[part].tiles[index]
     if (vTile &&
       vTile.hasOwnProperty('data') &&
       vTile.data[y] &&
@@ -186,6 +186,9 @@ export default {
   },
   TOGGLE_EDITOR_FLIP (state, flip) {
     state.editorFlip[flip] = !state.editorFlip[flip]
+  },
+  TOGGLE_SAVE_EVENT_LISTENER (state) {
+    state.saveEventListener = !state.saveEventListener
   },
   TOGGLE_SPRITE (state) { state.showSprite = !state.showSprite },
   TOGGLE_VRAM (state) { state.showVram = !state.showVram },

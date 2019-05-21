@@ -54,6 +54,7 @@ const store = {
     frames: [],
     palettes: [],
     redoCache: [],
+    saveEventListener: false,
     refreshPalette: true, // value is irrelevant, simply forces a refresh when color changed
     selectedTile: undefined,
     selectedTiles: undefined,

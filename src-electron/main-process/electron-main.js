@@ -49,26 +49,6 @@ function createWindow () {
   })
 }
 
-function setRendererPoseIndex (index, indexToRender) {
-  console.log(POSES
-    .map((it, i) => {
-      return !it.unused && i === indexToRender ? i : -1
-    })
-    .filter(it => {
-      console.log(it)
-      return it > -1
-    }))
-  const result = indexToRender
-    ? POSES
-      .map((it, i) => {
-        return !it.unused && i === indexToRender ? i : -1
-      })
-      .filter(it => it > -1)
-    : [index]
-  console.log(result)
-  return result.length ? result[0] : 0
-}
-
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
@@ -217,12 +197,12 @@ ipcMain.on('Save VRAM Tile', (event, { filePath, tile }) => {
     console.trace(e)
   }
 })
-ipcMain.on('Save VRAM Tiles', (event, { filePath, tiles }) => {
+ipcMain.on('Save VRAM Tiles', (event, { filePath, tiles, save16x16 = false }) => {
   try {
     Samus({ filePath })
       .saveVRAMTilesToROM(tiles)
       .then(function () {
-        event.sender.send('VRAM Tiles Saved', true)
+        event.sender.send('VRAM Tiles Saved', { save16x16 })
       }, function (e) {
         console.trace(e)
         event.sender.send('VRAM Tiles Error', {

@@ -27,7 +27,11 @@ export default {
     if (state.copiedTileData &&
       state.selectedTile &&
       state.selectedTile.hasOwnProperty('tile')) {
-      commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTile))
+      commit('PUSH_TO_UNDO_CACHE',
+        cloneDeep(
+          state.edit16x16
+            ? state.selectedTiles
+            : state.selectedTile))
       const data = {
         ...state.selectedTile,
         tile: {
@@ -41,8 +45,12 @@ export default {
     }
   },
   pushToUndoCache ({ commit, state }) {
-    if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
+    if (!state.edit16x16 &&
+      state.selectedTile &&
+      !state.selectedTile.hasOwnProperty('empty')) {
       commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTile))
+    } else if (state.edit16x16) {
+      commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTiles))
     }
   },
   popFromUndoCache ({ commit, state }) {
@@ -50,8 +58,13 @@ export default {
       !state.selectedTile.hasOwnProperty('empty') &&
       state.undoCache.length) {
       commit('POP_FROM_UNDO_CACHE')
-      commit('SET_VRAM_TILE', state.undoRedoInterim[0])
-      commit('SET_SELECTED_TILE', state.undoRedoInterim[0])
+      if (!state.edit16x16) {
+        commit('SET_VRAM_TILE', state.undoRedoInterim[0])
+        commit('SET_SELECTED_TILE', state.undoRedoInterim[0])
+      } else {
+        state.undoRedoInterim[0].forEach(it => { commit('SET_VRAM_TILE', it) })
+        commit('SET_SELECTED_TILES', state.undoRedoInterim[0])
+      }
       commit('UPDATE_EDITOR')
     }
   },
@@ -70,7 +83,10 @@ export default {
     commit('SET_CURRENT_FRAME_INDEX', i)
   },
   setCurrentPalette ({ commit }, i) { commit('SET_CURRENT_PALETTE', i) },
-  setEdit16x16 ({ commit }, o) { commit('SET_EDIT_16X16', o) },
+  setEdit16x16 ({ commit }, o) {
+    commit('CLEAR_EDITOR_FLIP')
+    commit('SET_EDIT_16X16', o)
+  },
   setEditorActive ({ commit }, active) { commit('SET_EDITOR_ACTIVE', active) },
   setEditorRatio ({ commit }, ratio) { commit('SET_EDITOR_RATIO', ratio) },
   setError ({ commit }, error) { commit('SET_ERROR', error) },
@@ -159,7 +175,14 @@ export default {
   },
   setTab ({ commit }, o) { commit('SET_TAB', o) },
   setUserIsDrawing ({ commit, state }, o) {
-    if (o) commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTile))
+    if (o) {
+      commit(
+        'PUSH_TO_UNDO_CACHE',
+        cloneDeep(
+          state.edit16x16
+            ? state.selectedTiles
+            : state.selectedTile))
+    }
     commit('SET_USER_IS_DRAWING', o)
   },
   setVramPixel ({ commit }, o) {
@@ -172,13 +195,19 @@ export default {
       !state.selectedTile.hasOwnProperty('empty') &&
       state.redoCache.length) {
       commit('SHIFT_FROM_REDO_CACHE')
-      commit('SET_VRAM_TILE', state.undoRedoInterim[0])
-      commit('SET_SELECTED_TILE', state.undoRedoInterim[0])
+      if (!state.edit16x16) {
+        commit('SET_VRAM_TILE', state.undoRedoInterim[0])
+        commit('SET_SELECTED_TILE', state.undoRedoInterim[0])
+      } else {
+        state.undoRedoInterim[0].forEach(it => { commit('SET_VRAM_TILE', it) })
+        commit('SET_SELECTED_TILES', state.undoRedoInterim[0])
+      }
       commit('UPDATE_EDITOR')
     }
   },
   toggleHFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'h') },
   toggleVFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'v') },
+  toggleSaveEventListener ({ commit }) { commit('TOGGLE_SAVE_EVENT_LISTENER') },
   toggleSprite ({ commit }) { commit('TOGGLE_SPRITE') },
   toggleVram ({ commit }) { commit('TOGGLE_VRAM') }
 }
