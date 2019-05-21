@@ -56,6 +56,7 @@ const store = {
     redoCache: [],
     refreshPalette: true, // value is irrelevant, simply forces a refresh when color changed
     selectedTile: undefined,
+    selectedTiles: undefined,
     settings: {
       PALETTES: {},
       POSES: []

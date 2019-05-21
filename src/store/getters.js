@@ -12,6 +12,35 @@ import { handleIrregularHalfLogic } from '../components/Miscellaneous'
 export default {
   activeSpriteAddress: state => state.activeSprite
     ? state.activeSprite._address : undefined,
+  computedSelectedTiles: state => {
+    const { half, index, no, part } = state.selectedTile
+    return (state.edit16x16)
+      ? [
+        state.selectedTile,
+        {
+          half,
+          index: index + 1,
+          no: no + 1,
+          part,
+          tile: state.vram[half].parts[part].tiles[index + 1]
+        },
+        {
+          half,
+          index,
+          no,
+          part: 'part2',
+          tile: state.vram[half].parts['part2'].tiles[index]
+        },
+        {
+          half,
+          index: index + 1,
+          no: no + 1,
+          part: 'part2',
+          tile: state.vram[half].parts['part2'].tiles[index + 1]
+        }
+      ]
+      : undefined
+  },
   currentFrame: state => (state.vram)
     ? state.vram : undefined,
   editorHFlip: state => state.editorFlip.h,

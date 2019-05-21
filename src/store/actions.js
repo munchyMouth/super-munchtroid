@@ -6,6 +6,7 @@ import { cloneDeep } from 'lodash'
 // -----------------------------------------------------------------------------
 export default {
   clearSelectedTile ({ commit }) { commit('CLEAR_SELECTED_TILE') },
+  clearSelectedTiles ({ commit }) { commit('CLEAR_SELECTED_TILES') },
   clearPalettesUpdateFlag ({ commit }, o) {
     commit('CLEAR_PALETTES_UPDATE_FLAG', o)
   },
@@ -65,6 +66,7 @@ export default {
     commit('CLEAR_UNDO_REDO_CACHES')
     commit('CLEAR_EDITOR_FLIP')
     commit('CLEAR_SELECTED_TILE')
+    commit('CLEAR_SELECTED_TILES')
     commit('SET_CURRENT_FRAME_INDEX', i)
   },
   setCurrentPalette ({ commit }, i) { commit('SET_CURRENT_PALETTE', i) },
@@ -107,6 +109,7 @@ export default {
       commit('CLEAR_EDITOR_FLIP')
       commit('CLEAR_ERROR')
       commit('CLEAR_SELECTED_TILE')
+      commit('CLEAR_SELECTED_TILES')
       commit('CLEAR_UNDO_REDO_CACHES')
       commit('SET_FILEPATH', filePath)
       commit('SET_FRAMES', frames)
@@ -148,6 +151,11 @@ export default {
     commit('CLEAR_EDITOR_FLIP')
     commit('CLEAR_UNDO_REDO_CACHES')
     commit('SET_SELECTED_TILE', o)
+  },
+  setSelectedTiles ({ commit }, o) {
+    commit('CLEAR_EDITOR_FLIP')
+    commit('CLEAR_UNDO_REDO_CACHES')
+    commit('SET_SELECTED_TILES', o)
   },
   setTab ({ commit }, o) { commit('SET_TAB', o) },
   setUserIsDrawing ({ commit, state }, o) {

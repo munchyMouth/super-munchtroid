@@ -50,7 +50,7 @@ export default {
       this.context.fillRect(x, y, (8 * R), (8 * R))
     }
   },
-  renderSpriteTile (R, fillstyle = 'rgba(0, 200, 0, .3)') {
+  renderSpriteTile (R) {
     const { vramIndex, part, load16x16 } = this.getSpriteByProps(this.activeSprite)
     const x = (vramIndex * 8) * R
     const y = (part === 'part1' ? 0 : 8) * R

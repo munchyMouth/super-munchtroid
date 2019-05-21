@@ -23,6 +23,7 @@ export default {
     ...mapGetters([
       'activePaletteIndex',
       'activeSprite',
+      'computedSelectedTiles',
       'currentFrame',
       'currentFrameIndex',
       'edit16x16',
@@ -34,6 +35,7 @@ export default {
       'palettes',
       'refreshPalette',
       'selectedTile',
+      'selectedTiles',
       'showVram',
       'spriteRatio',
       'spriteRefresh',
@@ -116,9 +118,11 @@ export default {
   methods: {
     ...mapActions([
       'clearSelectedTile',
+      'clearSelectedTiles',
       'setActiveSprite',
       'setLoading',
       'setSelectedTile',
+      'setSelectedTiles',
       'setSpriteProperty']),
     ...VramRedraw,
     actionClick (evt) {
@@ -159,9 +163,13 @@ export default {
     activeSprite () { this.redraw() },
     currentFrameIndex () {
       this.clearSelectedTile()
+      this.clearSelectedTiles()
       this.redraw()
     },
-    edit16x16 () { this.redraw() },
+    edit16x16 (newVal) {
+      if (newVal) this.setSelectedTiles(this.computedSelectedTiles)
+      this.redraw()
+    },
     editorUpdate () { this.redraw() },
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },
@@ -170,6 +178,7 @@ export default {
     showVram (newVal) { this.redraw() },
     vram () {
       this.clearSelectedTile()
+      this.clearSelectedTiles()
       this.redraw()
     },
     vramX () { this.redraw() },

@@ -3,33 +3,43 @@
     <div class="editor__canvas">
       <div>
         <div class="editor__canvas__top-tools">
-          <button class="no-style"
-                  @click="shrinkEditor()"
-                  title="shrink editor">
+          <button
+            class="no-style"
+            @click="shrinkEditor()"
+            title="shrink editor"
+          >
             <icon name="search-minus" />
           </button>
-          <button class="no-style"
-                @click="enlargeEditor()"
-                title="enlarge editor">
+          <button
+            class="no-style"
+            @click="enlargeEditor()"
+            title="enlarge editor"
+          >
             <icon name="search-plus" />
           </button>
-          <button :class="`no-style editor__canvas__tools__grid${showGrid ? '--hide' : ''}`"
-                @click="toggleGrid()"
-                title="show grid">
+          <button
+            :class="`no-style editor__canvas__tools__grid${showGrid ? '--hide' : ''}`"
+            @click="toggleGrid()"
+            title="show grid"
+          >
             <icon name="th-large" />
           </button>
           <template v-if="!noSelectedTile">
-            <button class="no-style editor__canvas__tools__16x16"
-                  :disabled="editor16x16TileIsValid(selectedTile) ? false : 'disabled'"
-                  title="set 16x16 mode"
-                  @click="setEdit16x16(!edit16x16)">
+            <button
+              class="no-style editor__canvas__tools__16x16"
+              :disabled="editor16x16TileIsValid(selectedTile) ? false : 'disabled'"
+              title="set 16x16 mode"
+              @click="setEdit16x16(!edit16x16)"
+            >
               <div>
                 <span :class="edit16x16 ? '--active' : ''">16²</span>
               </div>
             </button>
-            <button :class="`no-style editor__canvas__tools__save${updated ? '--active' : ''}`"
-                  @click="saveVramTile()"
-                  title="save current tile">
+            <button
+              :class="`no-style editor__canvas__tools__save${updated ? '--active' : ''}`"
+              @click="saveVramTile()"
+              title="save current tile"
+            >
               <icon name="save" />
             </button>
             <strong class="editor__canvas__tools__address">
@@ -37,46 +47,63 @@
             </strong>
           </template>
         </div>
-        <canvas :class="!noSelectedTile ? '--active' : ''"
-                ref="editor"
-                @mousemove="getMousePos"
-                @mouseout="clearActiveMouse"></canvas>
+        <canvas
+          :class="!noSelectedTile ? '--active' : ''"
+          ref="editor"
+          @mousemove="getMousePos"
+          @mouseout="clearActiveMouse"
+        ></canvas>
       </div>
       <div class="editor__canvas__tools">
         <template v-if="!noSelectedTile">
-          <button :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
-                  @click="toggleVFlip()"
-                  title="Does not flip the raw VRAM image">
-            <icon style="width: 16px;" name="arrows-alt-v" />&nbsp;
+          <button
+            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
+            @click="toggleVFlip()"
+            title="Does not flip the raw VRAM image"
+          >
+            <icon
+              style="width: 16px;"
+              name="arrows-alt-v"
+            />&nbsp;
             <label>(V-flip)</label>
           </button>
-          <button :class="`no-style editor__canvas__tools__flip${editorHFlip ? '--flip' : ''}`"
-                  @click="toggleHFlip()"
-                  title="Does not flip the raw VRAM image">
+          <button
+            :class="`no-style editor__canvas__tools__flip${editorHFlip ? '--flip' : ''}`"
+            @click="toggleHFlip()"
+            title="Does not flip the raw VRAM image"
+          >
             <icon name="arrows-alt-h" />&nbsp;
             <label>(H-flip)</label>
           </button>
-          <button class="no-style editor__canvas__tools__copy"
-                  @click="setCopiedTileData()"
-                  title="copy">
+          <button
+            class="no-style editor__canvas__tools__copy"
+            @click="setCopiedTileData()"
+            title="copy"
+          >
             <icon name="copy" />&nbsp;
             <label>(copy)</label>
           </button>
-          <button class="no-style editor__canvas__tools__paste"
-                  @click="pastecopiedTile()"
-                  title="paste">
+          <button
+            class="no-style editor__canvas__tools__paste"
+            @click="pastecopiedTile()"
+            title="paste"
+          >
             <icon name="paste" />&nbsp;
             <label>(paste)</label>
           </button>
-          <button class="no-style editor__canvas__tools__undo"
-                  @click="popFromUndoCache()"
-                  title="undo">
+          <button
+            class="no-style editor__canvas__tools__undo"
+            @click="popFromUndoCache()"
+            title="undo"
+          >
             <icon name="undo" />&nbsp;
             <label>(undo)</label>
           </button>
-          <button class="no-style editor__canvas__tools__redo"
-                  @click="shiftFromRedoCache()"
-                  title="redo">
+          <button
+            class="no-style editor__canvas__tools__redo"
+            @click="shiftFromRedoCache()"
+            title="redo"
+          >
             <icon name="redo" />&nbsp;
             <label>(redo)</label>
           </button>
@@ -131,15 +158,27 @@ export default {
       'redoCache',
       'refreshPalette',
       'selectedTile',
+      'selectedTiles',
       'userIsDrawing',
       'undoRedoInterim',
       'undoCache',
       'updateVram'
     ]),
-    editorSize () { return this.tileSize * 8 },
-    pixelX () { return Math.floor(this.x / this.tileSize) },
-    pixelY () { return Math.floor(this.y / this.tileSize) },
-    tileSize () { return this.editorRatio * 32 }
+    editorSize () {
+      return this.tileSize * 8
+    },
+    pixelX () {
+      return Math.floor(this.x / this.variableTileSize)
+    },
+    pixelY () {
+      return Math.floor(this.y / this.variableTileSize)
+    },
+    tileSize () {
+      return this.editorRatio * 32
+    },
+    variableTileSize () {
+      return this.edit16x16 ? this.tileSize / 2 : this.tileSize
+    }
   },
   data () {
     return {
@@ -174,15 +213,18 @@ export default {
     },
     colorPixel (newVal = 0) {
       if (
-        newVal > -1 && newVal < 8 &&
+        newVal > -1 &&
+        newVal < 8 &&
         this.userIsDrawing &&
         this.selectedTile &&
-        this.activePaletteColor) {
+        this.activePaletteColor
+      ) {
         this.setVramPixel({
           ...this.selectedTile,
           x: this.editorHFlip ? 7 - this.pixelX : this.pixelX,
           y: this.editorVFlip ? 7 - this.pixelY : this.pixelY,
-          colorIndex: this.activePaletteColor[this.userIsDrawing] })
+          colorIndex: this.activePaletteColor[this.userIsDrawing]
+        })
       }
     },
     enlargeEditor () {
@@ -201,7 +243,7 @@ export default {
     redraw () {
       this.context.clearRect(0, 0, this.editorSize + 1, this.editorSize + 1)
       const R = this.editorRatio
-      this.redrawPixels()
+      this.redrawTiles()
       if (this.showGrid) this.redrawGrid(R)
       if (this.x > -1 && this.y > -1) this.redrawHilight(R)
     },
@@ -210,52 +252,71 @@ export default {
       this.context.lineWidth = 1
       this.context.strokeStyle = 'black'
       for (let i = 1; i < 8; i++) {
-        this.context.moveTo(0, (i * this.tileSize))
-        this.context.lineTo(this.editorSize, (i * this.tileSize))
-        this.context.moveTo((i * this.tileSize), 0)
-        this.context.lineTo((i * this.tileSize), this.editorSize)
+        this.context.moveTo(0, i * this.tileSize)
+        this.context.lineTo(this.editorSize, i * this.tileSize)
+        this.context.moveTo(i * this.tileSize, 0)
+        this.context.lineTo(i * this.tileSize, this.editorSize)
       }
       this.context.stroke()
     },
     redrawHilight (R) {
       this.context.beginPath()
       this.context.moveTo(
-        (this.pixelX * this.tileSize),
-        (this.pixelY * this.tileSize))
+        this.pixelX * this.variableTileSize, this.pixelY * this.variableTileSize)
       this.context.lineWidth = 2
       this.context.strokeStyle = 'white'
       this.context.lineTo(
-        (this.pixelX * this.tileSize),
-        (this.pixelY * this.tileSize) + this.tileSize)
+        this.pixelX * this.variableTileSize,
+        this.pixelY * this.variableTileSize + this.variableTileSize)
       this.context.lineTo(
-        (this.pixelX * this.tileSize) + this.tileSize,
-        (this.pixelY * this.tileSize) + this.tileSize)
+        this.pixelX * this.variableTileSize + this.variableTileSize,
+        this.pixelY * this.variableTileSize + this.variableTileSize)
       this.context.lineTo(
-        (this.pixelX * this.tileSize) + this.tileSize,
-        (this.pixelY * this.tileSize))
+        this.pixelX * this.variableTileSize + this.variableTileSize,
+        this.pixelY * this.variableTileSize)
       this.context.lineTo(
-        (this.pixelX * this.tileSize),
-        (this.pixelY * this.tileSize))
+        this.pixelX * this.variableTileSize,
+        this.pixelY * this.variableTileSize)
       this.context.stroke()
     },
-    redrawPixels (R) {
-      if (this.selectedTile && this.selectedTile.hasOwnProperty('tile')) {
-        let lines = cloneDeep(this.selectedTile.tile.data)
-        lines = (this.editorVFlip ? lines.reverse() : lines)
-        lines.forEach(function (line, i) {
-          let _line = (this.editorHFlip ? line.reverse() : line)
-          _line.forEach(function (pixel, j) {
-            this.context.fillStyle =
-              pixel > -1 && this.palettes && this.palettes.length
-                ? this.palettes[this.activePaletteIndex].palette[pixel]
-                : (pixel === 0 ? '#000000' : '#FFFFFF')
-            this.context.fillRect(
-              j * this.tileSize,
-              i * this.tileSize,
-              this.tileSize + (!this.showGrid ? 1 : 0),
-              this.tileSize + (!this.showGrid ? 1 : 0))
-          }.bind(this))
-        }.bind(this))
+    redrawPixels (lines, offsetX = 0, offsetY = 0) {
+      lines = this.editorVFlip ? lines.reverse() : lines
+      lines.forEach(
+        function (line, i) {
+          let _line = this.editorHFlip ? line.reverse() : line
+          _line.forEach(
+            function (pixel, j) {
+              this.context.fillStyle =
+                pixel > -1 && this.palettes && this.palettes.length
+                  ? this.palettes[this.activePaletteIndex].palette[pixel]
+                  : pixel === 0
+                    ? '#000000'
+                    : '#FFFFFF'
+              this.context.fillRect(
+                (j * this.variableTileSize) + offsetX,
+                (i * this.variableTileSize) + offsetY,
+                this.variableTileSize + (!this.showGrid ? 1 : 0),
+                this.variableTileSize + (!this.showGrid ? 1 : 0)
+              )
+            }.bind(this)
+          )
+        }.bind(this)
+      )
+    },
+    redrawTile (index = undefined, x = 0, y = 0) {
+      if (typeof index !== 'undefined') {
+        this.redrawPixels(
+          cloneDeep(this.selectedTiles[index].tile.data), x, y)
+      } else this.redrawPixels(cloneDeep(this.selectedTile.tile.data))
+    },
+    redrawTiles () {
+      if (this.edit16x16) {
+        this.redrawTile(0)
+        this.redrawTile(1, this.variableTileSize * 8, 0)
+        this.redrawTile(2, 0, this.variableTileSize * 8)
+        this.redrawTile(3, this.variableTileSize * 8, this.variableTileSize * 8)
+      } else if (this.selectedTile && this.selectedTile.hasOwnProperty('tile')) {
+        this.redrawTile()
       }
     },
     saveVramTile () {
@@ -271,11 +332,14 @@ export default {
       if (this.editorRatio > 0.7) this.setEditorRatio(this.editorRatio - 0.1)
     },
     testTileUpdated () {
-      this.updated = this.selectedTile &&
+      this.updated =
+        this.selectedTile &&
         !this.selectedTile.hasOwnProperty('empty') &&
         this.getVramTileByProps(this.selectedTile)._updated
     },
-    toggleGrid () { this.showGrid = !this.showGrid }
+    toggleGrid () {
+      this.showGrid = !this.showGrid
+    }
   },
   mounted () {
     this.canvas = this.$refs['editor']
@@ -285,15 +349,26 @@ export default {
     this.redraw()
   },
   watch: {
-    activePaletteIndex () { this.redraw() },
-    editorHFlip () { this.redraw() },
-    editorVFlip () { this.redraw() },
+    activePaletteIndex () {
+      this.redraw()
+    },
+    edit16x16 () {
+      this.redraw()
+    },
+    editorHFlip () {
+      this.redraw()
+    },
+    editorVFlip () {
+      this.redraw()
+    },
     editorRatio () {
       this.$refs['editor'].width = this.editorSize
       this.$refs['editor'].height = this.editorSize
       this.redraw()
     },
-    palettes () { this.redraw() },
+    palettes () {
+      this.redraw()
+    },
     pixelX (newVal) {
       this.colorPixel(newVal)
       this.testTileUpdated()
@@ -302,14 +377,20 @@ export default {
       this.colorPixel(newVal)
       this.testTileUpdated()
     },
-    refreshPalette () { this.redraw() },
+    refreshPalette () {
+      this.redraw()
+    },
     selectedTile (newVal) {
       this.setEdit16x16(false)
       this.redraw()
       this.testTileUpdated()
     },
-    showGrid () { this.redraw() },
-    updateVram () { this.testTileUpdated() },
+    showGrid () {
+      this.redraw()
+    },
+    updateVram () {
+      this.testTileUpdated()
+    },
     userIsDrawing (newVal) {
       if (newVal) {
         this.colorPixel()
@@ -320,4 +401,6 @@ export default {
 }
 </script>
 
-<style>@import '../css/editor.css';</style>
+<style>
+@import "../css/editor.css";
+</style>
