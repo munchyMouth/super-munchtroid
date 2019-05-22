@@ -42,6 +42,7 @@ export default {
       'refreshPalette',
       'getActivePaletteInPalettes',
       'selectedTile',
+      'selectedTiles',
       'showSprite',
       'showVram',
       'spriteDefault',
@@ -181,6 +182,7 @@ export default {
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },
     selectedTile () { this.redraw() },
+    selectedTiles () { this.redraw() },
     spriteRatio () {
       this.$refs['sprite'].width = this.spriteEndX
       this.$refs['sprite'].height = this.spriteEndY

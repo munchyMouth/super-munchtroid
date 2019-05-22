@@ -174,6 +174,7 @@ export default {
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },
     selectedTile () { this.redraw() },
+    selectedTiles () { this.redraw() },
     spriteRefresh () { this.redraw() },
     showVram (newVal) { this.redraw() },
     vram () {

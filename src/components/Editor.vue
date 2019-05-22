@@ -30,7 +30,7 @@
               class="no-style editor__canvas__tools__16x16"
               :disabled="editor16x16TileIsValid(selectedTile) ? false : 'disabled'"
               title="set 16x16 mode"
-              @click="setEdit16x16(!edit16x16)"
+              @click="toggle16x16(!edit16x16)"
             >
               <div>
                 <span :class="edit16x16 ? '--active' : ''">16²</span>
@@ -55,7 +55,7 @@
           @mouseout="clearActiveMouse"
         ></canvas>
       </div>
-      <div class="editor__canvas__tools">
+      <div :class="editorRatio < 1.1 ? 'editor__canvas__tools--small' : 'editor__canvas__tools'">
         <template v-if="!noSelectedTile">
           <button
             :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
@@ -66,7 +66,7 @@
               style="width: 16px;"
               name="arrows-alt-v"
             />&nbsp;
-            <label>(V-flip)</label>
+            <label v-show="editorRatio > 1">(V-flip)</label>
           </button>
           <button
             :class="`no-style editor__canvas__tools__flip${editorHFlip ? '--flip' : ''}`"
@@ -74,7 +74,7 @@
             title="Does not flip the raw VRAM image"
           >
             <icon name="arrows-alt-h" />&nbsp;
-            <label>(H-flip)</label>
+            <label v-show="editorRatio > 1">(H-flip)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__copy"
@@ -83,7 +83,7 @@
             :title="!edit16x16 ? 'copy' : 'you can only copy/paste a single tile!'"
           >
             <icon name="copy" />&nbsp;
-            <label>(copy)</label>
+            <label v-show="editorRatio > 1">(copy)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__paste"
@@ -92,7 +92,7 @@
             :title="!edit16x16 ? 'paste' : 'you can only copy/paste a single tile!'"
           >
             <icon name="paste" />&nbsp;
-            <label>(paste)</label>
+            <label v-show="editorRatio > 1">(paste)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__undo"
@@ -100,7 +100,7 @@
             title="undo"
           >
             <icon name="undo" />&nbsp;
-            <label>(undo)</label>
+            <label v-show="editorRatio > 1">(undo)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__redo"
@@ -108,8 +108,39 @@
             title="redo"
           >
             <icon name="redo" />&nbsp;
-            <label>(redo)</label>
+            <label v-show="editorRatio > 1">(redo)</label>
           </button>
+          <div class="editor__canvas__tools__shifters">
+            <div>
+              <button class="no-style editor__canvas__tools__shifters__button"
+                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift left'"
+                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                      @click="horizontalShift('left')">
+                <icon name="arrow-left" />
+              </button>
+              <button class="no-style editor__canvas__tools__shifters__button"
+                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift up'"
+                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                      @click="verticalShift('up')">
+                <icon name="arrow-up" />
+              </button>
+            </div>
+            <div>
+              <button class="no-style editor__canvas__tools__shifters__button"
+                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift right'"
+                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                      @click="horizontalShift('right')">
+                <icon name="arrow-right" />
+              </button>
+              <button class="no-style editor__canvas__tools__shifters__button"
+                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift down'"
+                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                      @click="verticalShift('down')">
+                <icon name="arrow-down" />
+              </button>
+            </div>
+            <!-- <label>(pixel shifters)</label> -->
+          </div>
         </template>
       </div>
     </div>
@@ -134,6 +165,10 @@ import 'vue-awesome/icons/undo'
 import 'vue-awesome/icons/redo'
 import 'vue-awesome/icons/save'
 import 'vue-awesome/icons/th-large'
+import 'vue-awesome/icons/arrow-left'
+import 'vue-awesome/icons/arrow-right'
+import 'vue-awesome/icons/arrow-down'
+import 'vue-awesome/icons/arrow-up'
 import Icon from 'vue-awesome/components/Icon'
 
 import Palette from './Palette'
@@ -150,10 +185,12 @@ export default {
       'activePaletteIndex',
       'copiedTileData',
       'edit16x16',
+      'editor16x16TileIsValid',
       'editorHFlip',
       'editorVFlip',
-      'editor16x16TileIsValid',
       'editorRatio',
+      'editorRatioMax',
+      'editorRatioMin',
       'filePath',
       'getVramTileByProps',
       'noSelectedTile',
@@ -214,11 +251,16 @@ export default {
       'setCopiedTileData',
       'pastecopiedTile',
       'popFromUndoCache',
+      'pushToUndoCache',
       'setEdit16x16',
       'setEditorActive',
       'setEditorRatio',
+      'setSelectedTile',
+      'setSelectedTilePersistUndo',
+      'setSelectedTilesPersistUndo',
       'setUserIsDrawing',
       'setVramPixel',
+      'setVramTile',
       'setLoading',
       'shiftFromRedoCache',
       'toggleHFlip',
@@ -231,42 +273,10 @@ export default {
       this.setEditorActive(false)
       this.redraw()
     },
-    colorPixel (newVal = 0) {
-      if (!this.edit16x16) {
-        if (
-          newVal > -1 &&
-          newVal < 8 &&
-          this.userIsDrawing &&
-          this.selectedTile &&
-          this.activePaletteColor
-        ) {
-          this.setVramPixel({
-            ...this.selectedTile,
-            x: this.editorHFlip ? 7 - this.pixelX : this.pixelX,
-            y: this.editorVFlip ? 7 - this.pixelY : this.pixelY,
-            colorIndex: this.activePaletteColor[this.userIsDrawing]
-          })
-        }
-      } else this.colorPixel16x16Context(newVal)
-    },
-    colorPixel16x16Context (newVal = 0) {
-      if (
-        newVal > -1 &&
-        newVal < 16 &&
-        this.userIsDrawing &&
-        this.selectedTiles &&
-        this.activePaletteColor
-      ) {
-        this.setVramPixel({
-          ...this.selectedTiles[this.currentTileIndex],
-          x: this.editorHFlip ? 7 - this.pixelX16x16Context : this.pixelX16x16Context,
-          y: this.editorVFlip ? 7 - this.pixelY16x16Context : this.pixelY16x16Context,
-          colorIndex: this.activePaletteColor[this.userIsDrawing]
-        })
-      }
-    },
     enlargeEditor () {
-      if (this.editorRatio < 1.5) this.setEditorRatio(this.editorRatio + 0.1)
+      if (this.editorRatio < this.editorRatioMax) {
+        this.setEditorRatio(this.editorRatio + 0.1)
+      }
     },
     getMousePos (evt) {
       if (!this.noSelectedTile) {
@@ -334,7 +344,9 @@ export default {
       }
     },
     shrinkEditor () {
-      if (this.editorRatio > 0.7) this.setEditorRatio(this.editorRatio - 0.1)
+      if (this.editorRatio > this.editorRatioMin) {
+        this.setEditorRatio(this.editorRatio - 0.1)
+      }
     },
     testTileUpdated () {
       if (!this.edit16x16) {
@@ -352,6 +364,10 @@ export default {
         this.updated = false
       }
     },
+    toggle16x16 (value) {
+      if (!value) this.setSelectedTile(this.selectedTiles[0])
+      this.setEdit16x16(value)
+    },
     toggleGrid () { this.showGrid = !this.showGrid }
   },
   mounted () {
@@ -365,7 +381,7 @@ export default {
     activePaletteIndex () {
       this.redraw()
     },
-    edit16x16 () {
+    edit16x16 (newVal) {
       this.redraw()
     },
     editorHFlip () {

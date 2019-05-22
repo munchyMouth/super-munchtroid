@@ -45,6 +45,8 @@ const store = {
     edit16x16: false,
     editorActive: false,
     editorRatio: 1.1, // Size = Ratio * 32 for Editor.
+    editorRatioMax: 1.5,
+    editorRatioMin: 0.7,
     editorUpdate: false,
     editorFlip: { h: false, v: false },
     error: { type: '', message: [] },

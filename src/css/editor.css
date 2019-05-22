@@ -18,10 +18,28 @@
   align-items: flex-start;
   flex-direction: column
 }
+.editor__canvas__tools--small {
+  padding-top: 18px;
+  padding-left: 8px;
+  height: 80px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column
+}
+.editor__canvas__tools--small > .editor__canvas__tools__shifters {
+  display: absolute;
+  margin-top: 50px;
+  margin-left: -70px;
+  align-self: flex-start
+}
 .editor__canvas__tools > button {
   display: flex;
   align-items: center;
   padding-bottom: 8px;
+}
+.editor__canvas__tools--small > button {
+  padding: 2px;
 }
 .editor__canvas__top-tools button {
   padding-right: 8px;
@@ -34,6 +52,17 @@
   padding: 8px;
 }
 .editor__canvas__tools > button:hover {
+  background: rgba(0, 50, 255, 0.25);
+}
+.editor__canvas__tools__shifters {
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc
+}
+.editor__canvas__tools__shifters > div > button {
+  padding: 5px;
+}
+.editor__canvas__tools__shifters > div > button:hover {
   background: rgba(0, 50, 255, 0.25);
 }
 .editor__canvas__tools > button > label {

@@ -168,9 +168,17 @@ export default {
     commit('CLEAR_UNDO_REDO_CACHES')
     commit('SET_SELECTED_TILE', o)
   },
+  setSelectedTilePersistUndo ({ commit, state }, o) {
+    commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTile))
+    commit('SET_SELECTED_TILE', o)
+  },
   setSelectedTiles ({ commit }, o) {
     commit('CLEAR_EDITOR_FLIP')
     commit('CLEAR_UNDO_REDO_CACHES')
+    commit('SET_SELECTED_TILES', o)
+  },
+  setSelectedTilesPersistUndo ({ commit, state }, o) {
+    commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTiles))
     commit('SET_SELECTED_TILES', o)
   },
   setTab ({ commit }, o) { commit('SET_TAB', o) },
@@ -190,6 +198,7 @@ export default {
     commit('UPDATE_EDITOR')
   },
   setVramRatio ({ commit }, o) { commit('SET_VRAM_RATIO', o) },
+  setVramTile ({ commit }, o) { commit('SET_VRAM_TILE', o) },
   shiftFromRedoCache ({ commit, state }) {
     if (state.selectedTile &&
       !state.selectedTile.hasOwnProperty('empty') &&
