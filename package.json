@@ -1,6 +1,6 @@
 {
   "name": "super-munchtroid-beta",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "A graphics management suite",
   "productName": "Super Munchtroid",
   "cordovaId": "org.cordova.quasar.app",
