@@ -26,7 +26,7 @@
       </option>
     </select>
     <div class="settings__dropdown-label">
-      <strong>Palette: </strong>
+      <strong>Palette Set: </strong>
     </div>
     <select @change="choosePalette()">
       <option v-for="({ name, id, length }, i) in settings.PALETTES"
