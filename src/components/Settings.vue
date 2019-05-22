@@ -140,7 +140,6 @@ export default {
       'frames',
       'settings',
       'spriteRatio',
-      'updateSprite',
       'tab',
       'tileMapFrame',
       'tileMaps',

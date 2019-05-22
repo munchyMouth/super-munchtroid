@@ -18,6 +18,7 @@ export default {
       'loading',
       'currentFrameIndex',
       'eventObserver',
+      'hasUnsavedSprites',
       'selectedTile',
       'selectedTiles',
       'vram'])
@@ -137,7 +138,7 @@ export default {
         'Sprite Saved',
         function () {
           this.setLoading(false)
-          this.clearUpdateSprite()
+          if (!this.hasUnsavedSprites) this.clearUpdateSprite()
           this.success('Sprite Saved!')
         }.bind(this))
 

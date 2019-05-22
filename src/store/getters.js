@@ -83,6 +83,15 @@ export default {
     state.selectedTile &&
     typeof state.selectedTile === 'object' &&
     !state.selectedTile.hasOwnProperty('empty'),
+  hasUnsavedSprites: state =>
+    Object.keys(state.tileMaps).reduce(function (result, key) {
+      if (!result) {
+        state.tileMaps[key].tileMap.sprites.forEach(({ _updated }) => {
+          if (_updated) result = true
+        })
+      }
+      return result
+    }, false),
   noSelectedTile: state =>
     !state.selectedTile ||
     (state.selectedTile &&
