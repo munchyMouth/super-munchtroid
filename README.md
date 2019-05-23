@@ -6,6 +6,15 @@
 
 ### Downloads
 
+#### 2.10.0
+- <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.10.0</a>
+- <a href="https://drive.google.com/open?id=1lHNXGFKV108smdQRCptXHeg7KNnbAZNN">Super Munchtroid-win32-x64 2.10.0</a>
+
+2.10.0 Features
+- fixed saves
+- pixel-shifting
+- 16x16px editing
+
 #### 2.6.1
 - <a href="https://drive.google.com/file/d/1xdQcD7yAhloVSno8lo_GdLgVjVIo21Vl/view">Super Munchtroid-linux-x64 2.6.1</a>
 - <a href="https://drive.google.com/file/d/1Cg1NwMUcyrZLJHbUjO3U7rs3D7W18HiF/view">Super Munchtroid-win32-x64 2.6.1</a>
@@ -13,9 +22,6 @@
 2.6.1 Features special poses, a search bar, significant bug/palette fixes and frame by frame loading (ergo, massive performance boost)
 
 #### 2.3.2
-- <a href="https://drive.google.com/open?id=1TaLiAbylx5gioLtTEdp0tZ18c3l9vZ1i">Super Munchtroid-linux-x64 2.3.2</a>
-- <a href="https://drive.google.com/open?id=1wLfEN4MMojDJCvBAZSjidLDDEp1p52of">Super Munchtroid-win32-x64 2.3.2</a>
-
 2.3.2 fixes the default lift pose's use of a redundant tile in Common Sprites by blanking the redundant tile. Also decouples the majority of CSS logic for compnents into separate files
 
 #### 2.3.0
