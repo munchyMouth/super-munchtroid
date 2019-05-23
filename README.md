@@ -1,4 +1,4 @@
-<h1>SUPER MUNCHTROID</h1>v.2.6.1
+<h1>SUPER MUNCHTROID</h1>v.2.10.0
 
 <img alt="Co.Koa header" title="Co.Koa" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
@@ -60,6 +60,7 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 ### Documentation
 
-- <a href="https://drive.google.com/open?id=1dIIWtJS0Lfokaq1hsTgSjmIJ-t5b26DX">Manual</a>
+- <a href="https://drive.google.com/open?id=1dIIWtJS0Lfokaq1hsTgSjmIJ-t5b26DX">Manual (updated to 2.10.0)</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
+- <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
