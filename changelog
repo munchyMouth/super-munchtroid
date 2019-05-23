@@ -1,4 +1,10 @@
-20/05 2.6.1
+22/05/19 2.10.0
+- Fixed saving sprite bug
+- Added 16x16 pixel editing mode
+- Added pixel-shifting tools
+- modified editor zoom and the menu that accompanies it.
+
+20/05/19 2.6.1
 - Fixed custom palettes edge case
 - Added special poses and supporting UI
 - Added search bar for standard poses
