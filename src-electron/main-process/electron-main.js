@@ -89,6 +89,28 @@ ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
   }
 })
 
+ipcMain.on('Load Death Pose', (event, { filePath }) => {
+  try {
+    Samus({ filePath })
+      .loadSamusDeathPose()
+      .then(
+        function (data) {
+          console.log(data.tiles[data.tiles.length - 1])
+        },
+        function (e) {
+          console.log('HERE')
+          console.trace(e)
+          event.sender.send('Death Pose Error', {
+            type: 'DeathPoseMainLoadException',
+            title: 'Failed to load death pose: Error in main',
+            message: [e.message]
+          })
+        })
+  } catch (e) {
+    console.trace(e)
+  }
+})
+
 // dmaOffset and frameCount are used to load in special poses.
 ipcMain.on('Load Pose', (event,
   { filePath,

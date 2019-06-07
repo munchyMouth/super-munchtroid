@@ -38,6 +38,7 @@
         <div class="settings__tab">
           <button :class="`no-style ${tab === 'basic' ? '' : '--inactive'}`" @click="changeTab('basic')">Basic</button>
           <button :class="`no-style ${tab === 'special' ? '' : '--inactive'}`" @click="changeTab('special')">Special</button>
+          <button :class="`no-style ${tab === 'death' ? '' : '--inactive'}`" @click="changeTab('death')">Death</button>
         </div>
         <settings/>
       </template>
@@ -123,11 +124,16 @@ export default {
         switch (tab) {
           case 'basic': return this.loadBasicSettings()
           case 'special': return this.loadSpecialSettings()
+          case 'death': return this.loadDeathSettings()
         }
       }
     },
     loadBasicSettings () {
       ipcRenderer.send('Load Pose', { filePath: this.filePath, index: 0 })
+    },
+    loadDeathSettings () {
+      ipcRenderer.send('Load Death Pose', { filePath: this.filePath })
+      this.setLoading(false)
     },
     loadSpecialSettings () {
       const pose = this.settings.SPECIAL_POSES[0]
@@ -147,7 +153,7 @@ export default {
 }
 .settings__tab button {
   padding: .5rem !important;
-  width: 50%;
+  width: 33.2%;
   margin-bottom: 1rem;
   font-weight: bolder;
 }

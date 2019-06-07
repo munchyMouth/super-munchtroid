@@ -14,9 +14,20 @@ export default stampit(
   SamusVRAM,
   {
     init () {
-      const { each, loadSettingsFile, pojoToSpriteBuffer, setOffsetData } = this
+      const {
+        bytesToPixels,
+        chunk,
+        each,
+        getOffsetData,
+        loadSettingsFile,
+        pojoToSpriteBuffer,
+        setOffsetData
+      } = this
 
-      const { REDUNDANT_LIFT_POSE_TORSO_TILE } = loadSettingsFile('TableData')
+      const {
+        REDUNDANT_LIFT_POSE_TORSO_TILE,
+        DEATH_POSE
+      } = loadSettingsFile('TableData')
 
       async function eraseCommonTileForLiftPose (isFirstPose) {
         if (isFirstPose) {
@@ -34,6 +45,24 @@ export default stampit(
           frames: frameCount ? new Array(frameCount).fill(0) : frames,
           tileMaps: await loadTileMaps(dmaOffset),
           vram: await loadVRAMTiles()
+        }
+      }
+
+      this.loadSamusDeathPose = async function () {
+        const { START_OFFSET, SIZE } = DEATH_POSE
+        const startOffset = parseInt(START_OFFSET, 16)
+        const tiles =
+          await getOffsetData(startOffset, parseInt(SIZE, 16))
+        return {
+          _address: `$${startOffset.toString(16)}`,
+          _id: startOffset,
+          tiles: chunk(tiles, 0x20).map(function (it, i) {
+            return {
+              _address: `$${(startOffset + (i * 0x20)).toString(16)}`,
+              _id: startOffset + (i * 0x20),
+              data: bytesToPixels(it)
+            }
+          })
         }
       }
 
