@@ -17,7 +17,6 @@ export default {
     ...mapGetters([
       'loading',
       'currentFrameIndex',
-      'eventObserver',
       'hasUnsavedSprites',
       'selectedTile',
       'selectedTiles',
@@ -29,7 +28,6 @@ export default {
       'clearUpdateSprite',
       'clearUpdateVram',
       'clearVramUpdateFlag',
-      'setEventObserver',
       'setError',
       'setLoading',
       'setPalettes',
@@ -48,9 +46,6 @@ export default {
         })
       }
     },
-    renderEvent (title, callback) {
-      ipcRenderer.on(title, callback)
-    },
     success (message, color = 'positive') {
       if (message) {
         this.$q.notify({
@@ -67,14 +62,20 @@ export default {
   },
   updated () {
     try {
-      const events = ['Palettes', 'Pose', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
+      const events = ['Death Pose', 'Palettes', 'Pose', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
       events.forEach(function (it) {
         ipcRenderer.on(`${it} Error`, function (event, error) {
           this.setError(error)
         }.bind(this))
       }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
+        'Death Pose Loaded',
+        function (event, data) {
+          console.log(data)
+        })
+
+      ipcRenderer.on(
         'ROM Loaded',
         async function (event, object) {
           try {
@@ -98,7 +99,7 @@ export default {
           }
         }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
         'Pose loaded',
         async function (event, object) {
           try {
@@ -112,7 +113,7 @@ export default {
           }
         }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
         'Palettes Loaded',
         function (event, object) {
           try {
@@ -126,7 +127,7 @@ export default {
           }
         }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
         'Palettes Saved',
         function () {
           this.setLoading(false)
@@ -134,7 +135,7 @@ export default {
           this.success('Palette(s) Saved!')
         }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
         'Sprite Saved',
         function () {
           this.setLoading(false)
@@ -142,7 +143,7 @@ export default {
           this.success('Sprite Saved!')
         }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
         'Sprites Saved',
         function () {
           this.setLoading(false)
@@ -150,7 +151,7 @@ export default {
           this.success('All Sprites Saved!')
         }.bind(this))
 
-      this.renderEvent(
+      ipcRenderer.on(
         'VRAM Tile Saved',
         function () {
           this.clearVramUpdateFlag({
@@ -162,7 +163,7 @@ export default {
           this.setLoading(false)
           this.success('Tile Saved!')
         }.bind(this))
-      this.renderEvent(
+      ipcRenderer.on(
         'VRAM Tiles Saved',
         function (event, { save16x16 }) {
           if (!save16x16) {
@@ -186,7 +187,7 @@ export default {
       this.setError({
         type: 'genericRendererException',
         title: 'Generic Renderer Exception',
-        message: [genericException, this.eventObserver, e.message]
+        message: [genericException, e.message]
       })
     }
   },

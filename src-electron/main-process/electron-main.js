@@ -95,10 +95,9 @@ ipcMain.on('Load Death Pose', (event, { filePath }) => {
       .loadSamusDeathPose()
       .then(
         function (data) {
-          console.log(data.tiles[data.tiles.length - 1])
+          event.sender.send('Death Pose Loaded', data)
         },
         function (e) {
-          console.log('HERE')
           console.trace(e)
           event.sender.send('Death Pose Error', {
             type: 'DeathPoseMainLoadException',

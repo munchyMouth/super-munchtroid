@@ -37,7 +37,10 @@
   "REDUNDANT_LIFT_POSE_TORSO_TILE": "0xD5620",
   "DEATH_POSE": {
     "START_OFFSET": "0xD8000",
-    "END_OFFSET": "0xD93E0",
-    "SIZE": "0x1400"
+    "SIZE": "0x1400",
+    "TILEMAPS": {
+      "FACING_LEFT": "0825",
+      "FACING_RIGHT": "081C"
+    }
   }
 }

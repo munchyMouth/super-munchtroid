@@ -14,20 +14,20 @@ export default stampit(
   SamusVRAM,
   {
     init () {
+      // PRIVATE ---------------------------------------------------------------
       const {
         bytesToPixels,
         chunk,
         each,
         getOffsetData,
+        loadDeathTileMaps,
         loadSettingsFile,
         pojoToSpriteBuffer,
         setOffsetData
       } = this
 
-      const {
-        REDUNDANT_LIFT_POSE_TORSO_TILE,
-        DEATH_POSE
-      } = loadSettingsFile('TableData')
+      const { REDUNDANT_LIFT_POSE_TORSO_TILE, DEATH_POSE } =
+        loadSettingsFile('TableData')
 
       async function eraseCommonTileForLiftPose (isFirstPose) {
         if (isFirstPose) {
@@ -37,6 +37,7 @@ export default stampit(
         }
       }
 
+      // PUBLIC ----------------------------------------------------------------
       this.load = async function (pose, frameCount, dmaOffset) {
         const { frames, loadVRAMTiles, loadDMAEntries, loadTileMaps } =
           await this.setPose(pose).setFrames(frameCount)
@@ -48,21 +49,23 @@ export default stampit(
         }
       }
 
-      this.loadSamusDeathPose = async function () {
+      this.loadSamusDeathPose = async function (direction, index) {
         const { START_OFFSET, SIZE } = DEATH_POSE
         const startOffset = parseInt(START_OFFSET, 16)
-        const tiles =
-          await getOffsetData(startOffset, parseInt(SIZE, 16))
+        const { tileMap } = await loadDeathTileMaps(direction, index)
+        debugger
         return {
           _address: `$${startOffset.toString(16)}`,
           _id: startOffset,
-          tiles: chunk(tiles, 0x20).map(function (it, i) {
-            return {
-              _address: `$${(startOffset + (i * 0x20)).toString(16)}`,
-              _id: startOffset + (i * 0x20),
-              data: bytesToPixels(it)
-            }
-          })
+          tiles: chunk(await getOffsetData(startOffset, parseInt(SIZE, 16)), 0x20)
+            .map(function (it, i) {
+              return {
+                _address: `$${(startOffset + (i * 0x20)).toString(16)}`,
+                _id: startOffset + (i * 0x20),
+                data: bytesToPixels(it)
+              }
+            }),
+          tileMap
         }
       }
 

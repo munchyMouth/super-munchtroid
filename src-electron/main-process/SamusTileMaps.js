@@ -4,8 +4,8 @@ export default stampit({ /* extends RomData, SamusProps */
   init () {
     // PRIVATE -----------------------------------------------------------------
     const obj = this.loadSettingsFile('TableData')
-    const { ANIMATION_TABLE, INDEX_OFFSET_TABLE_BOT, INDEX_OFFSET_TABLE_TOP } =
-      ['ANIMATION_TABLE', 'INDEX_OFFSET_TABLE_BOT', 'INDEX_OFFSET_TABLE_TOP']
+    const { ANIMATION_TABLE, DEATH_POSE, INDEX_OFFSET_TABLE_BOT, INDEX_OFFSET_TABLE_TOP } =
+      ['ANIMATION_TABLE', 'DEATH_POSE', 'INDEX_OFFSET_TABLE_BOT', 'INDEX_OFFSET_TABLE_TOP']
         .reduce((o, key) => {
           o[key] = parseInt(obj[key], 16)
           return o
@@ -93,21 +93,30 @@ export default stampit({ /* extends RomData, SamusProps */
       return arr
     }.bind(this)
 
-    this.loadSpriteTileMaps = async function (table, i) {
-      const poseTileMapPointer =
-        ANIMATION_TABLE +
-        (await this.getTableOffsetByIndex(table, this.pose) * 2)
-      const tileMapPointer = await this.getOffsetData(
-        poseTileMapPointer + (i * 2), 2)
-      return {
-        tileMap: !tileMapPointerIsEmpty(tileMapPointer)
-          ? await this.getSpriteMapTable(tileMapPointer)
-          : { sprites: [] },
-        _id: poseTileMapPointer + (i * 2),
-        _pose: `$${this.pose.toString(16)}`,
-        _address: `$${(poseTileMapPointer + (i * 2)).toString(16)}`
-      }
-    }.bind(this)
+    this.loadSpriteTileMaps =
+      async function (table, i, poseTileMapPointerOverride) {
+        const poseTileMapPointer = poseTileMapPointerOverride ||
+          ANIMATION_TABLE +
+          (await this.getTableOffsetByIndex(table, this.pose) * 2)
+        const tileMapPointer = await this.getOffsetData(
+          poseTileMapPointer + (i * 2), 2)
+        return {
+          tileMap: !tileMapPointerIsEmpty(tileMapPointer)
+            ? await this.getSpriteMapTable(tileMapPointer)
+            : { sprites: [] },
+          _id: poseTileMapPointer + (i * 2),
+          _pose: `$${this.pose.toString(16)}`,
+          _address: `$${(poseTileMapPointer + (i * 2)).toString(16)}`
+        }
+      }.bind(this)
+
+    this.loadDeathTileMaps =
+      async function (direction = 'FACING_LEFT', index = 0) {
+        return this.loadSpriteTileMaps(
+          undefined,
+          index,
+          ANIMATION_TABLE + (parseInt(DEATH_POSE[direction], 16) * 2))
+      }.bind(this)
 
     this.loadTileMaps = async function (offset, data = {}, i = 0, count = 0) {
       try {
