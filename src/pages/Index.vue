@@ -4,10 +4,11 @@
          @mouseenter="setUserIsDrawing(undefined)"
          @mousedown="draw"
          @mouseup="setUserIsDrawing(undefined)">
-      <vram />
+      <vram v-if="tab !== 'death'"/>
+      <vram-death-pose v-else/>
       <div class="munch-index">
         <div class="munch-index__left">
-          <sprite />
+          <sprite v-if="tab !== 'death'"/>
           <div class="munch-index__left__toggle">
             <div v-if="showSprite">
               <button class="no-style munch-index__left__toggle munch-index__left__toggle--show"
@@ -40,10 +41,11 @@ import Icon from 'vue-awesome/components/Icon'
 import Editor from '../components/Editor.vue'
 import Sprite from '../components/Sprite.vue'
 import Vram from '../components/Vram.vue'
+import VramDeathPose from '../components/VramDeathPose.vue'
 
 export default {
   name: 'PageIndex',
-  components: { Editor, Icon, Sprite, Vram },
+  components: { Editor, Icon, Sprite, Vram, VramDeathPose },
   computed: {
     ...mapGetters([
       'activeSprite',
@@ -52,6 +54,7 @@ export default {
       'showSprite',
       'spriteDefault',
       'spriteRatio',
+      'tab',
       'tileMaps',
       'vram'
     ])

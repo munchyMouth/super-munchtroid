@@ -1,5 +1,5 @@
 <template>
-  <div :class="`vram-outer-wrapper${showVram ? '--show' : '--hide'}`">
+  <div :class="`vram-death-outer-wrapper${showVram ? '--show' : '--hide'}`">
     <canvas
       ref="vram"
       @mousemove="getMousePos"
@@ -7,6 +7,12 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    active tile y {{ activeTileY }} --- {{ y }}
   </div>
 </template>
 
@@ -16,7 +22,7 @@ import { mapActions, mapGetters } from 'vuex'
 import VramRedraw from './helpers/VramRedraw.js'
 
 export default {
-  name: 'vram',
+  name: 'vram-death-pose',
   computed: {
     ...mapGetters([
       'activePaletteIndex',
@@ -40,70 +46,38 @@ export default {
       'tileMaps',
       'vram',
       'vramRatio']),
-    activePart () {
-      return (this.y / this.vramRatio >= 8) ? 'part2' : 'part1'
-    },
     activeTileMetaData () {
       return {
-        half: this.activeHalf,
         index: this.activeTileIndex,
-        no: this.activeTileNo,
-        part: this.activePart,
-        tile: this.currentTile
+        no: this.activeTileIndex,
       }
     },
-    activeTileNo () {
-      return Math.floor((this.x / this.vramRatio) / 8)
-    },
     activeTileIndex () {
-      return this.activeTileNo < 8 ? this.activeTileNo : this.activeTileNo - 8
-    },
-    activeHalf () {
-      return this.activeTileNo < 8 ? 'top' : 'bottom'
-    },
-    currentPart () {
-      return this.currentFrame
-        ? this.currentFrame[this.activeHalf].parts[this.activePart]
-        : undefined
-    },
-    currentTile () {
-      return this.currentPart
-        ? this.currentPart.tiles[this.activeTileIndex]
-        : undefined
+      const test = Math.floor((this.x / this.vramRatio) / 8) +
+        (Math.floor(this.y / (this.vramRatio * 8)) * 16)
+      return test > -1 ? test : -1
     },
     isVramSelectionInEditorMode () {
-      return this.viableTile &&
-        this.vramX > -1 &&
+      return this.vramX > -1 &&
         this.vramY > -1 &&
         !this.activeSprite
     },
     isVramSelectionInSpriteMode () {
-      return this.viableTile &&
-        this.vramX > -1 &&
+      return this.vramX > -1 &&
         this.vramY > -1 &&
         !!this.activeSprite
     },
     spriteModeDataObject () {
       return {
         'load16x16': false,
-        'part': this.activePart,
-        'vramIndex': this.activeTileNo
+        'vramIndex': this.activeTileIndex
       }
     },
-    viableTile () {
-      return this.currentPart
-        ? this.activeTileIndex < this.currentPart.tiles.length
-        : false
-    },
     vramX () {
-      return (this.viableTile && this.x > -1 && this.x < this.vramRatio * 128)
-        ? this.x
-        : -1
+      return (this.x > -1 && this.x < this.vramRatio * 128) ? this.x : -1
     },
     vramY () {
-      return (this.viableTile && this.y > -1 && this.y < this.vramRatio * 16)
-        ? this.y
-        : -1
+      return (this.y > -1 && this.y < this.vramRatio * 80) ? this.y : -1
     }
   },
   data () {
@@ -126,7 +100,7 @@ export default {
     actionClick (evt) {
       switch (true) {
         case this.isVramSelectionInEditorMode ||
-          (this.viableTile && evt.button > 0):
+          (evt.button > 0):
           this.setSelectedTile(this.activeTileMetaData)
           break
 
@@ -147,7 +121,7 @@ export default {
     clearActiveMouse () {
       this.x = -1
       this.y = -1
-      this.redraw()
+      this.redrawDeathPose()
     },
     getMousePos (evt) {
       this.$refs['vram'].focus()
@@ -157,38 +131,40 @@ export default {
     }
   },
   watch: {
-    activePaletteIndex () { this.redraw() },
-    activeSprite () { this.redraw() },
+    activePaletteIndex () { this.redrawDeathPose() },
+    activeSprite () { this.redrawDeathPose() },
     currentFrameIndex () {
       this.clearSelectedTile()
       this.clearSelectedTiles()
-      this.redraw()
+      this.redrawDeathPose()
     },
     edit16x16 (newVal) {
       if (newVal) this.setSelectedTiles(this.computedSelectedTiles)
-      this.redraw()
+      this.redrawDeathPose()
     },
-    editorUpdate () { this.redraw() },
-    palettes () { this.redraw() },
-    refreshPalette () { this.redraw() },
-    selectedTile () { this.redraw() },
-    selectedTiles () { this.redraw() },
-    spriteRefresh () { this.redraw() },
-    showVram (newVal) { this.redraw() },
+    editorUpdate () { this.redrawDeathPose() },
+    palettes () { this.redrawDeathPose() },
+    refreshPalette () { this.redrawDeathPose() },
+    selectedTile () { this.redrawDeathPose() },
+    selectedTiles () { this.redrawDeathPose() },
+    spriteRefresh () { this.redrawDeathPose() },
+    showVram (newVal) { this.redrawDeathPose() },
     vram () {
       this.clearSelectedTile()
       this.clearSelectedTiles()
-      this.redraw()
+      this.redrawDeathPose()
     },
-    vramX () { this.redraw() },
-    vramY () { this.redraw() }
+    vramX () { this.redrawDeathPose() },
+    vramY () { this.redrawDeathPose() }
   },
   mounted () {
     this.context = this.$refs['vram'].getContext('2d')
     this.$refs['vram'].width = 128 * this.vramRatio
-    this.$refs['vram'].height = 16 * this.vramRatio
+    this.$refs['vram'].height = 80 * this.vramRatio
   }
 }
 </script>
 
-<style>@import '../css/vram.css';</style>
+<style scoped>
+@import '../css/vram.css';
+</style>

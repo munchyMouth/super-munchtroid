@@ -100,7 +100,7 @@ export default {
         }.bind(this))
 
       ipcRenderer.on(
-        'Pose loaded',
+        'Pose Loaded',
         async function (event, object) {
           try {
             await this.setSamus(object)

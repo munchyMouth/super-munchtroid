@@ -95,7 +95,7 @@ ipcMain.on('Load Death Pose', (event, { filePath }) => {
       .loadSamusDeathPose()
       .then(
         function (data) {
-          event.sender.send('Death Pose Loaded', data)
+          event.sender.send('Pose Loaded', { ...data, filePath })
         },
         function (e) {
           console.trace(e)
@@ -123,9 +123,9 @@ ipcMain.on('Load Pose', (event,
     Samus({ filePath })
       .load(index, frameCount, dmaOffset)
       .then(function (samus) {
-        event.sender.send('Pose loaded', {
+        event.sender.send('Pose Loaded', {
           ...samus,
-          filePath,
+          filePath: filePath,
           frameIndex: typeof specialPoseFrameOverride !== 'undefined'
             ? (dmaOffset / 4) - specialPoseFrameOverride
             : dmaOffset / 4,

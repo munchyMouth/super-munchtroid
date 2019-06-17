@@ -41,6 +41,7 @@
     "TILEMAPS": {
       "FACING_LEFT": "0825",
       "FACING_RIGHT": "081C"
-    }
+    },
+    "NO_OF_FRAMES": 10
   }
 }

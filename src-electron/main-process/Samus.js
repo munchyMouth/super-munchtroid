@@ -50,22 +50,27 @@ export default stampit(
       }
 
       this.loadSamusDeathPose = async function (direction, index) {
-        const { START_OFFSET, SIZE } = DEATH_POSE
+        const { START_OFFSET, SIZE, NO_OF_FRAMES } = DEATH_POSE
         const startOffset = parseInt(START_OFFSET, 16)
-        const { tileMap } = await loadDeathTileMaps(direction, index)
+        const { tileMaps } = await loadDeathTileMaps(direction, index)
         debugger
         return {
           _address: `$${startOffset.toString(16)}`,
           _id: startOffset,
-          tiles: chunk(await getOffsetData(startOffset, parseInt(SIZE, 16)), 0x20)
-            .map(function (it, i) {
-              return {
-                _address: `$${(startOffset + (i * 0x20)).toString(16)}`,
-                _id: startOffset + (i * 0x20),
-                data: bytesToPixels(it)
-              }
-            }),
-          tileMap
+          frames: new Array(NO_OF_FRAMES),
+          frameIndex: index,
+          pose: { name: `Facing ${direction}` },
+          vram: {
+            tiles: chunk(await getOffsetData(startOffset, parseInt(SIZE, 16)), 0x20)
+              .map(function (it, i) {
+                return {
+                  _address: `$${(startOffset + (i * 0x20)).toString(16)}`,
+                  _id: startOffset + (i * 0x20),
+                  data: bytesToPixels(it)
+                }
+              })
+          },
+          tileMaps
         }
       }
 

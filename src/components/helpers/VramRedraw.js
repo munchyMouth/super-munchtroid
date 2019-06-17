@@ -1,6 +1,6 @@
 import { createBlankTemplate } from '../Miscellaneous'
 
-// public object VramRedraw implements IRedraw extends Vram
+// public object VramRedraw implements IRedraw extends Vram, VramDeathPose
 export default {
   insertTile (tile, offsetX = 0, offsetY = 0, R = 4) {
     tile.forEach(function (line, y) {
@@ -40,6 +40,19 @@ export default {
       if (this.vramX > -1 && this.vramY > -1) this.renderHilightedTile(R)
       if (this.activeSprite) this.renderSpriteTile(R)
       this.renderSelectedTile(R)
+    }
+  },
+  redrawDeathPose () {
+    if (this.showVram && this.palettes.length && this.currentFrame) {
+      const R = this.vramRatio
+      let j = 0
+      this.vram.tiles.forEach(function ({ data }, i) {
+        this.insertTile(data, j, Math.floor(i / 16), R)
+        if (++j > 15) j = 0
+      }.bind(this))
+      // if (this.vramX > -1 && this.vramY > -1) this.renderHilightedTile(R)
+      // if (this.activeSprite) this.renderSpriteTile(R)
+      // this.renderSelectedTile(R)
     }
   },
   renderHilightedTile (R, fillstyle = 'rgba(200, 200, 200, .5)') {
