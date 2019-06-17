@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="Object.keys(tileMaps).length">
+  <q-page v-if="tab === 'death' || (tileMaps && Object.keys(tileMaps).length)">
     <div class="munch-index-wrapper"
          @mouseenter="setUserIsDrawing(undefined)"
          @mousedown="draw"
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="munch-index__right">
-          <editor />
+          <editor v-if="tab !== 'death'"/>
         </div>
       </div>
     </div>

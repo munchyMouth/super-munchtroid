@@ -37,8 +37,8 @@ export default {
         this.renderTilesOrBlank(bottom.parts.part1, i, i + 8, 0, R)
         this.renderTilesOrBlank(bottom.parts.part2, i, i + 8, 1, R)
       }
-      if (this.vramX > -1 && this.vramY > -1) this.renderHilightedTile(R)
       if (this.activeSprite) this.renderSpriteTile(R)
+      this.renderHilightedTile(R)
       this.renderSelectedTile(R)
     }
   },
@@ -50,15 +50,19 @@ export default {
         this.insertTile(data, j, Math.floor(i / 16), R)
         if (++j > 15) j = 0
       }.bind(this))
-      // if (this.vramX > -1 && this.vramY > -1) this.renderHilightedTile(R)
-      // if (this.activeSprite) this.renderSpriteTile(R)
-      // this.renderSelectedTile(R)
+      if (this.activeSprite) this.renderSpriteTile(R)
+      this.renderHilightedTile(R)
+      this.renderSelectedTile(R)
     }
   },
   renderHilightedTile (R, fillstyle = 'rgba(200, 200, 200, .5)') {
     if (this.viableTile && this.vramX > -1 && this.vramY > -1) {
-      const x = (this.activeTileNo * 8) * R
-      const y = (this.activePart === 'part1' ? 0 : 8) * R
+      const x = typeof this.activeTileXOffset === 'number'
+        ? this.activeTileXOffset
+        : (this.activeTileNo * 8) * R
+      const y = typeof this.activeTileYOffset === 'number'
+        ? this.activeTileYOffset
+        : (this.activePart === 'part1' ? 0 : 8) * R
       this.context.fillStyle = fillstyle
       this.context.fillRect(x, y, (8 * R), (8 * R))
     }
@@ -71,9 +75,9 @@ export default {
   },
   renderSelectedTile (R) {
     if (this.hasSelectedTile) {
-      const { no, part } = this.selectedTile
-      const x = (no * 8) * R
-      const y = (part === 'part1' ? 0 : 8) * R
+      let { no, part, x, y } = this.selectedTile
+      x = typeof x === 'number' ? x : (no * 8) * R
+      y = typeof y === 'number' ? y : (part === 'part1' ? 0 : 8) * R
       this.redrawHilightSquare('magenta', R, x, y, this.edit16x16, this.activeSprite ? 3 : 1)
     }
   },

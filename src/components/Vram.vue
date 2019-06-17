@@ -49,7 +49,9 @@ export default {
         index: this.activeTileIndex,
         no: this.activeTileNo,
         part: this.activePart,
-        tile: this.currentTile
+        tile: this.currentTile,
+        x: undefined,
+        y: undefined
       }
     },
     activeTileNo () {

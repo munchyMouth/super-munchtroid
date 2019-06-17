@@ -9,10 +9,7 @@
     </canvas>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    active tile y {{ activeTileY }} --- {{ y }}
+    Active Sprite {{ selectedTile }}
   </div>
 </template>
 
@@ -49,13 +46,22 @@ export default {
     activeTileMetaData () {
       return {
         index: this.activeTileIndex,
-        no: this.activeTileIndex,
+        no: 'n/a',
+        part: 'n/a',
+        x: this.activeTileXOffset,
+        y: this.activeTileYOffset
       }
     },
     activeTileIndex () {
       const test = Math.floor((this.x / this.vramRatio) / 8) +
         (Math.floor(this.y / (this.vramRatio * 8)) * 16)
       return test > -1 ? test : -1
+    },
+    activeTileXOffset () {
+      return Math.floor(this.x / (this.vramRatio * 8)) * (8 * this.vramRatio)
+    },
+    activeTileYOffset () {
+      return Math.floor(this.y / (this.vramRatio * 8)) * (8 * this.vramRatio)
     },
     isVramSelectionInEditorMode () {
       return this.vramX > -1 &&
@@ -73,6 +79,7 @@ export default {
         'vramIndex': this.activeTileIndex
       }
     },
+    viableTile () { return true },
     vramX () {
       return (this.x > -1 && this.x < this.vramRatio * 128) ? this.x : -1
     },
@@ -99,8 +106,7 @@ export default {
     ...VramRedraw,
     actionClick (evt) {
       switch (true) {
-        case this.isVramSelectionInEditorMode ||
-          (evt.button > 0):
+        case this.isVramSelectionInEditorMode || (evt.button > 0):
           this.setSelectedTile(this.activeTileMetaData)
           break
 
