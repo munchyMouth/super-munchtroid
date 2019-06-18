@@ -83,6 +83,7 @@ export default {
     commit('SET_CURRENT_FRAME_INDEX', i)
   },
   setCurrentPalette ({ commit }, i) { commit('SET_CURRENT_PALETTE', i) },
+  setDeathPoseIndex ({ commit }, i) { commit('SET_DEATH_POSE_INDEX', i) },
   setEdit16x16 ({ commit }, o) {
     commit('CLEAR_EDITOR_FLIP')
     commit('SET_EDIT_16X16', o)

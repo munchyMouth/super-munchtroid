@@ -28,6 +28,7 @@ export default {
       'editorUpdate',
       'getSpriteByProps',
       'getSpritesByHalf',
+      'hasSelectedTile',
       'palettes',
       'refreshPalette',
       'selectedTile',
@@ -41,7 +42,9 @@ export default {
     ]),
     activeTileMetaData () {
       return {
+        half: 'n/a',
         index: this.activeTileIndex,
+        isDeathPose: true,
         no: 'n/a',
         part: 'n/a',
         tile: this.currentTile,

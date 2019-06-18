@@ -77,12 +77,15 @@ export default {
   getVramByProps: state => ({ half, part }) =>
     state.vram[half].parts[part],
   getVramTileByProps: state => ({ half, index, part }) =>
-    state.vram[half].parts[part].tiles[index],
+    state.tab !== 'death'
+      ? state.vram[half].parts[part].tiles[index]
+      : state.vram.tiles[index],
   hasError: state => state.error.type || state.error.message.length,
-  hasSelectedTile: state =>
-    state.selectedTile &&
+  hasSelectedTile: state => {
+    return state.selectedTile &&
     typeof state.selectedTile === 'object' &&
-    !state.selectedTile.hasOwnProperty('empty'),
+    !state.selectedTile.hasOwnProperty('empty')
+  },
   hasUnsavedSprites: state =>
     Object.keys(state.tileMaps).reduce(function (result, key) {
       if (!result) {

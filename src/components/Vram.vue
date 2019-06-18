@@ -7,9 +7,6 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
-    <br>
-    <br>
-    Active Sprite {{ currentTile }}
   </div>
 </template>
 
@@ -50,6 +47,7 @@ export default {
       return {
         half: this.activeHalf,
         index: this.activeTileIndex,
+        isDeathPose: false,
         no: this.activeTileNo,
         part: this.activePart,
         tile: this.currentTile,
