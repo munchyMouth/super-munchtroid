@@ -7,9 +7,6 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
-    <br>
-    <br>
-    Active Sprite {{ selectedTile }}
   </div>
 </template>
 
@@ -31,8 +28,6 @@ export default {
       'editorUpdate',
       'getSpriteByProps',
       'getSpritesByHalf',
-      'getVramByProps',
-      'hasSelectedTile',
       'palettes',
       'refreshPalette',
       'selectedTile',
@@ -42,12 +37,14 @@ export default {
       'spriteRefresh',
       'tileMaps',
       'vram',
-      'vramRatio']),
+      'vramRatio'
+    ]),
     activeTileMetaData () {
       return {
         index: this.activeTileIndex,
         no: 'n/a',
         part: 'n/a',
+        tile: this.currentTile,
         x: this.activeTileXOffset,
         y: this.activeTileYOffset
       }
@@ -62,6 +59,9 @@ export default {
     },
     activeTileYOffset () {
       return Math.floor(this.y / (this.vramRatio * 8)) * (8 * this.vramRatio)
+    },
+    currentTile () {
+      return this.vram.tiles[this.activeTileIndex]
     },
     isVramSelectionInEditorMode () {
       return this.vramX > -1 &&
@@ -90,8 +90,8 @@ export default {
   data () {
     return {
       context: undefined,
-      x: 0,
-      y: 0
+      x: -1,
+      y: -1
     }
   },
   methods: {
@@ -137,8 +137,22 @@ export default {
     }
   },
   watch: {
-    activePaletteIndex () { this.redrawDeathPose() },
-    activeSprite () { this.redrawDeathPose() },
+    ...[
+      'activePaletteIndex',
+      'activeSprite',
+      'activeTileXOffset',
+      'activeTileYOffset',
+      'editorUpdate',
+      'palettes',
+      'refreshPalette',
+      'selectedTile',
+      'selectedTiles',
+      'showVram',
+      'spriteRefresh'
+    ].reduce((obj, it) => {
+      obj[it] = function () { this.redrawDeathPose() }
+      return obj
+    }, {}),
     currentFrameIndex () {
       this.clearSelectedTile()
       this.clearSelectedTiles()
@@ -148,20 +162,11 @@ export default {
       if (newVal) this.setSelectedTiles(this.computedSelectedTiles)
       this.redrawDeathPose()
     },
-    editorUpdate () { this.redrawDeathPose() },
-    palettes () { this.redrawDeathPose() },
-    refreshPalette () { this.redrawDeathPose() },
-    selectedTile () { this.redrawDeathPose() },
-    selectedTiles () { this.redrawDeathPose() },
-    spriteRefresh () { this.redrawDeathPose() },
-    showVram (newVal) { this.redrawDeathPose() },
     vram () {
       this.clearSelectedTile()
       this.clearSelectedTiles()
       this.redrawDeathPose()
-    },
-    vramX () { this.redrawDeathPose() },
-    vramY () { this.redrawDeathPose() }
+    }
   },
   mounted () {
     this.context = this.$refs['vram'].getContext('2d')

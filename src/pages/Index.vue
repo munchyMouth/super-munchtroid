@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="munch-index__right">
-          <editor v-if="tab !== 'death'"/>
+          <editor />
         </div>
       </div>
     </div>

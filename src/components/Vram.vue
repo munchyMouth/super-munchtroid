@@ -7,6 +7,9 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
+    <br>
+    <br>
+    Active Sprite {{ currentTile }}
   </div>
 </template>
 
@@ -159,8 +162,22 @@ export default {
     }
   },
   watch: {
-    activePaletteIndex () { this.redraw() },
-    activeSprite () { this.redraw() },
+    ...[
+      'activePaletteIndex',
+      'activeSprite',
+      'editorUpdate',
+      'palettes',
+      'refreshPalette',
+      'selectedTile',
+      'selectedTiles',
+      'spriteRefresh',
+      'showVram',
+      'vramX',
+      'vramY'
+    ].reduce((obj, it) => {
+      obj[it] = function () { this.redraw() }
+      return obj
+    }, {}),
     currentFrameIndex () {
       this.clearSelectedTile()
       this.clearSelectedTiles()
@@ -170,20 +187,11 @@ export default {
       if (newVal) this.setSelectedTiles(this.computedSelectedTiles)
       this.redraw()
     },
-    editorUpdate () { this.redraw() },
-    palettes () { this.redraw() },
-    refreshPalette () { this.redraw() },
-    selectedTile () { this.redraw() },
-    selectedTiles () { this.redraw() },
-    spriteRefresh () { this.redraw() },
-    showVram (newVal) { this.redraw() },
     vram () {
       this.clearSelectedTile()
       this.clearSelectedTiles()
       this.redraw()
-    },
-    vramX () { this.redraw() },
-    vramY () { this.redraw() }
+    }
   },
   mounted () {
     this.context = this.$refs['vram'].getContext('2d')

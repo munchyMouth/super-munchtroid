@@ -353,10 +353,12 @@ export default {
         this.updated =
           this.selectedTile &&
           !this.selectedTile.hasOwnProperty('empty') &&
-          this.getVramTileByProps(this.selectedTile)._updated
+          (this.tab !== 'death' || // GET THE ACTIVE TILE INDEX PROPERLY
+            this.getVramTileByProps(this.selectedTile)._updated)
       } else {
         for (let i = 0; i < 4; i++) {
-          if (this.getVramTileByProps(this.selectedTiles[i])._updated) {
+          if (this.tab !== 'death' ||
+            this.getVramTileByProps(this.selectedTiles[i])._updated) {
             this.updated = true
             return
           }
