@@ -7,6 +7,10 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
+    <br>
+    <br>
+    <br>
+    {{ tileMaps }}
   </div>
 </template>
 

@@ -7,7 +7,7 @@ export default stampit({ /* extends RomData, SamusProps */
     const { ANIMATION_TABLE, DEATH_POSE, INDEX_OFFSET_TABLE_BOT, INDEX_OFFSET_TABLE_TOP } =
       ['ANIMATION_TABLE', 'DEATH_POSE', 'INDEX_OFFSET_TABLE_BOT', 'INDEX_OFFSET_TABLE_TOP']
         .reduce((o, key) => {
-          o[key] = parseInt(obj[key], 16)
+          o[key] = key !== 'DEATH_POSE' ? parseInt(obj[key], 16) : obj[key]
           return o
         }, {})
 
@@ -38,11 +38,9 @@ export default stampit({ /* extends RomData, SamusProps */
               return {
                 _address: `$${spriteId.toString(16)}`,
                 _id: spriteId,
-                sprite: it,
                 ...this.parseSpriteMapLogic(it)
               }
             } else {
-              debugger
               throw new Error('failed to load TileMap for this sprite.')
             }
           }),
@@ -100,7 +98,7 @@ export default stampit({ /* extends RomData, SamusProps */
           (await this.getTableOffsetByIndex(table, this.pose) * 2)
         const tileMapPointer = await this.getOffsetData(
           poseTileMapPointer + (i * 2), 2)
-        return {
+        const obj = {
           tileMap: !tileMapPointerIsEmpty(tileMapPointer)
             ? await this.getSpriteMapTable(tileMapPointer)
             : { sprites: [] },
@@ -108,6 +106,8 @@ export default stampit({ /* extends RomData, SamusProps */
           _pose: `$${this.pose.toString(16)}`,
           _address: `$${(poseTileMapPointer + (i * 2)).toString(16)}`
         }
+        if (poseTileMapPointerOverride) debugger
+        return obj
       }.bind(this)
 
     this.loadDeathTileMaps =
@@ -115,7 +115,7 @@ export default stampit({ /* extends RomData, SamusProps */
         return this.loadSpriteTileMaps(
           undefined,
           index,
-          ANIMATION_TABLE + (parseInt(DEATH_POSE[direction], 16) * 2))
+          ANIMATION_TABLE + (parseInt(DEATH_POSE.TILEMAPS[direction], 16) * 2))
       }.bind(this)
 
     this.loadTileMaps = async function (offset, data = {}, i = 0, count = 0) {

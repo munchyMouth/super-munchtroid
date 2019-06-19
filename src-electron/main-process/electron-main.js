@@ -70,6 +70,28 @@ ipcMain.on('attachMenuEvents', (event) => {
   Menu.setApplicationMenu(menu)
 })
 
+ipcMain.on('Load Death Pose', (event, { filePath }) => {
+  try {
+    Samus({ filePath })
+      .loadSamusDeathPose()
+      .then(
+        function (data) {
+          console.log(data.tileMaps)
+          event.sender.send('Pose Loaded', { ...data, filePath })
+        },
+        function (e) {
+          console.trace(e)
+          event.sender.send('Death Pose Error', {
+            type: 'DeathPoseMainLoadException',
+            title: 'Failed to load death pose: Error in main',
+            message: [e.message]
+          })
+        })
+  } catch (e) {
+    console.trace(e)
+  }
+})
+
 ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
   try {
     Palette({ filePath })
@@ -84,27 +106,6 @@ ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {
           message: [e.message]
         })
       })
-  } catch (e) {
-    console.trace(e)
-  }
-})
-
-ipcMain.on('Load Death Pose', (event, { filePath }) => {
-  try {
-    Samus({ filePath })
-      .loadSamusDeathPose()
-      .then(
-        function (data) {
-          event.sender.send('Pose Loaded', { ...data, filePath })
-        },
-        function (e) {
-          console.trace(e)
-          event.sender.send('Death Pose Error', {
-            type: 'DeathPoseMainLoadException',
-            title: 'Failed to load death pose: Error in main',
-            message: [e.message]
-          })
-        })
   } catch (e) {
     console.trace(e)
   }

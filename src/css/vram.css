@@ -30,6 +30,7 @@
   height: 480px;
   background: black;
   margin-bottom: 16px;
+  overflow-y: auto
 }
 .vram-death-outer-wrapper--hide {
   width: 100%;

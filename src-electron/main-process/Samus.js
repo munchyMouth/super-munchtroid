@@ -52,8 +52,6 @@ export default stampit(
       this.loadSamusDeathPose = async function (direction, index) {
         const { START_OFFSET, SIZE, NO_OF_FRAMES } = DEATH_POSE
         const startOffset = parseInt(START_OFFSET, 16)
-        const { tileMaps } = await loadDeathTileMaps(direction, index)
-        debugger
         return {
           _address: `$${startOffset.toString(16)}`,
           _id: startOffset,
@@ -70,7 +68,7 @@ export default stampit(
                 }
               })
           },
-          tileMaps
+          tileMaps: await loadDeathTileMaps(direction, index)
         }
       }
 
