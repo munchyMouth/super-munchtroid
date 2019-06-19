@@ -14,16 +14,28 @@
       <search-box @load-entry="choosePoseFromSearchEntry($event)"/>
     </template>
     <div class="settings__dropdown-label pose">
-      <strong>{{ this.tab === 'special' ? 'Special ' : '' }}Pose: </strong>
+      <strong v-if="this.tab !== 'death'">
+        {{ this.tab === 'special' ? 'Special ' : '' }}Pose:
+      </strong>
     </div>
     <select class="settings__dropdown" @change="choosePose()">
-      <option v-for="({ name, index, unused }, i) in poses"
-              :key="i"
-              :value="index"
-              :class="unused ? '--unused' : ''"
-              :selected="i === currentPose ? 'selected' : false">
-        {{ name }}
-      </option>
+      <template v-if="tab !== 'death'">
+        <option v-for="({ name, index, unused }, i) in poses"
+                :key="i"
+                :value="index"
+                :class="unused ? '--unused' : ''"
+                :selected="i === currentPose ? 'selected' : false">
+          {{ name }}
+        </option>
+      </template>
+      <template v-else>
+        <option v-for="(dir, i) in ['FACING_LEFT', 'FACING_RIGHT']"
+                :key="i"
+                :value="dir"
+                :selected="currentPose === dir">
+          {{ snakeCaseToUIFormat(dir) }}
+        </option>
+      </template>
     </select>
     <div class="settings__dropdown-label">
       <strong>Palette Set: </strong>
@@ -110,7 +122,7 @@ import 'vue-awesome/icons/regular/check-circle'
 import 'vue-awesome/icons/regular/circle'
 import Icon from 'vue-awesome/components/Icon'
 
-import { getUpdatedVramTiles } from './Miscellaneous'
+import { getUpdatedVramTiles, snakeCaseToUIFormat } from './Miscellaneous'
 import { poseWarning, paletteWarning } from '../libs/messages.json'
 
 import PlusMinusField from './PlusMinusField.vue'
@@ -148,25 +160,37 @@ export default {
       'updateSprite',
       'vram'
     ]),
-    poses () {
-      return this.tab === 'special'
-        ? this.settings.SPECIAL_POSES
-        : this.settings.POSES
-          .map(function (it, i) {
-            return (!this.showUnused && it.unused)
-              ? undefined
-              : { ...it, index: i }
-          }.bind(this))
-          .filter((it) => it)
-    },
     frameDMAOffset () {
       return this.tab === 'special'
         ? this.settings.SPECIAL_POSES[this.currentPose].dmaOffset : 0
     },
     frameIndex () {
-      return this.tab === 'basic'
-        ? this.poses[this.currentPose].index || 0
-        : this.settings.SPECIAL_POSES[this.currentPose || 0].index
+      switch (this.tab) {
+        case 'basic': return this.poses[this.currentPose].index || 0
+        case 'death': 'TODO'
+        case 'special': return this.settings.SPECIAL_POSES[this.currentPose || 0].index
+      }
+    },
+    poses () {
+      switch (this.tab) {
+        case 'basic':
+          return this.settings.POSES
+            .map(function (it, i) {
+              return (!this.showUnused && it.unused)
+                ? undefined
+                : { ...it, index: i }
+            }.bind(this))
+            .filter((it) => it)
+        case 'death': return 'TODO'
+        case 'special': return this.settings.SPECIAL_POSES
+      }
+    },
+    poseTitle () {
+      switch (this.tab) {
+        case 'basic': return 'Pose: '
+        case 'special': return 'Special Pose: '
+        case 'death': return 'Direction: '
+      }
     }
   },
   provide () {
@@ -192,9 +216,7 @@ export default {
       'setSpriteRatio'
     ]),
     ...mapMutations({ setLoading: 'SET_LOADING' }),
-    actionSelectedSprite (sprite) {
-      this.setActiveSprite(sprite)
-    },
+    actionSelectedSprite (sprite) { this.setActiveSprite(sprite) },
     clearActiveSprite (activeHalf) {
       this.setActiveSprite()
       if (activeHalf) this.activeHalf = activeHalf
@@ -223,6 +245,8 @@ export default {
               optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
             })
             break
+          case 'death':
+            console.log('TODO')
           case 'special':
             const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex]
             ipcRenderer.send('Load Pose', {
@@ -326,6 +350,7 @@ export default {
         this.showUnused = !this.showUnused
       }
     },
+    snakeCaseToUIFormat,
     spriteZoomIn () {
       if (this.spriteRatio < 6) {
         this.setSpriteRatio(this.spriteRatio + 1)

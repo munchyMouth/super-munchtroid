@@ -45,3 +45,13 @@ export function handleIrregularHalfLogic ({ half, vramIndex }) {
       ? 'bottom'
       : half)
 }
+
+export function snakeCaseToUIFormat (string) {
+  string
+    .split('_')
+    .reduce((str, it) =>
+      (str ? (str + ' ') : str) +
+      it.substring(0, 1) +
+      it.substring(1, it.length)
+        .toLowerCase(), '')
+}
