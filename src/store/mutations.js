@@ -95,6 +95,9 @@ export default {
       if (state.redoCache.length > 16) state.redoCache.pop()
     }
   },
+  SET_ACTIVE_HALF (state, half) {
+    state.activeHalf = half
+  },
   SET_ACTIVE_PALETTE_INDEX (state, o) {
     state.activePaletteIndex = o || 0
     state.refreshPalette = !state.refreshPalette

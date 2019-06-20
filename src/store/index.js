@@ -35,6 +35,7 @@ Vue.use(Vuex)
 // -----------------------------------------------------------------------------
 const store = {
   state: {
+    activeHalf: undefined,
     activePaletteIndex: 0,
     activePaletteColor: { left: 0, right: 0 },
     activeSprite: undefined,

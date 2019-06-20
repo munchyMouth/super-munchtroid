@@ -14,9 +14,7 @@
       <search-box @load-entry="choosePoseFromSearchEntry($event)"/>
     </template>
     <div class="settings__dropdown-label pose">
-      <strong v-if="this.tab !== 'death'">
-        {{ this.tab === 'special' ? 'Special ' : '' }}Pose:
-      </strong>
+      <strong>{{ poseTitle }}</strong>
     </div>
     <select class="settings__dropdown" @change="choosePose()">
       <template v-if="tab !== 'death'">
@@ -63,44 +61,16 @@
       <label>
         <strong>Sprite Manager: </strong>
       </label>
-      <template v-if="tileMapFrame">
-        <tree v-for="(half, j) in ['top', 'bottom']"
-              :key="tileMapFrame[half]._id + j"
-              :label="half"
-              :open-override="activeHalf === tileMapFrame[half]._id + j
-                ? activeHalf
-                : false"
-              @opened="clearActiveSprite(tileMapFrame[half]._id + j)"
-              @closed="clearActiveSprite()">
-          <template slot="default" slot-scope="spriteIs">
-          <tree-li>
-            <tree v-for="(sprite, k) in tileMapFrame[half].tileMap.sprites"
-                  :key="sprite._id + k"
-                  :open-override="activeSpriteAddress &&
-                    activeSpriteAddress === sprite._address
-                      ? sprite._id + k
-                      : spriteIs.open"
-                  :label="sprite._address"
-                  @opened="actionSelectedSprite({ half, index: k, ...sprite })"
-                  @closed="clearActiveSprite()">
-              <tree-li>
-                <sprite-manager :half="half"
-                                :index="k"/>
-              </tree-li>
-            </tree>
-          </tree-li>
-          </template>
-        </tree>
-      </template>
+      <sprite-manager-tree v-if="tileMapFrame"/>
       <div class="settings__frame-tree__save">
-      <hr />
+        <hr />
         <button :class="`no-style ${updateSprite ? '--active' : ''}`"
                 @click="saveSprites">
           <icon name="save" /> Save All Sprite Changes
         </button>
       </div>
       <div class="settings__frame-tree__save">
-      <hr />
+        <hr />
         <button :class="`no-style ${updateVram ? '--active' : ''}`"
                 @click="saveVram">
           <icon name="save" /> Save All VRAM Changes
@@ -126,10 +96,8 @@ import { getUpdatedVramTiles, snakeCaseToUIFormat } from './Miscellaneous'
 import { poseWarning, paletteWarning } from '../libs/messages.json'
 
 import PlusMinusField from './PlusMinusField.vue'
-import SpriteManager from './SpriteManager.vue'
+import SpriteManagerTree from './SpriteManagerTree.vue'
 import SearchBox from './SearchBox.vue'
-import Tree from './Tree.vue'
-import TreeLi from './TreeLi.vue'
 
 export default {
   name: 'settings',
@@ -137,13 +105,10 @@ export default {
     Icon,
     PlusMinusField,
     SearchBox,
-    SpriteManager,
-    Tree,
-    TreeLi
+    SpriteManagerTree
   },
   computed: {
     ...mapGetters([
-      'activeSpriteAddress',
       'currentFrame',
       'currentFrameIndex',
       'currentPalette',
@@ -193,14 +158,8 @@ export default {
       }
     }
   },
-  provide () {
-    return {
-      poses: this.poses
-    }
-  },
   data () {
     return {
-      activeHalf: undefined,
       previousPaletteIndex: 0,
       previousPoseIndex: 0,
       showUnused: false
@@ -208,19 +167,14 @@ export default {
   },
   methods: {
     ...mapActions([
+      'clearActiveSprite',
       'clearSpriteUpdateFlag',
-      'setActiveSprite',
       'setCurrentFrameIndex',
       'setError',
       'setSamus',
       'setSpriteRatio'
     ]),
     ...mapMutations({ setLoading: 'SET_LOADING' }),
-    actionSelectedSprite (sprite) { this.setActiveSprite(sprite) },
-    clearActiveSprite (activeHalf) {
-      this.setActiveSprite()
-      if (activeHalf) this.activeHalf = activeHalf
-    },
     choosePalette () {
       if (!this.updatePalette ||
         (this.updatePalette &&
@@ -368,10 +322,13 @@ export default {
         confirm(poseWarning))
     }
   },
-  watch: {
-    showUnused (newValue, oldValue) {
-      this.choosePose(true)
+  provide () {
+    return {
+      poses: this.poses
     }
+  },
+  watch: {
+    showUnused (newValue, oldValue) { this.choosePose(true) }
   }
 }
 </script>

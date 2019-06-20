@@ -5,6 +5,10 @@ import { cloneDeep } from 'lodash'
 // Vuex refers to the execution of Actions as "dispatches"
 // -----------------------------------------------------------------------------
 export default {
+  clearActiveSprite ({ commit }, activeHalf) {
+    commit('SET_ACTIVE_SPRITE')
+    if (activeHalf) commit('SET_ACTIVE_HALF')
+  },
   clearSelectedTile ({ commit }) { commit('CLEAR_SELECTED_TILE') },
   clearSelectedTiles ({ commit }) { commit('CLEAR_SELECTED_TILES') },
   clearPalettesUpdateFlag ({ commit }, o) {
@@ -68,6 +72,7 @@ export default {
       commit('UPDATE_EDITOR')
     }
   },
+  setActiveHalf ({ commit }, half) { commit('SET_ACTIVE_HALF', half) },
   setActivePaletteColor ({ commit }, obj) { commit('SET_ACTIVE_PALETTE_COLOR', obj) },
   setActiveSprite ({ commit }, sprite, setSpriteDefault = true) {
     commit('SET_ACTIVE_SPRITE', sprite)
