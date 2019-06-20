@@ -166,14 +166,16 @@ export default {
     },
     frameIndex () {
       switch (this.tab) {
-        case 'basic': return this.poses[this.currentPose].index || 0
-        case 'death': 'TODO'
+        case 'death': return 'TODO'
         case 'special': return this.settings.SPECIAL_POSES[this.currentPose || 0].index
+        default: return this.poses[this.currentPose].index || 0
       }
     },
     poses () {
       switch (this.tab) {
-        case 'basic':
+        case 'death': return 'TODO'
+        case 'special': return this.settings.SPECIAL_POSES
+        default:
           return this.settings.POSES
             .map(function (it, i) {
               return (!this.showUnused && it.unused)
@@ -181,15 +183,13 @@ export default {
                 : { ...it, index: i }
             }.bind(this))
             .filter((it) => it)
-        case 'death': return 'TODO'
-        case 'special': return this.settings.SPECIAL_POSES
       }
     },
     poseTitle () {
       switch (this.tab) {
-        case 'basic': return 'Pose: '
         case 'special': return 'Special Pose: '
         case 'death': return 'Direction: '
+        default: return 'Pose: '
       }
     }
   },
@@ -247,6 +247,7 @@ export default {
             break
           case 'death':
             console.log('TODO')
+            break
           case 'special':
             const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex]
             ipcRenderer.send('Load Pose', {

@@ -47,7 +47,7 @@ export function handleIrregularHalfLogic ({ half, vramIndex }) {
 }
 
 export function snakeCaseToUIFormat (string) {
-  string
+  return string
     .split('_')
     .reduce((str, it) =>
       (str ? (str + ' ') : str) +

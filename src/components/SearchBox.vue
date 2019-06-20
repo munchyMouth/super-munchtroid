@@ -85,8 +85,6 @@ export default {
 </script>
 
 <style>
-.search-box__input {
-}
 .search-box__entries {
   display: flex;
   flex-direction: column;
