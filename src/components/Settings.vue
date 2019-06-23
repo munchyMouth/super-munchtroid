@@ -1,5 +1,6 @@
 <template>
   <div class="settings">
+    {{ settings.DEATH_POSE }}
     <template v-if="tab === 'basic'">
       <div class="settings__show-unused">
         <div>Show unused poses:</div>
@@ -61,7 +62,10 @@
       <label>
         <strong>Sprite Manager: </strong>
       </label>
-      <sprite-manager-tree v-if="tileMapFrame"/>
+      <template v-if="tileMapFrame">
+        <sprite-manager-tree v-if="tab !== 'death'"/>
+        <sprite-death-manager-tree v-else/>
+      </template>
       <div class="settings__frame-tree__save">
         <hr />
         <button :class="`no-style ${updateSprite ? '--active' : ''}`"
@@ -97,6 +101,7 @@ import { poseWarning, paletteWarning } from '../libs/messages.json'
 
 import PlusMinusField from './PlusMinusField.vue'
 import SpriteManagerTree from './SpriteManagerTree.vue'
+import SpriteDeathManagerTree from './SpriteDeathManagerTree.vue'
 import SearchBox from './SearchBox.vue'
 
 export default {
@@ -105,6 +110,7 @@ export default {
     Icon,
     PlusMinusField,
     SearchBox,
+    SpriteDeathManagerTree,
     SpriteManagerTree
   },
   computed: {

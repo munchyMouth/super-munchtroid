@@ -81,6 +81,7 @@ export default {
           try {
             this.setSettings({
               PALETTES: object.PALETTES,
+              DEATH_POSE: object.DEATH_POSE,
               POSES: object.POSES,
               SPECIAL_POSES: object.SPECIAL_POSES
             })

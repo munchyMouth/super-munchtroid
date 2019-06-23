@@ -14,32 +14,56 @@ export default {
     ? state.activeSprite._address : undefined,
   computedSelectedTiles: state => {
     const { half, index, no, part } = state.selectedTile
-    return (state.edit16x16)
-      ? [
-        state.selectedTile,
-        {
-          half,
-          index: index + 1,
-          no: no + 1,
-          part,
-          tile: state.vram[half].parts[part].tiles[index + 1]
-        },
-        {
-          half,
-          index,
-          no,
-          part: 'part2',
-          tile: state.vram[half].parts['part2'].tiles[index]
-        },
-        {
-          half,
-          index: index + 1,
-          no: no + 1,
-          part: 'part2',
-          tile: state.vram[half].parts['part2'].tiles[index + 1]
-        }
-      ]
-      : undefined
+    if (state.tab !== 'death') {
+      return (state.edit16x16)
+        ? [
+          state.selectedTile,
+          {
+            half,
+            index: index + 1,
+            no: no + 1,
+            part,
+            tile: state.vram[half].parts[part].tiles[index + 1]
+          },
+          {
+            half,
+            index,
+            no,
+            part: 'part2',
+            tile: state.vram[half].parts['part2'].tiles[index]
+          },
+          {
+            half,
+            index: index + 1,
+            no: no + 1,
+            part: 'part2',
+            tile: state.vram[half].parts['part2'].tiles[index + 1]
+          }
+        ]
+        : undefined
+    } else {
+      return (state.edit16x16)
+        ? [
+          state.selectedTile,
+          {
+            index: index + 1,
+            no: no + 1,
+            part,
+            tile: state.vram.tiles[index + 1]
+          },
+          {
+            index: index + 16,
+            no: no + 16,
+            tile: state.vram.tiles[index + 16]
+          },
+          {
+            index: index + 17,
+            no: no + 17,
+            tile: state.vram.tiles[index + 17]
+          }
+        ]
+        : undefined
+    }
   },
   currentFrame: state => (state.vram)
     ? state.vram : undefined,
@@ -73,9 +97,13 @@ export default {
     // how Samus's tiles overlap with each other, you'll have to reorder her in reverse sprite order like the game.
   },
   getSpriteByProps: state => ({ half, index }) =>
-    state.tileMaps[half].tileMap.sprites[index],
+    state.tab !== 'death'
+      ? state.tileMaps[half].tileMap.sprites[index]
+      : state.tileMaps.tileMap.sprites[index],
   getVramByProps: state => ({ half, part }) =>
-    state.vram[half].parts[part],
+    state.tab !== 'death'
+      ? state.vram[half].parts[part]
+      : state.vram.tiles,
   getVramTileByProps: state => ({ half, index, part }) =>
     state.tab !== 'death'
       ? state.vram[half].parts[part].tiles[index]
@@ -83,8 +111,8 @@ export default {
   hasError: state => state.error.type || state.error.message.length,
   hasSelectedTile: state => {
     return state.selectedTile &&
-    typeof state.selectedTile === 'object' &&
-    !state.selectedTile.hasOwnProperty('empty')
+      typeof state.selectedTile === 'object' &&
+      !state.selectedTile.hasOwnProperty('empty')
   },
   hasUnsavedSprites: state =>
     Object.keys(state.tileMaps).reduce(function (result, key) {
@@ -101,7 +129,8 @@ export default {
       state.selectedTile.hasOwnProperty('empty')),
   romLoaded: state => !!Object.keys(state.vram).length, // the `!!` syntax forces primitive boolean rather than truthy.
   vram16x16TileIsValid: state => ({ half, vramIndex, part }) => {
-    if (part === 'part1' &&
+    if (state.tab !== 'death' &&
+      part === 'part1' &&
       state.activeSprite &&
       state.activeSprite.xOffset < 24 &&
       state.activeSprite.yOffset < 24) {
@@ -113,18 +142,30 @@ export default {
         if (tiles.length + modifier < vramIndex + 2) return false
       }
       return true
-    } else return false
+    } else if (state.tab === 'death') {
+      return state.activeSprite.index <
+        (state.settings.DEATH_POSE.NO_OF_TILE_ROWS - 1) * 16 &&
+        (state.selectedTile.index + 1) % 16
+    }
+    return false
   },
   editor16x16TileIsValid: state => ({ half, index, part }) => {
-    if (part === 'part1') {
+    if (state.tab !== 'death' && part === 'part1') {
       for (let i = 1; i < 3; i++) {
         const { tiles } = state.vram[half].parts[`part${i}`]
         if (tiles.length < index + 2) return false
       }
       return true
-    } else return false
+    } else if (state.tab === 'death') {
+      return state.selectedTile.index <
+        (state.settings.DEATH_POSE.NO_OF_FRAME_ROWS - 1) * 16 &&
+        (state.selectedTile.index + 1) % 16
+    }
+    return false
   },
-  tileMapFrame: state =>
-    state.tileMaps && typeof state.currentFrameIndex === 'number'
+  tileMapFrame: state => {
+    console.log('INDEX', state.tileMaps)
+    return state.tileMaps && typeof state.currentFrameIndex === 'number'
       ? state.tileMaps : undefined
+  }
 }

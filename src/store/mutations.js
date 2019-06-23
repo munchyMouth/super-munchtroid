@@ -105,7 +105,12 @@ export default {
   SET_ACTIVE_PALETTE_COLOR (state, { colorIndex, leftRight = 0 }) {
     state.activePaletteColor[leftRight] = colorIndex
   },
-  SET_ACTIVE_SPRITE (state, o) { state.activeSprite = o },
+  SET_ACTIVE_SPRITE (state, o) {
+    if (o && o.hasOwnProperty('half') &&
+      typeof o.half === 'string' &&
+      o.half === 'N/A') delete o.half
+    state.activeSprite = o
+  },
   SET_COPIED_TILE_DATA (state) {
     if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
       state.copiedTileData = cloneDeep(state.selectedTile.tile.data)

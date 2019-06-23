@@ -7,10 +7,7 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
-    <br>
-    <br>
-    <br>
-    {{ tileMaps }}
+    <span style="color: white">{{ activeTileIndex }}</span>
   </div>
 </template>
 

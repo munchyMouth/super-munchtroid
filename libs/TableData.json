@@ -36,12 +36,12 @@
   "INDEX_OFFSET_TABLE_TOP": "0x91263",
   "REDUNDANT_LIFT_POSE_TORSO_TILE": "0xD5620",
   "DEATH_POSE": {
+    "NO_OF_TILE_ROWS": 10,
     "START_OFFSET": "0xD8000",
     "SIZE": "0x1400",
     "TILEMAPS": {
       "FACING_LEFT": "0825",
       "FACING_RIGHT": "081C"
-    },
-    "NO_OF_FRAMES": 10
+    }
   }
 }
