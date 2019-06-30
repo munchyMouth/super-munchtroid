@@ -92,11 +92,11 @@ export default {
   setError ({ commit }, error) { commit('SET_ERROR', error) },
   setEventObserver ({ commit }, obs) { commit('SET_EVENT_OBSERVER', obs) },
   setLoading ({ commit }, loading) { commit('SET_LOADING', loading) },
-  setPalettes ({ commit }, { palettes, i }) {
+  setPalettes ({ commit }, { palettes, index = 0 }) {
     try {
       commit('SET_LOADING', false)
       commit('SET_PALETTES', palettes)
-      commit('SET_CURRENT_PALETTE', i)
+      commit('SET_CURRENT_PALETTE', index)
       commit('SET_ACTIVE_PALETTE_INDEX', 0)
       commit('CLEAR_ACTIVE_PALETTE_COLOR')
     } catch (e) {
