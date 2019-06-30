@@ -8,7 +8,7 @@
       <vram-death-pose v-else/>
       <div class="munch-index">
         <div class="munch-index__left">
-          <sprite v-if="tab !== 'death'"/>
+          <sprite/>
           <div class="munch-index__left__toggle">
             <div v-if="showSprite">
               <button class="no-style munch-index__left__toggle munch-index__left__toggle--show"

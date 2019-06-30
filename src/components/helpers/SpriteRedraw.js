@@ -71,11 +71,18 @@ export default {
     const R = this.spriteRatio
     this.context.clearRect(0, 0, this.spriteMaxEndX, this.spriteMaxEndY)
     this.redrawAxes(R)
-    const half = ['bottom', 'top']
-    half.forEach(function (half) {
-      this.getSpritesByHalf({ half }).forEach(function (sprite, i) {
-        this.prepareAndRedrawSprite({ half, R, ...sprite, edgeCaseIndex: i })
-      }.bind(this))
-    }.bind(this))
+    switch (this.tab) {
+      case 'basic':
+      case 'special':
+        const half = ['bottom', 'top']
+        half.forEach(function (half) {
+          this.getSpritesByHalf({ half }).forEach(function (sprite, i) {
+            this.prepareAndRedrawSprite({ half, R, ...sprite, edgeCaseIndex: i })
+          }.bind(this))
+        }.bind(this))
+        break
+      case 'death':
+        console.log('WOO WOO')
+    }
   }
 }

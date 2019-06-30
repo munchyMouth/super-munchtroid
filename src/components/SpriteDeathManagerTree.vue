@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="tileMapFrame && tileMapFrame.tileMap">
     <tree v-for="(sprite, k) in tileMapFrame.tileMap.sprites"
           :key="sprite._id + k"
           :open-override="activeSpriteAddress &&
@@ -14,7 +14,6 @@
                         :index="k"/>
       </tree-li>
     </tree>
-    BASTARD {{ nuisance }}
   </div>
 </template>
 
@@ -38,12 +37,7 @@ export default {
       'activeSpriteAddress',
       'tileMapFrame',
       'settings'
-    ]),
-    nuisance () {
-      return this.activeSprite ? this.activeSprite.index <
-        (this.settings.DEATH_POSE.NO_OF_FRAME_ROWS - 1) * 16
-        : -1
-    }
+    ])
   },
   methods: {
     ...mapActions([

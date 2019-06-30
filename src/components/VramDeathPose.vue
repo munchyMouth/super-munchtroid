@@ -7,7 +7,6 @@
       @click="actionClick"
       @contextmenu="actionClick">
     </canvas>
-    <span style="color: white">{{ activeTileIndex }}</span>
   </div>
 </template>
 

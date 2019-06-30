@@ -1,6 +1,5 @@
 <template>
   <div class="settings">
-    {{ settings.DEATH_POSE }}
     <template v-if="tab === 'basic'">
       <div class="settings__show-unused">
         <div>Show unused poses:</div>

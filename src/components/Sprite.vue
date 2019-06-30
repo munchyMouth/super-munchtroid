@@ -48,6 +48,7 @@ export default {
       'spriteDefault',
       'spriteRatio',
       'spriteRefresh',
+      'tab',
       'tileMaps',
       'vram']),
     mouseInActiveSpriteArea () {

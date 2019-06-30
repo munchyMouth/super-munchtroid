@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="tileMapFrame && (tileMapFrame.top || tileMapFrame.bottom)">
     <tree v-for="(half, j) in ['top', 'bottom']"
           :key="tileMapFrame[half]._id + j"
           :label="half"
