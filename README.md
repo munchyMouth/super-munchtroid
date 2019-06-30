@@ -1,10 +1,18 @@
-<h1>SUPER MUNCHTROID</h1>v.2.10.0
+<h1>SUPER MUNCHTROID</h1>v.2.11.1
 
-<img alt="Co.Koa header" title="Co.Koa" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
+<img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
 ----
 
 ### Downloads
+
+#### 2.11.1
+- <a href="https://drive.google.com/open?id=12rogfVhpqjm_FAAP3u3MLVIlI6fZCkij">Super Munchtroid-linux-x64 2.11.1</a>
+- <a href="https://drive.google.com/open?id=119TU9tgSIjYxafYdqTzC9cBq-XxqHl-9">Super Munchtroid-win32-x64 2.11.1</a>
+
+2.11.1 Features
+- bug fixes
+- the crystal flash palette
 
 #### 2.10.0
 - <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.10.0</a>
@@ -16,9 +24,6 @@
 - 16x16px editing
 
 #### 2.6.1
-- <a href="https://drive.google.com/file/d/1xdQcD7yAhloVSno8lo_GdLgVjVIo21Vl/view">Super Munchtroid-linux-x64 2.6.1</a>
-- <a href="https://drive.google.com/file/d/1Cg1NwMUcyrZLJHbUjO3U7rs3D7W18HiF/view">Super Munchtroid-win32-x64 2.6.1</a>
-
 2.6.1 Features special poses, a search bar, significant bug/palette fixes and frame by frame loading (ergo, massive performance boost)
 
 #### 2.3.2

@@ -1,3 +1,7 @@
+30/06/19 2.11.1
+- Fixed palette drop down index reset in settings panel
+- added the crystal flash palette to the palette library
+
 22/05/19 2.10.0
 - Fixed saving sprite bug
 - Added 16x16 pixel editing mode
@@ -9,7 +13,7 @@
 - Added special poses and supporting UI
 - Added search bar for standard poses
 - Added better renderer error handling for App.vue
-- Replaced loading all frames per pose with frame-by-frame logic 
+- Replaced loading all frames per pose with frame-by-frame logic
 
 07/05/19 2.3.2
 - Fixed the default lift pose's use of a redundant tile in Common Sprites by blanking the redundant tile if pose === 1st pose
