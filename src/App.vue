@@ -7,20 +7,26 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { ipcRenderer } from 'electron'
+import { debounce } from 'lodash'
 
 import { genericException } from './libs/messages.json'
 import { getUpdatedVramTiles } from './components/Miscellaneous.js'
+
+let debouncedKeyCommands
 
 export default {
   name: 'App',
   computed: {
     ...mapGetters([
+      'edit16x16',
+      'noSelectedTile',
       'loading',
       'currentFrameIndex',
       'eventObserver',
       'hasUnsavedSprites',
       'selectedTile',
       'selectedTiles',
+      'tileMaps',
       'vram'])
   },
   methods: {
@@ -29,13 +35,18 @@ export default {
       'clearUpdateSprite',
       'clearUpdateVram',
       'clearVramUpdateFlag',
+      'pastecopiedTile',
+      'popFromUndoCache',
+      'setCopiedTileData',
       'setEventObserver',
       'setError',
       'setLoading',
       'setPalettes',
       'setSamus',
       'setSettings',
-      'toggleSaveEventListener'
+      'shiftFromRedoCache',
+      'toggleSaveEventListener',
+      'toggleSaveKeyEvent'
     ]),
     fail ({ type, title, message }, color = 'negative', timeout = 120000) {
       if (message) {
@@ -46,6 +57,30 @@ export default {
           timeout,
           detail: message
         })
+      }
+    },
+    keyCommands (evt) {
+      if (this.tileMaps &&
+        Object.keys(this.tileMaps).length &&
+        !this.noSelectedTile) {
+        switch (true) {
+          case evt.key === 'z' && evt.ctrlKey:
+            this.popFromUndoCache()
+            break
+          case evt.key === 'y' && evt.ctrlKey:
+            this.shiftFromRedoCache()
+            break
+          case evt.key === 'c' && evt.ctrlKey:
+            if (!this.edit16x16) this.setCopiedTileData()
+            else alert('you can only copy an 8x8 tile!')
+            break
+          case evt.key === 'v' && evt.ctrlKey:
+            if (!this.edit16x16) this.pastecopiedTile()
+            else alert('you can only paste onto an 8x8 tile!')
+            break
+          case evt.key === 's' && evt.ctrlKey:
+            this.toggleSaveKeyEvent()
+        }
       }
     },
     renderEvent (title, callback) {
@@ -64,6 +99,13 @@ export default {
   },
   beforeCreate () {
     ipcRenderer.send('attachMenuEvents')
+  },
+  mounted () {
+    debouncedKeyCommands = debounce(this.keyCommands, 150)
+    window.addEventListener('keydown', debouncedKeyCommands)
+  },
+  beforeDestroy () {
+    window.removeEventListener('keydown', debouncedKeyCommands)
   },
   updated () {
     try {

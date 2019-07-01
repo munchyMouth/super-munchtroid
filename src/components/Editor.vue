@@ -39,7 +39,7 @@
             <button
               :class="`no-style editor__canvas__tools__save${updated ? '--active' : ''}`"
               @click="saveVramTile()"
-              title="save current tile"
+              title="save current tile [ctrl^s]"
             >
               <icon name="save" />
             </button>
@@ -80,7 +80,7 @@
             class="no-style editor__canvas__tools__copy"
             @click="setCopiedTileData()"
             :disabled="!edit16x16 ? false : 'disabled'"
-            :title="!edit16x16 ? 'copy' : 'you can only copy/paste a single tile!'"
+            :title="!edit16x16 ? 'copy [ctrl^c]' : 'you can only copy/paste a single tile!'"
           >
             <icon name="copy" />&nbsp;
             <label v-show="editorRatio > 1">(copy)</label>
@@ -89,7 +89,7 @@
             class="no-style editor__canvas__tools__paste"
             @click="pastecopiedTile()"
             :disabled="!edit16x16 ? false : 'disabled'"
-            :title="!edit16x16 ? 'paste' : 'you can only copy/paste a single tile!'"
+            :title="!edit16x16 ? 'paste [ctrl^v]' : 'you can only copy/paste a single tile!'"
           >
             <icon name="paste" />&nbsp;
             <label v-show="editorRatio > 1">(paste)</label>
@@ -97,7 +97,7 @@
           <button
             class="no-style editor__canvas__tools__undo"
             @click="popFromUndoCache()"
-            title="undo"
+            title="undo [ctrl^z]"
           >
             <icon name="undo" />&nbsp;
             <label v-show="editorRatio > 1">(undo)</label>
@@ -105,7 +105,7 @@
           <button
             class="no-style editor__canvas__tools__redo"
             @click="shiftFromRedoCache()"
-            title="redo"
+            title="redo [ctrl^y]"
           >
             <icon name="redo" />&nbsp;
             <label v-show="editorRatio > 1">(redo)</label>
@@ -139,7 +139,6 @@
                 <icon name="arrow-down" />
               </button>
             </div>
-            <!-- <label>(pixel shifters)</label> -->
           </div>
         </template>
       </div>
@@ -198,6 +197,7 @@ export default {
       'redoCache',
       'refreshPalette',
       'saveEventListener',
+      'saveKeyEvent',
       'selectedTile',
       'selectedTiles',
       'userIsDrawing',
@@ -378,26 +378,16 @@ export default {
     this.redraw()
   },
   watch: {
-    activePaletteIndex () {
-      this.redraw()
-    },
-    edit16x16 (newVal) {
-      this.redraw()
-    },
-    editorHFlip () {
-      this.redraw()
-    },
-    editorVFlip () {
-      this.redraw()
-    },
+    activePaletteIndex () { this.redraw() },
+    edit16x16 (newVal) { this.redraw() },
+    editorHFlip () { this.redraw() },
+    editorVFlip () { this.redraw() },
     editorRatio () {
       this.$refs['editor'].width = this.editorSize
       this.$refs['editor'].height = this.editorSize
       this.redraw()
     },
-    palettes () {
-      this.redraw()
-    },
+    palettes () { this.redraw() },
     pixelX (newVal) {
       this.colorPixel(newVal)
       this.testTileUpdated()
@@ -406,9 +396,7 @@ export default {
       this.colorPixel(newVal)
       this.testTileUpdated()
     },
-    refreshPalette () {
-      this.redraw()
-    },
+    refreshPalette () { this.redraw() },
     selectedTile (newVal) {
       this.setEdit16x16(false)
       this.testTileUpdated()
@@ -418,15 +406,10 @@ export default {
       this.testTileUpdated()
       this.redraw()
     },
-    showGrid () {
-      this.redraw()
-    },
-    saveEventListener () {
-      this.testTileUpdated()
-    },
-    updateVram () {
-      this.testTileUpdated()
-    },
+    showGrid () { this.redraw() },
+    saveEventListener () { this.testTileUpdated() },
+    saveKeyEvent () { this.saveVramTile() },
+    updateVram () { this.testTileUpdated() },
     userIsDrawing (newVal) {
       if (newVal) {
         this.colorPixel()
