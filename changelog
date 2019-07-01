@@ -1,6 +1,7 @@
-30/06/19 2.11.1
+30/06/19 2.12.0
 - Fixed palette drop down index reset in settings panel
-- added the crystal flash palette to the palette library
+- Added the crystal flash palette to the palette library
+- Added in basic shortcuts for Editor copy/paste/undo/redo/save
 
 22/05/19 2.10.0
 - Fixed saving sprite bug

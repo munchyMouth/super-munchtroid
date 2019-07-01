@@ -1,18 +1,18 @@
-<h1>SUPER MUNCHTROID</h1>v.2.11.1
-
+<h1>SUPER MUNCHTROID</h1>v.2.12.0
 <img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
 ----
 
 ### Downloads
 
-#### 2.11.1
-- <a href="https://drive.google.com/open?id=12rogfVhpqjm_FAAP3u3MLVIlI6fZCkij">Super Munchtroid-linux-x64 2.11.1</a>
-- <a href="https://drive.google.com/open?id=119TU9tgSIjYxafYdqTzC9cBq-XxqHl-9">Super Munchtroid-win32-x64 2.11.1</a>
+#### 2.12.0
+- <a href="https://drive.google.com/open?id=1z_LU5vmBjUHMFaCwXQI8vEwrnlBQ7QAg">Super Munchtroid-linux-x64 2.12.0</a>
+- <a href="https://drive.google.com/open?id=1uXT2qNPiCIF5lECP1gT6qPhp-ltCKQQE">Super Munchtroid-win32-x64 2.12.0</a>
 
-2.11.1 Features
+2.12.0 Features
 - bug fixes
 - the crystal flash palette
+- support for conventional shortcuts for Editor window: copy/paste/undo/redo/save tile
 
 #### 2.10.0
 - <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.10.0</a>
