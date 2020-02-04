@@ -327,7 +327,7 @@ export default {
       }
     },
     spriteZoomIn () {
-      if (this.spriteRatio < 6) {
+      if (this.spriteRatio < 8) {
         this.setSpriteRatio(this.spriteRatio + 1)
       }
     },

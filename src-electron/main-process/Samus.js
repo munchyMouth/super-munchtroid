@@ -58,7 +58,6 @@ export default stampit(
       }
 
       this.saveVRAMTilesToROM = async function (tiles) {
-        debugger
         await each(tiles, async tile => {
           const buff = this.tileDataToVRAMBuffers(tile)
           await setOffsetData(buff[0], tile._id, buff[0].length)

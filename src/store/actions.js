@@ -68,6 +68,7 @@ export default {
       commit('UPDATE_EDITOR')
     }
   },
+  setActivePalette ({ commit }, c) { commit('SET_ACTIVE_PALETTE', c) },
   setActivePaletteColor ({ commit }, obj) { commit('SET_ACTIVE_PALETTE_COLOR', obj) },
   setActiveSprite ({ commit }, sprite, setSpriteDefault = true) {
     commit('SET_ACTIVE_SPRITE', sprite)
@@ -92,6 +93,7 @@ export default {
   setError ({ commit }, error) { commit('SET_ERROR', error) },
   setEventObserver ({ commit }, obs) { commit('SET_EVENT_OBSERVER', obs) },
   setLoading ({ commit }, loading) { commit('SET_LOADING', loading) },
+  setPaletteClipboard ({ commit }, palette) { commit('SET_PALETTE_CLIPBOARD', palette) },
   setPalettes ({ commit }, { palettes, index = 0 }) {
     try {
       commit('SET_LOADING', false)
@@ -181,6 +183,7 @@ export default {
     commit('PUSH_TO_UNDO_CACHE', cloneDeep(state.selectedTiles))
     commit('SET_SELECTED_TILES', o)
   },
+  setSpriteMaskColor ({ commit }, o) { commit('SET_SPRITE_MASK_COLOR', o) },
   setTab ({ commit }, o) { commit('SET_TAB', o) },
   setUserIsDrawing ({ commit, state }, o) {
     if (o) {
@@ -214,6 +217,7 @@ export default {
       commit('UPDATE_EDITOR')
     }
   },
+  toggleLayoutDrawerOpen ({ commit }) { commit('TOGGLE_LAYOUT_DRAWER_OPEN') },
   toggleHFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'h') },
   toggleVFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'v') },
   toggleSaveEventListener ({ commit }) { commit('TOGGLE_SAVE_EVENT_LISTENER') },

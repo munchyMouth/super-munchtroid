@@ -24,6 +24,7 @@ export default {
       'currentFrameIndex',
       'eventObserver',
       'hasUnsavedSprites',
+      'layoutDrawerOpen',
       'selectedTile',
       'selectedTiles',
       'tileMaps',
@@ -45,6 +46,7 @@ export default {
       'setSamus',
       'setSettings',
       'shiftFromRedoCache',
+      'toggleLayoutDrawerOpen',
       'toggleSaveEventListener',
       'toggleSaveKeyEvent'
     ]),
@@ -59,28 +61,34 @@ export default {
         })
       }
     },
+    handleEditorCommands (evt) {
+      switch (true) {
+        case evt.key === 'z' && evt.ctrlKey:
+          this.popFromUndoCache()
+          break
+        case evt.key === 'y' && evt.ctrlKey:
+          this.shiftFromRedoCache()
+          break
+        case evt.key === 'c' && evt.ctrlKey:
+          if (!this.edit16x16) this.setCopiedTileData()
+          else alert('you can only copy an 8x8 tile!')
+          break
+        case evt.key === 'v' && evt.ctrlKey:
+          if (!this.edit16x16) this.pastecopiedTile()
+          else alert('you can only paste onto an 8x8 tile!')
+          break
+        case evt.key === 's' && evt.ctrlKey:
+          this.toggleSaveKeyEvent()
+          break
+      }
+    },
     keyCommands (evt) {
-      if (this.tileMaps &&
-        Object.keys(this.tileMaps).length &&
-        !this.noSelectedTile) {
-        switch (true) {
-          case evt.key === 'z' && evt.ctrlKey:
-            this.popFromUndoCache()
-            break
-          case evt.key === 'y' && evt.ctrlKey:
-            this.shiftFromRedoCache()
-            break
-          case evt.key === 'c' && evt.ctrlKey:
-            if (!this.edit16x16) this.setCopiedTileData()
-            else alert('you can only copy an 8x8 tile!')
-            break
-          case evt.key === 'v' && evt.ctrlKey:
-            if (!this.edit16x16) this.pastecopiedTile()
-            else alert('you can only paste onto an 8x8 tile!')
-            break
-          case evt.key === 's' && evt.ctrlKey:
-            this.toggleSaveKeyEvent()
-        }
+      switch (true) {
+        case evt.keyCode === 220 && evt.ctrlKey: // ctrl+backslash
+          this.toggleLayoutDrawerOpen()
+          return
+        case this.tileMaps && Object.keys(this.tileMaps).length && !this.noSelectedTile:
+          this.handleEditorCommands(evt)
       }
     },
     renderEvent (title, callback) {

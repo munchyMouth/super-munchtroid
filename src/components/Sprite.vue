@@ -46,6 +46,7 @@ export default {
       'showSprite',
       'showVram',
       'spriteDefault',
+      'spriteMaskColor',
       'spriteRatio',
       'spriteRefresh',
       'tileMaps',
@@ -183,6 +184,7 @@ export default {
     refreshPalette () { this.redraw() },
     selectedTile () { this.redraw() },
     selectedTiles () { this.redraw() },
+    spriteMaskColor () { this.redraw() },
     spriteRatio () {
       this.$refs['sprite'].width = this.spriteEndX
       this.$refs['sprite'].height = this.spriteEndY

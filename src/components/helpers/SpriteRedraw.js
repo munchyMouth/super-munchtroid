@@ -58,7 +58,7 @@ export default {
           this.context.fillStyle = !this.activeSpriteAddress ||
             this.activeSpriteAddress === _address
             ? _palette
-            : _palette.replace(/[a-f0-9]{2}$/gi, 'FF')
+            : `#${this.setSpriteBoxMaskColor(_palette)}` // .replace(/[a-f0-9]{2}$/gi, 'FF')
           this.context.fillRect(
             x * R + (this.spriteZeroY + (xOffset * R)),
             y * R + (this.spriteZeroX + (yOffset * R)),
@@ -77,5 +77,20 @@ export default {
         this.prepareAndRedrawSprite({ half, R, ...sprite, edgeCaseIndex: i })
       }.bind(this))
     }.bind(this))
+  },
+  setSpriteBoxMaskColor (palette) {
+    const p = palette.replace('#', '')
+    switch (this.spriteMaskColor) {
+      case 'blue': return p.replace(/[a-f0-9]{2}$/gi, 'FF')
+      case 'red': return p.replace(/^[a-f0-9]{2}/gi, 'FF')
+      case 'yellow': return p.replace(/^[a-f0-9]{4}/gi, 'DDDD')
+      case 'purple': return p.replace(/^[a-f0-9]{2}/gi, 'FF').replace(/[a-f0-9]{2}$/gi, 'FF')
+      case 'green':
+        return p
+          .match(/.{1,2}/g)
+          .map((it, i) => i === 1 ? 'FF' : it)
+          .toString()
+          .replace(/,/gi, '')
+    }
   }
 }

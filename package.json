@@ -7,8 +7,7 @@
   "author": "munch.mc.mouthington@gmail.com",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue src",
-    "test": "echo \"No test specified\" && exit 0"
+    "dev": "quasar dev -m electron"
   },
   "dependencies": {
     "lodash": "^4.17.11",

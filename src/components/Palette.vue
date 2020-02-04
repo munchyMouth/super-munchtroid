@@ -39,7 +39,7 @@
     </div>
     <div class="palette__sliders">
       <div>
-        <button class="no-style palette__sliders__save --active"
+        <button class="no-style palette__sliders__save --active palette__sliders__buttons"
                 title="Save ALL of the currently loaded palette(s)"
                 @click="savePalettes()"
                 v-if="updatePalette">
@@ -47,7 +47,7 @@
               class="q-icon material-icons">save</i>
         </button>
         <!-- Show a functionally useless button for the user after save. It's a human thing! -->
-        <button class="no-style palette__sliders__save"
+        <button class="no-style palette__sliders__save palette__sliders__buttons"
                 title="Save ALL of the currently loaded palette(s)"
                 v-else>
           <i aria-hidden="true"
@@ -93,24 +93,49 @@
         </div>
       </div>
       <div>
-        <button class="no-style palette__sliders__undo"
+        <button class="no-style palette__sliders__undo palette__sliders__buttons"
                 style="color: red"
                 @click="resetActiveColor()"
                 title="reset to saved version of palette">
           <icon name="undo"/>
         </button>
       </div>
+      <div class="palette__sliders__buttons">
+        <button class="no-style palette__sliders__copy-paste"
+                style="color: black"
+                @click="setPaletteClipboard(activePalette)"
+                title="copy current palette">
+          <icon name="copy"/>
+        </button>
+        <button class="no-style palette__sliders__copy-paste"
+                style="color: black"
+                @click="pasteClipboardPalette"
+                title="paste to current palette"
+                :disabled="paletteClipboard.length ? false : 'disabled'">
+          <icon name="paste"/>
+        </button>
+      </div>
+    </div>
+    <div class="palette__sprite-mode">
+      Sprite Mode Mask Color:
+        <q-radio keep-color v-model="spriteMaskColor" val="blue" color="blue" />
+        <q-radio keep-color v-model="spriteMaskColor" val="green" color="green" />
+        <q-radio keep-color v-model="spriteMaskColor" val="red" color="red" />
+        <q-radio keep-color v-model="spriteMaskColor" val="yellow" color="yellow" />
+        <q-radio keep-color v-model="spriteMaskColor" val="purple" color="purple" />
     </div>
   </div>
 </template>
 
 <script>
 import { ipcRenderer } from 'electron'
-import { cloneDeep } from 'lodash'
+import { clone, cloneDeep } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 
 import 'vue-awesome/icons/caret-down'
 import 'vue-awesome/icons/caret-up'
+import 'vue-awesome/icons/copy'
+import 'vue-awesome/icons/paste'
 import 'vue-awesome/icons/undo'
 import Icon from 'vue-awesome/components/Icon'
 
@@ -128,6 +153,7 @@ export default {
       'getActivePaletteChunked',
       'getActivePaletteInPalettes',
       'getActiveColorFromPaletteInPalettes',
+      'paletteClipboard',
       'palettes',
       'refreshPalette',
       'updatePalette'
@@ -153,7 +179,8 @@ export default {
       initialisingPalette: true, // prevents updates being fired on palette defaults
       RR: 0,
       GG: 0,
-      BB: 0
+      BB: 0,
+      spriteMaskColor: 'blue'
     }
   },
   methods: {
@@ -161,9 +188,12 @@ export default {
       'clearPalettesUpdateFlag',
       'setLoading',
       'setCurrentPalette',
+      'setActivePalette',
       'setActivePaletteColor',
       'setActivePaletteIndex',
-      'setPaletteColorChunk'
+      'setPaletteClipboard',
+      'setPaletteColorChunk',
+      'setSpriteMaskColor'
     ]),
     currentPaletteDown () {
       this.setActivePaletteIndex(
@@ -180,6 +210,17 @@ export default {
     formattedHexColor (col) {
       const c = col.toString(16)
       return c.length < 2 ? `0${c}` : c
+    },
+    pasteClipboardPalette () {
+      this.setActivePalette(clone(this.paletteClipboard))
+      this.$nextTick(() => {
+        this.$q.notify({
+          message: 'palette pasted',
+          position: 'bottom',
+          color: 'positive',
+          timeout: 1000
+        })
+      })
     },
     resetActiveColor () {
       const col =
@@ -239,9 +280,15 @@ export default {
       this.defaultPalette = cloneDeep(this.activePalette)
       this.initialisingPalette = true
     },
+    refreshPalette (newVal) {
+      this.activePalette = this.getActivePaletteInPalettes.palette
+      this.defaultPalette = cloneDeep(this.activePalette)
+      this.initialisingPalette = true
+    },
     RR (newVal) { this.setCompleteHexColor('RR', newVal) },
     GG (newVal) { this.setCompleteHexColor('GG', newVal) },
-    BB (newVal) { this.setCompleteHexColor('BB', newVal) }
+    BB (newVal) { this.setCompleteHexColor('BB', newVal) },
+    spriteMaskColor (newVal) { this.setSpriteMaskColor(newVal) }
   },
   updated () {
     this.initialisingPalette = false

@@ -42,7 +42,6 @@ export default stampit({ /* extends RomData, SamusProps */
                 ...this.parseSpriteMapLogic(it)
               }
             } else {
-              debugger
               throw new Error('failed to load TileMap for this sprite.')
             }
           }),

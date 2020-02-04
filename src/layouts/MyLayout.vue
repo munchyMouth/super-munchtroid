@@ -7,7 +7,7 @@
           flat
           dense
           round
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          @click="toggleLayoutDrawerOpen()"
           aria-label="Settings">
           <q-icon name="settings" />
         </q-btn>
@@ -31,7 +31,7 @@
     </q-layout-header>
 
     <q-layout-drawer
-      v-model="leftDrawerOpen"
+      v-model="layoutDrawerOpen"
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
     >
       <template v-if="!hasError && romLoaded">
@@ -93,6 +93,7 @@ export default {
       'filePath',
       'hasError',
       'filePath',
+      'layoutDrawerOpen',
       'romLoaded',
       'settings',
       'showVram',
@@ -100,16 +101,12 @@ export default {
       'updateSprite',
       'updateVram'])
   },
-  data () {
-    return {
-      leftDrawerOpen: this.$q.platform.is.desktop
-    }
-  },
   methods: {
     ...mapActions([
       'setActiveSprite',
       'setLoading',
       'setTab',
+      'toggleLayoutDrawerOpen',
       'toggleVram']),
     openURL,
     changeTab (tab) {

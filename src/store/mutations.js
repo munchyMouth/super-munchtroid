@@ -102,6 +102,13 @@ export default {
   SET_ACTIVE_PALETTE_COLOR (state, { colorIndex, leftRight = 0 }) {
     state.activePaletteColor[leftRight] = colorIndex
   },
+  SET_ACTIVE_PALETTE (state, p) {
+    const palettes = state.palettes[state.activePaletteIndex]
+    palettes.palette = p
+    palettes._updated = new Date().getTime()
+    state.updatePalette = true
+    state.refreshPalette = !state.refreshPalette
+  },
   SET_ACTIVE_SPRITE (state, o) { state.activeSprite = o },
   SET_COPIED_TILE_DATA (state) {
     if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
@@ -135,6 +142,7 @@ export default {
     }
     state.refreshPalette = !state.refreshPalette
   },
+  SET_PALETTE_CLIPBOARD (state, o) { state.paletteClipboard = o },
   SET_PALETTES (state, o) {
     state.palettes = o
     state.updatePalette = false
@@ -143,6 +151,7 @@ export default {
   SET_SELECTED_TILES (state, o) { state.selectedTiles = o },
   SET_SETTINGS (state, o) { state.settings = o },
   SET_SPRITE_DEFAULT (state, o) { state.spriteDefault = o },
+  SET_SPRITE_MASK_COLOR (state, c) { state.spriteMaskColor = c },
   SET_SPRITE_PROPERTY (state, { half, index, property, value }) {
     const sprite = state
       .tileMaps[half]
@@ -186,6 +195,9 @@ export default {
   },
   TOGGLE_EDITOR_FLIP (state, flip) {
     state.editorFlip[flip] = !state.editorFlip[flip]
+  },
+  TOGGLE_LAYOUT_DRAWER_OPEN (state) {
+    state.layoutDrawerOpen = !state.layoutDrawerOpen
   },
   TOGGLE_SAVE_EVENT_LISTENER (state) {
     state.saveEventListener = !state.saveEventListener
