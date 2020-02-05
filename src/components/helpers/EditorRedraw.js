@@ -36,7 +36,7 @@ export default {
       })
     }
   },
-  dispatchShift (selectedTileOrTiles) {
+  dispatchTransformation (selectedTileOrTiles) {
     if (!this.edit16x16) {
       this.setSelectedTilePersistUndo(selectedTileOrTiles)
       this.setVramTile(selectedTileOrTiles)
@@ -166,25 +166,74 @@ export default {
   },
   horizontalShift (direction) {
     if (!this.edit16x16) {
-      this.dispatchShift(
+      this.dispatchTransformation(
         this.getHorizontalShiftedTile(
           cloneDeep(this.selectedTile), direction)
       )
     } else {
-      this.dispatchShift(
+      this.dispatchTransformation(
         this.getHorizontalShiftedTiles(
           cloneDeep(this.selectedTiles), direction))
     }
   },
   verticalShift (direction) {
     if (!this.edit16x16) {
-      this.dispatchShift(
+      this.dispatchTransformation(
         this.getVerticalShiftedTile(
           cloneDeep(this.selectedTile), direction))
     } else {
-      this.dispatchShift(
+      this.dispatchTransformation(
         this.getVerticalShiftedTiles(
           cloneDeep(this.selectedTiles), direction))
+    }
+  },
+  getFlippedTile (tile, direction) {
+    switch (direction) {
+      case 'h': tile.tile.data = tile.tile.data.map(it => it.reverse())
+        break
+      case 'v': tile.tile.data = tile.tile.data.reverse()
+        break
+    }
+    return tile
+  },
+  getFlippedTiles (tiles, direction) {
+    const newTiles = cloneDeep(tiles)
+    switch (direction) {
+      case 'v':
+        tiles =
+          tiles.splice(2, 4).concat(tiles.splice(0, 2))
+        break
+      case 'h':
+        tiles =
+          tiles.splice(0, 2).reverse().concat(tiles.splice(0, 2).reverse())
+    }
+    for (let i = 0; i < 4; i++) {
+      newTiles[i].tile.data =
+        this.getFlippedTile(tiles[i], direction).tile.data
+    }
+    return newTiles
+  },
+  pixelFlipH () {
+    if (!this.edit16x16) {
+      this.dispatchTransformation(
+        this.getFlippedTile(cloneDeep(this.selectedTile), 'h')
+      )
+    } else {
+      console.log(this.selectedTiles)
+      this.dispatchTransformation(
+        this.getFlippedTiles(cloneDeep(this.selectedTiles), 'h')
+      )
+    }
+  },
+  pixelFlipV () {
+    if (!this.edit16x16) {
+      this.dispatchTransformation(
+        this.getFlippedTile(cloneDeep(this.selectedTile), 'v')
+      )
+    } else {
+      this.dispatchTransformation(
+        this.getFlippedTiles(cloneDeep(this.selectedTiles), 'v')
+      )
     }
   }
 }

@@ -44,6 +44,14 @@
               <icon name="save" />
             </button>
             <strong class="editor__canvas__tools__address">
+              <button
+                class="no-style editor__canvas__tools__button"
+                @click="pxFlipEnabled = !pxFlipEnabled"
+                title="switch between pixel-flipping/H&amp;V-flip"
+              >
+              <span style="font-size: 8px; justify-self: centre">px-Flip&nbsp;</span>
+              <icon :name="pxFlipEnabled ? 'toggle-on' : 'toggle-off'" />
+            </button>
               {{ this.selectedTile.tile._address }}
             </strong>
           </template>
@@ -61,6 +69,7 @@
             :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
             @click="toggleVFlip()"
             title="Does not flip the raw VRAM image"
+            v-if="!pxFlipEnabled"
           >
             <icon
               style="width: 16px;"
@@ -69,12 +78,37 @@
             <label v-show="editorRatio > 1">(V-flip)</label>
           </button>
           <button
+            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
+            @click="pixelFlipV()"
+            title="V-flip the raw image"
+            v-else
+          >
+            <icon
+              style="height: 10px; margin-right: 8px"
+              name="arrows-alt-v"
+            /><span style="font-size: 8px">Px</span>&nbsp;
+            <label v-show="editorRatio > 1">(V-px)</label>
+          </button>
+          <button
             :class="`no-style editor__canvas__tools__flip${editorHFlip ? '--flip' : ''}`"
             @click="toggleHFlip()"
             title="Does not flip the raw VRAM image"
+            v-if="!pxFlipEnabled"
           >
             <icon name="arrows-alt-h" />&nbsp;
             <label v-show="editorRatio > 1">(H-flip)</label>
+          </button>
+          <button
+            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
+            @click="pixelFlipH()"
+            title="H-flip the raw image"
+            v-else
+          >
+            <icon
+              style="width: 10px; margin-right: 8px"
+              name="arrows-alt-h"
+            /><span style="font-size: 8px">Px</span>&nbsp;
+            <label v-show="editorRatio > 1">(H-px)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__copy"
@@ -164,6 +198,8 @@ import 'vue-awesome/icons/undo'
 import 'vue-awesome/icons/redo'
 import 'vue-awesome/icons/save'
 import 'vue-awesome/icons/th-large'
+import 'vue-awesome/icons/toggle-on'
+import 'vue-awesome/icons/toggle-off'
 import 'vue-awesome/icons/arrow-left'
 import 'vue-awesome/icons/arrow-right'
 import 'vue-awesome/icons/arrow-down'
@@ -240,6 +276,7 @@ export default {
     return {
       canvas: undefined,
       context: undefined,
+      pxFlipEnabled: false,
       showGrid: false,
       updated: false,
       x: -1,

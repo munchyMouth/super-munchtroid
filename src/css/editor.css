@@ -93,6 +93,21 @@
 .editor__canvas__tools__save--active svg {
   color: red;
 }
+.editor__canvas__tools__address {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-items: center;
+}
+.editor__canvas__tools__button {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-items: center;
+}
+.editor__canvas__tooles__button > span {
+
+}
 
 .editor__canvas__tools__address {
   float: right;
