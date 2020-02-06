@@ -145,22 +145,31 @@ module.exports = function (ctx) {
         cfg.resolve.extensions.push('json')
       },
       packager: {
-        // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
-        // OS X / Mac App Store
-        // appBundleId: '',
-        // appCategoryType: '',
-        // osxSign: '',
-        // protocol: 'myapp://path',
-
-        // Window only
-        // win32metadata: { ... }
+        platform: 'win32'
       },
       builder: {
         // https://www.electron.build/configuration/configuration
-
-        // appId: 'quasar-app'
+        win: {
+          target: 'portable'
+        }
       }
+      // packager: {
+      //   // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
+
+      //   // OS X / Mac App Store
+      //   // appBundleId: '',
+      //   // appCategoryType: '',
+      //   // osxSign: '',
+      //   // protocol: 'myapp://path',
+
+      //   // Window only
+      //   // win32metadata: { ... }
+      // },
+      // builder: {
+      //   // https://www.electron.build/configuration/configuration
+
+      //   // appId: 'quasar-app'
+      // }
     }
   }
 }

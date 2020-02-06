@@ -1,9 +1,19 @@
-<h1>SUPER MUNCHTROID</h1>v.2.12.0
+<h1>SUPER MUNCHTROID</h1>v.2.15.0
 <img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
 ----
 
 ### Downloads
+
+#### 2.15.0
+- <a href="https://drive.google.com/open?id=16gHtApJ7FzbFgV4E7HoOIeSPrKBqTKhm">Super Munchtroid-linux-x64 2.15.0</a>
+- <a href="https://drive.google.com/open?id=1eW_TflW9AX_5ropM7b_HmrYHNmsRH_al">Super Munchtroid-win32-x64 2.15.0</a>
+
+2.15.0 Features
+- pixel-flip support added
+- added variably colored sprite masks
+- added palette copy/paste
+- added shortcut for show/hide settings
 
 #### 2.12.0
 - <a href="https://drive.google.com/open?id=1z_LU5vmBjUHMFaCwXQI8vEwrnlBQ7QAg">Super Munchtroid-linux-x64 2.12.0</a>

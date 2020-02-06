@@ -1,3 +1,9 @@
+06/02/20 2.15.0
+- pixel-flip support added
+- added variably colored sprite masks
+- added palette copy/paste
+- added shortcut for show/hide settings
+
 30/06/19 2.12.0
 - Fixed palette drop down index reset in settings panel
 - Added the crystal flash palette to the palette library
