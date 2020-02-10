@@ -42,6 +42,7 @@ const store = {
     currentPalette: 0,
     currentPose: 0,
     copiedTileData: undefined,
+    decrementFrame: false,
     edit16x16: false,
     editorActive: false,
     editorRatio: 1.1, // Size = Ratio * 32 for Editor.
@@ -52,6 +53,7 @@ const store = {
     error: { type: '', message: [] },
     eventObserver: '',
     filePath: '',
+    incrementFrame: false,
     layoutDrawerOpen: true,
     loading: false,
     frames: [],
@@ -67,6 +69,7 @@ const store = {
       PALETTES: {},
       POSES: []
     },
+    shortcutTriggerFullSave: false,
     showSprite: true,
     showVram: true,
     spriteDefault: undefined,

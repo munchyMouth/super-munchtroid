@@ -23,6 +23,12 @@ export default {
     commit('CLEAR_ACTIVE_PALETTE_COLOR')
     commit('SET_ACTIVE_PALETTE_INDEX', palette)
   },
+  decrementFrameToggle ({ commit }) {
+    commit('DECREMENT_FRAME_TOGGLE')
+  },
+  incrementFrameToggle ({ commit }) {
+    commit('INCREMENT_FRAME_TOGGLE')
+  },
   pastecopiedTile ({ commit, state }) {
     if (state.copiedTileData &&
       state.selectedTile &&
@@ -217,6 +223,7 @@ export default {
       commit('UPDATE_EDITOR')
     }
   },
+  shortcutTriggerFullSaveToggle ({ commit }) { commit('SHORTCUT_TRIGGER_FULL_SAVE_TOGGLE') },
   toggleLayoutDrawerOpen ({ commit }) { commit('TOGGLE_LAYOUT_DRAWER_OPEN') },
   toggleHFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'h') },
   toggleVFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'v') },

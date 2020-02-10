@@ -64,6 +64,12 @@ export default {
         .tiles[index],
       '_updated')
   },
+  DECREMENT_FRAME_TOGGLE (state) {
+    state.decrementFrame = !state.decrementFrame
+  },
+  INCREMENT_FRAME_TOGGLE (state) {
+    state.incrementFrame = !state.incrementFrame
+  },
   // pull newest item from the undo array history
   POP_FROM_UNDO_CACHE (state) {
     state.redoCache.unshift(
@@ -192,6 +198,9 @@ export default {
       vTile._updated = new Date().getTime()
       state.updateVram = true
     }
+  },
+  SHORTCUT_TRIGGER_FULL_SAVE_TOGGLE (state) {
+    state.shortcutTriggerFullSave = !state.shortcutTriggerFullSave
   },
   TOGGLE_EDITOR_FLIP (state, flip) {
     state.editorFlip[flip] = !state.editorFlip[flip]

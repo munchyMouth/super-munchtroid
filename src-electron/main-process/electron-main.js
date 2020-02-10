@@ -1,9 +1,12 @@
 'use strict'
 
-import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import { app, BrowserWindow, globalShortcut, ipcMain, Menu } from 'electron'
 import { readFileSync } from 'fs'
 import path from 'path'
 
+// case evt.keyCode === 18 && evt.key.toLowerCase() === 's' && evt.ctrlKey:
+//   console.log('FOUND')
+//   break
 import Palette from './Palette'
 import Samus from './Samus'
 import { getSubmenu } from './submenus.js'
@@ -53,6 +56,8 @@ app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    // Unregister all shortcuts.
+    globalShortcut.unregisterAll()
     app.quit()
   }
 })
@@ -68,6 +73,9 @@ ipcMain.on('attachMenuEvents', (event) => {
     label: 'File', submenu: getSubmenu(event, mainWindow, POSES)
   }])
   Menu.setApplicationMenu(menu)
+  globalShortcut.register('CommandOrControl+shift+s', () => {
+    event.sender.send('Shortcut Save', true)
+  })
 })
 
 ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {

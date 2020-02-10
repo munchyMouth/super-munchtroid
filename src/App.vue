@@ -36,6 +36,8 @@ export default {
       'clearUpdateSprite',
       'clearUpdateVram',
       'clearVramUpdateFlag',
+      'decrementFrameToggle',
+      'incrementFrameToggle',
       'pastecopiedTile',
       'popFromUndoCache',
       'setCopiedTileData',
@@ -46,6 +48,7 @@ export default {
       'setSamus',
       'setSettings',
       'shiftFromRedoCache',
+      'shortcutTriggerFullSaveToggle',
       'toggleLayoutDrawerOpen',
       'toggleSaveEventListener',
       'toggleSaveKeyEvent'
@@ -63,21 +66,21 @@ export default {
     },
     handleEditorCommands (evt) {
       switch (true) {
-        case evt.key === 'z' && evt.ctrlKey:
+        case evt.key.toLowerCase() === 'z' && evt.ctrlKey:
           this.popFromUndoCache()
           break
-        case evt.key === 'y' && evt.ctrlKey:
+        case evt.key.toLowerCase() === 'y' && evt.ctrlKey:
           this.shiftFromRedoCache()
           break
-        case evt.key === 'c' && evt.ctrlKey:
+        case evt.key.toLowerCase() === 'c' && evt.ctrlKey:
           if (!this.edit16x16) this.setCopiedTileData()
           else alert('you can only copy an 8x8 tile!')
           break
-        case evt.key === 'v' && evt.ctrlKey:
+        case evt.key.toLowerCase() === 'v' && evt.ctrlKey:
           if (!this.edit16x16) this.pastecopiedTile()
           else alert('you can only paste onto an 8x8 tile!')
           break
-        case evt.key === 's' && evt.ctrlKey:
+        case evt.key.toLowerCase() === 's' && evt.ctrlKey:
           this.toggleSaveKeyEvent()
           break
       }
@@ -86,7 +89,13 @@ export default {
       switch (true) {
         case evt.keyCode === 220 && evt.ctrlKey: // ctrl+backslash
           this.toggleLayoutDrawerOpen()
-          return
+          break
+        case evt.keyCode === 39 && evt.ctrlKey: // ctrl+right
+          this.incrementFrameToggle()
+          break
+        case evt.keyCode === 37 && evt.ctrlKey: // ctrl+left
+          this.decrementFrameToggle()
+          break
         case this.tileMaps && Object.keys(this.tileMaps).length && !this.noSelectedTile:
           this.handleEditorCommands(evt)
       }
@@ -183,6 +192,10 @@ export default {
           this.clearUpdatePalette()
           this.success('Palette(s) Saved!')
         }.bind(this))
+
+      ipcRenderer.on('Shortcut Save', function () {
+        this.shortcutTriggerFullSaveToggle()
+      }.bind(this))
 
       this.renderEvent(
         'Sprite Saved',

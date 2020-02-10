@@ -219,6 +219,7 @@ export default {
       'activePaletteColor',
       'activePaletteIndex',
       'copiedTileData',
+
       'edit16x16',
       'editor16x16TileIsValid',
       'editorHFlip',
@@ -228,6 +229,7 @@ export default {
       'editorRatioMin',
       'filePath',
       'getVramTileByProps',
+
       'noSelectedTile',
       'palettes',
       'redoCache',

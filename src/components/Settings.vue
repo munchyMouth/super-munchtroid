@@ -136,9 +136,12 @@ export default {
       'currentFrameIndex',
       'currentPalette',
       'currentPose',
+      'decrementFrame',
+      'incrementFrame',
       'filePath',
       'frames',
       'settings',
+      'shortcutTriggerFullSave',
       'spriteRatio',
       'tab',
       'tileMapFrame',
@@ -345,6 +348,12 @@ export default {
   watch: {
     showUnused (newValue, oldValue) {
       this.choosePose(true)
+    },
+    decrementFrame () { this.frameDec() },
+    incrementFrame () { this.frameInc() },
+    shortcutTriggerFullSave () {
+      this.saveVram()
+      this.saveSprites()
     }
   }
 }
