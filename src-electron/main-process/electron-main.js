@@ -76,6 +76,9 @@ ipcMain.on('attachMenuEvents', (event) => {
   globalShortcut.register('CommandOrControl+shift+s', () => {
     event.sender.send('Shortcut Save', true)
   })
+  globalShortcut.register('F1', () => {
+    event.sender.send('Shortcut Help', true)
+  })
 })
 
 ipcMain.on('Load Palettes', (event, { filePath, index = 0 }) => {

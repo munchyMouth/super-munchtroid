@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "quasar dev -m electron",
     "build-linux": "quasar build --m electron",
-    "build-win32": "quasar build -m electron win32 -t mat -b builder"
+    "build-win32": "quasar build -m electron win32 -t mat"
   },
   "dependencies": {
     "lodash": "^4.17.11",
