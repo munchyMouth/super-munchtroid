@@ -5,6 +5,15 @@
 
 ### Downloads
 
+#### 2.16.2
+- <a href="">Super Munchtroid-linux-x64 2.16.2</a>
+- <a href="">Super Munchtroid-win32-x64 2.16.2</a>
+
+2.16.2 Features
+- ctrl+left/right events matched up to frame inc/dec
+- ctrl+shift+s setup for doing save to sprites and vram
+- added help modal and events
+
 #### 2.15.0
 - <a href="https://drive.google.com/open?id=16gHtApJ7FzbFgV4E7HoOIeSPrKBqTKhm">Super Munchtroid-linux-x64 2.15.0</a>
 - <a href="https://drive.google.com/open?id=1eW_TflW9AX_5ropM7b_HmrYHNmsRH_al">Super Munchtroid-win32-x64 2.15.0</a>

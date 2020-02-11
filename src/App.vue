@@ -1,6 +1,7 @@
 <template>
   <div id="q-app">
     <router-view />
+    <help v-show="showHelp" />
   </div>
 </template>
 
@@ -11,11 +12,15 @@ import { debounce } from 'lodash'
 
 import { genericException } from './libs/messages.json'
 import { getUpdatedVramTiles } from './components/Miscellaneous.js'
+import Help from './components/Help.vue'
 
 let debouncedKeyCommands
 
 export default {
   name: 'App',
+  components: {
+    Help
+  },
   computed: {
     ...mapGetters([
       'edit16x16',
@@ -27,6 +32,7 @@ export default {
       'layoutDrawerOpen',
       'selectedTile',
       'selectedTiles',
+      'showHelp',
       'tileMaps',
       'vram'])
   },
@@ -51,7 +57,8 @@ export default {
       'shortcutTriggerFullSaveToggle',
       'toggleLayoutDrawerOpen',
       'toggleSaveEventListener',
-      'toggleSaveKeyEvent'
+      'toggleSaveKeyEvent',
+      'toggleShowHelp'
     ]),
     fail ({ type, title, message }, color = 'negative', timeout = 120000) {
       if (message) {
@@ -87,6 +94,9 @@ export default {
     },
     keyCommands (evt) {
       switch (true) {
+        case evt.keyCode === 27: // escape
+          if (this.showHelp) this.toggleShowHelp()
+          break
         case evt.keyCode === 220 && evt.ctrlKey: // ctrl+backslash
           this.toggleLayoutDrawerOpen()
           break
@@ -193,10 +203,6 @@ export default {
           this.success('Palette(s) Saved!')
         }.bind(this))
 
-      ipcRenderer.on('Shortcut Save', function () {
-        this.shortcutTriggerFullSaveToggle()
-      }.bind(this))
-
       this.renderEvent(
         'Sprite Saved',
         function () {
@@ -245,6 +251,15 @@ export default {
           this.success('Tile(s) Saved!')
           this.setLoading(false)
         }.bind(this))
+
+      ipcRenderer.on('Shortcut Save', function () {
+        this.shortcutTriggerFullSaveToggle()
+      }.bind(this))
+      ipcRenderer.on('Shortcut Help', function () {
+        if (!this.showHelp) {
+          this.toggleShowHelp()
+        }
+      }.bind(this))
     } catch (e) {
       this.setError({
         type: 'genericRendererException',

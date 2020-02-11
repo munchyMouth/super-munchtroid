@@ -1,6 +1,7 @@
-10/02/20 2.16.0
+10/02/20 2.16.2
 - ctrl+left/right events matched up to frame inc/dec
 - ctrl+shift+s setup for doing save to sprites and vram
+- added help modal and events
 
 06/02/20 2.15.0
 - pixel-flip support added

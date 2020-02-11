@@ -229,6 +229,7 @@ export default {
   toggleVFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'v') },
   toggleSaveEventListener ({ commit }) { commit('TOGGLE_SAVE_EVENT_LISTENER') },
   toggleSaveKeyEvent ({ commit }) { commit('TOGGLE_SAVE_KEY_EVENT') },
+  toggleShowHelp ({ commit }) { commit('TOGGLE_SHOW_HELP') },
   toggleSprite ({ commit }) { commit('TOGGLE_SPRITE') },
   toggleVram ({ commit }) { commit('TOGGLE_VRAM') }
 }

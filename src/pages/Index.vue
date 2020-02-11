@@ -1,6 +1,7 @@
 <template>
-  <q-page v-if="Object.keys(tileMaps).length">
-    <div class="munch-index-wrapper"
+  <q-page >
+    <div v-if="Object.keys(tileMaps).length"
+         class="munch-index-wrapper"
          @mouseenter="setUserIsDrawing(undefined)"
          @mousedown="draw"
          @mouseup="setUserIsDrawing(undefined)">
@@ -129,7 +130,7 @@ export default {
   }
   .munch-index__left__toggle {
     width: 12px;
-    z-index: 99;
+    z-index: 89;
   }
   .munch-index__left__toggle > div {
     display: flex;

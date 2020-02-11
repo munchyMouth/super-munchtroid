@@ -70,6 +70,7 @@ const store = {
       POSES: []
     },
     shortcutTriggerFullSave: false,
+    showHelp: false,
     showSprite: true,
     showVram: true,
     spriteDefault: undefined,

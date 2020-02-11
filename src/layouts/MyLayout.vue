@@ -96,6 +96,7 @@ export default {
       'layoutDrawerOpen',
       'romLoaded',
       'settings',
+      'showHelp',
       'showVram',
       'tab',
       'updateSprite',

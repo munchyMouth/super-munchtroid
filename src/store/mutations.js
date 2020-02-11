@@ -206,13 +206,18 @@ export default {
     state.editorFlip[flip] = !state.editorFlip[flip]
   },
   TOGGLE_LAYOUT_DRAWER_OPEN (state) {
-    state.layoutDrawerOpen = !state.layoutDrawerOpen
+    if (state.showHelp) state.layoutDrawerOpen = false
+    else state.layoutDrawerOpen = !state.layoutDrawerOpen
   },
   TOGGLE_SAVE_EVENT_LISTENER (state) {
     state.saveEventListener = !state.saveEventListener
   },
   TOGGLE_SAVE_KEY_EVENT (state) {
     state.saveKeyEvent = !state.saveKeyEvent
+  },
+  TOGGLE_SHOW_HELP (state) {
+    state.showHelp = !state.showHelp
+    state.layoutDrawerOpen = !state.showHelp
   },
   TOGGLE_SPRITE (state) { state.showSprite = !state.showSprite },
   TOGGLE_VRAM (state) { state.showVram = !state.showVram },
