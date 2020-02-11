@@ -1,7 +1,11 @@
 <template>
   <q-layout class="munch-layout"
             view="lHh Lpr lFf">
+    <help v-show="showHelp" />
     <q-layout-header v-if="filePath">
+      <div class="help-back"
+           v-show="showHelp"
+           @click="toggleShowHelp">&nbsp;</div>
       <q-toolbar>
         <q-btn
           flat
@@ -79,10 +83,12 @@ import Icon from 'vue-awesome/components/Icon'
 
 import { poseWarning } from '../libs/messages.json'
 import Settings from '../components/Settings.vue'
+import Help from '../components/Help.vue'
 
 export default {
   name: 'MyLayout',
   components: {
+    Help,
     Icon,
     Settings
   },
@@ -108,6 +114,7 @@ export default {
       'setLoading',
       'setTab',
       'toggleLayoutDrawerOpen',
+      'toggleShowHelp',
       'toggleVram']),
     openURL,
     changeTab (tab) {
@@ -151,5 +158,13 @@ export default {
 }
 .settings__tab button.--inactive {
   background: lightslategray;
+}
+.help-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #ccc;
+  opacity: .5;
+  z-index: 95;
 }
 </style>

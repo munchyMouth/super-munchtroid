@@ -1,7 +1,6 @@
 <template>
   <div id="q-app">
     <router-view />
-    <help v-show="showHelp" />
   </div>
 </template>
 
@@ -12,14 +11,12 @@ import { debounce } from 'lodash'
 
 import { genericException } from './libs/messages.json'
 import { getUpdatedVramTiles } from './components/Miscellaneous.js'
-import Help from './components/Help.vue'
 
 let debouncedKeyCommands
 
 export default {
   name: 'App',
   components: {
-    Help
   },
   computed: {
     ...mapGetters([

@@ -99,7 +99,7 @@ export default {
   z-index: 95;
 }
 .help {
-  position: relative;
+  position: absolute;
   background: white;
   width: 80%;
   height: 80%;

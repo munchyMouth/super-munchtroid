@@ -53,7 +53,7 @@ export const getSubmenu = function (event, mainWindow, POSES) {
       }
     },
     {
-      label: 'Shortcuts [F1]',
+      label: 'View Shortcuts [F1]',
       click () {
         event.sender.send('Shortcut Help', true)
       }
