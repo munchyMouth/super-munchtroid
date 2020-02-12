@@ -16,7 +16,7 @@
           </tr>
           <tr>
             <td>ctrl + shift + s</td>
-            <td>save current frame's VRAM and Sprite</td>
+            <td>save current frame's VRAM and Sprites</td>
           </tr>
           <tr>
             <td>ctrl + left</td>
@@ -29,7 +29,7 @@
         </table>
         <br>
         <table>
-          <tr><th>Editor ShortCuts</th><th></th></tr>
+          <tr><th>Editor Shortcuts</th><th></th></tr>
           <tr>
             <td>ctrl + s</td>
             <td>save current tile</td>
