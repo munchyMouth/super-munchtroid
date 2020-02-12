@@ -8,8 +8,9 @@
   "private": true,
   "scripts": {
     "dev": "quasar dev -m electron",
-    "build-linux": "quasar build --m electron",
-    "build-win32": "quasar build -m electron win32 -t mat"
+    "build": "quasar build -m electron",
+    "NB": "// the below doesn't seem to work any more, uncomment packager code in quasar.conf.js instead and run the command above.",
+    "build-win32": "quasar build -m electron win32 -t mat -b builder"
   },
   "dependencies": {
     "lodash": "^4.17.11",

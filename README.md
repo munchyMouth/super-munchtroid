@@ -6,8 +6,8 @@
 ### Downloads
 
 #### 2.16.2
-- <a href="">Super Munchtroid-linux-x64 2.16.2</a>
-- <a href="">Super Munchtroid-win32-x64 2.16.2</a>
+- <a href="https://drive.google.com/open?id=1JtP0M8kAeYHhb__YaAZrqsl8mQrDIsmv">Super Munchtroid-linux-x64 2.16.2</a>
+- <a href="https://drive.google.com/open?id=1LoxE0vFCaNcPG911m_AtJ_B-l2OMBITu">Super Munchtroid-win32-x64 2.16.2</a>
 
 2.16.2 Features
 - ctrl+left/right events matched up to frame inc/dec
