@@ -6,22 +6,22 @@
         <div class="editor__canvas__top-tools">
           <button
             class="no-style"
-            @click="shrinkEditor()"
             title="shrink editor"
+            @click="shrinkEditor()"
           >
             <icon name="search-minus" />
           </button>
           <button
             class="no-style"
-            @click="enlargeEditor()"
             title="enlarge editor"
+            @click="enlargeEditor()"
           >
             <icon name="search-plus" />
           </button>
           <button
             :class="`no-style editor__canvas__tools__grid${showGrid ? '--hide' : ''}`"
-            @click="toggleGrid()"
             title="show grid"
+            @click="toggleGrid()"
           >
             <icon name="th-large" />
           </button>
@@ -38,38 +38,38 @@
             </button>
             <button
               :class="`no-style editor__canvas__tools__save${updated ? '--active' : ''}`"
-              @click="saveVramTile()"
               title="save current tile [ctrl^s]"
+              @click="saveVramTile()"
             >
               <icon name="save" />
             </button>
             <strong class="editor__canvas__tools__address">
               <button
                 class="no-style editor__canvas__tools__button"
-                @click="pxFlipEnabled = !pxFlipEnabled"
                 title="switch between pixel-flipping/H&amp;V-flip"
+                @click="pxFlipEnabled = !pxFlipEnabled"
               >
-              <span style="font-size: 8px; justify-self: centre">px-Flip&nbsp;</span>
-              <icon :name="pxFlipEnabled ? 'toggle-on' : 'toggle-off'" />
-            </button>
-              {{ this.selectedTile.tile._address }}
+                <span style="font-size: 8px; justify-self: centre">px-Flip&nbsp;</span>
+                <icon :name="pxFlipEnabled ? 'toggle-on' : 'toggle-off'" />
+              </button>
+              {{ selectedTile.tile._address }}
             </strong>
           </template>
         </div>
         <canvas
-          :class="!noSelectedTile ? '--active' : ''"
           ref="editor"
+          :class="!noSelectedTile ? '--active' : ''"
           @mousemove="getMousePos"
           @mouseout="clearActiveMouse"
-        ></canvas>
+        />
       </div>
       <div :class="editorRatio < 1.1 ? 'editor__canvas__tools--small' : 'editor__canvas__tools'">
         <template v-if="!noSelectedTile">
           <button
-            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
-            @click="toggleVFlip()"
-            title="Does not flip the raw VRAM image"
             v-if="!pxFlipEnabled"
+            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
+            title="Does not flip the raw VRAM image"
+            @click="toggleVFlip()"
           >
             <icon
               style="width: 16px;"
@@ -78,10 +78,10 @@
             <label v-show="editorRatio > 1">(V-flip)</label>
           </button>
           <button
-            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
-            @click="pixelFlipV()"
-            title="V-flip the raw image"
             v-else
+            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
+            title="V-flip the raw image"
+            @click="pixelFlipV()"
           >
             <icon
               style="height: 10px; margin-right: 8px"
@@ -90,19 +90,19 @@
             <label v-show="editorRatio > 1">(V-px)</label>
           </button>
           <button
-            :class="`no-style editor__canvas__tools__flip${editorHFlip ? '--flip' : ''}`"
-            @click="toggleHFlip()"
-            title="Does not flip the raw VRAM image"
             v-if="!pxFlipEnabled"
+            :class="`no-style editor__canvas__tools__flip${editorHFlip ? '--flip' : ''}`"
+            title="Does not flip the raw VRAM image"
+            @click="toggleHFlip()"
           >
             <icon name="arrows-alt-h" />&nbsp;
             <label v-show="editorRatio > 1">(H-flip)</label>
           </button>
           <button
-            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
-            @click="pixelFlipH()"
-            title="H-flip the raw image"
             v-else
+            :class="`no-style editor__canvas__tools__flip${editorVFlip ? '--flip' : ''}`"
+            title="H-flip the raw image"
+            @click="pixelFlipH()"
           >
             <icon
               style="width: 10px; margin-right: 8px"
@@ -112,64 +112,72 @@
           </button>
           <button
             class="no-style editor__canvas__tools__copy"
-            @click="setCopiedTileData()"
             :disabled="!edit16x16 ? false : 'disabled'"
             :title="!edit16x16 ? 'copy [ctrl^c]' : 'you can only copy/paste a single tile!'"
+            @click="setCopiedTileData()"
           >
             <icon name="copy" />&nbsp;
             <label v-show="editorRatio > 1">(copy)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__paste"
-            @click="pastecopiedTile()"
             :disabled="!edit16x16 ? false : 'disabled'"
             :title="!edit16x16 ? 'paste [ctrl^v]' : 'you can only copy/paste a single tile!'"
+            @click="pastecopiedTile()"
           >
             <icon name="paste" />&nbsp;
             <label v-show="editorRatio > 1">(paste)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__undo"
-            @click="popFromUndoCache()"
             title="undo [ctrl^z]"
+            @click="popFromUndoCache()"
           >
             <icon name="undo" />&nbsp;
             <label v-show="editorRatio > 1">(undo)</label>
           </button>
           <button
             class="no-style editor__canvas__tools__redo"
-            @click="shiftFromRedoCache()"
             title="redo [ctrl^y]"
+            @click="shiftFromRedoCache()"
           >
             <icon name="redo" />&nbsp;
             <label v-show="editorRatio > 1">(redo)</label>
           </button>
           <div class="editor__canvas__tools__shifters">
             <div>
-              <button class="no-style editor__canvas__tools__shifters__button"
-                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift left'"
-                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
-                      @click="horizontalShift('left')">
+              <button
+                class="no-style editor__canvas__tools__shifters__button"
+                :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift left'"
+                :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                @click="horizontalShift('left')"
+              >
                 <icon name="arrow-left" />
               </button>
-              <button class="no-style editor__canvas__tools__shifters__button"
-                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift up'"
-                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
-                      @click="verticalShift('up')">
+              <button
+                class="no-style editor__canvas__tools__shifters__button"
+                :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift up'"
+                :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                @click="verticalShift('up')"
+              >
                 <icon name="arrow-up" />
               </button>
             </div>
             <div>
-              <button class="no-style editor__canvas__tools__shifters__button"
-                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift right'"
-                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
-                      @click="horizontalShift('right')">
+              <button
+                class="no-style editor__canvas__tools__shifters__button"
+                :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift right'"
+                :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                @click="horizontalShift('right')"
+              >
                 <icon name="arrow-right" />
               </button>
-              <button class="no-style editor__canvas__tools__shifters__button"
-                      :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift down'"
-                      :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
-                      @click="verticalShift('down')">
+              <button
+                class="no-style editor__canvas__tools__shifters__button"
+                :title="editorVFlip || editorHFlip ? 'disabled while hflip/vflip are switched on' : 'pixel shift down'"
+                :disabled="editorVFlip || editorHFlip ? 'disabled' : false"
+                @click="verticalShift('down')"
+              >
                 <icon name="arrow-down" />
               </button>
             </div>
@@ -213,6 +221,17 @@ export default {
   components: {
     Icon,
     Palette
+  },
+  data () {
+    return {
+      canvas: undefined,
+      context: undefined,
+      pxFlipEnabled: false,
+      showGrid: false,
+      updated: false,
+      x: -1,
+      y: -1
+    }
   },
   computed: {
     ...mapGetters([
@@ -274,16 +293,52 @@ export default {
       return this.edit16x16 ? this.tileSize / 2 : this.tileSize
     }
   },
-  data () {
-    return {
-      canvas: undefined,
-      context: undefined,
-      pxFlipEnabled: false,
-      showGrid: false,
-      updated: false,
-      x: -1,
-      y: -1
+  watch: {
+    activePaletteIndex () { this.redraw() },
+    edit16x16 (newVal) { this.redraw() },
+    editorHFlip () { this.redraw() },
+    editorVFlip () { this.redraw() },
+    editorRatio () {
+      this.$refs['editor'].width = this.editorSize
+      this.$refs['editor'].height = this.editorSize
+      this.redraw()
+    },
+    palettes () { this.redraw() },
+    pixelX (newVal) {
+      this.colorPixel(newVal)
+      this.testTileUpdated()
+    },
+    pixelY (newVal) {
+      this.colorPixel(newVal)
+      this.testTileUpdated()
+    },
+    refreshPalette () { this.redraw() },
+    selectedTile (newVal) {
+      this.setEdit16x16(false)
+      this.testTileUpdated()
+      this.redraw()
+    },
+    selectedTiles (newVal) {
+      this.testTileUpdated()
+      this.redraw()
+    },
+    showGrid () { this.redraw() },
+    saveEventListener () { this.testTileUpdated() },
+    saveKeyEvent () { this.saveVramTile() },
+    updateVram () { this.testTileUpdated() },
+    userIsDrawing (newVal) {
+      if (newVal) {
+        this.colorPixel()
+        this.redraw()
+      }
     }
+  },
+  mounted () {
+    this.canvas = this.$refs['editor']
+    this.context = this.$refs['editor'].getContext('2d')
+    this.$refs['editor'].width = this.editorSize
+    this.$refs['editor'].height = this.editorSize
+    this.redraw()
   },
   methods: {
     ...mapActions([
@@ -408,53 +463,6 @@ export default {
       this.setEdit16x16(value)
     },
     toggleGrid () { this.showGrid = !this.showGrid }
-  },
-  mounted () {
-    this.canvas = this.$refs['editor']
-    this.context = this.$refs['editor'].getContext('2d')
-    this.$refs['editor'].width = this.editorSize
-    this.$refs['editor'].height = this.editorSize
-    this.redraw()
-  },
-  watch: {
-    activePaletteIndex () { this.redraw() },
-    edit16x16 (newVal) { this.redraw() },
-    editorHFlip () { this.redraw() },
-    editorVFlip () { this.redraw() },
-    editorRatio () {
-      this.$refs['editor'].width = this.editorSize
-      this.$refs['editor'].height = this.editorSize
-      this.redraw()
-    },
-    palettes () { this.redraw() },
-    pixelX (newVal) {
-      this.colorPixel(newVal)
-      this.testTileUpdated()
-    },
-    pixelY (newVal) {
-      this.colorPixel(newVal)
-      this.testTileUpdated()
-    },
-    refreshPalette () { this.redraw() },
-    selectedTile (newVal) {
-      this.setEdit16x16(false)
-      this.testTileUpdated()
-      this.redraw()
-    },
-    selectedTiles (newVal) {
-      this.testTileUpdated()
-      this.redraw()
-    },
-    showGrid () { this.redraw() },
-    saveEventListener () { this.testTileUpdated() },
-    saveKeyEvent () { this.saveVramTile() },
-    updateVram () { this.testTileUpdated() },
-    userIsDrawing (newVal) {
-      if (newVal) {
-        this.colorPixel()
-        this.redraw()
-      }
-    }
   }
 }
 </script>

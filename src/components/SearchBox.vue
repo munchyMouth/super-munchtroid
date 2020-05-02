@@ -1,19 +1,25 @@
 <template>
   <div>
-    <q-search v-model="entry"
-              class="search-box__input"
-              clearable
-              placeholder="Search used poses"
-              @keyup.up="scrollThroughEntries('up')"
-              @keyup.down="scrollThroughEntries('down')"
-              @keyup.enter="submitEntry()"/>
+    <q-search
+      v-model="entry"
+      class="search-box__input"
+      clearable
+      placeholder="Search used poses"
+      @keyup.up="scrollThroughEntries('up')"
+      @keyup.down="scrollThroughEntries('down')"
+      @keyup.enter="submitEntry()"
+    />
     <div class="search-box__entries">
-      <div v-for="(e, i) in entries"
-          :key="e.id"
-          :class="hilightedIndex === i ? '--hilight' : ''">
-        <button class="no-style"
-                @click="getEntry(e)">
-        {{ e.name }}
+      <div
+        v-for="(e, i) in entries"
+        :key="e.id"
+        :class="hilightedIndex === i ? '--hilight' : ''"
+      >
+        <button
+          class="no-style"
+          @click="getEntry(e)"
+        >
+          {{ e.name }}
         </button>
       </div>
     </div>
@@ -38,6 +44,11 @@ export default {
         const regExp = new RegExp(this.entry, 'gi')
         return this.poses.filter(it => it.name.search(regExp) > -1)
       } else return []
+    }
+  },
+  watch: {
+    entry (newVal) {
+      if (!newVal) this.hilightedIndex = -1
     }
   },
   methods: {
@@ -75,18 +86,13 @@ export default {
         this.getEntry(this.entries[this.hilightedIndex])
       }
     }
-  },
-  watch: {
-    entry (newVal) {
-      if (!newVal) this.hilightedIndex = -1
-    }
   }
 }
 </script>
 
 <style>
-.search-box__input {
-}
+/* .search-box__input {
+} */
 .search-box__entries {
   display: flex;
   flex-direction: column;
@@ -112,7 +118,7 @@ export default {
   text-decoration: none;
   width: 100%;
   min-height: 50px;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 .search-box__entries > div > button:focus {
   background: #eee;

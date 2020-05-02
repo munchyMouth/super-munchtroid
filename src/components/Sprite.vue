@@ -1,17 +1,19 @@
 <template>
   <div :class="`sprite-outer-wrapper sprite-outer-wrapper${showSprite ? '--show' : '--hide'}`">
     <canvas
-      :class="`sprite-canvas${mouseInActiveSpriteArea ? '--active-sprite' : ''}`"
       ref="sprite"
+      :class="`sprite-canvas${mouseInActiveSpriteArea ? '--active-sprite' : ''}`"
       @mousemove="getMousePos"
       @mouseout="clearActiveMouse"
       @mousedown="drag = mouseInActiveSpriteArea"
-      @mouseup="clearDrag">
-    </canvas>
-    <button class="no-style sprite-undo"
-            @click="undoDrag"
-            title="Reset to latest active sprite state."
-            v-if="spriteDefault">
+      @mouseup="clearDrag"
+    />
+    <button
+      v-if="spriteDefault"
+      class="no-style sprite-undo"
+      title="Reset to latest active sprite state."
+      @click="undoDrag"
+    >
       <icon name="undo" />
     </button>
   </div>
@@ -28,6 +30,18 @@ import SpriteRedraw from './helpers/SpriteRedraw.js'
 export default {
   name: 'sprite',
   components: { Icon },
+  data () {
+    return {
+      canvas: undefined,
+      context: undefined,
+      drag: false,
+      dragX: undefined,
+      dragY: undefined,
+      wrapperHeight: '',
+      x: 0,
+      y: 0
+    }
+  },
   computed: {
     ...mapGetters([
       'activeSpriteAddress',
@@ -54,9 +68,9 @@ export default {
     mouseInActiveSpriteArea () {
       return this.activeSprite
         ? this.activeSprite.xOffset <= this.spriteX &&
-          this.activeSprite.yOffset <= this.spriteY &&
-          this.activeSprite.xOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteX &&
-          this.activeSprite.yOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteY
+        this.activeSprite.yOffset <= this.spriteY &&
+        this.activeSprite.xOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteX &&
+        this.activeSprite.yOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteY
         : false
     },
     permitDragX () {
@@ -87,17 +101,35 @@ export default {
     spriteZeroY () { return (80 * this.spriteRatio) / 2 },
     spriteZeroX () { return (80 * this.spriteRatio) / 2 }
   },
-  data () {
-    return {
-      canvas: undefined,
-      context: undefined,
-      drag: false,
-      dragX: undefined,
-      dragY: undefined,
-      wrapperHeight: '',
-      x: 0,
-      y: 0
-    }
+  watch: {
+    activeSprite (newVal) {
+      this.setWrapperHeight()
+      this.redraw()
+    },
+    currentFrameIndex () {
+      this.redraw()
+    },
+    editorUpdate () { this.redraw() },
+    getActivePaletteInPalettes () { this.redraw() },
+    palettes () { this.redraw() },
+    refreshPalette () { this.redraw() },
+    selectedTile () { this.redraw() },
+    selectedTiles () { this.redraw() },
+    spriteMaskColor () { this.redraw() },
+    spriteRatio () {
+      this.$refs['sprite'].width = this.spriteEndX
+      this.$refs['sprite'].height = this.spriteEndY
+      this.setWrapperHeight()
+      this.redraw()
+    },
+    spriteRefresh () { this.redraw() },
+    vram () { this.redraw() }
+  },
+  mounted () {
+    this.canvas = this.$refs['sprite']
+    this.context = this.$refs['sprite'].getContext('2d')
+    this.$refs['sprite'].width = this.spriteEndX
+    this.$refs['sprite'].height = this.spriteEndY
   },
   methods: {
     ...mapActions([
@@ -169,38 +201,10 @@ export default {
           .getBoundingClientRect()
           .height + 'px'
     }
-  },
-  watch: {
-    activeSprite (newVal) {
-      this.setWrapperHeight()
-      this.redraw()
-    },
-    currentFrameIndex () {
-      this.redraw()
-    },
-    editorUpdate () { this.redraw() },
-    getActivePaletteInPalettes () { this.redraw() },
-    palettes () { this.redraw() },
-    refreshPalette () { this.redraw() },
-    selectedTile () { this.redraw() },
-    selectedTiles () { this.redraw() },
-    spriteMaskColor () { this.redraw() },
-    spriteRatio () {
-      this.$refs['sprite'].width = this.spriteEndX
-      this.$refs['sprite'].height = this.spriteEndY
-      this.setWrapperHeight()
-      this.redraw()
-    },
-    spriteRefresh () { this.redraw() },
-    vram () { this.redraw() }
-  },
-  mounted () {
-    this.canvas = this.$refs['sprite']
-    this.context = this.$refs['sprite'].getContext('2d')
-    this.$refs['sprite'].width = this.spriteEndX
-    this.$refs['sprite'].height = this.spriteEndY
   }
 }
 </script>
 
-<style>@import '../css/sprite.css';</style>
+<style>
+@import "../css/sprite.css";
+</style>

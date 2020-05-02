@@ -1,6 +1,6 @@
 <template>
   <div class="tree-li">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
@@ -8,13 +8,13 @@
 
 export default {
   name: 'tree',
-  computed: {
-  },
   components: {
   },
   data () {
     return {
     }
+  },
+  computed: {
   }
 }
 </script>

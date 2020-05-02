@@ -5,8 +5,8 @@
       @mousemove="getMousePos"
       @mouseout="clearActiveMouse"
       @click="actionClick"
-      @contextmenu="actionClick">
-    </canvas>
+      @contextmenu="actionClick"
+    />
   </div>
 </template>
 
@@ -18,6 +18,13 @@ import VramRedraw from './helpers/VramRedraw.js'
 export default {
   name: 'vram',
   components: {
+  },
+  data () {
+    return {
+      context: undefined,
+      x: 0,
+      y: 0
+    }
   },
   computed: {
     ...mapGetters([
@@ -108,56 +115,6 @@ export default {
         : -1
     }
   },
-  data () {
-    return {
-      context: undefined,
-      x: 0,
-      y: 0
-    }
-  },
-  methods: {
-    ...mapActions([
-      'clearSelectedTile',
-      'clearSelectedTiles',
-      'setActiveSprite',
-      'setLoading',
-      'setSelectedTile',
-      'setSelectedTiles',
-      'setSpriteProperty']),
-    ...VramRedraw,
-    actionClick (evt) {
-      switch (true) {
-        case this.isVramSelectionInEditorMode ||
-          (this.viableTile && evt.button > 0):
-          this.setSelectedTile(this.activeTileMetaData)
-          break
-
-        case this.isVramSelectionInSpriteMode:
-          Object.keys(this.spriteModeDataObject).forEach(function (key, i) {
-            this.setSpriteProperty({
-              ...this.activeSprite,
-              property: key,
-              value: this.spriteModeDataObject[key],
-              redraw: i === 2
-            })
-          }.bind(this))
-          this.setActiveSprite({
-            ...this.activeSprite, ...this.getSpriteByProps(this.activeSprite) })
-          break
-      }
-    },
-    clearActiveMouse () {
-      this.x = -1
-      this.y = -1
-      this.redraw()
-    },
-    getMousePos (evt) {
-      this.$refs['vram'].focus()
-      var rect = evt.currentTarget.getBoundingClientRect()
-      this.x = evt.clientX - rect.left
-      this.y = evt.clientY - rect.top
-    }
-  },
   watch: {
     activePaletteIndex () { this.redraw() },
     activeSprite () { this.redraw() },
@@ -189,8 +146,55 @@ export default {
     this.context = this.$refs['vram'].getContext('2d')
     this.$refs['vram'].width = 128 * this.vramRatio
     this.$refs['vram'].height = 16 * this.vramRatio
+  },
+  methods: {
+    ...mapActions([
+      'clearSelectedTile',
+      'clearSelectedTiles',
+      'setActiveSprite',
+      'setLoading',
+      'setSelectedTile',
+      'setSelectedTiles',
+      'setSpriteProperty']),
+    ...VramRedraw,
+    actionClick (evt) {
+      switch (true) {
+        case this.isVramSelectionInEditorMode ||
+          (this.viableTile && evt.button > 0):
+          this.setSelectedTile(this.activeTileMetaData)
+          break
+
+        case this.isVramSelectionInSpriteMode:
+          Object.keys(this.spriteModeDataObject).forEach(function (key, i) {
+            this.setSpriteProperty({
+              ...this.activeSprite,
+              property: key,
+              value: this.spriteModeDataObject[key],
+              redraw: i === 2
+            })
+          }.bind(this))
+          this.setActiveSprite({
+            ...this.activeSprite,
+            ...this.getSpriteByProps(this.activeSprite)
+          })
+          break
+      }
+    },
+    clearActiveMouse () {
+      this.x = -1
+      this.y = -1
+      this.redraw()
+    },
+    getMousePos (evt) {
+      this.$refs['vram'].focus()
+      var rect = evt.currentTarget.getBoundingClientRect()
+      this.x = evt.clientX - rect.left
+      this.y = evt.clientY - rect.top
+    }
   }
 }
 </script>
 
-<style>@import '../css/vram.css';</style>
+<style>
+@import "../css/vram.css";
+</style>

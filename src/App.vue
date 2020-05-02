@@ -33,92 +33,16 @@ export default {
       'tileMaps',
       'vram'])
   },
-  methods: {
-    ...mapActions([
-      'clearUpdatePalette',
-      'clearUpdateSprite',
-      'clearUpdateVram',
-      'clearVramUpdateFlag',
-      'decrementFrameToggle',
-      'incrementFrameToggle',
-      'pastecopiedTile',
-      'popFromUndoCache',
-      'setCopiedTileData',
-      'setEventObserver',
-      'setError',
-      'setLoading',
-      'setPalettes',
-      'setSamus',
-      'setSettings',
-      'shiftFromRedoCache',
-      'shortcutTriggerFullSaveToggle',
-      'toggleLayoutDrawerOpen',
-      'toggleSaveEventListener',
-      'toggleSaveKeyEvent',
-      'toggleShowHelp'
-    ]),
-    fail ({ type, title, message }, color = 'negative', timeout = 120000) {
-      if (message) {
-        this.$q.notify({
-          color,
-          message: title,
-          position: 'middle',
-          timeout,
-          detail: message
+  watch: {
+    loading (val) {
+      if (val) {
+        this.$q.loading.show({
+          message: 'Loading',
+          messageColor: 'white',
+          spinnerColor: 'white',
+          spinnerSize: 250 // in pixels
         })
-      }
-    },
-    handleEditorCommands (evt) {
-      switch (true) {
-        case evt.key.toLowerCase() === 'z' && evt.ctrlKey:
-          this.popFromUndoCache()
-          break
-        case evt.key.toLowerCase() === 'y' && evt.ctrlKey:
-          this.shiftFromRedoCache()
-          break
-        case evt.key.toLowerCase() === 'c' && evt.ctrlKey:
-          if (!this.edit16x16) this.setCopiedTileData()
-          else alert('you can only copy an 8x8 tile!')
-          break
-        case evt.key.toLowerCase() === 'v' && evt.ctrlKey:
-          if (!this.edit16x16) this.pastecopiedTile()
-          else alert('you can only paste onto an 8x8 tile!')
-          break
-        case evt.key.toLowerCase() === 's' && evt.ctrlKey:
-          this.toggleSaveKeyEvent()
-          break
-      }
-    },
-    keyCommands (evt) {
-      switch (true) {
-        case evt.keyCode === 27: // escape
-          if (this.showHelp) this.toggleShowHelp()
-          break
-        case evt.keyCode === 220 && evt.ctrlKey: // ctrl+backslash
-          this.toggleLayoutDrawerOpen()
-          break
-        case evt.keyCode === 39 && evt.ctrlKey: // ctrl+right
-          this.incrementFrameToggle()
-          break
-        case evt.keyCode === 37 && evt.ctrlKey: // ctrl+left
-          this.decrementFrameToggle()
-          break
-        case this.tileMaps && Object.keys(this.tileMaps).length && !this.noSelectedTile:
-          this.handleEditorCommands(evt)
-      }
-    },
-    renderEvent (title, callback) {
-      ipcRenderer.on(title, callback)
-    },
-    success (message, color = 'positive') {
-      if (message) {
-        this.$q.notify({
-          message,
-          position: 'bottom',
-          color,
-          timeout: 1000
-        })
-      }
+      } else this.$q.loading.hide()
     }
   },
   beforeCreate () {
@@ -265,16 +189,92 @@ export default {
       })
     }
   },
-  watch: {
-    loading (val) {
-      if (val) {
-        this.$q.loading.show({
-          message: 'Loading',
-          messageColor: 'white',
-          spinnerColor: 'white',
-          spinnerSize: 250 // in pixels
+  methods: {
+    ...mapActions([
+      'clearUpdatePalette',
+      'clearUpdateSprite',
+      'clearUpdateVram',
+      'clearVramUpdateFlag',
+      'decrementFrameToggle',
+      'incrementFrameToggle',
+      'pastecopiedTile',
+      'popFromUndoCache',
+      'setCopiedTileData',
+      'setEventObserver',
+      'setError',
+      'setLoading',
+      'setPalettes',
+      'setSamus',
+      'setSettings',
+      'shiftFromRedoCache',
+      'shortcutTriggerFullSaveToggle',
+      'toggleLayoutDrawerOpen',
+      'toggleSaveEventListener',
+      'toggleSaveKeyEvent',
+      'toggleShowHelp'
+    ]),
+    fail ({ type, title, message }, color = 'negative', timeout = 120000) {
+      if (message) {
+        this.$q.notify({
+          color,
+          message: title,
+          position: 'middle',
+          timeout,
+          detail: message
         })
-      } else this.$q.loading.hide()
+      }
+    },
+    handleEditorCommands (evt) {
+      switch (true) {
+        case evt.key.toLowerCase() === 'z' && evt.ctrlKey:
+          this.popFromUndoCache()
+          break
+        case evt.key.toLowerCase() === 'y' && evt.ctrlKey:
+          this.shiftFromRedoCache()
+          break
+        case evt.key.toLowerCase() === 'c' && evt.ctrlKey:
+          if (!this.edit16x16) this.setCopiedTileData()
+          else alert('you can only copy an 8x8 tile!')
+          break
+        case evt.key.toLowerCase() === 'v' && evt.ctrlKey:
+          if (!this.edit16x16) this.pastecopiedTile()
+          else alert('you can only paste onto an 8x8 tile!')
+          break
+        case evt.key.toLowerCase() === 's' && evt.ctrlKey:
+          this.toggleSaveKeyEvent()
+          break
+      }
+    },
+    keyCommands (evt) {
+      switch (true) {
+        case evt.keyCode === 27: // escape
+          if (this.showHelp) this.toggleShowHelp()
+          break
+        case evt.keyCode === 220 && evt.ctrlKey: // ctrl+backslash
+          this.toggleLayoutDrawerOpen()
+          break
+        case evt.keyCode === 39 && evt.ctrlKey: // ctrl+right
+          this.incrementFrameToggle()
+          break
+        case evt.keyCode === 37 && evt.ctrlKey: // ctrl+left
+          this.decrementFrameToggle()
+          break
+        case this.tileMaps && Object.keys(this.tileMaps).length && !this.noSelectedTile:
+          this.handleEditorCommands(evt)
+      }
+    },
+    renderEvent (title, callback) {
+      ipcRenderer.on(title, callback)
+    },
+    success (message, color = 'positive') {
+      if (message) {
+        this.$q.notify({
+          message,
+          position: 'bottom',
+          color,
+          timeout: 1000
+        })
+      }
     }
   }
 }
@@ -284,13 +284,15 @@ export default {
 #q-app {
   min-width: 1084px;
 }
-html, body, #q-app {
+html,
+body,
+#q-app {
   height: 100%;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select:none;
-  -o-user-select:none;
-  user-select:none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .q-layout,
 .q-layout-page-container,
@@ -308,7 +310,7 @@ button.no-style {
 }
 input.one-char {
   margin: 0 1rem 0 1rem;
-  width: .66rem !important;
+  width: 0.66rem !important;
 }
 input.six-char {
   margin: 0 1rem 0 1rem;

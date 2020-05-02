@@ -217,7 +217,6 @@ export default {
   },
   TOGGLE_SHOW_HELP (state) {
     state.showHelp = !state.showHelp
-    state.layoutDrawerOpen = !state.showHelp
   },
   TOGGLE_SPRITE (state) { state.showSprite = !state.showSprite },
   TOGGLE_VRAM (state) { state.showVram = !state.showVram },

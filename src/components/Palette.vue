@@ -2,11 +2,18 @@
   <div class="palette">
     <div>
       <div class="palette__current-colors">
-        <div class="no-style"
-            :style="`background: ${getActiveColorFromPaletteInPalettes('left')}`">
+        <div
+          class="no-style"
+          :style="`background: ${getActiveColorFromPaletteInPalettes('left')}`"
+        >
+          &nbsp;
         </div>
-        <div class="no-style"
-            :style="`background: ${getActiveColorFromPaletteInPalettes('right')}`"></div>
+        <div
+          class="no-style"
+          :style="`background: ${getActiveColorFromPaletteInPalettes('right')}`"
+        >
+          &nbsp;
+        </div>
       </div>
       <div class="palette__settings">
         <div class="palette__settings__16">
@@ -17,19 +24,29 @@
             <icon name="caret-down" />
           </button>
         </div>
-        <div class="palette__settings__colors" v-if="hasCurrentPalette">
-          <button v-for="(color, i) in activePalette"
-                  :class="`no-style ${i === activeColorIndex ? '--active' : ''}`"
-                  :style="`background: ${color}`"
-                  :key="i"
-                  @click="setAnActivePaletteColor($event, i)"
-                  @contextmenu="setAnActivePaletteColor($event, i)">
+        <div
+          v-if="hasCurrentPalette"
+          class="palette__settings__colors"
+        >
+          <button
+            v-for="(color, i) in activePalette"
+            :key="i"
+            :class="`no-style ${i === activeColorIndex ? '--active' : ''}`"
+            :style="`background: ${color}`"
+            @click="setAnActivePaletteColor($event, i)"
+            @contextmenu="setAnActivePaletteColor($event, i)"
+          >
             &nbsp;
           </button>
-          <div class="palette__settings__misc"
-           title="Active Palette Index">
+          <div
+            class="palette__settings__misc"
+            title="Active Palette Index"
+          >
             <label>
-              <i aria-hidden="true" class="q-icon material-icons">palette</i>
+              <i
+                aria-hidden="true"
+                class="q-icon material-icons"
+              >palette</i>
               {{ activePaletteIndex + 1 }} /
               {{ palettes ? palettes.length : 1 }}
             </label>
@@ -39,27 +56,35 @@
     </div>
     <div class="palette__sliders">
       <div>
-        <button class="no-style palette__sliders__save --active palette__sliders__buttons"
-                title="Save ALL of the currently loaded palette(s)"
-                @click="savePalettes()"
-                v-if="updatePalette">
-          <i aria-hidden="true"
-              class="q-icon material-icons">save</i>
+        <button
+          v-if="updatePalette"
+          class="no-style palette__sliders__save --active palette__sliders__buttons"
+          title="Save ALL of the currently loaded palette(s)"
+          @click="savePalettes()"
+        >
+          <i
+            aria-hidden="true"
+            class="q-icon material-icons"
+          >save</i>
         </button>
         <!-- Show a functionally useless button for the user after save. It's a human thing! -->
-        <button class="no-style palette__sliders__save palette__sliders__buttons"
-                title="Save ALL of the currently loaded palette(s)"
-                v-else>
-          <i aria-hidden="true"
-              class="q-icon material-icons">save</i>
+        <button
+          v-else
+          class="no-style palette__sliders__save palette__sliders__buttons"
+          title="Save ALL of the currently loaded palette(s)"
+        >
+          <i
+            aria-hidden="true"
+            class="q-icon material-icons"
+          >save</i>
         </button>
       </div>
       <div>
         <div>
           <label>R</label>
           <q-slider
-            class="palette__sliders__slider"
             v-model="RR"
+            class="palette__sliders__slider"
             color="red"
             :min="0"
             :max="255"
@@ -70,8 +95,8 @@
         <div>
           <label>G</label>
           <q-slider
-            class="palette__sliders__slider"
             v-model="GG"
+            class="palette__sliders__slider"
             color="green"
             :min="0"
             :max="255"
@@ -82,8 +107,8 @@
         <div>
           <label>B</label>
           <q-slider
-            class="palette__sliders__slider"
             v-model="BB"
+            class="palette__sliders__slider"
             color="blue"
             :min="0"
             :max="255"
@@ -93,36 +118,67 @@
         </div>
       </div>
       <div>
-        <button class="no-style palette__sliders__undo palette__sliders__buttons"
-                style="color: red"
-                @click="resetActiveColor()"
-                title="reset to saved version of palette">
-          <icon name="undo"/>
+        <button
+          class="no-style palette__sliders__undo palette__sliders__buttons"
+          style="color: red"
+          title="reset to saved version of palette"
+          @click="resetActiveColor()"
+        >
+          <icon name="undo" />
         </button>
       </div>
       <div class="palette__sliders__buttons">
-        <button class="no-style palette__sliders__copy-paste"
-                style="color: black"
-                @click="setPaletteClipboard(activePalette)"
-                title="copy current palette">
-          <icon name="copy"/>
+        <button
+          class="no-style palette__sliders__copy-paste"
+          style="color: black"
+          title="copy current palette"
+          @click="setPaletteClipboard(activePalette)"
+        >
+          <icon name="copy" />
         </button>
-        <button class="no-style palette__sliders__copy-paste"
-                style="color: black"
-                @click="pasteClipboardPalette"
-                title="paste to current palette"
-                :disabled="paletteClipboard.length ? false : 'disabled'">
-          <icon name="paste"/>
+        <button
+          class="no-style palette__sliders__copy-paste"
+          style="color: black"
+          title="paste to current palette"
+          :disabled="paletteClipboard.length ? false : 'disabled'"
+          @click="pasteClipboardPalette"
+        >
+          <icon name="paste" />
         </button>
       </div>
     </div>
     <div class="palette__sprite-mode">
       Sprite Mode Mask Color:
-        <q-radio keep-color v-model="spriteMaskColor" val="blue" color="blue" />
-        <q-radio keep-color v-model="spriteMaskColor" val="green" color="green" />
-        <q-radio keep-color v-model="spriteMaskColor" val="red" color="red" />
-        <q-radio keep-color v-model="spriteMaskColor" val="yellow" color="yellow" />
-        <q-radio keep-color v-model="spriteMaskColor" val="purple" color="purple" />
+      <q-radio
+        v-model="spriteMaskColor"
+        keep-color
+        val="blue"
+        color="blue"
+      />
+      <q-radio
+        v-model="spriteMaskColor"
+        keep-color
+        val="green"
+        color="green"
+      />
+      <q-radio
+        v-model="spriteMaskColor"
+        keep-color
+        val="red"
+        color="red"
+      />
+      <q-radio
+        v-model="spriteMaskColor"
+        keep-color
+        val="yellow"
+        color="yellow"
+      />
+      <q-radio
+        v-model="spriteMaskColor"
+        keep-color
+        val="purple"
+        color="purple"
+      />
     </div>
   </div>
 </template>
@@ -143,6 +199,18 @@ export default {
   name: 'palette',
   components: {
     Icon
+  },
+  data () {
+    return {
+      activeColorIndex: 0,
+      activePalette: [],
+      defaultPalette: undefined,
+      initialisingPalette: true, // prevents updates being fired on palette defaults
+      RR: 0,
+      GG: 0,
+      BB: 0,
+      spriteMaskColor: 'blue'
+    }
   },
   computed: {
     ...mapGetters([
@@ -171,17 +239,35 @@ export default {
         this.getActivePaletteInPalettes.hasOwnProperty('palette')
     }
   },
-  data () {
-    return {
-      activeColorIndex: 0,
-      activePalette: [],
-      defaultPalette: undefined,
-      initialisingPalette: true, // prevents updates being fired on palette defaults
-      RR: 0,
-      GG: 0,
-      BB: 0,
-      spriteMaskColor: 'blue'
-    }
+  watch: {
+    activePaletteIndex (newVal) {
+      this.activePalette = this.getActivePaletteInPalettes.palette
+      this.defaultPalette = cloneDeep(this.activePalette)
+      this.initialisingPalette = true
+    },
+    currentColor (newVal) {
+      this.initialisingPalette = true
+      this.RR = newVal[0]
+      this.GG = newVal[1]
+      this.BB = newVal[2]
+    },
+    palettes (newVal) {
+      this.activePalette = this.getActivePaletteInPalettes.palette
+      this.defaultPalette = cloneDeep(this.activePalette)
+      this.initialisingPalette = true
+    },
+    refreshPalette (newVal) {
+      this.activePalette = this.getActivePaletteInPalettes.palette
+      this.defaultPalette = cloneDeep(this.activePalette)
+      this.initialisingPalette = true
+    },
+    RR (newVal) { this.setCompleteHexColor('RR', newVal) },
+    GG (newVal) { this.setCompleteHexColor('GG', newVal) },
+    BB (newVal) { this.setCompleteHexColor('BB', newVal) },
+    spriteMaskColor (newVal) { this.setSpriteMaskColor(newVal) }
+  },
+  updated () {
+    this.initialisingPalette = false
   },
   methods: {
     ...mapActions([
@@ -259,41 +345,14 @@ export default {
           const color = (it === key ? newColor : this[it]).toString(16)
           return str + (color.length === 1 ? '0' + color : color)
         }.bind(this), '#'),
-        isInitialising: this.initialisingPalette })
+        isInitialising: this.initialisingPalette
+      })
       this.activePalette = this.getActivePaletteInPalettes.palette
     }
-  },
-  watch: {
-    activePaletteIndex (newVal) {
-      this.activePalette = this.getActivePaletteInPalettes.palette
-      this.defaultPalette = cloneDeep(this.activePalette)
-      this.initialisingPalette = true
-    },
-    currentColor (newVal) {
-      this.initialisingPalette = true
-      this.RR = newVal[0]
-      this.GG = newVal[1]
-      this.BB = newVal[2]
-    },
-    palettes (newVal) {
-      this.activePalette = this.getActivePaletteInPalettes.palette
-      this.defaultPalette = cloneDeep(this.activePalette)
-      this.initialisingPalette = true
-    },
-    refreshPalette (newVal) {
-      this.activePalette = this.getActivePaletteInPalettes.palette
-      this.defaultPalette = cloneDeep(this.activePalette)
-      this.initialisingPalette = true
-    },
-    RR (newVal) { this.setCompleteHexColor('RR', newVal) },
-    GG (newVal) { this.setCompleteHexColor('GG', newVal) },
-    BB (newVal) { this.setCompleteHexColor('BB', newVal) },
-    spriteMaskColor (newVal) { this.setSpriteMaskColor(newVal) }
-  },
-  updated () {
-    this.initialisingPalette = false
   }
 }
 </script>
 
-<style>@import '../css/palette.css';</style>
+<style>
+@import "../css/palette.css";
+</style>

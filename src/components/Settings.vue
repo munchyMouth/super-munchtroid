@@ -4,24 +4,31 @@
       <div class="settings__show-unused">
         <div>Show unused poses:</div>
         <div>
-          <button class="no-style"
-                  @click="setshowUnused()">
+          <button
+            class="no-style"
+            @click="setshowUnused()"
+          >
             <icon :name="showUnused ? 'regular/check-circle' : 'regular/circle'" />
           </button>
         </div>
       </div>
-      <hr />
-      <search-box @load-entry="choosePoseFromSearchEntry($event)"/>
+      <hr>
+      <search-box @load-entry="choosePoseFromSearchEntry($event)" />
     </template>
     <div class="settings__dropdown-label pose">
-      <strong>{{ this.tab === 'special' ? 'Special ' : '' }}Pose: </strong>
+      <strong>{{ tab === 'special' ? 'Special ' : '' }}Pose: </strong>
     </div>
-    <select class="settings__dropdown" @change="choosePose()">
-      <option v-for="({ name, index, unused }, i) in poses"
-              :key="i"
-              :value="index"
-              :class="unused ? '--unused' : ''"
-              :selected="i === currentPose ? 'selected' : false">
+    <select
+      class="settings__dropdown"
+      @change="choosePose()"
+    >
+      <option
+        v-for="({ name, index, unused }, i) in poses"
+        :key="i"
+        :value="index"
+        :class="unused ? '--unused' : ''"
+        :selected="i === currentPose ? 'selected' : false"
+      >
         {{ name }}
       </option>
     </select>
@@ -29,10 +36,12 @@
       <strong>Palette Set: </strong>
     </div>
     <select @change="choosePalette()">
-      <option v-for="({ name, id, length }, i) in settings.PALETTES"
-              :key="i"
-              :value="id"
-              :selected="i === currentPalette ? 'selected' : false">
+      <option
+        v-for="({ name, id, length }, i) in settings.PALETTES"
+        :key="i"
+        :value="id"
+        :selected="i === currentPalette ? 'selected' : false"
+      >
         {{ name }} (cycles: {{ length / 32 }})
       </option>
     </select>
@@ -40,57 +49,69 @@
       title="Frame No:"
       :value="`${currentFrameIndex + 1} of ${frames.length}`"
       @decrement="frameDec()"
-      @increment="frameInc()" />
+      @increment="frameInc()"
+    />
     <plus-minus-field
       title="Sprite Zoom:"
       :value="`${spriteRatio} : 1px`"
       @decrement="spriteZoomOut()"
-      @increment="spriteZoomIn()" />
-    <hr />
+      @increment="spriteZoomIn()"
+    />
+    <hr>
     <div class="settings__frame-tree">
       <label>
         <strong>Sprite Manager: </strong>
       </label>
       <template v-if="tileMapFrame">
-        <tree v-for="(half, j) in ['top', 'bottom']"
-              :key="tileMapFrame[half]._id + j"
-              :label="half"
-              :open-override="activeHalf === tileMapFrame[half]._id + j
-                ? activeHalf
-                : false"
-              @opened="clearActiveSprite(tileMapFrame[half]._id + j)"
-              @closed="clearActiveSprite()">
-          <template slot="default" slot-scope="spriteIs">
-          <tree-li>
-            <tree v-for="(sprite, k) in tileMapFrame[half].tileMap.sprites"
-                  :key="sprite._id + k"
-                  :open-override="activeSpriteAddress &&
-                    activeSpriteAddress === sprite._address
-                      ? sprite._id + k
-                      : spriteIs.open"
-                  :label="sprite._address"
-                  @opened="actionSelectedSprite({ half, index: k, ...sprite })"
-                  @closed="clearActiveSprite()">
-              <tree-li>
-                <sprite-manager :half="half"
-                                :index="k"/>
-              </tree-li>
-            </tree>
-          </tree-li>
+        <tree
+          v-for="(half, j) in ['top', 'bottom']"
+          :key="tileMapFrame[half]._id + j"
+          :label="half"
+          :open-override="activeHalf === tileMapFrame[half]._id + j
+            ? activeHalf
+            : false"
+          @opened="clearActiveSprite(tileMapFrame[half]._id + j)"
+          @closed="clearActiveSprite()"
+        >
+          <template
+            slot="default"
+            slot-scope="spriteIs"
+          >
+            <tree-li>
+              <tree
+                v-for="(sprite, k) in tileMapFrame[half].tileMap.sprites"
+                :key="sprite._id + k"
+                :open-override="activeSpriteAddress && activeSpriteAddress === sprite._address ? sprite._id + k : spriteIs.open"
+                :label="sprite._address"
+                @opened="actionSelectedSprite({ half, index: k, ...sprite })"
+                @closed="clearActiveSprite()"
+              >
+                <tree-li>
+                  <sprite-manager
+                    :half="half"
+                    :index="k"
+                  />
+                </tree-li>
+              </tree>
+            </tree-li>
           </template>
         </tree>
       </template>
       <div class="settings__frame-tree__save">
-      <hr />
-        <button :class="`no-style ${updateSprite ? '--active' : ''}`"
-                @click="saveSprites">
+        <hr>
+        <button
+          :class="`no-style ${updateSprite ? '--active' : ''}`"
+          @click="saveSprites"
+        >
           <icon name="save" /> Save All Sprite Changes
         </button>
       </div>
       <div class="settings__frame-tree__save">
-      <hr />
-        <button :class="`no-style ${updateVram ? '--active' : ''}`"
-                @click="saveVram">
+        <hr>
+        <button
+          :class="`no-style ${updateVram ? '--active' : ''}`"
+          @click="saveVram"
+        >
           <icon name="save" /> Save All VRAM Changes
         </button>
       </div>
@@ -128,6 +149,14 @@ export default {
     SpriteManager,
     Tree,
     TreeLi
+  },
+  data () {
+    return {
+      activeHalf: undefined,
+      previousPaletteIndex: 0,
+      previousPoseIndex: 0,
+      showUnused: false
+    }
   },
   computed: {
     ...mapGetters([
@@ -177,12 +206,15 @@ export default {
       poses: this.poses
     }
   },
-  data () {
-    return {
-      activeHalf: undefined,
-      previousPaletteIndex: 0,
-      previousPoseIndex: 0,
-      showUnused: false
+  watch: {
+    showUnused (newValue, oldValue) {
+      this.choosePose(true)
+    },
+    decrementFrame () { this.frameDec() },
+    incrementFrame () { this.frameInc() },
+    shortcutTriggerFullSave () {
+      this.saveVram()
+      this.saveSprites()
     }
   },
   methods: {
@@ -205,7 +237,7 @@ export default {
     choosePalette () {
       if (!this.updatePalette ||
         (this.updatePalette &&
-        confirm(paletteWarning))) {
+          confirm(paletteWarning))) {
         this.previousPaletteIndex = event.currentTarget.selectedIndex
         ipcRenderer.send('Load Palettes', {
           filePath: this.filePath,
@@ -325,7 +357,7 @@ export default {
     setshowUnused () {
       if ((!this.updateVram && !this.updateSprite) ||
         ((this.updateSprite || this.updateVram) &&
-        confirm(poseWarning))) {
+          confirm(poseWarning))) {
         this.showUnused = !this.showUnused
       }
     },
@@ -342,21 +374,12 @@ export default {
     validatePose () {
       return (!this.updateVram && !this.updateSprite) ||
         ((this.updateSprite || this.updateVram) &&
-        confirm(poseWarning))
-    }
-  },
-  watch: {
-    showUnused (newValue, oldValue) {
-      this.choosePose(true)
-    },
-    decrementFrame () { this.frameDec() },
-    incrementFrame () { this.frameInc() },
-    shortcutTriggerFullSave () {
-      this.saveVram()
-      this.saveSprites()
+          confirm(poseWarning))
     }
   }
 }
 </script>
 
-<style>@import '../css/settings.css';</style>
+<style>
+@import "../css/settings.css";
+</style>

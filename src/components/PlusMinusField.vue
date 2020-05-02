@@ -1,20 +1,26 @@
 <template>
   <div class="plus-minus-field">
-      <strong>{{ title }}</strong>&nbsp;
-      <div>
-        <button class="no-style"
-              @click="$emit('decrement', true)">
+    <strong>{{ title }}</strong>&nbsp;
+    <div>
+      <button
+        class="no-style"
+        @click="$emit('decrement', true)"
+      >
         <icon name="minus" />
-        </button>
-        <input class="six-char"
-              :value="value"
-              disabled/>
-        <button class="no-style"
-                @click="$emit('increment', true)">
-          <icon name="plus" />
-        </button>
-      </div>
+      </button>
+      <input
+        class="six-char"
+        :value="value"
+        disabled
+      >
+      <button
+        class="no-style"
+        @click="$emit('increment', true)"
+      >
+        <icon name="plus" />
+      </button>
     </div>
+  </div>
 </template>
 
 <script>
@@ -36,7 +42,7 @@ export default {
 .plus-minus-field {
   display: flex;
   justify-content: center;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 .plus-minus-field strong {
   width: 35%;

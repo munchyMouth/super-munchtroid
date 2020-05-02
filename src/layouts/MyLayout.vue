@@ -1,36 +1,46 @@
 <template>
-  <q-layout class="munch-layout"
-            view="lHh Lpr lFf">
-    <help v-show="showHelp" />
+  <q-layout
+    class="munch-layout"
+    view="lHh Lpr lFf"
+  >
+    <help-dialog v-show="showHelp" />
     <q-layout-header v-if="filePath">
-      <div class="help-back"
-           v-show="showHelp"
-           @click="toggleShowHelp">&nbsp;</div>
+      <div
+        v-show="showHelp"
+        class="help-back"
+        @click="toggleShowHelp"
+      >
+        &nbsp;
+      </div>
       <q-toolbar>
         <q-btn
           flat
           dense
           round
+          aria-label="Settings"
           @click="toggleLayoutDrawerOpen()"
-          aria-label="Settings">
+        >
           <q-icon name="settings" />
         </q-btn>
         <q-toolbar-title>
-            <strong>
-              {{ this.activeSpriteAddress ? 'Sprite Mode' : 'Editor Mode' }}
-            </strong>
-            <div slot="subtitle">
-              {{ this.activeSpriteAddress
-                  ? 'Left-click on VRAM reassigns current sprite; right-click on VRAM opens a new tile in the editor'
-                  : 'Left-click on VRAM will open a new tile in the editor'
-              }}
-            </div>
-          </q-toolbar-title>
-          <button class="no-style show-vram"
-                  @click="toggleVram">
-            <strong>VRAM</strong>&nbsp;
-            <icon :name="showVram ? 'eye' : 'eye-slash'" />
-          </button>
+          <strong>
+            {{ activeSpriteAddress ? 'Sprite Mode' : 'Editor Mode' }}
+          </strong>
+          <div slot="subtitle">
+            {{
+              activeSpriteAddress
+                ? 'Left-click on VRAM reassigns current sprite; right-click on VRAM opens a new tile in the editor'
+                : 'Left-click on VRAM will open a new tile in the editor'
+            }}
+          </div>
+        </q-toolbar-title>
+        <button
+          class="no-style show-vram"
+          @click="toggleVram"
+        >
+          <strong>VRAM</strong>&nbsp;
+          <icon :name="showVram ? 'eye' : 'eye-slash'" />
+        </button>
       </q-toolbar>
     </q-layout-header>
 
@@ -40,16 +50,28 @@
     >
       <template v-if="!hasError && romLoaded">
         <div class="settings__tab">
-          <button :class="`no-style ${tab === 'basic' ? '' : '--inactive'}`" @click="changeTab('basic')">Basic</button>
-          <button :class="`no-style ${tab === 'special' ? '' : '--inactive'}`" @click="changeTab('special')">Special</button>
+          <button
+            :class="`no-style ${tab === 'basic' ? '' : '--inactive'}`"
+            @click="changeTab('basic')"
+          >
+            Basic
+          </button>
+          <button
+            :class="`no-style ${tab === 'special' ? '' : '--inactive'}`"
+            @click="changeTab('special')"
+          >
+            Special
+          </button>
         </div>
-        <settings/>
+        <settings />
       </template>
       <template v-else-if="hasError">
         <strong class="settings__error-list">{{ error.type }}</strong>
         <ul class="settings__error-list">
-          <li v-for="(message, i) in error.message"
-              :key="i">
+          <li
+            v-for="(message, i) in error.message"
+            :key="i"
+          >
             {{ message }}
           </li>
         </ul>
@@ -83,12 +105,12 @@ import Icon from 'vue-awesome/components/Icon'
 
 import { poseWarning } from '../libs/messages.json'
 import Settings from '../components/Settings.vue'
-import Help from '../components/Help.vue'
+import HelpDialog from '../components/HelpDialog.vue'
 
 export default {
   name: 'MyLayout',
   components: {
-    Help,
+    HelpDialog,
     Icon,
     Settings
   },
@@ -120,8 +142,8 @@ export default {
     changeTab (tab) {
       if (tab !== this.tab &&
         ((!this.updateVram && !this.updateSprite) ||
-        ((this.updateSprite || this.updateVram) &&
-        confirm(poseWarning)))) {
+          ((this.updateSprite || this.updateVram) &&
+            confirm(poseWarning)))) {
         this.setTab(tab)
         this.setLoading(true)
         this.setActiveSprite()
@@ -147,11 +169,12 @@ export default {
 </script>
 
 <style>
-.munch-layout, .q-layout-page-container {
+.munch-layout,
+.q-layout-page-container {
   height: 100%;
 }
 .settings__tab button {
-  padding: .5rem !important;
+  padding: 0.5rem !important;
   width: 50%;
   margin-bottom: 1rem;
   font-weight: bolder;
@@ -164,7 +187,7 @@ export default {
   height: 100%;
   position: absolute;
   background: #ccc;
-  opacity: .5;
+  opacity: 0.5;
   z-index: 95;
 }
 </style>

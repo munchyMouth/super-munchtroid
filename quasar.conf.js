@@ -63,6 +63,7 @@ module.exports = function (ctx) {
         'QIcon',
         'QList',
         'QListHeader',
+        'QModal',
         'QItem',
         'QItemMain',
         'QItemSide',
@@ -76,7 +77,8 @@ module.exports = function (ctx) {
         'QTabPane'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [
