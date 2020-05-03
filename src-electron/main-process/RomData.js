@@ -44,7 +44,7 @@ export default stampit({
     }.bind(this)
 
     this.reduce = async (items, fn, initialValue) => {
-      await self.each(
+      await this.each(
         items, async (item) => {
           initialValue = await fn(initialValue, item)
         })

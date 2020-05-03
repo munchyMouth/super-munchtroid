@@ -120,6 +120,7 @@ export default {
     state.activeSprite = o
   },
   SET_BEAM_OFFSET_ACTION (state, a) { state.beamOffset.action = a },
+  SET_BEAM_OFFSET_DATA (state, d) { state.beamOffset.data = d },
   SET_BEAM_OFFSET_DIRECTION (state, d) { state.beamOffset.direction = d },
   SET_BEAM_OFFSET_INDEX (state, i) { state.beamOffset.index = i },
   SET_COPIED_TILE_DATA (state) {

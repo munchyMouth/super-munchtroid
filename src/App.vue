@@ -71,10 +71,10 @@ export default {
             this.setSettings({
               PALETTES: object.PALETTES,
               POSES: object.POSES,
-              SPECIAL_POSES: object.SPECIAL_POSES,
-              BEAM_DATA: object.BEAM_DATA
+              SPECIAL_POSES: object.SPECIAL_POSES
             })
             await this.setSamus(object)
+            this.setBeamOffsetData(object.beam)
             this.setPalettes(object)
           } catch (e) {
             this.setError({
@@ -200,6 +200,7 @@ export default {
       'incrementFrameToggle',
       'pastecopiedTile',
       'popFromUndoCache',
+      'setBeamOffsetData',
       'setCopiedTileData',
       'setEventObserver',
       'setError',

@@ -1,26 +1,26 @@
 {
   "STATIONARY": {
     "X": {
-      "DEFAULT": "0x90C204",
-      "GRAPPLE_ORIGIN": "0x90C14A",
-      "GRAPPLE_DESTINATION": "0x90C122"
+      "DEFAULT": "0x84204",
+      "GRAPPLE_ORIGIN": "0xDC14A",
+      "GRAPPLE_DESTINATION": "0xDC122"
     },
     "Y": {
-      "DEFAULT": "0x90C218",
-      "GRAPPLE_ORIGIN": "0x90C15E",
-      "GRAPPLE_DESTINATION": "0x90C136"
+      "DEFAULT": "0x84218",
+      "GRAPPLE_ORIGIN": "0xDC15E",
+      "GRAPPLE_DESTINATION": "0xDC136"
     }
   },
   "RUNNING": {
     "X": {
-      "DEFAULT": "0x90C22C",
-      "GRAPPLE_ORIGIN": "0x90C19A",
-      "GRAPPLE_DESTINATION": "0x90C172"
+      "DEFAULT": "0x8422C",
+      "GRAPPLE_ORIGIN": "0xDC19A",
+      "GRAPPLE_DESTINATION": "0xDC172"
     },
     "Y": {
-      "DEFAULT": "0x90C240",
-      "GRAPPLE_ORIGIN": "90x90C1AE",
-      "GRAPPLE_DESTINATION": "0x90C186"
+      "DEFAULT": "0x84240",
+      "GRAPPLE_ORIGIN": "0xDC1AE",
+      "GRAPPLE_DESTINATION": "0xDC186"
     }
   }
 }

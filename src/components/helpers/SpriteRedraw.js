@@ -50,6 +50,19 @@ export default {
     this.context.lineTo(this.spriteEndX, this.spriteZeroX)
     this.context.stroke()
   },
+  redrawBeamCursor (R) {
+    if (this.hasActiveBeamOffsetIndex) {
+      const offsetX = (R / 3 * this.getBeamCursor.width) / 2
+      const offsetY = (R / 3 * this.getBeamCursor.height) / 2
+      this.context.drawImage(
+        this.getBeamCursor,
+        this.spriteZeroX - offsetX,
+        this.spriteZeroY - offsetY,
+        R / 3 * this.getBeamCursor.width,
+        R / 3 * this.getBeamCursor.height
+      )
+    }
+  },
   redrawSprite ({ _address, data, hFlip, R, vFlip, xOffset, yOffset }) {
     (vFlip ? data.slice().reverse() : data).forEach(function (line, y) {
       (hFlip ? line.slice().reverse() : line).forEach(function (pixel, x) {
@@ -77,6 +90,7 @@ export default {
         this.prepareAndRedrawSprite({ half, R, ...sprite, edgeCaseIndex: i })
       }.bind(this))
     }.bind(this))
+    this.redrawBeamCursor(R)
   },
   setSpriteBoxMaskColor (palette) {
     const p = palette.replace('#', '')

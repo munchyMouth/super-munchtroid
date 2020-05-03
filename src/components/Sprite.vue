@@ -34,6 +34,7 @@ export default {
     return {
       canvas: undefined,
       context: undefined,
+      beamCursor: undefined,
       drag: false,
       dragX: undefined,
       dragY: undefined,
@@ -49,12 +50,15 @@ export default {
       'currentFrame',
       'currentFrameIndex',
       'editorUpdate',
+      'getActivePaletteInPalettes',
+      'getBeamCursor',
+      'getBeamIndex',
       'getSpriteByProps',
       'getSpritesByHalf',
       'getVramByProps',
+      'hasActiveBeamOffsetIndex',
       'palettes',
       'refreshPalette',
-      'getActivePaletteInPalettes',
       'selectedTile',
       'selectedTiles',
       'showSprite',
@@ -106,11 +110,10 @@ export default {
       this.setWrapperHeight()
       this.redraw()
     },
-    currentFrameIndex () {
-      this.redraw()
-    },
+    currentFrameIndex () { this.redraw() },
     editorUpdate () { this.redraw() },
     getActivePaletteInPalettes () { this.redraw() },
+    getBeamIndex () { this.redraw() },
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },
     selectedTile () { this.redraw() },
@@ -126,6 +129,8 @@ export default {
     vram () { this.redraw() }
   },
   mounted () {
+    this.beamCursor = new Image()
+    this.beamCursor.src = './beamCrossHair.png'
     this.canvas = this.$refs['sprite']
     this.context = this.$refs['sprite'].getContext('2d')
     this.$refs['sprite'].width = this.spriteEndX

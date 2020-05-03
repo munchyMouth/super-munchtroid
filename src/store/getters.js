@@ -62,6 +62,8 @@ export default {
         .palette[state.activePaletteColor[leftOrRight]]
       : undefined
   },
+  getBeamIndex: state => state.beamOffset.index,
+  getBeamCursor: state => state.beamOffset ? state.beamOffset.cursorImage : undefined,
   getSpritesByHalf: state => ({ half }) => {
     return state.tileMaps[half]
       .tileMap

@@ -2,6 +2,7 @@ import { dialog } from 'electron'
 import { readFileSync } from 'fs'
 import path from 'path'
 
+import Beam from './Beam'
 import Samus from './Samus'
 import Palette from './Palette'
 
@@ -47,8 +48,9 @@ export const getSubmenu = function (event, mainWindow, POSES) {
           if (filePath && filePath.length) {
             const palettes = await Palette({ filePath }).getPalettesByIndex()
             const samus = await Samus({ filePath }).load(0)
+            const beam = await Beam({ filePath }).load()
             event.sender.send(
-              'ROM Loaded', { ...samus, filePath, palettes, BEAM_DATA, POSES, PALETTES, SPECIAL_POSES })
+              'ROM Loaded', { ...samus, beam, filePath, palettes, BEAM_DATA, POSES, PALETTES, SPECIAL_POSES })
           }
         } catch (e) {
           event.sender.send('ROM Error', {

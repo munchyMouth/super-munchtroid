@@ -83,6 +83,7 @@ export default {
     commit('SET_SPRITE_DEFAULT', sprite ? cloneDeep(sprite) : undefined)
   },
   setBeamOffsetAction ({ commit }, action) { commit('SET_BEAM_OFFSET_ACTION', action) },
+  setBeamOffsetData ({ commit }, data) { commit('SET_BEAM_OFFSET_DATA', data) },
   setBeamOffsetDirection ({ commit }, direction) { commit('SET_BEAM_OFFSET_DIRECTION', direction) },
   setBeamOffsetIndex ({ commit }, index) { commit('SET_BEAM_OFFSET_INDEX', index) },
   // the copy function below should only copy tile data, any more information would repoint the tile into which it is pasted!

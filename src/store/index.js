@@ -41,7 +41,13 @@ const store = {
     beamOffset: {
       action: 'STATIONARY',
       direction: 'FACING_LEFT',
-      index: undefined
+      index: undefined,
+      data: undefined,
+      cursorImage: (function () {
+        const img = new Image()
+        img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AUDFTQbsPaIKgAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAADVklEQVRIx72WP2hbVxTGf0fVs5WnPwZbUakooRY2DVh2lkezxClIxZkLtumouYPBUyZ1qKdMhg6dNQY70Dmh0hBnKQhKYxvSRkgZikpkKeDoT54tVbfDu+9F/+I0Q3wW6d777vfd7zvn3fOE90TWsrz/O8WiGpiXgfkLMeR94KYIC34/1w2D5cePVS+Vwl8ocHj7tjzrdin1enSUupBM3gUeEeFOIMByaAoSwBLI93mlnqSRW3nUz2nhGCjDYeuch7bN63eQySSCFcNgPWLCKqhUH7vTpN1scPXbiirnQiQyLU5+mZdgeI6AGUYKPjiAB687PO12x4j8owS3pqdZiwdgC9pvXlH76/lEC5qnJzRPTwCIfbVI8OtZ1n8yiVRtnpydkbUsj8g3uHHFMFiLB1Dbinq9Qmjtd/5P1KrPqdcrqG3FWjzAimEMrftcFRERx6ItaLx8QfO05j2UyLRUItNSAPNf3hybc5TVaLx8AVuwHjGJiHjueEruBAKw6lg0SlDOhdgYOf0GoPOjEpmWR9R+8wpWNZ6rJGtZmCIsh6ZQqT616lAOvETvHaWdIrnhLOwdpSWRaVHOhQDUoHUq1Wc5NIWp1fgAFvx+SIDdaY4p0KcUSeYZ1K7HHtGgdXanCQmN6265bhiwBO1mY8iSu5kWylXgxvSvQ0N1lJa72i432s0GLGlc/Z4oPiCUUojIh2xxSHqpFJ/8KFRKv3kLbhVxQ+sdUQDA2TfQB/5whpU/B/Yv3OTfHxT+QuFylPizliWbpknyO4P6Z2XvLU5kWmpDVxELWnYg7x1I2TpXJdhM5tW+U9ICEJ65SvSfBEf3u+x1Ok7in3W7cAzB8NzQCe7lQkgyr6iNWOTVK0gyr+45ZexFMDwHxxrXra5SrwdlCJhh78FyLuSVp1zLK0p6oa9/SyDX8l6ZuypA45Q1LuDbKRbpKMVh6xwp+IjFFycSbSa1VTrJm8nJBLH4IlLwcdg6p6MUO8Xi22vloW3DAQSvzBKeiY0R7Y8kc9/J2xBBeCZG8MosHGi80X6StSynj3xuorbV2CU5egsMgrsEc59+gewKD/52+srEq/5pt8ujqo3sCtHo/JB1F0Usvkg0Oo/sCo+qtte4LrUzXn6Pv7SvlY/x3fUfJy/SqWuzBE0AAAAASUVORK5CYII='
+        return img
+      })()
     },
     currentFrameIndex: 0,
     currentPalette: 0,
