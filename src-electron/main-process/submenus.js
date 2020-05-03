@@ -24,6 +24,13 @@ const SPECIAL_POSES = JSON.parse(
       'libs',
       'SamusSpecialPoses.json')))
 
+const BEAM_DATA = JSON.parse(
+  readFileSync(
+    path.resolve(
+      projectDirectory,
+      'libs',
+      'BeamData.json')))
+
 export const getSubmenu = function (event, mainWindow, POSES) {
   return [
     {
@@ -41,7 +48,7 @@ export const getSubmenu = function (event, mainWindow, POSES) {
             const palettes = await Palette({ filePath }).getPalettesByIndex()
             const samus = await Samus({ filePath }).load(0)
             event.sender.send(
-              'ROM Loaded', { ...samus, filePath, palettes, POSES, PALETTES, SPECIAL_POSES })
+              'ROM Loaded', { ...samus, filePath, palettes, BEAM_DATA, POSES, PALETTES, SPECIAL_POSES })
           }
         } catch (e) {
           event.sender.send('ROM Error', {

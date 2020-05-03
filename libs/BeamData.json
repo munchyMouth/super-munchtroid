@@ -1,24 +1,24 @@
 {
   "STATIONARY": {
     "X": {
-      "NORMAL": "0x90C204",
+      "DEFAULT": "0x90C204",
       "GRAPPLE_ORIGIN": "0x90C14A",
       "GRAPPLE_DESTINATION": "0x90C122"
     },
     "Y": {
-      "NORMAL": "0x90C218",
+      "DEFAULT": "0x90C218",
       "GRAPPLE_ORIGIN": "0x90C15E",
       "GRAPPLE_DESTINATION": "0x90C136"
     }
   },
   "RUNNING": {
     "X": {
-      "NORMAL": "0x90C22C",
+      "DEFAULT": "0x90C22C",
       "GRAPPLE_ORIGIN": "0x90C19A",
       "GRAPPLE_DESTINATION": "0x90C172"
     },
     "Y": {
-      "NORMAL": "0x90C240",
+      "DEFAULT": "0x90C240",
       "GRAPPLE_ORIGIN": "90x90C1AE",
       "GRAPPLE_DESTINATION": "0x90C186"
     }

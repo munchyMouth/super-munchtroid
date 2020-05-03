@@ -8,6 +8,16 @@
   justify-content: space-evenly
 }
 
+.settings .collapsible {
+  font-weight: bold
+}
+.settings .collapsible.--red {
+  color: red
+}
+.settings .collapsible.--blue {
+  color: blue
+}
+
 .settings select {
   width: 100%;
   height: 2rem;

@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash'
 // Vuex refers to the execution of Actions as "dispatches"
 // -----------------------------------------------------------------------------
 export default {
+  clearBeamOffsetIndex ({ commit }) { commit('CLEAR_BEAM_OFFSET_INDEX') },
   clearSelectedTile ({ commit }) { commit('CLEAR_SELECTED_TILE') },
   clearSelectedTiles ({ commit }) { commit('CLEAR_SELECTED_TILES') },
   clearPalettesUpdateFlag ({ commit }, o) {
@@ -77,9 +78,13 @@ export default {
   setActivePalette ({ commit }, c) { commit('SET_ACTIVE_PALETTE', c) },
   setActivePaletteColor ({ commit }, obj) { commit('SET_ACTIVE_PALETTE_COLOR', obj) },
   setActiveSprite ({ commit }, sprite, setSpriteDefault = true) {
+    if (sprite) commit('CLEAR_BEAM_OFFSET_INDEX')
     commit('SET_ACTIVE_SPRITE', sprite)
     commit('SET_SPRITE_DEFAULT', sprite ? cloneDeep(sprite) : undefined)
   },
+  setBeamOffsetAction ({ commit }, action) { commit('SET_BEAM_OFFSET_ACTION', action) },
+  setBeamOffsetDirection ({ commit }, direction) { commit('SET_BEAM_OFFSET_DIRECTION', direction) },
+  setBeamOffsetIndex ({ commit }, index) { commit('SET_BEAM_OFFSET_INDEX', index) },
   // the copy function below should only copy tile data, any more information would repoint the tile into which it is pasted!
   setCopiedTileData ({ commit }) { commit('SET_COPIED_TILE_DATA') },
   setCurrentFrameIndex ({ commit }, i) {

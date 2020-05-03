@@ -1,3 +1,7 @@
+
+- replaced shortcuts popup with Quasar OOB popup
+- created BeamData.json
+
 10/02/20 2.16.2
 - ctrl+left/right events matched up to frame inc/dec
 - ctrl+shift+s setup for doing save to sprites and vram

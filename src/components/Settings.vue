@@ -59,46 +59,63 @@
     />
     <hr>
     <div class="settings__frame-tree">
-      <label>
-        <strong>Sprite Manager: </strong>
-      </label>
-      <template v-if="tileMapFrame">
-        <tree
-          v-for="(half, j) in ['top', 'bottom']"
-          :key="tileMapFrame[half]._id + j"
-          :label="half"
-          :open-override="activeHalf === tileMapFrame[half]._id + j
-            ? activeHalf
-            : false"
-          @opened="clearActiveSprite(tileMapFrame[half]._id + j)"
-          @closed="clearActiveSprite()"
-        >
-          <template
-            slot="default"
-            slot-scope="spriteIs"
+      <q-collapsible :opened="true">
+        <template slot="header">
+          <span :class="`collapsible${activeSprite ? ' --blue' : ''}`">
+            <q-icon name="directions_run" />
+            &nbsp;&nbsp;&nbsp;&nbsp;Sprite Manager
+          </span>
+        </template>
+        <template v-if="tileMapFrame">
+          <tree
+            v-for="(half, j) in ['top', 'bottom']"
+            :key="tileMapFrame[half]._id + j"
+            :label="half"
+            :open-override="activeHalf === tileMapFrame[half]._id + j
+              ? activeHalf
+              : false"
+            @opened="clearActiveSprite(tileMapFrame[half]._id + j)"
+            @closed="clearActiveSprite()"
           >
-            <tree-li>
-              <tree
-                v-for="(sprite, k) in tileMapFrame[half].tileMap.sprites"
-                :key="sprite._id + k"
-                :open-override="activeSpriteAddress && activeSpriteAddress === sprite._address ? sprite._id + k : spriteIs.open"
-                :label="sprite._address"
-                @opened="actionSelectedSprite({ half, index: k, ...sprite })"
-                @closed="clearActiveSprite()"
-              >
-                <tree-li>
-                  <sprite-manager
-                    :half="half"
-                    :index="k"
-                  />
-                </tree-li>
-              </tree>
-            </tree-li>
-          </template>
-        </tree>
-      </template>
-      <div class="settings__frame-tree__save">
+            <template
+              slot="default"
+              slot-scope="spriteIs"
+            >
+              <tree-li>
+                <tree
+                  v-for="(sprite, k) in tileMapFrame[half].tileMap.sprites"
+                  :key="sprite._id + k"
+                  :open-override="activeSpriteAddress && activeSpriteAddress === sprite._address ? sprite._id + k : spriteIs.open"
+                  :label="sprite._address"
+                  @opened="actionSelectedSprite({ half, index: k, ...sprite })"
+                  @closed="clearActiveSprite()"
+                >
+                  <tree-li>
+                    <sprite-manager
+                      :half="half"
+                      :index="k"
+                    />
+                  </tree-li>
+                </tree>
+              </tree-li>
+            </template>
+          </tree>
+        </template>
+      </q-collapsible>
+      <div class="settings__frame-tree__beam-offset">
         <hr>
+        <q-collapsible>
+          <template slot="header">
+            <span :class="`collapsible${hasActiveBeamOffsetIndex ? ' --red' : ''}`">
+              <q-icon name="my_locations" />
+              Beam Offsets
+            </span>
+          </template>
+          <beam-manager />
+        </q-collapsible>
+      </div>
+      <hr>
+      <div class="settings__frame-tree__save">
         <button
           :class="`no-style ${updateSprite ? '--active' : ''}`"
           @click="saveSprites"
@@ -107,7 +124,6 @@
         </button>
       </div>
       <div class="settings__frame-tree__save">
-        <hr>
         <button
           :class="`no-style ${updateVram ? '--active' : ''}`"
           @click="saveVram"
@@ -134,6 +150,7 @@ import Icon from 'vue-awesome/components/Icon'
 import { getUpdatedVramTiles } from './Miscellaneous'
 import { poseWarning, paletteWarning } from '../libs/messages.json'
 
+import BeamManager from './BeamManager.vue'
 import PlusMinusField from './PlusMinusField.vue'
 import SpriteManager from './SpriteManager.vue'
 import SearchBox from './SearchBox.vue'
@@ -143,6 +160,7 @@ import TreeLi from './TreeLi.vue'
 export default {
   name: 'settings',
   components: {
+    BeamManager,
     Icon,
     PlusMinusField,
     SearchBox,
@@ -160,12 +178,14 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'activeSprite',
       'activeSpriteAddress',
       'currentFrame',
       'currentFrameIndex',
       'currentPalette',
       'currentPose',
       'decrementFrame',
+      'hasActiveBeamOffsetIndex',
       'incrementFrame',
       'filePath',
       'frames',

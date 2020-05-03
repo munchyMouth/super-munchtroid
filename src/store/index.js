@@ -38,6 +38,11 @@ const store = {
     activePaletteIndex: 0,
     activePaletteColor: { left: 0, right: 0 },
     activeSprite: undefined,
+    beamOffset: {
+      action: 'STATIONARY',
+      direction: 'FACING_LEFT',
+      index: undefined
+    },
     currentFrameIndex: 0,
     currentPalette: 0,
     currentPose: 0,

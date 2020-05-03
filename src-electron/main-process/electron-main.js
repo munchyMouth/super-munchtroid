@@ -4,9 +4,6 @@ import { app, BrowserWindow, globalShortcut, ipcMain, Menu } from 'electron'
 import { readFileSync } from 'fs'
 import path from 'path'
 
-// case evt.keyCode === 18 && evt.key.toLowerCase() === 's' && evt.ctrlKey:
-//   console.log('FOUND')
-//   break
 import Palette from './Palette'
 import Samus from './Samus'
 import { getSubmenu } from './submenus.js'

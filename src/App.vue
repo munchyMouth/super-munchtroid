@@ -71,7 +71,8 @@ export default {
             this.setSettings({
               PALETTES: object.PALETTES,
               POSES: object.POSES,
-              SPECIAL_POSES: object.SPECIAL_POSES
+              SPECIAL_POSES: object.SPECIAL_POSES,
+              BEAM_DATA: object.BEAM_DATA
             })
             await this.setSamus(object)
             this.setPalettes(object)

@@ -16,6 +16,7 @@ export default {
     state.activePaletteColor.left = 0
     state.activePaletteColor.right = 0
   },
+  CLEAR_BEAM_OFFSET_INDEX (state) { state.beamOffset.index = undefined },
   CLEAR_EDITOR_FLIP (state) { state.editorFlip = { h: false, v: false } },
   CLEAR_ERROR (state) {
     state.error.type = ''
@@ -115,7 +116,12 @@ export default {
     state.updatePalette = true
     state.refreshPalette = !state.refreshPalette
   },
-  SET_ACTIVE_SPRITE (state, o) { state.activeSprite = o },
+  SET_ACTIVE_SPRITE (state, o) {
+    state.activeSprite = o
+  },
+  SET_BEAM_OFFSET_ACTION (state, a) { state.beamOffset.action = a },
+  SET_BEAM_OFFSET_DIRECTION (state, d) { state.beamOffset.direction = d },
+  SET_BEAM_OFFSET_INDEX (state, i) { state.beamOffset.index = i },
   SET_COPIED_TILE_DATA (state) {
     if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
       state.copiedTileData = cloneDeep(state.selectedTile.tile.data)

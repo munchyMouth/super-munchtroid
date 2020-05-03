@@ -78,6 +78,7 @@ export default {
     state.vram[half].parts[part],
   getVramTileByProps: state => ({ half, index, part }) =>
     state.vram[half].parts[part].tiles[index],
+  hasActiveBeamOffsetIndex: state => typeof state.beamOffset.index !== 'undefined',
   hasError: state => state.error.type || state.error.message.length,
   hasSelectedTile: state =>
     state.selectedTile &&
