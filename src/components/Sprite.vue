@@ -2,10 +2,10 @@
   <div :class="`sprite-outer-wrapper sprite-outer-wrapper${showSprite ? '--show' : '--hide'}`">
     <canvas
       ref="sprite"
-      :class="`sprite-canvas${(mouseInActiveSpriteArea || mouseInActiveCursorArea) ? '--active-sprite' : ''}`"
+      :class="`sprite-canvas${(mouseInActiveSpriteArea || mouseInActiveBeamCursorArea) ? '--active-sprite' : ''}`"
       @mousemove="getMousePos"
       @mouseout="clearActiveMouse"
-      @mousedown="drag = mouseInActiveSpriteArea"
+      @mousedown="drag = mouseInActiveSpriteArea || mouseInActiveBeamCursorArea"
       @mouseup="clearDrag"
     />
     <button
@@ -70,12 +70,6 @@ export default {
       'spriteRefresh',
       'tileMaps',
       'vram']),
-    beamCursorOffsetX () {
-      return this.getActiveBeamOffset('X') * this.spriteRatio
-    },
-    beamCursorOffsetY () {
-      return this.getActiveBeamOffset('Y') * this.spriteRatio
-    },
     beamCursorHeight () {
       return (this.spriteRatio / 3 * this.getBeamCursor.height)
     },
@@ -98,11 +92,13 @@ export default {
         this.activeSprite.yOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteY
         : false
     },
-    mouseInActiveCursorArea () {
-      return this.x >= this.beamCursorX - (this.beamCursorWidth / 2) &&
+    mouseInActiveBeamCursorArea () {
+      return typeof this.getBeamIndex !== 'undefined'
+        ? this.x >= this.beamCursorX - (this.beamCursorWidth / 2) &&
         this.y >= this.beamCursorY - (this.beamCursorHeight / 2) &&
         this.x <= this.beamCursorX + (this.beamCursorWidth / 2) &&
         this.y <= this.beamCursorY + (this.beamCursorHeight / 2)
+        : undefined
     },
     permitDragX () {
       const x = this.activeSprite.xOffset + (this.spriteX - this.dragX)
@@ -127,8 +123,8 @@ export default {
     // required for offseting in the future.
     spriteEndX () { return 80 * this.spriteRatio },
     spriteEndY () { return 80 * this.spriteRatio },
-    spriteMaxEndX () { return 80 * 6 },
-    spriteMaxEndY () { return 80 * 6 },
+    spriteMaxEndX () { return 80 * 8 },
+    spriteMaxEndY () { return 80 * 8 },
     spriteZeroY () { return (80 * this.spriteRatio) / 2 },
     spriteZeroX () { return (80 * this.spriteRatio) / 2 }
   },
@@ -156,8 +152,6 @@ export default {
     vram () { this.redraw() }
   },
   mounted () {
-    this.beamCursor = new Image()
-    this.beamCursor.src = './beamCrossHair.png'
     this.canvas = this.$refs['sprite']
     this.context = this.$refs['sprite'].getContext('2d')
     this.$refs['sprite'].width = this.spriteEndX
@@ -170,19 +164,18 @@ export default {
       'setSpriteProperty'
     ]),
     ...SpriteRedraw,
-    actionDrag () {
-      if (this.spriteX > 63 || this.spriteX < -63 ||
-        this.spriteY > 63 || this.spriteY < -63) this.clearDrag()
-      else if (this.drag) {
-        if (typeof this.dragX === 'undefined') {
-          this.dragX = this.spriteX
-          this.dragY = this.spriteY
-        }
-        if (this.permitDragX) this.setAxis('x')
-        if (this.permitDragY) this.setAxis('y')
+    actionBeamCursorDrag () {
+      console.log('TODO')
+    },
+    actionSpriteDrag () {
+      if (typeof this.dragX === 'undefined') {
         this.dragX = this.spriteX
         this.dragY = this.spriteY
       }
+      if (this.permitDragX) this.setAxis('x')
+      if (this.permitDragY) this.setAxis('y')
+      this.dragX = this.spriteX
+      this.dragY = this.spriteY
     },
     undoDrag () {
       this.setAxis('x', 'undo')
@@ -224,7 +217,18 @@ export default {
       var rect = evt.currentTarget.getBoundingClientRect()
       this.x = evt.clientX - rect.left
       this.y = evt.clientY - rect.top
-      this.actionDrag()
+
+      if (this.spriteX > 63 || this.spriteX < -63 ||
+        this.spriteY > 63 || this.spriteY < -63) this.clearDrag()
+      else if (this.drag) {
+        switch (true) {
+          case this.mouseInActiveSpriteArea:
+            this.actionSpriteDrag()
+            break
+          case this.mouseInActiveBeamCursorArea:
+            this.actionBeamCursorDrag()
+        }
+      }
     },
     setWrapperHeight () {
       this.wrapperHeight =

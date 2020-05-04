@@ -52,12 +52,10 @@ export default {
   },
   redrawBeamCursor (R) {
     if (this.hasActiveBeamOffsetIndex) {
-      const offsetX = (R / 3 * this.getBeamCursor.width) / 2
-      const offsetY = (R / 3 * this.getBeamCursor.height) / 2
       this.context.drawImage(
         this.getBeamCursor,
-        (R * this.getActiveBeamOffset('X')) + this.spriteZeroX - offsetX,
-        (R * this.getActiveBeamOffset('Y')) + this.spriteZeroY - offsetY,
+        this.beamCursorX - (this.beamCursorWidth / 2),
+        this.beamCursorY - (this.beamCursorHeight / 2),
         R / 3 * this.getBeamCursor.width,
         R / 3 * this.getBeamCursor.height
       )
