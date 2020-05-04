@@ -2,7 +2,7 @@
   <div :class="`sprite-outer-wrapper sprite-outer-wrapper${showSprite ? '--show' : '--hide'}`">
     <canvas
       ref="sprite"
-      :class="`sprite-canvas${mouseInActiveSpriteArea ? '--active-sprite' : ''}`"
+      :class="`sprite-canvas${(mouseInActiveSpriteArea || mouseInActiveCursorArea) ? '--active-sprite' : ''}`"
       @mousemove="getMousePos"
       @mouseout="clearActiveMouse"
       @mousedown="drag = mouseInActiveSpriteArea"
@@ -50,6 +50,7 @@ export default {
       'currentFrame',
       'currentFrameIndex',
       'editorUpdate',
+      'getActiveBeamOffset',
       'getActivePaletteInPalettes',
       'getBeamCursor',
       'getBeamIndex',
@@ -69,6 +70,26 @@ export default {
       'spriteRefresh',
       'tileMaps',
       'vram']),
+    beamCursorOffsetX () {
+      return this.getActiveBeamOffset('X') * this.spriteRatio
+    },
+    beamCursorOffsetY () {
+      return this.getActiveBeamOffset('Y') * this.spriteRatio
+    },
+    beamCursorHeight () {
+      return (this.spriteRatio / 3 * this.getBeamCursor.height)
+    },
+    beamCursorWidth () {
+      return (this.spriteRatio / 3 * this.getBeamCursor.width)
+    },
+    beamCursorX () {
+      return (this.spriteRatio * this.getActiveBeamOffset('X')) +
+        this.spriteZeroX
+    },
+    beamCursorY () {
+      return (this.spriteRatio * this.getActiveBeamOffset('Y')) +
+        this.spriteZeroY
+    },
     mouseInActiveSpriteArea () {
       return this.activeSprite
         ? this.activeSprite.xOffset <= this.spriteX &&
@@ -76,6 +97,12 @@ export default {
         this.activeSprite.xOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteX &&
         this.activeSprite.yOffset + (this.activeSprite.load16x16 ? 16 : 8) >= this.spriteY
         : false
+    },
+    mouseInActiveCursorArea () {
+      return this.x >= this.beamCursorX - (this.beamCursorWidth / 2) &&
+        this.y >= this.beamCursorY - (this.beamCursorHeight / 2) &&
+        this.x <= this.beamCursorX + (this.beamCursorWidth / 2) &&
+        this.y <= this.beamCursorY + (this.beamCursorHeight / 2)
     },
     permitDragX () {
       const x = this.activeSprite.xOffset + (this.spriteX - this.dragX)

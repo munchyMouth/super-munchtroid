@@ -1,4 +1,4 @@
-import { handleIrregularHalfLogic } from '../components/Miscellaneous'
+import { handleIrregularHalfLogic, uIntToSignedInt } from '../components/Miscellaneous'
 
 // -----------------------------------------------------------------------------
 // Generally, getters just get a variable from the store. However, they're a
@@ -45,14 +45,16 @@ export default {
     ? state.vram : undefined,
   editorHFlip: state => state.editorFlip.h,
   editorVFlip: state => state.editorFlip.v,
-  getActivePaletteChunked: state => paletteIndex =>
-    state
-      .palettes[state.activePaletteIndex]
-      .palette[paletteIndex]
-      .replace('#', '')
-      .match(/[0-9A-F]{2}/gi)
-      .map(it => parseInt(it, 16)),
-  getActivePaletteInPalettes: state => state.palettes[state.activePaletteIndex || 0],
+  getActiveBeamOffset: state => xY =>
+    typeof state.beamOffset.index !== 'undefined' &&
+      state.beamOffset.action
+      ? uIntToSignedInt(
+        state
+          .beamOffset
+          .data[state.beamOffset.action][xY]
+          .DEFAULT
+          .data[state.beamOffset.index])
+      : undefined,
   getActiveColorFromPaletteInPalettes: state => leftOrRight => {
     return state.palettes.length &&
       typeof state.activePaletteColor[leftOrRight] === 'number' &&
@@ -62,6 +64,14 @@ export default {
         .palette[state.activePaletteColor[leftOrRight]]
       : undefined
   },
+  getActivePaletteChunked: state => paletteIndex =>
+    state
+      .palettes[state.activePaletteIndex]
+      .palette[paletteIndex]
+      .replace('#', '')
+      .match(/[0-9A-F]{2}/gi)
+      .map(it => parseInt(it, 16)),
+  getActivePaletteInPalettes: state => state.palettes[state.activePaletteIndex || 0],
   getBeamIndex: state => state.beamOffset.index,
   getBeamCursor: state => state.beamOffset ? state.beamOffset.cursorImage : undefined,
   getSpritesByHalf: state => ({ half }) => {

@@ -56,8 +56,8 @@ export default {
       const offsetY = (R / 3 * this.getBeamCursor.height) / 2
       this.context.drawImage(
         this.getBeamCursor,
-        this.spriteZeroX - offsetX,
-        this.spriteZeroY - offsetY,
+        (R * this.getActiveBeamOffset('X')) + this.spriteZeroX - offsetX,
+        (R * this.getActiveBeamOffset('Y')) + this.spriteZeroY - offsetY,
         R / 3 * this.getBeamCursor.width,
         R / 3 * this.getBeamCursor.height
       )

@@ -25,8 +25,7 @@ export default stampit(RomData, { /* extends RomData */
                     xYObj[key] = {
                       offset: BEAM_OFFSETS[position][xY][key],
                       data: _this.reverseByteWords(
-                        await _this.getOffsetData(parseInt(BEAM_OFFSETS[position][xY][key], 16), 20),
-                        'hex')
+                        await _this.getOffsetData(parseInt(BEAM_OFFSETS[position][xY][key], 16), 20))
                     }
                     return xYObj
                   }, {})

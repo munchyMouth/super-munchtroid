@@ -45,3 +45,7 @@ export function handleIrregularHalfLogic ({ half, vramIndex }) {
       ? 'bottom'
       : half)
 }
+
+export function uIntToSignedInt (word) {
+  return (word > 255) ? -(65535 - word) : word
+}
