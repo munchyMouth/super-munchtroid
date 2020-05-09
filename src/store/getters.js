@@ -142,11 +142,12 @@ export default {
       .map(it => parseInt(it, 16)),
   getActivePaletteInPalettes: state => state.palettes[state.activePaletteIndex || 0],
   getBeamCursor: state => state.beamOffset ? state.beamOffset.cursorImage : undefined,
+  getBeamData: state => state.beamOffset.data,
   getBeamIndex: state => state.beamOffset.index,
   getBeamAction: state => state.beamOffset.action,
   getBeamPosition: state => state.beamOffset.position,
   getBeamHasUpdatesByIndex: state => i => {
-    if (state.beamOffset.action) {
+    if (state.beamOffset.action && state.beamOffset.data) {
       for (let j of
         [state
           .beamOffset

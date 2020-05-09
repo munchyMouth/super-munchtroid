@@ -146,7 +146,6 @@ export default {
     ...mapActions(['clearActiveBeamUpdate', 'clearBeamOffsetIndex', 'setActiveSprite', 'setBeamOffsetIndex']),
     activeClass (dir, i) {
       const active = (this.activeDirection === dir ? '--active' : '')
-      console.log(this.beamOffset.index, i)
       const updated = (this.getBeamHasUpdatesByIndex(i) ? '--updated' : '')
       return active + (active && updated ? ' ' : '') + updated
     }

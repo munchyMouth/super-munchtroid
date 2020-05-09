@@ -8,6 +8,7 @@ import path from 'path'
 import Palette from './Palette'
 import Samus from './Samus'
 import { getSubmenu } from './submenus.js'
+import Beam from './Beam'
 
 const projectDirectory = __dirname.replace(
   (process.env.PROD)
@@ -124,6 +125,25 @@ ipcMain.on('Load Pose', (event,
         event.sender.send('Pose Error', {
           type: 'PoseMainLoadException',
           title: 'Failed to load a pose: Error in main',
+          message: [e.message]
+        })
+      })
+  } catch (e) {
+    console.trace(e)
+  }
+})
+
+ipcMain.on('Save Beams', (event, { filePath, beams }) => {
+  try {
+    Beam({ filePath })
+      .saveToROM(beams)
+      .then(function (beam) {
+        event.sender.send('Beams Saved', { beam })
+      }, function (e) {
+        console.trace(e)
+        event.sender.send('Beams Error', {
+          type: 'BeamMainSaveException',
+          title: 'Failed to save beams: Error in main. ',
           message: [e.message]
         })
       })

@@ -242,5 +242,9 @@ export default {
   toggleSaveKeyEvent ({ commit }) { commit('TOGGLE_SAVE_KEY_EVENT') },
   toggleShowHelp ({ commit }) { commit('TOGGLE_SHOW_HELP') },
   toggleSprite ({ commit }) { commit('TOGGLE_SPRITE') },
-  toggleVram ({ commit }) { commit('TOGGLE_VRAM') }
+  toggleVram ({ commit }) { commit('TOGGLE_VRAM') },
+  zeroBeamUpdates ({ commit }) {
+    commit('ZERO_BEAM_UPDATES')
+    commit('SET_SPRITE_REFRESH')
+  }
 }

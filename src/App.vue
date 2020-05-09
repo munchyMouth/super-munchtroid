@@ -57,13 +57,28 @@ export default {
   },
   updated () {
     try {
-      const events = ['Palettes', 'Pose', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
+      const events = ['Beams', 'Palettes', 'Pose', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
       events.forEach(function (it) {
         ipcRenderer.on(`${it} Error`, function (event, error) {
           this.setError(error)
         }.bind(this))
       }.bind(this))
-
+      this.renderEvent(
+        'Beams Saved',
+        async function (event, object) {
+          try {
+            this.setLoading(false)
+            this.success('Beams Saved!')
+            this.setBeamOffsetData(object.beam)
+          } catch (e) {
+            this.setError({
+              type: 'BeamRendererSaveException',
+              title: 'Failed to save your ROM: Error in renderer',
+              message: [e.message]
+            })
+          }
+        }.bind(this)
+      )
       this.renderEvent(
         'ROM Loaded',
         async function (event, object) {

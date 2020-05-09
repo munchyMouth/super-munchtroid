@@ -65,6 +65,12 @@
             <q-icon name="directions_run" />
             &nbsp;&nbsp;&nbsp;&nbsp;Sprite Manager
           </span>
+          <span
+            v-show="updateSprite"
+            class="collapsible --red"
+          >
+            &nbsp;*
+          </span>
         </template>
         <template v-if="tileMapFrame">
           <tree
@@ -111,10 +117,10 @@
               Beam Offsets
             </span>
             <span
-              v-show="!hasActiveBeamOffsetIndex && beamHasUpdates"
+              v-show="beamHasUpdates"
               class="collapsible --red"
             >
-              *
+              &nbsp;*
             </span>
           </template>
           <beam-manager />

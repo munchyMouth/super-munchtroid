@@ -35,5 +35,9 @@ export default stampit(RomData, { /* extends RomData */
           return obj
         }, {})
     }
+
+    this.saveToROM = async function () {
+      return this.load()
+    }
   }
 })

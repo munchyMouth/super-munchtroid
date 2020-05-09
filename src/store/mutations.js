@@ -125,7 +125,6 @@ export default {
   SET_BEAM_OFFSET_INDEX (state, i) { state.beamOffset.index = i },
   SET_ACTIVE_BEAM_UPDATE (state, xY) {
     if (typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action) {
-      // debugger
       Object.keys(xY).forEach(function (k) {
         state
           .beamOffset
@@ -133,6 +132,18 @@ export default {
           ._updates.splice(state.beamOffset.index, 1, xY[k])
       })
     }
+  },
+  ZERO_BEAM_UPDATES (state) {
+    Object.keys(state.beamOffset.data).forEach(
+      actionKey =>
+        Object.keys(state.beamOffset.data[actionKey]).forEach(
+          XYKey => {
+            for (let i in state.beamOffset.data[actionKey][XYKey]._updates) {
+              state.beamOffset.data[actionKey][XYKey]._updates.splice(i, 1, 0)
+            }
+          }
+        )
+    )
   },
   SET_COPIED_TILE_DATA (state) {
     if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
