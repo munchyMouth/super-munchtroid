@@ -50,7 +50,7 @@
           scale="0.6"
           name="undo"
         />
-        undo all
+        undo beams
       </button>
       <button
         :class="`no-style ${beamHasUpdates ? '--active' : ''}`"
@@ -61,7 +61,7 @@
           scale="0.75"
           name="save"
         />
-        save all
+        save beams
       </button>
     </div>
   </div>

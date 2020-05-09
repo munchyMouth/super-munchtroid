@@ -114,7 +114,7 @@
           <template slot="header">
             <span :class="`collapsible${hasActiveBeamOffsetIndex ? ' --red' : ''}`">
               <q-icon name="my_locations" />
-              Beam Offsets
+              Beam Manager
             </span>
             <span
               v-show="beamHasUpdates"

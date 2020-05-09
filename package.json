@@ -1,8 +1,8 @@
 {
-  "name": "super-munchtroid-beta",
-  "version": "2.16.2",
-  "description": "A graphics management suite",
-  "productName": "Super Munchtroid",
+  "name": "samus-palette-art-application",
+  "version": "2.18.0",
+  "description": "A suite of tools for editing Samus in Super Metroid suite",
+  "productName": "SPARTA",
   "cordovaId": "org.cordova.quasar.app",
   "author": "munch.mc.mouthington@gmail.com",
   "private": true,

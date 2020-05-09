@@ -1,9 +1,20 @@
-<h1>SUPER MUNCHTROID</h1>v.2.15.0
+<h1>Samus Palette (and) ART Application  (SPARTA)</h1>
+<h2>(formerly known as SUPER MUNCHTROID)</h2>
+
 <img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
 ----
 
 ### Downloads
+#### 2.18.0
+- <a href="">Super Munchtroid-linux-x64 2.18.0</a>
+- <a href="">Super Munchtroid-win32-x64 2.18.0</a>
+
+2.18.0 Features
+- support for setting beam offsets
+- collapsible panels for sprite manager & beam editor
+- added help modal and events
+- some general code tidying (under the hood stuff, cos this project got massive!)
 
 #### 2.16.2
 - <a href="https://drive.google.com/open?id=1JtP0M8kAeYHhb__YaAZrqsl8mQrDIsmv">Super Munchtroid-linux-x64 2.16.2</a>

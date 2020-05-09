@@ -23,6 +23,17 @@ export default stampit({
     }
 
     // PUBLIC ------------------------------------------------------------------
+    this.bufferFromArray = function (data) {
+      return Buffer.from(
+        data.map(function (it) {
+          let word = it.toString(16)
+          while (word.length < 4) word = '0' + word
+          return word
+        }).reduce(function (a, it) {
+          return a.concat(this.chunk(it).reverse().map(j => parseInt(j, 16)))
+        }.bind(this), []), 'hex')
+    }
+
     this.chunk = function (arr, size = 2, R = []) {
       for (let i = 0, len = arr.length; i < len; i += size) {
         R.push(arr.slice(i, i + size))
@@ -106,6 +117,7 @@ export default stampit({
     this.setOffsetData = async function (buff, offset) {
       return new Promise(function (resolve, reject) {
         try {
+          debugger
           open(cleanFilePath, 'r+', function (err, fd) {
             if (!err) {
               write(fd, buff, 0, buff.length, offset, function (inErr) {
