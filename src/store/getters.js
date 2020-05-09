@@ -1,4 +1,4 @@
-import { handleIrregularHalfLogic, uIntToSignedInt } from '../components/Miscellaneous'
+import { handleIrregularHalfLogic } from '../components/Miscellaneous'
 
 // -----------------------------------------------------------------------------
 // Generally, getters just get a variable from the store. However, they're a
@@ -46,14 +46,83 @@ export default {
   editorHFlip: state => state.editorFlip.h,
   editorVFlip: state => state.editorFlip.v,
   getActiveBeamOffset: state => xY =>
-    typeof state.beamOffset.index !== 'undefined' &&
-      state.beamOffset.action
-      ? uIntToSignedInt(
+    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
+      ? state
+        .beamOffset
+        .data[state.beamOffset.action][xY]
+        .DEFAULT
+        .data[state.beamOffset.index]
+      : undefined,
+  getActiveBeamOffsetX: state =>
+    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
+      ? state
+        .beamOffset
+        .data[state.beamOffset.action]
+        .X
+        .DEFAULT
+        .data[state.beamOffset.index]
+      : undefined,
+  getActiveBeamOffsetY: state =>
+    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
+      ? state
+        .beamOffset
+        .data[state.beamOffset.action]
+        .Y
+        .DEFAULT
+        .data[state.beamOffset.index]
+      : undefined,
+  getActiveBeamUpdateX: state =>
+    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
+      ? state
+        .beamOffset
+        .data[state.beamOffset.action]
+        .X
+        ._updates[state.beamOffset.index]
+      : undefined,
+  beamHasUpdates: state => {
+    if (state.beamOffset.action && state.beamOffset.data) {
+      for (let i of
         state
           .beamOffset
-          .data[state.beamOffset.action][xY]
-          .DEFAULT
-          .data[state.beamOffset.index])
+          .data[state.beamOffset.action]
+          .X
+          ._updates
+          .concat(
+            state
+              .beamOffset
+              .data[state.beamOffset.action]
+              .Y
+              ._updates)) {
+        if (i !== 0) return true
+      }
+    }
+    return false
+  },
+  beamIndexHasUpdates: state => {
+    if (typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action) {
+      for (let i of
+        [state
+          .beamOffset
+          .data[state.beamOffset.action]
+          .X
+          ._updates[state.beamOffset.index],
+        state
+          .beamOffset
+          .data[state.beamOffset.action]
+          .Y
+          ._updates[state.beamOffset.index]]) {
+        if (i !== 0) return true
+      }
+    }
+    return false
+  },
+  getActiveBeamUpdateY: state =>
+    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
+      ? state
+        .beamOffset
+        .data[state.beamOffset.action]
+        .Y
+        ._updates[state.beamOffset.index]
       : undefined,
   getActiveColorFromPaletteInPalettes: state => leftOrRight => {
     return state.palettes.length &&
@@ -72,8 +141,28 @@ export default {
       .match(/[0-9A-F]{2}/gi)
       .map(it => parseInt(it, 16)),
   getActivePaletteInPalettes: state => state.palettes[state.activePaletteIndex || 0],
-  getBeamIndex: state => state.beamOffset.index,
   getBeamCursor: state => state.beamOffset ? state.beamOffset.cursorImage : undefined,
+  getBeamIndex: state => state.beamOffset.index,
+  getBeamAction: state => state.beamOffset.action,
+  getBeamPosition: state => state.beamOffset.position,
+  getBeamHasUpdatesByIndex: state => i => {
+    if (state.beamOffset.action) {
+      for (let j of
+        [state
+          .beamOffset
+          .data[state.beamOffset.action]
+          .X
+          ._updates[i],
+        state
+          .beamOffset
+          .data[state.beamOffset.action]
+          .Y
+          ._updates[i]]) {
+        if (j !== 0) return true
+      }
+    }
+    return false
+  },
   getSpritesByHalf: state => ({ half }) => {
     return state.tileMaps[half]
       .tileMap

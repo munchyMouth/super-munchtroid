@@ -110,6 +110,12 @@
               <q-icon name="my_locations" />
               Beam Offsets
             </span>
+            <span
+              v-show="!hasActiveBeamOffsetIndex && beamHasUpdates"
+              class="collapsible --red"
+            >
+              *
+            </span>
           </template>
           <beam-manager />
         </q-collapsible>
@@ -180,6 +186,7 @@ export default {
     ...mapGetters([
       'activeSprite',
       'activeSpriteAddress',
+      'beamHasUpdates',
       'currentFrame',
       'currentFrameIndex',
       'currentPalette',

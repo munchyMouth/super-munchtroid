@@ -51,9 +51,15 @@ export default {
       'currentFrameIndex',
       'editorUpdate',
       'getActiveBeamOffset',
+      'getActiveBeamOffsetX',
+      'getActiveBeamOffsetY',
+      'getActiveBeamUpdateX',
+      'getActiveBeamUpdateY',
       'getActivePaletteInPalettes',
+      'getBeamAction',
       'getBeamCursor',
       'getBeamIndex',
+      'getBeamPosition',
       'getSpriteByProps',
       'getSpritesByHalf',
       'getVramByProps',
@@ -77,12 +83,12 @@ export default {
       return (this.spriteRatio / 3 * this.getBeamCursor.width)
     },
     beamCursorX () {
-      return (this.spriteRatio * this.getActiveBeamOffset('X')) +
-        this.spriteZeroX
+      return ((this.spriteRatio * this.getActiveBeamOffsetX) +
+        this.spriteZeroX)
     },
     beamCursorY () {
-      return (this.spriteRatio * this.getActiveBeamOffset('Y')) +
-        this.spriteZeroY
+      return ((this.spriteRatio * this.getActiveBeamOffsetY) +
+        this.spriteZeroY)
     },
     mouseInActiveSpriteArea () {
       return this.activeSprite
@@ -94,10 +100,14 @@ export default {
     },
     mouseInActiveBeamCursorArea () {
       return typeof this.getBeamIndex !== 'undefined'
-        ? this.x >= this.beamCursorX - (this.beamCursorWidth / 2) &&
-        this.y >= this.beamCursorY - (this.beamCursorHeight / 2) &&
-        this.x <= this.beamCursorX + (this.beamCursorWidth / 2) &&
-        this.y <= this.beamCursorY + (this.beamCursorHeight / 2)
+        ? this.x >= ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) +
+          this.spriteZeroX) - (this.beamCursorWidth / 2) &&
+        this.y >= ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) +
+          this.spriteZeroY) - (this.beamCursorHeight / 2) &&
+        this.x <= ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) +
+          this.spriteZeroX) + (this.beamCursorWidth / 2) &&
+        this.y <= ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) +
+          this.spriteZeroY) + (this.beamCursorHeight / 2)
         : undefined
     },
     permitDragX () {
@@ -134,8 +144,12 @@ export default {
       this.redraw()
     },
     currentFrameIndex () { this.redraw() },
+    dragX () { this.redraw() },
+    dragY () { this.redraw() },
     editorUpdate () { this.redraw() },
     getActivePaletteInPalettes () { this.redraw() },
+    getBeamAction () { this.redraw() },
+    getBeamPosition () { this.redraw() },
     getBeamIndex () { this.redraw() },
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },
@@ -159,13 +173,24 @@ export default {
   },
   methods: {
     ...mapActions([
+      'setActiveBeamUpdate',
       'setLoading',
       'setSelectedTile',
-      'setSpriteProperty'
+      'setSpriteProperty',
+      'setSpriteUpdate'
     ]),
     ...SpriteRedraw,
     actionBeamCursorDrag () {
-      console.log('TODO')
+      if (typeof this.dragX === 'undefined') {
+        this.dragX = this.spriteX - this.getActiveBeamOffsetX
+        this.dragY = this.spriteY - this.getActiveBeamOffsetY
+      }
+      this.setActiveBeamUpdate({
+        x: this.spriteX - this.getActiveBeamOffsetX,
+        y: this.spriteY - this.getActiveBeamOffsetY
+      })
+      this.dragX = this.spriteX - this.getActiveBeamOffsetX
+      this.dragY = this.spriteY - this.getActiveBeamOffsetY
     },
     actionSpriteDrag () {
       if (typeof this.dragX === 'undefined') {

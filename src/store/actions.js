@@ -5,6 +5,10 @@ import { cloneDeep } from 'lodash'
 // Vuex refers to the execution of Actions as "dispatches"
 // -----------------------------------------------------------------------------
 export default {
+  clearActiveBeamUpdate ({ commit }) {
+    commit('SET_ACTIVE_BEAM_UPDATE', { x: 0, y: 0 })
+    commit('SET_SPRITE_REFRESH')
+  },
   clearBeamOffsetIndex ({ commit }) { commit('CLEAR_BEAM_OFFSET_INDEX') },
   clearSelectedTile ({ commit }) { commit('CLEAR_SELECTED_TILE') },
   clearSelectedTiles ({ commit }) { commit('CLEAR_SELECTED_TILES') },
@@ -75,6 +79,7 @@ export default {
       commit('UPDATE_EDITOR')
     }
   },
+  setActiveBeamUpdate ({ commit }, xY) { commit('SET_ACTIVE_BEAM_UPDATE', xY) },
   setActivePalette ({ commit }, c) { commit('SET_ACTIVE_PALETTE', c) },
   setActivePaletteColor ({ commit }, obj) { commit('SET_ACTIVE_PALETTE_COLOR', obj) },
   setActiveSprite ({ commit }, sprite, setSpriteDefault = true) {

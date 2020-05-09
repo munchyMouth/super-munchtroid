@@ -123,6 +123,17 @@ export default {
   SET_BEAM_OFFSET_DATA (state, d) { state.beamOffset.data = d },
   SET_BEAM_OFFSET_DIRECTION (state, d) { state.beamOffset.direction = d },
   SET_BEAM_OFFSET_INDEX (state, i) { state.beamOffset.index = i },
+  SET_ACTIVE_BEAM_UPDATE (state, xY) {
+    if (typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action) {
+      // debugger
+      Object.keys(xY).forEach(function (k) {
+        state
+          .beamOffset
+          .data[state.beamOffset.action][k.toUpperCase()]
+          ._updates.splice(state.beamOffset.index, 1, xY[k])
+      })
+    }
+  },
   SET_COPIED_TILE_DATA (state) {
     if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
       state.copiedTileData = cloneDeep(state.selectedTile.tile.data)

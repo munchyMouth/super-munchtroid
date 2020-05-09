@@ -25,10 +25,12 @@ export default stampit(RomData, { /* extends RomData */
                     xYObj[key] = {
                       offset: BEAM_OFFSETS[position][xY][key],
                       data: _this.reverseByteWords(
-                        await _this.getOffsetData(parseInt(BEAM_OFFSETS[position][xY][key], 16), 20))
+                        await _this.getOffsetData(
+                          parseInt(BEAM_OFFSETS[position][xY][key], 16), 20))
+                        .map(it => it > 255 ? -(65535 - it) : it)
                     }
                     return xYObj
-                  }, {})
+                  }, { _updates: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] })
             })
           return obj
         }, {})

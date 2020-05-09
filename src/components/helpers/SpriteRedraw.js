@@ -54,8 +54,8 @@ export default {
     if (this.hasActiveBeamOffsetIndex) {
       this.context.drawImage(
         this.getBeamCursor,
-        this.beamCursorX - (this.beamCursorWidth / 2),
-        this.beamCursorY - (this.beamCursorHeight / 2),
+        ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) + this.spriteZeroX) - (this.beamCursorWidth / 2),
+        ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) + this.spriteZeroY) - (this.beamCursorHeight / 2),
         R / 3 * this.getBeamCursor.width,
         R / 3 * this.getBeamCursor.height
       )
@@ -69,7 +69,7 @@ export default {
           this.context.fillStyle = !this.activeSpriteAddress ||
             this.activeSpriteAddress === _address
             ? _palette
-            : `#${this.setSpriteBoxMaskColor(_palette)}` // .replace(/[a-f0-9]{2}$/gi, 'FF')
+            : `#${this.setSpriteBoxMaskColor(_palette)}`
           this.context.fillRect(
             x * R + (this.spriteZeroY + (xOffset * R)),
             y * R + (this.spriteZeroX + (yOffset * R)),

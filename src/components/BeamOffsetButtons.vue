@@ -3,21 +3,21 @@
     <div class="beam-offsets__top">
       <button
         :disabled="direction === 'FACING_RIGHT'"
-        :class="activeClass('left-diag-up')"
+        :class="activeClass('left-diag-up', 8)"
         @click="setBeamOffsetIndex(8)"
       >
         &#8598;
       </button>
       <button
         :disabled="action === 'RUNNING'"
-        :class="activeClass('up')"
+        :class="activeClass('up', direction === 'FACING_LEFT' ? 9 : 0)"
         @click="setBeamOffsetIndex(direction === 'FACING_LEFT' ? 9 : 0)"
       >
         &uarr;
       </button>
       <button
         :disabled="direction === 'FACING_LEFT'"
-        :class="activeClass('right-diag-up')"
+        :class="activeClass('right-diag-up', 1)"
         @click="setBeamOffsetIndex(1)"
       >
         &#8599;
@@ -26,17 +26,25 @@
     <div class="beam-offsets__middle">
       <button
         :disabled="direction === 'FACING_RIGHT'"
-        :class="activeClass('left-dead-ahead')"
+        :class="activeClass('left-dead-ahead', 7)"
         @click="setBeamOffsetIndex(7)"
       >
         &larr;
       </button>
-      <button disabled>
-        &nbsp;
+      <button
+        class="beam-offsets"
+        :disabled="typeof beamOffset.index === 'undefined' || !beamIndexHasUpdates"
+        :title="`undo ${activeDirection}`"
+        @click="clearActiveBeamUpdate()"
+      >
+        <icon
+          name="undo"
+          scale="0.6"
+        />
       </button>
       <button
         :disabled="direction === 'FACING_LEFT'"
-        :class="activeClass('right-dead-ahead')"
+        :class="activeClass('right-dead-ahead', 2)"
         @click="setBeamOffsetIndex(2)"
       >
         &rarr;
@@ -45,21 +53,21 @@
     <div class="beam-offsets__bottom">
       <button
         :disabled="direction === 'FACING_RIGHT'"
-        :class="activeClass('left-diag-down')"
+        :class="activeClass('left-diag-down', 6)"
         @click="setBeamOffsetIndex(6)"
       >
         &#8601;
       </button>
       <button
         :disabled="action === 'RUNNING'"
-        :class="activeClass('down')"
+        :class="activeClass('down', direction === 'FACING_LEFT' ? 5 : 4)"
         @click="setBeamOffsetIndex(direction === 'FACING_LEFT' ? 5 : 4)"
       >
         &darr;
       </button>
       <button
         :disabled="direction === 'FACING_LEFT'"
-        :class="activeClass('right-diag-down')"
+        :class="activeClass('right-diag-down', 3)"
         @click="setBeamOffsetIndex(3)"
       >
         &#8600;
@@ -69,16 +77,22 @@
 </template>
 
 <script>
+import 'vue-awesome/icons/undo'
+import Icon from 'vue-awesome/components/Icon'
+
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  components: {
+    Icon
+  },
   data () {
     return {
       active: undefined
     }
   },
   computed: {
-    ...mapGetters(['beamOffset']),
+    ...mapGetters(['beamIndexHasUpdates', 'beamHasUpdates', 'beamOffset', 'getBeamHasUpdatesByIndex']),
     action () { return this.beamOffset.action },
     direction () { return this.beamOffset.direction },
     index () { return this.beamOffset.index },
@@ -101,10 +115,10 @@ export default {
   watch: {
     action (newValue) {
       if (newValue === 'RUNNING' &&
-          (this.index === 0 ||
-            this.index === 4 ||
-            this.index === 5 ||
-            this.index === 9)) this.clearBeamOffsetIndex()
+        (this.index === 0 ||
+          this.index === 4 ||
+          this.index === 5 ||
+          this.index === 9)) this.clearBeamOffsetIndex()
     },
     direction (newValue) {
       if (newValue === 'FACING_LEFT') {
@@ -125,10 +139,16 @@ export default {
       if (typeof newValue !== 'undefined') this.setActiveSprite()
     }
   },
+  mounted () {
+    console.log(this.beamOffset)
+  },
   methods: {
-    ...mapActions(['clearBeamOffsetIndex', 'setActiveSprite', 'setBeamOffsetIndex']),
-    activeClass (dir) {
-      return this.activeDirection === dir ? '--active' : ''
+    ...mapActions(['clearActiveBeamUpdate', 'clearBeamOffsetIndex', 'setActiveSprite', 'setBeamOffsetIndex']),
+    activeClass (dir, i) {
+      const active = (this.activeDirection === dir ? '--active' : '')
+      console.log(this.beamOffset.index, i)
+      const updated = (this.getBeamHasUpdatesByIndex(i) ? '--updated' : '')
+      return active + (active && updated ? ' ' : '') + updated
     }
   }
 }
@@ -147,6 +167,9 @@ export default {
 }
 .beam-offsets button[disabled] {
   cursor: default !important;
+}
+.beam-offsets button.--updated {
+  background: lightgoldenrodyellow;
 }
 .beam-offsets button.--active {
   background: red;
