@@ -1,4 +1,4 @@
-<h1>SPARTA : Samus Palette &amp; Art Application</h1>
+<h1>SPARTA : Samus Palette &amp; Art App</h1>
 <h2>(formerly known as Super Munchtroid)</h2>
 
 <img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
