@@ -1,4 +1,8 @@
-
+10/05/20 2.18.0 Features
+- support for setting beam offsets
+- collapsible panels for sprite manager & beam editor
+- reordered vue layouts to match Vue Standard
+- .eslintrc support properly setup
 - replaced shortcuts popup with Quasar OOB popup
 - created BeamData.json
 

@@ -1,5 +1,5 @@
 <h1>Samus Palette (and) ART Application  (SPARTA)</h1>
-<h2>(formerly known as SUPER MUNCHTROID)</h2>
+<h2>formerly known as Super Munchtroid</h2>
 
 <img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
@@ -7,10 +7,11 @@
 
 ### Downloads
 #### 2.18.0
-- <a href="">Super Munchtroid-linux-x64 2.18.0</a>
-- <a href="">Super Munchtroid-win32-x64 2.18.0</a>
+- <a href="https://drive.google.com/open?id=1yvxQh9qBgSkzvQD_4s0Kb3Ni3Sm3g7NL">Super Munchtroid-linux-x64 2.18.0</a>
+- <a href="https://drive.google.com/open?id=11d2VTfRsw14s0V_2nAzzBge0oG1cJImp">Super Munchtroid-win32-x64 2.18.0</a>
 
 2.18.0 Features
+- project renamed "SPARTA" :P
 - support for setting beam offsets
 - collapsible panels for sprite manager & beam editor
 - added help modal and events
@@ -26,29 +27,17 @@
 - added help modal and events
 
 #### 2.15.0
-- <a href="https://drive.google.com/open?id=16gHtApJ7FzbFgV4E7HoOIeSPrKBqTKhm">Super Munchtroid-linux-x64 2.15.0</a>
-- <a href="https://drive.google.com/open?id=1eW_TflW9AX_5ropM7b_HmrYHNmsRH_al">Super Munchtroid-win32-x64 2.15.0</a>
-
-2.15.0 Features
 - pixel-flip support added
 - added variably colored sprite masks
 - added palette copy/paste
 - added shortcut for show/hide settings
 
 #### 2.12.0
-- <a href="https://drive.google.com/open?id=1z_LU5vmBjUHMFaCwXQI8vEwrnlBQ7QAg">Super Munchtroid-linux-x64 2.12.0</a>
-- <a href="https://drive.google.com/open?id=1uXT2qNPiCIF5lECP1gT6qPhp-ltCKQQE">Super Munchtroid-win32-x64 2.12.0</a>
-
-2.12.0 Features
 - bug fixes
 - the crystal flash palette
 - support for conventional shortcuts for Editor window: copy/paste/undo/redo/save tile
 
 #### 2.10.0
-- <a href="https://drive.google.com/open?id=1pRQInxxwsXMQ6m3rBdu9jEqA3e8mM_d-">Super Munchtroid-linux-x64 2.10.0</a>
-- <a href="https://drive.google.com/open?id=1lHNXGFKV108smdQRCptXHeg7KNnbAZNN">Super Munchtroid-win32-x64 2.10.0</a>
-
-2.10.0 Features
 - fixed saves
 - pixel-shifting
 - 16x16px editing
@@ -88,6 +77,11 @@ simply download, unzip and double-click on the `.exe` (in the unlikely, but not 
 Download, unzip, navigate to the file directory in terminal and type the following within it:
 
 ```shell
+./SPARTA
+```
+
+(pre-sparta:)
+```shell
 ./Super\ Munchtroid
 ```
 
@@ -95,7 +89,7 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 
 ### Documentation
 
-- <a href="https://drive.google.com/open?id=1dIIWtJS0Lfokaq1hsTgSjmIJ-t5b26DX">Manual (updated to 2.10.0)</a>
+- <a href="https://drive.google.com/open?id=1n4kWcyuypXbNrRbYPHspHtcB6qqd5KOo">Manual (updated to 2.18.0)</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
