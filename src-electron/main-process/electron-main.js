@@ -68,15 +68,17 @@ app.on('activate', () => {
 })
 
 ipcMain.on('attachMenuEvents', (event) => {
-  const menu = Menu.buildFromTemplate([{
-    label: 'File', submenu: getSubmenu(event, mainWindow, POSES)
-  }])
+  const submenu = getSubmenu(event, mainWindow, POSES)
+  const menu = Menu.buildFromTemplate([{ label: 'File', submenu }])
   Menu.setApplicationMenu(menu)
   globalShortcut.register('CommandOrControl+shift+s', () => {
     event.sender.send('Shortcut Save', true)
   })
   globalShortcut.register('F1', () => {
     event.sender.send('Shortcut Help', true)
+  })
+  globalShortcut.register('CommandOrControl+o', () => {
+    submenu[0].click()
   })
 })
 

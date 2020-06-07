@@ -35,7 +35,7 @@ const BEAM_DATA = JSON.parse(
 export const getSubmenu = function (event, mainWindow, POSES) {
   return [
     {
-      label: 'load ROM',
+      label: 'load ROM [ctrl o]',
       async click () {
         try {
           const filePath = dialog.showOpenDialog(
