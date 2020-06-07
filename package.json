@@ -1,6 +1,6 @@
 {
   "name": "samus-palette-art-application",
-  "version": "2.18.0",
+  "version": "2.19.0",
   "description": "A suite of tools for editing Samus in Super Metroid suite",
   "productName": "SPARTA",
   "cordovaId": "org.cordova.quasar.app",
