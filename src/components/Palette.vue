@@ -121,7 +121,7 @@
         <button
           class="no-style palette__sliders__undo palette__sliders__buttons"
           style="color: red"
-          title="reset to saved version of palette"
+          title="undo palette change for current cycle"
           @click="resetActiveColor()"
         >
           <icon name="undo" />
@@ -260,12 +260,10 @@ export default {
     },
     palettes (newVal) {
       this.activePalette = this.getActivePaletteInPalettes.palette
-      this.defaultPalette = cloneDeep(this.activePalette)
       this.initialisingPalette = true
     },
     refreshPalette (newVal) {
       this.activePalette = this.getActivePaletteInPalettes.palette
-      this.defaultPalette = cloneDeep(this.activePalette)
       this.initialisingPalette = true
     },
     RR (newVal) { this.setCompleteHexColor('RR', newVal) },
