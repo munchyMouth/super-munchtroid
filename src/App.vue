@@ -264,13 +264,27 @@ export default {
           break
       }
     },
-    keyCommands (evt) {
+    keyCommands (evt, elem) {
       switch (true) {
         case evt.keyCode === 27: // escape
           if (this.showHelp) this.toggleShowHelp()
           break
         case evt.keyCode === 220 && evt.ctrlKey: // ctrl+backslash
           this.toggleLayoutDrawerOpen()
+          break
+        case evt.keyCode === 38 && evt.ctrlKey: // ctrl+up
+          elem = document.querySelector('.settings__dropdown')
+          if (elem.selectedIndex > 0) {
+            elem.selectedIndex -= 1
+            elem.dispatchEvent(new Event('change'))
+          }
+          break
+        case evt.keyCode === 40 && evt.ctrlKey: // ctrl+down
+          elem = document.querySelector('.settings__dropdown')
+          if (elem.selectedIndex < elem.childElementCount - 1) {
+            elem.selectedIndex += 1
+            elem.dispatchEvent(new Event('change'))
+          }
           break
         case evt.keyCode === 39 && evt.ctrlKey: // ctrl+right
           this.incrementFrameToggle()

@@ -1,9 +1,10 @@
-07/07/20 2.20.0 Features
-- arrow key control of vram
+07/07/20 2.20.2 Features
+- arrow key control of vram (while focused)
 - rotate 90° control for editor
 - switching off/on beam controls with buttons
 - better confirm dialogs
 - fixed palette undo
+- added `ctrl + up | down` to navigate poses globally
 - shortcut `ctrl + o` to open files
 
 10/05/20 2.18.0 Features

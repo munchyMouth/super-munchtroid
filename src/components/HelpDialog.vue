@@ -26,6 +26,14 @@
             <td>save current frame's VRAM and Sprites</td>
           </tr>
           <tr>
+            <td>ctrl + up</td>
+            <td>load previous pose</td>
+          </tr>
+          <tr>
+            <td>ctrl + down</td>
+            <td>load next pose</td>
+          </tr>
+          <tr>
             <td>ctrl + left</td>
             <td>load previous frame</td>
           </tr>
