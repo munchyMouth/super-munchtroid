@@ -83,6 +83,7 @@ export default {
         'ROM Loaded',
         async function (event, object) {
           try {
+            this.clearConfirmed()
             this.setSettings({
               PALETTES: object.PALETTES,
               POSES: object.POSES,
@@ -207,6 +208,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'clearConfirmed',
       'clearUpdatePalette',
       'clearUpdateSprite',
       'clearUpdateVram',

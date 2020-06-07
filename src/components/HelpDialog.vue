@@ -61,6 +61,17 @@
             <td>redo editor changes</td>
           </tr>
         </table>
+        <br>
+        <table>
+          <tr>
+            <th>VRAM Shortcuts (when focused)</th>
+            <th>&nbsp;</th>
+          </tr>
+          <tr>
+            <td>up | down | left | right</td>
+            <td>select active VRAM tile for editing</td>
+          </tr>
+        </table>
       </div>
     </div>
   </q-modal>

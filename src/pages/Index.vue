@@ -113,11 +113,15 @@ export default {
 </script>
 
 <style>
+body {
+  overflow: hidden;
+}
 .munch-index {
   position: relative;
   display: flex;
-  margin-left: 16px;
+  padding: 16px;
   height: 100%;
+  overflow: auto;
 }
 .munch-index-wrapper {
   display: flex;

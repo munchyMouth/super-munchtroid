@@ -2,11 +2,13 @@
   <div :class="`vram-outer-wrapper${showVram ? '--show' : '--hide'}`">
     <canvas
       ref="vram"
+      tabindex="1"
       @mousemove="getMousePos"
       @mouseout="clearActiveMouse"
       @click="actionClick"
       @contextmenu="actionClick"
     />
+    <!-- {{ selectedTile }} -->
   </div>
 </template>
 
@@ -146,6 +148,7 @@ export default {
     this.context = this.$refs['vram'].getContext('2d')
     this.$refs['vram'].width = 128 * this.vramRatio
     this.$refs['vram'].height = 16 * this.vramRatio
+    this.$refs['vram'].addEventListener('keydown', this.hilightSquareOnKeyup)
   },
   methods: {
     ...mapActions([
@@ -190,6 +193,95 @@ export default {
       var rect = evt.currentTarget.getBoundingClientRect()
       this.x = evt.clientX - rect.left
       this.y = evt.clientY - rect.top
+    },
+    hilightSquareOnKeyup (evt) {
+      // console.log('selected', this.selectedTile)
+      // console.log('metadata', this.activeTileMetaData)
+      if (!this.selectedTile.empty) {
+        switch (evt.keyCode) {
+          case 37: // left
+            this.keyLeft(this.selectedTile)
+            break
+          case 38: // up
+            this.keyUpDown(this.selectedTile, 'up')
+            break
+          case 39: // right
+            this.keyRight(this.selectedTile)
+            break
+          case 40: // down
+            this.keyUpDown(this.selectedTile, 'down')
+            break
+        }
+      }
+    },
+    keyUpDown ({ half, index, part, no }, upDown) {
+      part = upDown === 'up'
+        ? (part === 'part1' ? 'part2' : 'part1')
+        : (part === 'part2' ? 'part1' : 'part2')
+      if (this.validateTile({ half, index, part })) {
+        this.setSelectedTile(
+          {
+            half,
+            index,
+            no,
+            part,
+            tile: this.currentFrame[half].parts[part].tiles[index]
+          }
+        )
+      }
+    },
+    keyLeft ({ half, index, part, no }) {
+      let halt = false
+      let override = 0
+      while (!halt) {
+        if (--index < 0) {
+          index = 7
+          half = half === 'top' ? 'bottom' : 'top'
+        }
+        if (--no < 0) no = 15
+        if (++override > 15) halt = true // emergency break
+        if (this.validateTile({ half, index, part })) {
+          this.setSelectedTile(
+            {
+              half,
+              index,
+              no,
+              part,
+              tile: this.currentFrame[half].parts[part].tiles[index]
+            }
+          )
+          halt = true
+        }
+      }
+    },
+    keyRight ({ half, index, part, no }) {
+      let halt = false
+      let override = 0
+      while (!halt) {
+        if (++index === 8) {
+          index = 0
+          half = half === 'top' ? 'bottom' : 'top'
+        }
+        if (++no === 16) no = 0
+        if (++override > 15) halt = true // emergency break
+        if (this.validateTile({ half, index, part })) {
+          this.setSelectedTile(
+            {
+              half,
+              index,
+              no,
+              part,
+              tile: this.currentFrame[half].parts[part].tiles[index]
+            }
+          )
+          halt = true
+        }
+      }
+    },
+    validateTile ({ half, index, part }) {
+      return this.currentFrame[half].parts[part]
+        ? index < this.currentFrame[half].parts[part].tiles.length
+        : false
     }
   }
 }

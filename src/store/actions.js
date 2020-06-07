@@ -10,6 +10,7 @@ export default {
     commit('SET_SPRITE_REFRESH')
   },
   clearBeamOffsetIndex ({ commit }) { commit('CLEAR_BEAM_OFFSET_INDEX') },
+  clearConfirmed ({ commit }) { commit('CLEAR_CONFIRMED') },
   clearSelectedTile ({ commit }) { commit('CLEAR_SELECTED_TILE') },
   clearSelectedTiles ({ commit }) { commit('CLEAR_SELECTED_TILES') },
   clearPalettesUpdateFlag ({ commit }, o) {

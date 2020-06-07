@@ -17,6 +17,11 @@ export default {
     state.activePaletteColor.right = 0
   },
   CLEAR_BEAM_OFFSET_INDEX (state) { state.beamOffset.index = undefined },
+  CLEAR_CONFIRMED (state) {
+    state.confirmed.callback = function () {}
+    state.confirmed.message = ''
+    state.confirmed.show = false
+  },
   CLEAR_EDITOR_FLIP (state) { state.editorFlip = { h: false, v: false } },
   CLEAR_ERROR (state) {
     state.error.type = ''

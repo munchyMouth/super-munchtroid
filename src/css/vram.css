@@ -2,10 +2,8 @@
   padding-top: 83px;
   transition: margin-top .7s;
   padding-bottom: 0;
-  width: 100%;
   height: 97px;
   background: black;
-  margin-bottom: 16px;
 }
 .vram-outer-wrapper--hide {
   width: 100%;
