@@ -133,17 +133,10 @@ export default {
       })
     }
   },
-  ZERO_BEAM_UPDATES (state) {
-    Object.keys(state.beamOffset.data).forEach(
-      actionKey =>
-        Object.keys(state.beamOffset.data[actionKey]).forEach(
-          XYKey => {
-            for (let i in state.beamOffset.data[actionKey][XYKey]._updates) {
-              state.beamOffset.data[actionKey][XYKey]._updates.splice(i, 1, 0)
-            }
-          }
-        )
-    )
+  SET_CONFIRMED (state, { message, callback }) {
+    state.confirmed.message = message
+    state.confirmed.callback = callback
+    state.confirmed.show = true
   },
   SET_COPIED_TILE_DATA (state) {
     if (state.selectedTile && !state.selectedTile.hasOwnProperty('empty')) {
@@ -231,6 +224,9 @@ export default {
   SHORTCUT_TRIGGER_FULL_SAVE_TOGGLE (state) {
     state.shortcutTriggerFullSave = !state.shortcutTriggerFullSave
   },
+  TOGGLE_CONFIRM (state) {
+    state.confirmed.show = !state.confirmed.show
+  },
   TOGGLE_EDITOR_FLIP (state, flip) {
     state.editorFlip[flip] = !state.editorFlip[flip]
   },
@@ -249,5 +245,17 @@ export default {
   },
   TOGGLE_SPRITE (state) { state.showSprite = !state.showSprite },
   TOGGLE_VRAM (state) { state.showVram = !state.showVram },
-  UPDATE_EDITOR (state) { state.editorUpdate = !state.editorUpdate }
+  UPDATE_EDITOR (state) { state.editorUpdate = !state.editorUpdate },
+  ZERO_BEAM_UPDATES (state) {
+    Object.keys(state.beamOffset.data).forEach(
+      actionKey =>
+        Object.keys(state.beamOffset.data[actionKey]).forEach(
+          XYKey => {
+            for (let i in state.beamOffset.data[actionKey][XYKey]._updates) {
+              state.beamOffset.data[actionKey][XYKey]._updates.splice(i, 1, 0)
+            }
+          }
+        )
+    )
+  }
 }

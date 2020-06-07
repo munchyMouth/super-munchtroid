@@ -24,6 +24,7 @@ export default {
   clearUpdatePalette ({ commit }) { commit('CLEAR_UPDATE_PALETTE') },
   clearUpdateSprite ({ commit }) { commit('CLEAR_UPDATE_SPRITE') },
   clearUpdateVram ({ commit }) { commit('CLEAR_UPDATE_VRAM') },
+  confirm ({ commit }, confirm) { commit('SET_CONFIRMED', confirm) },
   setActivePaletteIndex ({ commit }, palette) {
     commit('CLEAR_ACTIVE_PALETTE_COLOR')
     commit('SET_ACTIVE_PALETTE_INDEX', palette)
@@ -235,6 +236,7 @@ export default {
     }
   },
   shortcutTriggerFullSaveToggle ({ commit }) { commit('SHORTCUT_TRIGGER_FULL_SAVE_TOGGLE') },
+  toggleConfirm ({ commit }) { commit('TOGGLE_CONFIRM') },
   toggleLayoutDrawerOpen ({ commit }) { commit('TOGGLE_LAYOUT_DRAWER_OPEN') },
   toggleHFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'h') },
   toggleVFlip ({ commit }) { commit('TOGGLE_EDITOR_FLIP', 'v') },

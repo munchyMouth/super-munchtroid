@@ -4,6 +4,7 @@
     view="lHh Lpr lFf"
   >
     <help-dialog v-show="showHelp" />
+    <confirm-dialog />
     <q-layout-header v-if="filePath">
       <div
         v-show="showHelp"
@@ -106,10 +107,12 @@ import Icon from 'vue-awesome/components/Icon'
 import { poseWarning } from '../libs/messages.json'
 import Settings from '../components/Settings.vue'
 import HelpDialog from '../components/HelpDialog.vue'
+import ConfirmDialog from '../components/ConfirmDialog.vue'
 
 export default {
   name: 'MyLayout',
   components: {
+    ConfirmDialog,
     HelpDialog,
     Icon,
     Settings
@@ -132,6 +135,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'confirm',
       'setActiveSprite',
       'setLoading',
       'setTab',
@@ -139,17 +143,23 @@ export default {
       'toggleShowHelp',
       'toggleVram']),
     openURL,
+    actionTabChange (tab) {
+      this.setTab(tab)
+      this.setLoading(true)
+      this.setActiveSprite()
+      switch (tab) {
+        case 'basic': return this.loadBasicSettings()
+        case 'special': return this.loadSpecialSettings()
+      }
+    },
     changeTab (tab) {
-      if (tab !== this.tab &&
-        ((!this.updateVram && !this.updateSprite) ||
-          ((this.updateSprite || this.updateVram) &&
-            confirm(poseWarning)))) {
-        this.setTab(tab)
-        this.setLoading(true)
-        this.setActiveSprite()
-        switch (tab) {
-          case 'basic': return this.loadBasicSettings()
-          case 'special': return this.loadSpecialSettings()
+      if (tab !== this.tab) {
+        if (!this.updateVram && !this.updateSprite) this.actionTabChange(tab)
+        else {
+          this.confirm({
+            message: poseWarning,
+            callback: function (val) { if (val) this.actionTabChange(tab) }.bind(this)
+          })
         }
       }
     },

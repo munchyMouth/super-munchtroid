@@ -49,6 +49,11 @@ const store = {
         return img
       })()
     },
+    confirmed: {
+      callback () {},
+      message: '',
+      show: false
+    },
     currentFrameIndex: 0,
     currentPalette: 0,
     currentPose: 0,

@@ -35,7 +35,10 @@
     <div class="settings__dropdown-label">
       <strong>Palette Set: </strong>
     </div>
-    <select @change="choosePalette()">
+    <select
+      class="palette"
+      @change="choosePalette()"
+    >
       <option
         v-for="({ name, id, length }, i) in settings.PALETTES"
         :key="i"
@@ -252,6 +255,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'confirm',
       'clearSpriteUpdateFlag',
       'setActiveSprite',
       'setCurrentFrameIndex',
@@ -260,6 +264,13 @@ export default {
       'setSpriteRatio'
     ]),
     ...mapMutations({ setLoading: 'SET_LOADING' }),
+    actionPaletteUpdate (elem) {
+      this.previousPaletteIndex = elem.selectedIndex
+      ipcRenderer.send('Load Palettes', {
+        filePath: this.filePath,
+        index: this.previousPaletteIndex
+      })
+    },
     actionSelectedSprite (sprite) {
       this.setActiveSprite(sprite)
     },
@@ -268,56 +279,64 @@ export default {
       if (activeHalf) this.activeHalf = activeHalf
     },
     choosePalette () {
-      if (!this.updatePalette ||
-        (this.updatePalette &&
-          confirm(paletteWarning))) {
-        this.previousPaletteIndex = event.currentTarget.selectedIndex
-        ipcRenderer.send('Load Palettes', {
-          filePath: this.filePath,
-          index: this.previousPaletteIndex
-        })
-      } else event.currentTarget.selectedIndex = this.previousPaletteIndex
-    },
-    choosePose (zero = false) {
-      if (zero || this.validatePose()) {
-        this.clearActiveSprite()
-        this.setLoading(true)
-        this.previousPoseIndex = zero ? 0 : event.currentTarget.selectedIndex
-        switch (this.tab) {
-          case 'basic':
-            ipcRenderer.send('Load Pose', {
-              filePath: this.filePath,
-              index: zero ? 0 : parseInt(event.currentTarget.value),
-              optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
-            })
-            break
-          case 'special':
-            const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex]
-            ipcRenderer.send('Load Pose', {
-              ...pose,
-              filePath: this.filePath,
-              specialPoseFrameOverride: pose.dmaOffset / 4,
-              optionsetIndex: this.previousPoseIndex
-            })
-            break
-        }
-        return true
-      } else event.currentTarget.selectedIndex = zero ? 0 : this.previousPoseIndex
-      return false
-    },
-    choosePoseFromSearchEntry ({ entry }) {
-      if (this.validatePose()) {
-        this.previousPoseIndex = !this.showUnused
-          ? this.poses
-            .map((it, i) => (it.index === entry.index) ? i : -1)
-            .filter(it => it > -1)[0]
-          : this.previousPoseIndex
-        ipcRenderer.send('Load Pose', {
-          filePath: this.filePath,
-          index: entry.index,
-          optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
+      const elem = event.currentTarget
+      if (!this.updatePalette) this.actionPaletteUpdate(elem)
+      else {
+        this.confirm({
+          message: paletteWarning,
+          callback: function (ok) {
+            if (ok) this.actionPaletteUpdate(elem)
+            else elem.selectedIndex = this.previousPaletteIndex
+          }.bind(this)
         })
       }
+    },
+    choosePose (zero = false) {
+      const elem = event.currentTarget
+      this.validatePose(
+        function (val) {
+          if (val) {
+            this.clearActiveSprite()
+            this.setLoading(true)
+            this.previousPoseIndex = zero ? 0 : elem.selectedIndex
+            switch (this.tab) {
+              case 'basic':
+                ipcRenderer.send('Load Pose', {
+                  filePath: this.filePath,
+                  index: zero ? 0 : parseInt(elem.value),
+                  optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
+                })
+                break
+              case 'special':
+                const pose = this.settings.SPECIAL_POSES[this.previousPoseIndex]
+                ipcRenderer.send('Load Pose', {
+                  ...pose,
+                  filePath: this.filePath,
+                  specialPoseFrameOverride: pose.dmaOffset / 4,
+                  optionsetIndex: this.previousPoseIndex
+                })
+                break
+            }
+            return true
+          } else elem.selectedIndex = zero ? 0 : this.previousPoseIndex
+        }.bind(this)
+        , zero)
+    },
+    choosePoseFromSearchEntry ({ entry }) {
+      this.validatePose(function (val) {
+        if (val) {
+          this.previousPoseIndex = !this.showUnused
+            ? this.poses
+              .map((it, i) => (it.index === entry.index) ? i : -1)
+              .filter(it => it > -1)[0]
+            : this.previousPoseIndex
+          ipcRenderer.send('Load Pose', {
+            filePath: this.filePath,
+            index: entry.index,
+            optionsetIndex: !this.showUnused ? this.previousPoseIndex : false
+          })
+        }
+      }.bind(this))
     },
     filterSpritesToSave (half) {
       return this.tileMaps[half]
@@ -335,10 +354,14 @@ export default {
       const newFrame = this.currentFrameIndex - 1 > -1
         ? this.currentFrameIndex - 1
         : this.frames.length - 1
-      if (oldFrame !== newFrame && this.validatePose()) {
-        this.clearActiveSprite()
-        this.setCurrentFrameIndex(newFrame)
-        this.frameLoad()
+      if (oldFrame !== newFrame) {
+        this.validatePose(function (val) {
+          if (val) {
+            this.clearActiveSprite()
+            this.setCurrentFrameIndex(newFrame)
+            this.frameLoad()
+          }
+        }.bind(this))
       }
     },
     frameInc () {
@@ -346,10 +369,14 @@ export default {
       const newFrame = this.frames.length > this.currentFrameIndex + 1
         ? this.currentFrameIndex + 1
         : 0
-      if (oldFrame !== newFrame && this.validatePose()) {
-        this.clearActiveSprite()
-        this.setCurrentFrameIndex(newFrame)
-        this.frameLoad()
+      if (oldFrame !== newFrame) {
+        this.validatePose(function (val) {
+          if (val) {
+            this.clearActiveSprite()
+            this.setCurrentFrameIndex(newFrame)
+            this.frameLoad()
+          }
+        }.bind(this))
       }
     },
     frameLoad (oldFrame) {
@@ -388,10 +415,17 @@ export default {
       }
     },
     setshowUnused () {
-      if ((!this.updateVram && !this.updateSprite) ||
-        ((this.updateSprite || this.updateVram) &&
-          confirm(poseWarning))) {
+      if (!this.updateVram && !this.updateSprite) {
         this.showUnused = !this.showUnused
+      } else {
+        if (this.updateSprite || this.updateVram) {
+          this.confirm({
+            message: poseWarning,
+            callback: function (ok) {
+              if (ok) this.showUnused = !this.showUnused
+            }.bind(this)
+          })
+        }
       }
     },
     spriteZoomIn () {
@@ -404,10 +438,9 @@ export default {
         this.setSpriteRatio(this.spriteRatio - 1)
       }
     },
-    validatePose () {
-      return (!this.updateVram && !this.updateSprite) ||
-        ((this.updateSprite || this.updateVram) &&
-          confirm(poseWarning))
+    validatePose (_callback, override) {
+      if (override || (!this.updateVram && !this.updateSprite)) _callback(true)
+      else this.confirm({ message: poseWarning, callback: _callback })
     }
   }
 }
