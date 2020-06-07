@@ -8,8 +8,8 @@
 ### Downloads
 
 #### 2.20.2
-- <a href="">Super Munchtroid-linux-x64 2.20.2</a>
-- <a href="">Super Munchtroid-win32-x64 2.20.2</a>
+- <a href="https://drive.google.com/file/d/1NKHthUq5tOZAy5KBSqESEwuMSmPYB7jH/view?usp=sharing">Super Munchtroid-linux-x64 2.20.2</a>
+- <a href="https://drive.google.com/file/d/1yN5X2NJoYto6vw9h4nRLWRewvjRsebyG/view?usp=sharing">Super Munchtroid-win32-x64 2.20.2</a>
 
 2.20.2 Features
 - arrow key control of vram (while focused)
