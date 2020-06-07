@@ -103,6 +103,7 @@ export default {
           .map((it, i) => i === 1 ? 'FF' : it)
           .toString()
           .replace(/,/gi, '')
+      default: return p
     }
   }
 }

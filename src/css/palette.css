@@ -104,3 +104,11 @@
   margin-top: 10px;
   font-weight: bold;
 }
+.palette__radio--crossed:before {
+  position: absolute;
+  content: "\274c";
+  font-size: 30px;
+  color: #555;
+  line-height: 100px;
+  text-align: center;
+}

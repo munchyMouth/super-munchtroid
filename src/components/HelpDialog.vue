@@ -14,6 +14,10 @@
             <th>&nbsp;</th>
           </tr>
           <tr>
+            <td>ctrl + o</td>
+            <td>open ROM</td>
+          </tr>
+          <tr>
             <td>ctrl + \</td>
             <td>show/hide settings</td>
           </tr>

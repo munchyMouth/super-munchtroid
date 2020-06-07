@@ -179,6 +179,13 @@
         val="purple"
         color="purple"
       />
+      <q-radio
+        v-model="spriteMaskColor"
+        class="palette__radio--crossed"
+        keep-color
+        val="none"
+        color="black"
+      />
     </div>
   </div>
 </template>

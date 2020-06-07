@@ -139,9 +139,6 @@ export default {
       if (typeof newValue !== 'undefined') this.setActiveSprite()
     }
   },
-  mounted () {
-    console.log(this.beamOffset)
-  },
   methods: {
     ...mapActions(['clearActiveBeamUpdate', 'clearBeamOffsetIndex', 'setActiveSprite', 'setBeamOffsetIndex']),
     activeClass (dir, i) {

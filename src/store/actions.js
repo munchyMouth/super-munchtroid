@@ -91,7 +91,10 @@ export default {
   setBeamOffsetAction ({ commit }, action) { commit('SET_BEAM_OFFSET_ACTION', action) },
   setBeamOffsetData ({ commit }, data) { commit('SET_BEAM_OFFSET_DATA', data) },
   setBeamOffsetDirection ({ commit }, direction) { commit('SET_BEAM_OFFSET_DIRECTION', direction) },
-  setBeamOffsetIndex ({ commit }, index) { commit('SET_BEAM_OFFSET_INDEX', index) },
+  setBeamOffsetIndex ({ state, commit }, index) {
+    if (state.beamOffset.index !== index) commit('SET_BEAM_OFFSET_INDEX', index)
+    else commit('CLEAR_BEAM_OFFSET_INDEX')
+  },
   // the copy function below should only copy tile data, any more information would repoint the tile into which it is pasted!
   setCopiedTileData ({ commit }) { commit('SET_COPIED_TILE_DATA') },
   setCurrentFrameIndex ({ commit }, i) {
