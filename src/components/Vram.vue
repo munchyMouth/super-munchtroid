@@ -200,24 +200,22 @@ export default {
       if (!this.selectedTile.empty) {
         switch (evt.keyCode) {
           case 37: // left
-            this.keyLeft(this.selectedTile)
+            this.keyLeftRight(this.selectedTile, 'left')
             break
           case 38: // up
-            this.keyUpDown(this.selectedTile, 'up')
+            this.keyUpDown(this.selectedTile)
             break
           case 39: // right
-            this.keyRight(this.selectedTile)
+            this.keyLeftRight(this.selectedTile, 'right')
             break
           case 40: // down
-            this.keyUpDown(this.selectedTile, 'down')
+            this.keyUpDown(this.selectedTile)
             break
         }
       }
     },
-    keyUpDown ({ half, index, part, no }, upDown) {
-      part = upDown === 'up'
-        ? (part === 'part1' ? 'part2' : 'part1')
-        : (part === 'part2' ? 'part1' : 'part2')
+    keyUpDown ({ half, index, part, no }) {
+      part = part === 'part1' ? 'part2' : 'part1'
       if (this.validateTile({ half, index, part })) {
         this.setSelectedTile(
           {
@@ -230,53 +228,40 @@ export default {
         )
       }
     },
-    keyLeft ({ half, index, part, no }) {
+    keyLeftRight ({ half, index, part, no }, leftRight) {
       let halt = false
       let override = 0
       while (!halt) {
-        if (--index < 0) {
-          index = 7
-          half = half === 'top' ? 'bottom' : 'top'
+        if (leftRight === 'left') {
+          if (--index < 0) {
+            index = 7
+            half = half === 'top' ? 'bottom' : 'top'
+          }
+          if (--no < 0) no = 15
+        } else {
+          if (++index === 8) {
+            index = 0
+            half = half === 'top' ? 'bottom' : 'top'
+          }
+          if (++no === 16) no = 0
         }
-        if (--no < 0) no = 15
         if (++override > 15) halt = true // emergency break
         if (this.validateTile({ half, index, part })) {
-          this.setSelectedTile(
-            {
-              half,
-              index,
-              no,
-              part,
-              tile: this.currentFrame[half].parts[part].tiles[index]
-            }
-          )
+          this.keySetTile({ half, index, no, part })
           halt = true
         }
       }
     },
-    keyRight ({ half, index, part, no }) {
-      let halt = false
-      let override = 0
-      while (!halt) {
-        if (++index === 8) {
-          index = 0
-          half = half === 'top' ? 'bottom' : 'top'
+    keySetTile ({ half, index, no, part }) {
+      this.setSelectedTile(
+        {
+          half,
+          index,
+          no,
+          part,
+          tile: this.currentFrame[half].parts[part].tiles[index]
         }
-        if (++no === 16) no = 0
-        if (++override > 15) halt = true // emergency break
-        if (this.validateTile({ half, index, part })) {
-          this.setSelectedTile(
-            {
-              half,
-              index,
-              no,
-              part,
-              tile: this.currentFrame[half].parts[part].tiles[index]
-            }
-          )
-          halt = true
-        }
-      }
+      )
     },
     validateTile ({ half, index, part }) {
       return this.currentFrame[half].parts[part]

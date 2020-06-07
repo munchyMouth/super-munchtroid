@@ -196,6 +196,16 @@ export default {
     }
     return tile
   },
+  getRotatedTile (tile) {
+    const matrix = cloneDeep(tile.tile.data)
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
+        matrix[j][i] = tile.tile.data[i][j]
+      }
+    }
+    tile.tile.data = matrix
+    return tile
+  },
   getFlippedTiles (tiles, direction) {
     const newTiles = cloneDeep(tiles)
     switch (direction) {
@@ -234,6 +244,14 @@ export default {
       this.dispatchTransformation(
         this.getFlippedTiles(cloneDeep(this.selectedTiles), 'v')
       )
+    }
+  },
+  pixelRotate90 () {
+    if (!this.edit16x16) {
+      this.dispatchTransformation(
+        this.getRotatedTile(
+          this.getFlippedTile(cloneDeep(this.selectedTile), 'v')
+        ))
     }
   }
 }

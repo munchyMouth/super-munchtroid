@@ -111,6 +111,15 @@
             <label v-show="editorRatio > 1">(H-px)</label>
           </button>
           <button
+            class="no-style editor__canvas__tools__rotate"
+            :disabled="!edit16x16 ? false : 'disabled'"
+            :title="!edit16x16 ? 'rotate 90&#176;' : 'you can only rotate a single tile!'"
+            @click="pixelRotate90()"
+          >
+            <icon name="sync" />&nbsp;
+            <label v-show="editorRatio > 1">(90&#176;)</label>
+          </button>
+          <button
             class="no-style editor__canvas__tools__copy"
             :disabled="!edit16x16 ? false : 'disabled'"
             :title="!edit16x16 ? 'copy [ctrl^c]' : 'you can only copy/paste a single tile!'"
@@ -205,6 +214,7 @@ import 'vue-awesome/icons/paste'
 import 'vue-awesome/icons/undo'
 import 'vue-awesome/icons/redo'
 import 'vue-awesome/icons/save'
+import 'vue-awesome/icons/sync'
 import 'vue-awesome/icons/th-large'
 import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
