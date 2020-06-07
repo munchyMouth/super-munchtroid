@@ -6,6 +6,19 @@
 ----
 
 ### Downloads
+
+#### 2.20.0
+- <a href="">Super Munchtroid-linux-x64 2.20.0</a>
+- <a href="">Super Munchtroid-win32-x64 2.20.0</a>
+
+2.20.0 Features
+- arrow key control of vram
+- rotate 90° control for editor
+- switching off/on beam controls with buttons
+- better confirm dialogs
+- fixed palette undo
+- shortcut `ctrl + o` to open files
+
 #### 2.18.0
 - <a href="https://drive.google.com/open?id=1yvxQh9qBgSkzvQD_4s0Kb3Ni3Sm3g7NL">Super Munchtroid-linux-x64 2.18.0</a>
 - <a href="https://drive.google.com/open?id=11d2VTfRsw14s0V_2nAzzBge0oG1cJImp">Super Munchtroid-win32-x64 2.18.0</a>

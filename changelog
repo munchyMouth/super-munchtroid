@@ -1,3 +1,11 @@
+07/07/20 2.20.0 Features
+- arrow key control of vram
+- rotate 90° control for editor
+- switching off/on beam controls with buttons
+- better confirm dialogs
+- fixed palette undo
+- shortcut `ctrl + o` to open files
+
 10/05/20 2.18.0 Features
 - support for setting beam offsets
 - collapsible panels for sprite manager & beam editor
