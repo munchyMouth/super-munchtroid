@@ -70,6 +70,14 @@ export default stampit({
         32256)
     }
 
+    this.loRomToString = function (lo, i = 2, str = '') {
+      for (i; i >= 0; i--) {
+        const s = lo[i].toString(16)
+        str += (s.length < 2) ? '0' + s : s
+      }
+      return str
+    }
+
     // THIS IS WHERE THE FILE LOADING MAGIC HAPPENS!!!
     this.getOffsetData = function (offset, length) {
       return new Promise(function (resolve, reject) {

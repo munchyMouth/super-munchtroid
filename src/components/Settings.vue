@@ -128,6 +128,16 @@
           </template>
           <beam-manager />
         </q-collapsible>
+        <hr>
+        <q-collapsible>
+          <template slot="header">
+            <span class="collapsible">
+              <q-icon name="developer_board" />
+              &nbsp;&nbsp;&nbsp;&nbsp;Metadata
+            </span>
+          </template>
+          <Metadata :vram="vram" />
+        </q-collapsible>
       </div>
       <hr>
       <div class="settings__frame-tree__save">
@@ -171,12 +181,14 @@ import SpriteManager from './SpriteManager.vue'
 import SearchBox from './SearchBox.vue'
 import Tree from './Tree.vue'
 import TreeLi from './TreeLi.vue'
+import Metadata from './Metadata.vue'
 
 export default {
   name: 'settings',
   components: {
     BeamManager,
     Icon,
+    Metadata,
     PlusMinusField,
     SearchBox,
     SpriteManager,

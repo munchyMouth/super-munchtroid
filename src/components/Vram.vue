@@ -195,8 +195,6 @@ export default {
       this.y = evt.clientY - rect.top
     },
     hilightSquareOnKeyup (evt) {
-      // console.log('selected', this.selectedTile)
-      // console.log('metadata', this.activeTileMetaData)
       if (!this.selectedTile.empty) {
         switch (evt.keyCode) {
           case 37: // left

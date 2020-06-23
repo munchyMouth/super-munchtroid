@@ -75,7 +75,8 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
       const vramCount2 = dmaEntry.readUIntLE(5, 2)
       const obj = {
         _address: `$${firstTile.toString(16)}`,
-        _id: firstTile
+        _id: firstTile,
+        _loAddress: `$${this.loRomToString(dmaEntry)}`
       }
       obj.part1 = await this.getPart(firstTile, vramCount1, 'PART1')
       obj.part2 = await this.getPart(
@@ -98,6 +99,9 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
         data[key]._id = this.dmaEntries[key]._id
         data[key]._address = this.dmaEntries[key]._address
       })
+      data._address = this.dmaEntries._address
+      data._id = this.dmaEntries._id
+      data._dma = this.dmaEntries.dma
       return data
     }.bind(this)
 

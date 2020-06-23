@@ -229,7 +229,6 @@ export default {
         this.getFlippedTile(cloneDeep(this.selectedTile), 'h')
       )
     } else {
-      console.log(this.selectedTiles)
       this.dispatchTransformation(
         this.getFlippedTiles(cloneDeep(this.selectedTiles), 'h')
       )

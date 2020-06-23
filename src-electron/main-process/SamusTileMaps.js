@@ -99,12 +99,15 @@ export default stampit({ /* extends RomData, SamusProps */
       const tileMapPointer = await this.getOffsetData(
         poseTileMapPointer + (i * 2), 2)
       return {
-        tileMap: !tileMapPointerIsEmpty(tileMapPointer)
-          ? await this.getSpriteMapTable(tileMapPointer)
-          : { sprites: [] },
+        tileMap: {
+          ...!tileMapPointerIsEmpty(tileMapPointer)
+            ? await this.getSpriteMapTable(tileMapPointer)
+            : { sprites: [] },
+          _addressShort: this.loRomToString(tileMapPointer, 1)
+        },
         _id: poseTileMapPointer + (i * 2),
         _pose: `$${this.pose.toString(16)}`,
-        _address: `$${(poseTileMapPointer + (i * 2)).toString(16)}`
+        _address: `$${(poseTileMapPointer + (i * 2)).toString(16)}`,
       }
     }.bind(this)
 

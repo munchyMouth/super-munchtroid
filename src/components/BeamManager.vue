@@ -4,39 +4,45 @@
       <beam-offset-buttons />
       <div class="beam-manager__settings">
         <div class="beam-manager__settings__direction">
-          <input
-            id="facing-left"
-            v-model="direction"
-            type="radio"
-            value="FACING_LEFT"
-          >
-          <label for="facing-left">Facing Left</label>
-          <br>
-          <input
-            id="facing-right"
-            v-model="direction"
-            type="radio"
-            value="FACING_RIGHT"
-          >
-          <label for="facing-right">Facing Right</label>
+          <div>
+            <input
+              id="facing-left"
+              v-model="direction"
+              type="radio"
+              value="FACING_LEFT"
+            >
+            <label for="facing-left">Facing Left</label>
+          </div>
+          <div>
+            <input
+              id="facing-right"
+              v-model="direction"
+              type="radio"
+              value="FACING_RIGHT"
+            >
+            <label for="facing-right">Facing Right</label>
+          </div>
         </div>
         <hr>
         <div class="beam-manager__settings__action">
-          <input
-            id="stationary"
-            v-model="action"
-            type="radio"
-            value="STATIONARY"
-          >
-          <label for="stationary">stationary/jumping</label>
-          <br>
-          <input
-            id="running"
-            v-model="action"
-            type="radio"
-            value="RUNNING"
-          >
-          <label for="running">running</label>
+          <div>
+            <input
+              id="stationary"
+              v-model="action"
+              type="radio"
+              value="STATIONARY"
+            >
+            <label for="stationary">stationary/jumping</label>
+          </div>
+          <div>
+            <input
+              id="running"
+              v-model="action"
+              type="radio"
+              value="RUNNING"
+            >
+            <label for="running">running</label>
+          </div>
         </div>
       </div>
     </div>
@@ -125,5 +131,13 @@ export default {
 }
 .beam-manager-globals button.--active {
   color: red;
+}
+.beam-manager__settings__direction {
+  display: flex;
+  flex-direction: column;
+}
+.beam-manager__settings__action div, .beam-manager__settings__direction div {
+  display: flex;
+  overflow: hidden;
 }
 </style>
