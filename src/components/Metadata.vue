@@ -29,6 +29,7 @@
                 v-model="dma.top.table"
                 class="dma"
                 type="text"
+                maxlength="2"
               >
             </strong>
           </div>
@@ -39,6 +40,7 @@
                 v-model="dma.top.entry"
                 class="dma"
                 type="text"
+                maxlength="2"
               >
             </strong>
           </div>
@@ -74,6 +76,7 @@
             >
           </strong>
         </div>
+        <div>&nbsp;&nbsp;&nbsp;&#8600;</div>
       </div>
 
       <div>
@@ -87,6 +90,7 @@
                 v-model="dma.bottom.table"
                 class="dma"
                 type="text"
+                maxlength="2"
               >
             </strong>
           </div>
@@ -97,6 +101,7 @@
                 v-model="dma.bottom.entry"
                 class="dma"
                 type="text"
+                maxlength="2"
               >
             </strong>
           </div>
@@ -132,15 +137,17 @@
             >
           </strong>
         </div>
+        <div>&#8601;&nbsp;&nbsp;&nbsp;</div>
       </div>
     </div>
-    <hr>
+    <br>
     <div>
       <div class="sub-heading">
         Tilemaps
       </div>
       <div class="top-bottom">
         <div>
+          <div>&nbsp;&nbsp;&nbsp;&#8601;</div>
           <div>
             <label>Frame top<span class="metadata__flag">(PC)</span></label>
             <strong>
@@ -160,11 +167,14 @@
                 v-model="frame.top"
                 type="text"
                 class="tilemap-pointer-value"
+                maxlength="4"
               >
             </strong>
           </div>
+          <div>&nbsp;&nbsp;&nbsp;&#8600;</div>
         </div>
         <div>
+          <div>&#8600;&nbsp;&nbsp;&nbsp;</div>
           <div>
             <label>Frame bot<span class="metadata__flag">(PC)</span></label>
             <strong>
@@ -184,18 +194,24 @@
                 v-model="frame.bottom"
                 type="text"
                 class="tilemap-pointer-value"
+                maxlength="4"
               >
             </strong>
           </div>
+          <div>&#8601;&nbsp;&nbsp;&nbsp;</div>
         </div>
       </div>
+      <button @click="repoint">
+        Repoint!
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { ipcRenderer } from 'electron'
 import { clone } from 'lodash'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'metadata',
@@ -222,7 +238,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['tileMaps'])
+    ...mapGetters(['filePath', 'tileMaps'])
   },
   watch: {
     vram (newValue) {
@@ -233,11 +249,59 @@ export default {
     this.injectROMMetaData()
   },
   methods: {
+    ...mapActions(['confirm', 'setLoading']),
     injectROMMetaData () {
       this.dma.top = clone(this.vram._dma.top)
       this.dma.bottom = clone(this.vram._dma.bottom)
       this.frame.top = this.tileMaps.top.tileMap._addressShort
       this.frame.bottom = this.tileMaps.bottom.tileMap._addressShort
+    },
+    repoint () {
+      if (this.validateFields()) {
+        this.confirm({
+          message: 'Are you absolutely sure you wish to repoint?',
+          callback: function (ok) {
+            if (ok) {
+              // this.setLoading(false)
+              ipcRenderer.send(
+                'Repoint frame',
+                {
+                  filePath: this.filePath,
+                  dma: { ...this.dma },
+                  frame: { ...this.frame }
+                }
+              )
+            }
+          }.bind(this)
+        })
+      } else {
+        this.$q.notify({
+          message: 'Repointing failed: Invalid value(s) detected. check your inputs!',
+          position: 'bottom',
+          color: 'negative',
+          timeout: 1000
+        })
+      }
+    },
+    validateFields () {
+      const dma = [
+        this.dma.bottom.entry,
+        this.dma.bottom.table,
+        this.dma.top.entry,
+        this.dma.top.table
+      ]
+      for (let item of dma) {
+        console.log(item)
+        if (!(/^[0-9A-F]{2}$/i.test(item))) return false
+      }
+      const frame = [
+        this.frame.top,
+        this.frame.bottom
+      ]
+      for (let item of frame) {
+        if (!(/^[0-9A-F]{4}$/i.test(item))) return false
+      }
+      return true
     }
   }
 }

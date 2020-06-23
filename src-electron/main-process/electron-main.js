@@ -135,6 +135,16 @@ ipcMain.on('Load Pose', (event,
   }
 })
 
+ipcMain.on('Repoint frame', (event, { filePath, dma, frame }) => {
+  try {
+    console.log('filepath', filePath)
+    console.log('dma', dma)
+    console.log('dma', frame)
+  } catch (e) {
+    console.trace(e)
+  }
+})
+
 ipcMain.on('Save Beams', (event, { filePath, beams }) => {
   try {
     Beam({ filePath })
