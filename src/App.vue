@@ -57,7 +57,7 @@ export default {
   },
   updated () {
     try {
-      const events = ['Beams', 'Palettes', 'Pose', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
+      const events = ['Beams', 'Palettes', 'Pose', 'Repoint', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
       events.forEach(function (it) {
         ipcRenderer.on(`${it} Error`, function (event, error) {
           this.setError(error)
@@ -79,6 +79,15 @@ export default {
           }
         }.bind(this)
       )
+
+      this.renderEvent(
+        'Frame Repointed',
+        async function (event, object) {
+          this.setLoading(false)
+          this.refreshFrame()
+          this.success('Data Repointed!')
+        }.bind(this))
+
       this.renderEvent(
         'ROM Loaded',
         async function (event, object) {
@@ -217,6 +226,7 @@ export default {
       'incrementFrameToggle',
       'pastecopiedTile',
       'popFromUndoCache',
+      'refreshFrame',
       'setBeamOffsetData',
       'setCopiedTileData',
       'setEventObserver',

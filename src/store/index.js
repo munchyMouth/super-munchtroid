@@ -73,12 +73,29 @@ const store = {
     layoutDrawerOpen: true,
     loading: false,
     frames: [],
-    paletteClipboard: [],
     palettes: [],
+    paletteClipboard: [],
+    pointerClipboard: {
+      dma: {
+        top: {
+          table: undefined,
+          entry: undefined
+        },
+        bottom: {
+          table: undefined,
+          entry: undefined
+        }
+      },
+      frame: {
+        top: undefined,
+        bottom: undefined
+      }
+    },
     redoCache: [],
+    refreshPalette: true, // value is irrelevant, simply forces a refresh when color changed
+    refreshFrame: false,
     saveKeyEvent: false,
     saveEventListener: false,
-    refreshPalette: true, // value is irrelevant, simply forces a refresh when color changed
     selectedTile: undefined,
     selectedTiles: undefined,
     settings: {

@@ -4,6 +4,11 @@
       <strong>Disclaimer:</strong>
       Messing with this section can seriously break your ROM. Make sure you backup before changing anything!
     </div>
+    <controls
+      :dma="dma"
+      :frame="frame"
+      @paste="paste($event)"
+    />
     <div class="sub-heading">
       VRAM
     </div>
@@ -212,9 +217,13 @@
 import { ipcRenderer } from 'electron'
 import { clone } from 'lodash'
 import { mapActions, mapGetters } from 'vuex'
+import Controls from './MetadataControls'
 
 export default {
   name: 'metadata',
+  components: {
+    Controls
+  },
   props: ['vram'],
   data () {
     return {
@@ -238,7 +247,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['filePath', 'tileMaps'])
+    ...mapGetters(['currentFrameIndex', 'filePath', 'tileMaps'])
   },
   watch: {
     vram (newValue) {
@@ -256,19 +265,35 @@ export default {
       this.frame.top = this.tileMaps.top.tileMap._addressShort
       this.frame.bottom = this.tileMaps.bottom.tileMap._addressShort
     },
+    paste ({ half, dma, frame }) {
+      this.dma[half] = clone(dma[half])
+      this.frame[half] = frame[half]
+    },
     repoint () {
       if (this.validateFields()) {
         this.confirm({
-          message: 'Are you absolutely sure you wish to repoint?',
+          message: 'All unsaved changes will be lost! Are you absolutely sure you wish to repoint?',
           callback: function (ok) {
             if (ok) {
-              // this.setLoading(false)
               ipcRenderer.send(
-                'Repoint frame',
+                'Repoint Frame',
                 {
                   filePath: this.filePath,
-                  dma: { ...this.dma },
-                  frame: { ...this.frame }
+                  dma: {
+                    index: this.currentFrameIndex,
+                    _id: this.vram._id,
+                    value: [this.dma.top.table, this.dma.top.entry, this.dma.bottom.table, this.dma.bottom.entry]
+                  },
+                  frame: {
+                    top: {
+                      _id: this.tileMaps.top._id,
+                      value: [this.frame.top.substring(2), this.frame.top.substring(0, 2)]
+                    },
+                    bottom: {
+                      _id: this.tileMaps.bottom._id,
+                      value: [this.frame.bottom.substring(2), this.frame.bottom.substring(0, 2)]
+                    }
+                  }
                 }
               )
             }
@@ -291,7 +316,6 @@ export default {
         this.dma.top.table
       ]
       for (let item of dma) {
-        console.log(item)
         if (!(/^[0-9A-F]{2}$/i.test(item))) return false
       }
       const frame = [

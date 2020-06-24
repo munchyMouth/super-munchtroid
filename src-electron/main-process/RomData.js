@@ -26,9 +26,11 @@ export default stampit({
     this.bufferFromArray = function (data) {
       return Buffer.from(
         data.map(function (it) {
-          let word = it.toString(16)
-          while (word.length < 4) word = '0' + word
-          return word
+          if (typeof it === 'number') {
+            let word = it.toString(16)
+            while (word.length < 4) word = '0' + word
+            return word
+          } else return it
         }).reduce(function (a, it) {
           return a.concat(this.chunk(it).reverse().map(j => parseInt(j, 16)))
         }.bind(this), []), 'hex')

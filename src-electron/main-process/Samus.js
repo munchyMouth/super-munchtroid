@@ -37,6 +37,24 @@ export default stampit(
         }
       }
 
+      this.repointData = async function ({ dma, frame }) {
+        await this.setOffsetData(
+          this.bufferFromArray(frame.bottom.value),
+          frame.bottom._id,
+          frame.bottom.value.length
+        )
+        await this.setOffsetData(
+          this.bufferFromArray(frame.top.value),
+          frame.top._id,
+          frame.top.value.length
+        )
+        await this.setOffsetData(
+          this.bufferFromArray(dma.value),
+          dma._id + (dma.index * 4),
+          dma.value.length
+        )
+      }
+
       this.saveSpriteToROM = async function (isFirstPose, pojo) {
         const buff = pojoToSpriteBuffer(pojo)
         await setOffsetData(buff, pojo._id, buff.length)

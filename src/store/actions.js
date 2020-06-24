@@ -81,6 +81,7 @@ export default {
       commit('UPDATE_EDITOR')
     }
   },
+  refreshFrame ({ commit }) { commit('REFRESH_FRAME') },
   setActiveBeamUpdate ({ commit }, xY) { commit('SET_ACTIVE_BEAM_UPDATE', xY) },
   setActivePalette ({ commit }, c) { commit('SET_ACTIVE_PALETTE', c) },
   setActivePaletteColor ({ commit }, obj) { commit('SET_ACTIVE_PALETTE_COLOR', obj) },
@@ -116,6 +117,15 @@ export default {
   setEventObserver ({ commit }, obs) { commit('SET_EVENT_OBSERVER', obs) },
   setLoading ({ commit }, loading) { commit('SET_LOADING', loading) },
   setPaletteClipboard ({ commit }, palette) { commit('SET_PALETTE_CLIPBOARD', palette) },
+  setPaletteColorChunk (
+    { commit },
+    { activeColorIndex, color, isInitialising = false }) {
+    commit('SET_PALETTE_COLOR_CHUNK', {
+      activeColorIndex,
+      color,
+      isInitialising
+    })
+  },
   setPalettes ({ commit }, { palettes, index = 0 }) {
     try {
       commit('SET_LOADING', false)
@@ -131,14 +141,8 @@ export default {
       })
     }
   },
-  setPaletteColorChunk (
-    { commit },
-    { activeColorIndex, color, isInitialising = false }) {
-    commit('SET_PALETTE_COLOR_CHUNK', {
-      activeColorIndex,
-      color,
-      isInitialising
-    })
+  setPointerClipboardByHalf ({ commit }, o) {
+    commit('SET_POINTER_CLIPBOARD_BY_HALF', o)
   },
   // Because of the overhead of Samus' full pose load, the function is async as
   // this avoids a race condition in initial rendering behaviour.

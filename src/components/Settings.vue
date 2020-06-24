@@ -217,6 +217,7 @@ export default {
       'incrementFrame',
       'filePath',
       'frames',
+      'refreshFrame',
       'settings',
       'shortcutTriggerFullSave',
       'spriteRatio',
@@ -245,8 +246,10 @@ export default {
     },
     frameIndex () {
       return this.tab === 'basic'
-        ? this.poses[this.currentPose].index || 0
-        : this.settings.SPECIAL_POSES[this.currentPose || 0].index
+        ? (this.poses[this.currentPose] ? (this.poses[this.currentPose].index || 0) : 0)
+        : (this.settings.SPECIAL_POSES[this.currentPose || 0]
+          ? (this.settings.SPECIAL_POSES[this.currentPose || 0].index || 0)
+          : 0)
     }
   },
   provide () {
@@ -260,6 +263,10 @@ export default {
     },
     decrementFrame () { this.frameDec() },
     incrementFrame () { this.frameInc() },
+    refreshFrame () {
+      this.clearActiveSprite()
+      this.frameLoad()
+    },
     shortcutTriggerFullSave () {
       this.saveVram()
       this.saveSprites()

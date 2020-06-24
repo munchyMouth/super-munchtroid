@@ -135,11 +135,20 @@ ipcMain.on('Load Pose', (event,
   }
 })
 
-ipcMain.on('Repoint frame', (event, { filePath, dma, frame }) => {
+ipcMain.on('Repoint Frame', (event, { filePath, dma, frame }) => {
   try {
-    console.log('filepath', filePath)
-    console.log('dma', dma)
-    console.log('dma', frame)
+    new Samus({ filePath })
+      .repointData({ dma, frame })
+      .then(function () {
+        event.sender.send('Frame Repointed', true)
+      }, function (e) {
+        console.trace(e)
+        event.sender.send('Repoint Error', {
+          type: 'FrameMainRepointException',
+          title: 'Failed to repoint some or all data: Error in main. ',
+          message: [e.message]
+        })
+      })
   } catch (e) {
     console.trace(e)
   }

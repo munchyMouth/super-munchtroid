@@ -199,6 +199,14 @@ export default {
     !state.selectedTile ||
     (state.selectedTile &&
       state.selectedTile.hasOwnProperty('empty')),
+  pointerClipboardHasBottom: state =>
+    state.pointerClipboard.dma.bottom.table &&
+    state.pointerClipboard.dma.bottom.entry &&
+    state.pointerClipboard.frame.bottom,
+  pointerClipboardHasTop: state =>
+    state.pointerClipboard.dma.top.table &&
+    state.pointerClipboard.dma.top.entry &&
+    state.pointerClipboard.frame.top,
   romLoaded: state => !!Object.keys(state.vram).length, // the `!!` syntax forces primitive boolean rather than truthy.
   vram16x16TileIsValid: state => ({ half, vramIndex, part }) => {
     if (part === 'part1' &&

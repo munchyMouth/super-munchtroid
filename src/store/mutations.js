@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash'
+import { clone, cloneDeep } from 'lodash'
 import Vue from 'vue'
 
 import { createBlankTemplate } from '../components/Miscellaneous.js'
@@ -92,6 +92,13 @@ export default {
     state.redoCache = []
     state.undoCache.push(o)
     if (state.undoCache.length > 16) state.undoCache.shift()
+  },
+  REFRESH_FRAME (state) {
+    state.refreshFrame = !state.refreshFrame
+  },
+  SET_POINTER_CLIPBOARD_BY_HALF (state, { dma, frame, half }) {
+    state.pointerClipboard.dma[half] = clone(dma[half])
+    state.pointerClipboard.frame[half] = frame[half]
   },
   // pull newest item from the redo array history
   SHIFT_FROM_REDO_CACHE (state) {
