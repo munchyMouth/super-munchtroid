@@ -133,7 +133,7 @@
           <template slot="header">
             <span class="collapsible">
               <q-icon name="developer_board" />
-              &nbsp;&nbsp;&nbsp;&nbsp;Metadata
+              &nbsp;&nbsp;&nbsp;&nbsp;Repointing Tool
             </span>
           </template>
           <Metadata :vram="vram" />
