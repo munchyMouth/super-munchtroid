@@ -3,24 +3,28 @@
     "X": {
       "DEFAULT": "0x84204",
       "GRAPPLE_ORIGIN": "0xDC14A",
-      "GRAPPLE_DESTINATION": "0xDC122"
+      "GRAPPLE_DESTINATION": "0xDC122",
+      "CHARGE_ORIGIN": "0x841A8"
     },
     "Y": {
       "DEFAULT": "0x84218",
       "GRAPPLE_ORIGIN": "0xDC15E",
-      "GRAPPLE_DESTINATION": "0xDC136"
+      "GRAPPLE_DESTINATION": "0xDC136",
+      "CHARGE_ORIGIN": "0x841C2"
     }
   },
   "RUNNING": {
     "X": {
       "DEFAULT": "0x8422C",
       "GRAPPLE_ORIGIN": "0xDC19A",
-      "GRAPPLE_DESTINATION": "0xDC172"
+      "GRAPPLE_DESTINATION": "0xDC172",
+      "CHARGE_ORIGIN": "0x841DC"
     },
     "Y": {
       "DEFAULT": "0x84240",
       "GRAPPLE_ORIGIN": "0xDC1AE",
-      "GRAPPLE_DESTINATION": "0xDC186"
+      "GRAPPLE_DESTINATION": "0xDC186",
+      "CHARGE_ORIGIN": "0x841F0"
     }
   }
 }

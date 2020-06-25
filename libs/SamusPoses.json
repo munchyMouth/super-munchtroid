@@ -5,35 +5,75 @@
   },
   {
     "name": "01: Facing right - normal",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "849DD",
+      "length": 20,
+      "loadByFrame": false
+    }
   },
   {
     "name": "02: Facing left - normal",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "849F1",
+      "length": 20,
+      "loadByFrame": false
+    }
   },
   {
     "name": "03: Facing right - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A05",
+      "length": 8,
+      "loadByFrame": true
+    }
   },
   {
     "name": "04: Facing left - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A0D",
+      "length": 8,
+      "loadByFrame": true
+    }
   },
   {
     "name": "05: Facing right - aiming up-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A15",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "06: Facing left - aiming up-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A19",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "07: Facing right - aiming down-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A1D",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "08: Facing left - aiming down-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A21",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "09: Moving right - not aiming",
@@ -45,11 +85,21 @@
   },
   {
     "name": "0B: Moving right - gun extended forward (not aiming)",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A25",
+      "length": 22,
+      "loadByFrame": true
+    }
   },
   {
     "name": "0C: Moving left - gun extended forward (not aiming)",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A3B",
+      "length": 22,
+      "loadByFrame": true
+    }
   },
   {
     "name": "0D: Moving right - aiming straight up*",
@@ -61,43 +111,93 @@
   },
   {
     "name": "0F: Moving right - aiming up-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A51",
+      "length": 22,
+      "loadByFrame": true
+    }
   },
   {
     "name": "10: Moving left - aiming up-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A67",
+      "length": 22,
+      "loadByFrame": true
+    }
   },
   {
     "name": "11: Moving right - aiming down-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A7D",
+      "length": 22,
+      "loadByFrame": true
+    }
   },
   {
     "name": "12: Moving left - aiming down-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84A93",
+      "length": 22,
+      "loadByFrame": true
+    }
   },
   {
     "name": "13: Facing right - normal jump - not aiming - not moving - gun extended",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84AA9",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "14: Facing left  - normal jump - not aiming - not moving - gun extended",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84AAF",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "15: Facing right - normal jump - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAB5",
+      "length": 8,
+      "loadByFrame": true
+    }
   },
   {
     "name": "16: Facing left - normal jump - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CABD",
+      "length": 8,
+      "loadByFrame": true
+    }
   },
   {
     "name": "17: Facing right - normal jump - aiming down",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAC5",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "18: Facing left  - normal jump - aiming down",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CACB",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "19: Facing right - spin jump",
@@ -157,11 +257,21 @@
   },
   {
     "name": "27: Facing right - crouching",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB5D",
+      "length": 20,
+      "loadByFrame": false
+    }
   },
   {
     "name": "28: Facing left - crouching",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB71",
+      "length": 20,
+      "loadByFrame": false
+    }
   },
   {
     "name": "29: Facing right - falling",
@@ -173,19 +283,39 @@
   },
   {
     "name": "2B: Facing right - falling - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB1D",
+      "length": 10,
+      "loadByFrame": true
+    }
   },
   {
     "name": "2C: Facing left - falling - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB27",
+      "length": 10,
+      "loadByFrame": true
+    }
   },
   {
     "name": "2D: Facing right - falling - aiming down",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB31",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "2E: Facing left - falling - aiming down",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB37",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "2F: Facing right - turning - jumping",
@@ -293,15 +423,30 @@
   },
   {
     "name": "49: Facing left - moonwalk",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBA5",
+      "length": 14,
+      "loadByFrame": true
+    }
   },
   {
     "name": "4A: Facing right - moonwalk",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBB3",
+      "length": 14,
+      "loadByFrame": true
+    }
   },
   {
     "name": "4B: Facing right - normal jump transition",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAD1",
+      "length": 8,
+      "loadByFrame": true
+    }
   },
   {
     "name": "4C: Facing left - normal jump transition",
@@ -325,11 +470,21 @@
   },
   {
     "name": "51: Facing right - normal jump - not aiming - moving forward",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAD9",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "52: Facing left - normal jump - not aiming - moving forward",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CACB",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "53: Facing right - knockback",
@@ -341,11 +496,21 @@
   },
   {
     "name": "55: Facing right - normal jump transition - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CC15",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "56: Facing left - normal jump transition - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CC1B",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "57: Facing right - normal jump transition - aiming up-right",
@@ -413,75 +578,165 @@
   },
   {
     "name": "67: Facing right - falling - gun extended",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAFD",
+      "length": 16,
+      "loadByFrame": false
+    }
   },
   {
     "name": "68: Facing left - falling - gun extended",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAFD",
+      "length": 16,
+      "loadByFrame": false
+    }
   },
   {
     "name": "69: Facing left - normal jump - aiming up-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAE5",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "6A: Facing left - normal jump - aiming up-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAEB",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "6B: Facing right - normal jump - aiming down-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAF1",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "6C: Facing left - normal jump - aiming down-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CAF7",
+      "length": 6,
+      "loadByFrame": false
+    }
   },
   {
     "name": "6D: Facing right - falling - aiming up-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB3D",
+      "length": 8,
+      "loadByFrame": false
+    }
   },
   {
     "name": "6E: Facing left - falling - aiming up-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB45",
+      "length": 8,
+      "loadByFrame": false
+    }
   },
   {
     "name": "6F: Facing right - falling - aiming down-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB4D",
+      "length": 8,
+      "loadByFrame": false
+    }
   },
   {
     "name": "70: Facing left - falling - aiming down-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB55",
+      "length": 8,
+      "loadByFrame": false
+    }
   },
   {
     "name": "71: Facing right - standing to crouching - aiming up-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB85",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "72: Facing left - standing to crouching - aiming up-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB89",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "73: Facing right - standing to crouching - aiming down-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB8D",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "74: Facing left - standing to crouching - aiming down-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB91",
+      "length": 4,
+      "loadByFrame": false
+    }
   },
   {
     "name": "75: Facing left - moonwalk - aiming up-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBC1",
+      "length": 14,
+      "loadByFrame": true
+    }
   },
   {
     "name": "76: Facing right - moonwalk - aiming up-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBCF",
+      "length": 14,
+      "loadByFrame": true
+    }
   },
   {
     "name": "77: Facing left - moonwalk - aiming down-left",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBDD",
+      "length": 14,
+      "loadByFrame": true
+    }
   },
   {
     "name": "78: Facing right - moonwalk - aiming down-right",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBEB",
+      "length": 14,
+      "loadByFrame": true
+    }
   },
   {
     "name": "79: Facing right - morph ball - spring ball - on ground",
@@ -533,11 +788,21 @@
   },
   {
     "name": "85: Facing right - crouching - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB95",
+      "length": 8,
+      "loadByFrame": true
+    }
   },
   {
     "name": "86: Facing left - crouching - aiming up",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB9D",
+      "length": 8,
+      "loadByFrame": false
+    }
   },
   {
     "name": "87: Facing right - turning - falling",
@@ -657,7 +922,12 @@
   },
   {
     "name": "A4: Facing right - Landing from normal jump",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CBF9",
+      "length": 12,
+      "loadByFrame": true
+    }
   },
   {
     "name": "A5: Facing left - Landing from normal jump",
@@ -665,7 +935,12 @@
   },
   {
     "name": "A6: Facing right - Landing from spin jump",
-    "unused": false
+    "unused": false,
+    "missileFins": {
+      "pointer": "84CB55",
+      "length": 8,
+      "loadByFrame": false
+    }
   },
   {
     "name": "A7: Facing left - Landing from spin jump",
