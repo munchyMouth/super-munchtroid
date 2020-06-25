@@ -42,8 +42,6 @@ export default stampit(RomData, { /* extends RomData */
         }, {})
     }
 
-    // const handleOffsetVariable = (update, type) => (update > 0 && type === 'GRAPPLE_ORIGIN') ? type - 5 : type
-
     this.saveToROM = async function (beams) {
       const _this = this
       await _this.each(
