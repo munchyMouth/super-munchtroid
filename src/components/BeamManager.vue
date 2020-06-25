@@ -1,5 +1,25 @@
 <template>
   <div>
+    <div class="beam-type">
+      <div :class="beamType === 'DEFAULT' ? '--active' : ''">
+        <input
+          id="default"
+          v-model="beamType"
+          type="radio"
+          value="DEFAULT"
+        >&nbsp;
+        <label for="default">Beams</label>
+      </div>
+      <div :class="beamType === 'CHARGE_ORIGIN' ? '--active' : ''">
+        <input
+          id="charge-spark"
+          v-model="beamType"
+          type="radio"
+          value="CHARGE_ORIGIN"
+        >&nbsp;
+        <label for="charge-spark">Beam Sparks</label>
+      </div>
+    </div>
     <div class="beam-manager">
       <beam-offset-buttons />
       <div class="beam-manager__settings">
@@ -91,6 +111,7 @@ export default {
   data () {
     return {
       action: 'STATIONARY',
+      beamType: 'DEFAULT',
       direction: 'FACING_LEFT'
     }
   },
@@ -101,12 +122,15 @@ export default {
     action (newValue) {
       this.setBeamOffsetAction(newValue)
     },
+    beamType (newValue) {
+      this.setBeamOffsetType(newValue)
+    },
     direction (newValue) {
       this.setBeamOffsetDirection(newValue)
     }
   },
   methods: {
-    ...mapActions(['setBeamOffsetAction', 'setBeamOffsetDirection', 'setLoading', 'zeroBeamUpdates']),
+    ...mapActions(['setBeamOffsetAction', 'setBeamOffsetDirection', 'setBeamOffsetType', 'setLoading', 'zeroBeamUpdates']),
     saveBeams () {
       this.setLoading(true)
       ipcRenderer.send(
@@ -121,6 +145,19 @@ export default {
 </script>
 
 <style scoped>
+.beam-type {
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.beam-type > div {
+  display: flex;
+  padding: 0 5px;
+}
+.beam-type > div.--active {
+  font-weight: bold;
+}
 .beam-manager {
   display: flex;
 }
@@ -136,7 +173,8 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.beam-manager__settings__action div, .beam-manager__settings__direction div {
+.beam-manager__settings__action div,
+.beam-manager__settings__direction div {
   display: flex;
   overflow: hidden;
 }

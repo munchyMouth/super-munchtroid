@@ -93,6 +93,7 @@ export default {
   setBeamOffsetAction ({ commit }, action) { commit('SET_BEAM_OFFSET_ACTION', action) },
   setBeamOffsetData ({ commit }, data) { commit('SET_BEAM_OFFSET_DATA', data) },
   setBeamOffsetDirection ({ commit }, direction) { commit('SET_BEAM_OFFSET_DIRECTION', direction) },
+  setBeamOffsetType ({ commit }, type) { commit('SET_BEAM_OFFSET_TYPE', type) },
   setBeamOffsetIndex ({ state, commit }, index) {
     if (state.beamOffset.index !== index) commit('SET_BEAM_OFFSET_INDEX', index)
     else commit('CLEAR_BEAM_OFFSET_INDEX')

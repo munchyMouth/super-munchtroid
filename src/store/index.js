@@ -40,6 +40,7 @@ const store = {
     activeSprite: undefined,
     beamOffset: {
       action: 'STATIONARY',
+      type: 'DEFAULT',
       direction: 'FACING_LEFT',
       index: undefined,
       data: undefined,

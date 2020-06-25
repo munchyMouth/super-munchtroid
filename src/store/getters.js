@@ -49,8 +49,7 @@ export default {
     typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
       ? state
         .beamOffset
-        .data[state.beamOffset.action][xY]
-        .DEFAULT
+        .data[state.beamOffset.action][xY][state.beamOffset.type]
         .data[state.beamOffset.index]
       : undefined,
   getActiveBeamOffsetX: state =>
@@ -58,8 +57,7 @@ export default {
       ? state
         .beamOffset
         .data[state.beamOffset.action]
-        .X
-        .DEFAULT
+        .X[state.beamOffset.type]
         .data[state.beamOffset.index]
       : undefined,
   getActiveBeamOffsetY: state =>
@@ -67,8 +65,7 @@ export default {
       ? state
         .beamOffset
         .data[state.beamOffset.action]
-        .Y
-        .DEFAULT
+        .Y[state.beamOffset.type]
         .data[state.beamOffset.index]
       : undefined,
   getActiveBeamUpdateX: state =>
@@ -76,23 +73,33 @@ export default {
       ? state
         .beamOffset
         .data[state.beamOffset.action]
-        .X
+        .X[state.beamOffset.type]
+        ._updates[state.beamOffset.index]
+      : undefined,
+  getActiveBeamUpdateY: state =>
+    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
+      ? state
+        .beamOffset
+        .data[state.beamOffset.action]
+        .Y[state.beamOffset.type]
         ._updates[state.beamOffset.index]
       : undefined,
   beamHasUpdates: state => {
     if (state.beamOffset.action && state.beamOffset.data) {
       for (let i of
-        state
-          .beamOffset
-          .data[state.beamOffset.action]
-          .X
-          ._updates
-          .concat(
+        ['DEFAULT', 'CHARGE_ORIGIN'].reduce((arr, key) =>
+          arr.concat(
             state
               .beamOffset
               .data[state.beamOffset.action]
-              .Y
-              ._updates)) {
+              .X[key]
+              ._updates
+              .concat(
+                state
+                  .beamOffset
+                  .data[state.beamOffset.action]
+                  .Y[key]
+                  ._updates)), [])) {
         if (i !== 0) return true
       }
     }
@@ -104,26 +111,18 @@ export default {
         [state
           .beamOffset
           .data[state.beamOffset.action]
-          .X
+          .X[state.beamOffset.type]
           ._updates[state.beamOffset.index],
         state
           .beamOffset
           .data[state.beamOffset.action]
-          .Y
+          .Y[state.beamOffset.type]
           ._updates[state.beamOffset.index]]) {
         if (i !== 0) return true
       }
     }
     return false
   },
-  getActiveBeamUpdateY: state =>
-    typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action
-      ? state
-        .beamOffset
-        .data[state.beamOffset.action]
-        .Y
-        ._updates[state.beamOffset.index]
-      : undefined,
   getActiveColorFromPaletteInPalettes: state => leftOrRight => {
     return state.palettes.length &&
       typeof state.activePaletteColor[leftOrRight] === 'number' &&
@@ -146,18 +145,19 @@ export default {
   getBeamIndex: state => state.beamOffset.index,
   getBeamAction: state => state.beamOffset.action,
   getBeamPosition: state => state.beamOffset.position,
+  getBeamType: state => state.beamOffset.type,
   getBeamHasUpdatesByIndex: state => i => {
     if (state.beamOffset.action && state.beamOffset.data) {
       for (let j of
         [state
           .beamOffset
           .data[state.beamOffset.action]
-          .X
+          .X[state.beamOffset.type]
           ._updates[i],
         state
           .beamOffset
           .data[state.beamOffset.action]
-          .Y
+          .Y[state.beamOffset.type]
           ._updates[i]]) {
         if (j !== 0) return true
       }

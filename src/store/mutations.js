@@ -18,7 +18,7 @@ export default {
   },
   CLEAR_BEAM_OFFSET_INDEX (state) { state.beamOffset.index = undefined },
   CLEAR_CONFIRMED (state) {
-    state.confirmed.callback = function () {}
+    state.confirmed.callback = function () { }
     state.confirmed.message = ''
     state.confirmed.show = false
   },
@@ -135,13 +135,15 @@ export default {
   SET_BEAM_OFFSET_DATA (state, d) { state.beamOffset.data = d },
   SET_BEAM_OFFSET_DIRECTION (state, d) { state.beamOffset.direction = d },
   SET_BEAM_OFFSET_INDEX (state, i) { state.beamOffset.index = i },
+  SET_BEAM_OFFSET_TYPE (state, t) { state.beamOffset.type = t },
   SET_ACTIVE_BEAM_UPDATE (state, xY) {
     if (typeof state.beamOffset.index !== 'undefined' && state.beamOffset.action) {
       Object.keys(xY).forEach(function (k) {
         state
           .beamOffset
-          .data[state.beamOffset.action][k.toUpperCase()]
-          ._updates.splice(state.beamOffset.index, 1, xY[k])
+          .data[state.beamOffset.action][k.toUpperCase()][state.beamOffset.type]
+          ._updates
+          .splice(state.beamOffset.index, 1, xY[k])
       })
     }
   },
@@ -263,9 +265,11 @@ export default {
       actionKey =>
         Object.keys(state.beamOffset.data[actionKey]).forEach(
           XYKey => {
-            for (let i in state.beamOffset.data[actionKey][XYKey]._updates) {
-              state.beamOffset.data[actionKey][XYKey]._updates.splice(i, 1, 0)
-            }
+            ['DEFAULT', 'CHARGE_ORIGIN'].forEach(key => {
+              for (let i in state.beamOffset.data[actionKey][XYKey][key]._updates) {
+                state.beamOffset.data[actionKey][XYKey][key]._updates.splice(i, 1, 0)
+              }
+            })
           }
         )
     )
