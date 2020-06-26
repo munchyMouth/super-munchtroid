@@ -195,6 +195,7 @@ export default {
       }
       return result
     }, false),
+  missileFinsVisible: state => state.missileFins ? state.missileFins.show : false,
   noSelectedTile: state =>
     !state.selectedTile ||
     (state.selectedTile &&

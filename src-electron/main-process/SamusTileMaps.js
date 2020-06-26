@@ -92,6 +92,23 @@ export default stampit({ /* extends RomData, SamusProps */
       return arr
     }.bind(this)
 
+    this.loadMissileFinOffsets = async function (offset = 0, pose, POSES = {}) {
+      debugger
+      const p = POSES.find((it, i) => i === pose && it.hasOwnProperty('missileFins'))
+      if (p) {
+        const address = parseInt(p.missileFins.offset, 16) + (2 + (offset / 2))
+        const data = await this.getOffsetData(address, 2)
+        debugger
+        return {
+          _address: p.missileFins.offset,
+          _id: address,
+          data: Uint8Array.from(data).map(it => it > 255 ? -(65535 - it) : it),
+          loadByFrame: p.missileFins.loadByFrame,
+          show: false
+        }
+      } else return undefined
+    }.bind(this)
+
     this.loadSpriteTileMaps = async function (table, i) {
       const poseTileMapPointer =
         ANIMATION_TABLE +

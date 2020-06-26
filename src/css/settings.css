@@ -56,3 +56,6 @@
 .settings__frame-tree__save > button.--active {
   color: red;
 }
+.fins.--show {
+  background: red;
+}

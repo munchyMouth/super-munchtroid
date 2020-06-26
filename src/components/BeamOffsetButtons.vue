@@ -92,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['beamIndexHasUpdates', 'beamHasUpdates', 'beamOffset', 'getBeamHasUpdatesByIndex']),
+    ...mapGetters(['beamIndexHasUpdates', 'missileFinsVisible', 'beamHasUpdates', 'beamOffset', 'getBeamHasUpdatesByIndex']),
     action () { return this.beamOffset.action },
     direction () { return this.beamOffset.direction },
     index () { return this.beamOffset.index },
@@ -137,6 +137,9 @@ export default {
     },
     index (newValue) {
       if (typeof newValue !== 'undefined') this.setActiveSprite()
+    },
+    missileFinsVisible (newValue) {
+      if (newValue) this.clearBeamOffsetIndex()
     }
   },
   methods: {

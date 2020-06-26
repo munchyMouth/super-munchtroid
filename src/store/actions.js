@@ -86,7 +86,10 @@ export default {
   setActivePalette ({ commit }, c) { commit('SET_ACTIVE_PALETTE', c) },
   setActivePaletteColor ({ commit }, obj) { commit('SET_ACTIVE_PALETTE_COLOR', obj) },
   setActiveSprite ({ commit }, sprite, setSpriteDefault = true) {
-    if (sprite) commit('CLEAR_BEAM_OFFSET_INDEX')
+    if (sprite) {
+      commit('CLEAR_BEAM_OFFSET_INDEX')
+      commit('SET_MISSILE_FINS_SHOW', false)
+    }
     commit('SET_ACTIVE_SPRITE', sprite)
     commit('SET_SPRITE_DEFAULT', sprite ? cloneDeep(sprite) : undefined)
   },
@@ -95,8 +98,10 @@ export default {
   setBeamOffsetDirection ({ commit }, direction) { commit('SET_BEAM_OFFSET_DIRECTION', direction) },
   setBeamOffsetType ({ commit }, type) { commit('SET_BEAM_OFFSET_TYPE', type) },
   setBeamOffsetIndex ({ state, commit }, index) {
-    if (state.beamOffset.index !== index) commit('SET_BEAM_OFFSET_INDEX', index)
-    else commit('CLEAR_BEAM_OFFSET_INDEX')
+    if (state.beamOffset.index !== index) {
+      commit('SET_BEAM_OFFSET_INDEX', index)
+      commit('SET_MISSILE_FINS_SHOW', false)
+    } else commit('CLEAR_BEAM_OFFSET_INDEX')
   },
   // the copy function below should only copy tile data, any more information would repoint the tile into which it is pasted!
   setCopiedTileData ({ commit }) { commit('SET_COPIED_TILE_DATA') },
@@ -117,6 +122,10 @@ export default {
   setError ({ commit }, error) { commit('SET_ERROR', error) },
   setEventObserver ({ commit }, obs) { commit('SET_EVENT_OBSERVER', obs) },
   setLoading ({ commit }, loading) { commit('SET_LOADING', loading) },
+  setMissileFinsShow ({ commit, dispatch }, v) {
+    if (v) dispatch('setActiveSprite')
+    commit('SET_MISSILE_FINS_SHOW', v)
+  },
   setPaletteClipboard ({ commit }, palette) { commit('SET_PALETTE_CLIPBOARD', palette) },
   setPaletteColorChunk (
     { commit },
@@ -149,7 +158,7 @@ export default {
   // this avoids a race condition in initial rendering behaviour.
   async setSamus (
     { commit },
-    { filePath, frames, frameIndex = 0, pose, tileMaps, vram }) {
+    { filePath, fins, frames, frameIndex = 0, pose, tileMaps, vram }) {
     try {
       commit('CLEAR_EDITOR_FLIP')
       commit('CLEAR_ERROR')
@@ -160,6 +169,7 @@ export default {
       commit('SET_FRAMES', frames)
       commit('SET_CURRENT_FRAME_INDEX', frameIndex)
       commit('SET_CURRENT_POSE', pose)
+      commit('SET_MISSILE_FINS', fins)
       commit('SET_TILEMAPS', tileMaps)
       commit('SET_VRAM', vram)
       commit('SET_LOADING', false)

@@ -112,7 +112,7 @@ ipcMain.on('Load Pose', (event,
   }) => {
   try {
     Samus({ filePath })
-      .load(index, frameCount, dmaOffset)
+      .load(index, frameCount, dmaOffset, POSES)
       .then(function (samus) {
         event.sender.send('Pose loaded', {
           ...samus,

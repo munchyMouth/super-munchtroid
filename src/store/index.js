@@ -73,6 +73,13 @@ const store = {
     incrementFrame: false,
     layoutDrawerOpen: true,
     loading: false,
+    missileFins: {
+      _address: undefined,
+      _id: undefined,
+      data: [],
+      loadByFrame: false,
+      show: false
+    },
     frames: [],
     palettes: [],
     paletteClipboard: [],

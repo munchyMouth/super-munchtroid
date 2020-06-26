@@ -14,7 +14,7 @@ export default stampit(
   SamusVRAM,
   {
     init () {
-      const { each, loadSettingsFile, pojoToSpriteBuffer, setOffsetData } = this
+      const { each, loadMissileFinOffsets, loadSettingsFile, pojoToSpriteBuffer, setOffsetData } = this
 
       const { REDUNDANT_LIFT_POSE_TORSO_TILE } = loadSettingsFile('TableData')
 
@@ -26,11 +26,12 @@ export default stampit(
         }
       }
 
-      this.load = async function (pose, frameCount, dmaOffset) {
+      this.load = async function (pose, frameCount, dmaOffset, POSES) {
         const { frames, loadVRAMTiles, loadDMAEntries, loadTileMaps } =
           await this.setPose(pose).setFrames(frameCount)
         await loadDMAEntries(dmaOffset)
         return {
+          fins: POSES ? await loadMissileFinOffsets(dmaOffset, pose, POSES) : undefined,
           frames: frameCount ? new Array(frameCount).fill(0) : frames,
           tileMaps: await loadTileMaps(dmaOffset),
           vram: await loadVRAMTiles()

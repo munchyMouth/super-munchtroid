@@ -23,13 +23,14 @@
       @change="choosePose()"
     >
       <option
-        v-for="({ name, index, unused }, i) in poses"
+        v-for="(p, i) in poses"
         :key="i"
-        :value="index"
-        :class="unused ? '--unused' : ''"
+        :value="p.index"
+        :class="p.unused ? '--unused' : ''"
         :selected="i === currentPose ? 'selected' : false"
       >
-        {{ name }}
+        {{ p.name }}
+        {{ p.hasOwnProperty('missileFins') ? '&#9830;' : '' }}
       </option>
     </select>
     <div class="settings__dropdown-label">
@@ -110,6 +111,23 @@
             </template>
           </tree>
         </template>
+        <div
+          v-if="missileFins"
+          class="collapsible"
+        >
+          <hr>
+          <button
+            :disabled="missileFins ? false : 'disabled'"
+            :class="`fins${missileFins.show ? ' --show' : ''}`"
+            @click="setMissileFinsShow(!missileFins.show)"
+          >
+            <img
+              src="../assets/missileFins.png"
+              :style="{ height: '25px', paddingTop: '6px', paddingRight: '2px' }"
+            >
+          </button>
+          &nbsp;Missile Fins
+        </div>
       </q-collapsible>
       <div class="settings__frame-tree__beam-offset">
         <hr>
@@ -168,6 +186,7 @@ import 'vue-awesome/icons/arrow-up'
 import 'vue-awesome/icons/minus'
 import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/save'
+import 'vue-awesome/icons/meteor'
 import 'vue-awesome/icons/regular/check-circle'
 import 'vue-awesome/icons/regular/circle'
 import Icon from 'vue-awesome/components/Icon'
@@ -182,6 +201,7 @@ import SearchBox from './SearchBox.vue'
 import Tree from './Tree.vue'
 import TreeLi from './TreeLi.vue'
 import Metadata from './Metadata.vue'
+// import MissileFins from './MissileFins.vue'
 
 export default {
   name: 'settings',
@@ -189,6 +209,7 @@ export default {
     BeamManager,
     Icon,
     Metadata,
+    // MissileFins,
     PlusMinusField,
     SearchBox,
     SpriteManager,
@@ -217,6 +238,7 @@ export default {
       'incrementFrame',
       'filePath',
       'frames',
+      'missileFins',
       'refreshFrame',
       'settings',
       'shortcutTriggerFullSave',
@@ -279,6 +301,7 @@ export default {
       'setActiveSprite',
       'setCurrentFrameIndex',
       'setError',
+      'setMissileFinsShow',
       'setSamus',
       'setSpriteRatio'
     ]),

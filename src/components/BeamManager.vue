@@ -99,6 +99,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 import 'vue-awesome/icons/save'
 import 'vue-awesome/icons/undo'
+import 'vue-awesome/icons/meteor'
 import Icon from 'vue-awesome/components/Icon'
 
 import BeamOffsetButtons from './BeamOffsetButtons'

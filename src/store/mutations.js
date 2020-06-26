@@ -96,6 +96,13 @@ export default {
   REFRESH_FRAME (state) {
     state.refreshFrame = !state.refreshFrame
   },
+  SET_MISSILE_FINS (state, f) {
+    state.missileFins = f
+  },
+  SET_MISSILE_FINS_SHOW (state, v) {
+    state.missileFins.show = v
+  },
+  UPDATE_MISSILE_FIN_DATA (state, a) {},
   SET_POINTER_CLIPBOARD_BY_HALF (state, { dma, frame, half }) {
     state.pointerClipboard.dma[half] = clone(dma[half])
     state.pointerClipboard.frame[half] = frame[half]
