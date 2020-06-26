@@ -30,7 +30,7 @@ export default stampit(RomData, { /* extends RomData */
                     xYObj[key] = {
                       offset: BEAM_OFFSETS[position][xY][key],
                       data: _this.reverseByteWords(
-                        await _this.getOffsetData(parseInt(BEAM_OFFSETS[position][xY][key === 'GRAPPLE_ORIGIN' ? 'CHARGE_ORIGIN' : key], 16), 20))
+                        await _this.getOffsetData(parseInt(BEAM_OFFSETS[position][xY][key], 16), 20))
                         .map(it => it > 255 ? -(65535 - it) : it),
                       _isSpark: key.includes('ORIGIN')
                     }
@@ -57,11 +57,12 @@ export default stampit(RomData, { /* extends RomData */
                     await _this.each(getBeamKeysByType(beams[actionKey][XYKey], type),
                       async function (beamKey) {
                         if (beamKey !== '_updates') {
-                          // spark updates are stored in CHARGE_ORIGIN, the rest are stored in DEFAULT
+                          // spark updates are stored in CHARGE_ORIGIN, the rest are stored in DEFAULT.
+                          // CHARGE_ORIGIN overwrites grapple origin.
                           beams[actionKey][XYKey][beamKey].data =
                             beams[actionKey][XYKey][beamKey].data.reduce(
                               function (arr, it, i) {
-                                let v = it + beams[actionKey][XYKey][type]._updates[i]
+                                let v = it + beams[actionKey][XYKey][type === 'GRAPPLE_ORIGIN' ? 'CHARGE_ORIGIN' : type]._updates[i]
                                 if (v < 0) v += 65535
                                 arr.push(v)
                                 return arr
