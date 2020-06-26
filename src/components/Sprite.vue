@@ -1,5 +1,7 @@
 <template>
   <div :class="`sprite-outer-wrapper sprite-outer-wrapper${showSprite ? '--show' : '--hide'}`">
+    <!-- {{ spriteX - (beamCursorWidth / 16) }} |
+    {{ spriteY - (beamCursorHeight / 16) }} -->
     <canvas
       ref="sprite"
       :class="`sprite-canvas${(mouseInActiveSpriteArea || mouseInActiveBeamCursorArea) ? '--active-sprite' : ''}`"
@@ -65,6 +67,8 @@ export default {
       'getSpritesByHalf',
       'getVramByProps',
       'hasActiveBeamOffsetIndex',
+      'missileFinsVisible',
+      'missileFins',
       'palettes',
       'refreshPalette',
       'selectedTile',
@@ -100,16 +104,27 @@ export default {
         : false
     },
     mouseInActiveBeamCursorArea () {
-      return typeof this.getBeamIndex !== 'undefined'
-        ? this.x >= ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) +
-          this.spriteZeroX) - (this.beamCursorWidth / 2) &&
-        this.y >= ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) +
-          this.spriteZeroY) - (this.beamCursorHeight / 2) &&
-        this.x <= ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) +
-          this.spriteZeroX) + (this.beamCursorWidth / 2) &&
-        this.y <= ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) +
-          this.spriteZeroY) + (this.beamCursorHeight / 2)
-        : undefined
+      switch (true) {
+        case typeof this.getBeamIndex !== 'undefined':
+          return this.x >= ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) +
+            this.spriteZeroX) - (this.beamCursorWidth / 2) &&
+            this.y >= ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) +
+              this.spriteZeroY) - (this.beamCursorHeight / 2) &&
+            this.x <= ((this.spriteRatio * (this.getActiveBeamOffsetX + this.getActiveBeamUpdateX)) +
+              this.spriteZeroX) + (this.beamCursorWidth / 2) &&
+            this.y <= ((this.spriteRatio * (this.getActiveBeamOffsetY + this.getActiveBeamUpdateY)) +
+              this.spriteZeroY) + (this.beamCursorHeight / 2)
+        case this.missileFinsVisible:
+          return this.x >= ((this.spriteRatio * (this.missileFins.data[0])) +
+            this.spriteZeroX) - (this.beamCursorWidth / 8) &&
+            this.y >= ((this.spriteRatio * (this.missileFins.data[1])) +
+              this.spriteZeroY) - (this.beamCursorHeight / 8) &&
+            this.x <= ((this.spriteRatio * (this.missileFins.data[0])) +
+              this.spriteZeroX) + (this.beamCursorWidth) &&
+            this.y <= ((this.spriteRatio * (this.missileFins.data[1])) +
+              this.spriteZeroY) + (this.beamCursorHeight)
+      }
+      return undefined
     },
     permitDragX () {
       const x = this.activeSprite.xOffset + (this.spriteX - this.dragX)
@@ -153,6 +168,7 @@ export default {
     getBeamPosition () { this.redraw() },
     getBeamIndex () { this.redraw() },
     getBeamType () { this.redraw() },
+    missileFinsVisible () { this.redraw() },
     palettes () { this.redraw() },
     refreshPalette () { this.redraw() },
     selectedTile () { this.redraw() },
@@ -176,6 +192,7 @@ export default {
   methods: {
     ...mapActions([
       'setActiveBeamUpdate',
+      'setMissileFinsData',
       'setLoading',
       'setSelectedTile',
       'setSpriteProperty',
@@ -183,16 +200,31 @@ export default {
     ]),
     ...SpriteRedraw,
     actionBeamCursorDrag () {
-      if (typeof this.dragX === 'undefined') {
-        this.dragX = this.spriteX - this.getActiveBeamOffsetX
-        this.dragY = this.spriteY - this.getActiveBeamOffsetY
+      switch (true) {
+        case typeof this.getBeamIndex !== 'undefined':
+          if (typeof this.dragX === 'undefined') {
+            this.dragX = this.spriteX - this.getActiveBeamOffsetX
+            this.dragY = this.spriteY - this.getActiveBeamOffsetY
+          }
+          this.setActiveBeamUpdate({
+            x: this.spriteX - this.getActiveBeamOffsetX,
+            y: this.spriteY - this.getActiveBeamOffsetY
+          })
+          this.dragX = this.spriteX - this.getActiveBeamOffsetX
+          this.dragY = this.spriteY - this.getActiveBeamOffsetY
+          break
+        case this.missileFinsVisible:
+          if (typeof this.dragX === 'undefined') {
+            this.dragX = this.spriteX - (Math.floor(this.beamCursorWidth / 12)) // - this.missileFins.data[0],
+            this.dragY = this.spriteY - (Math.floor(this.beamCursorHeight / 12)) // - this.missileFins.data[1]
+          }
+          this.setMissileFinsData([
+            this.spriteX - (Math.floor(this.beamCursorWidth / 12)), // - this.missileFins.data[0],
+            this.spriteY - (Math.floor(this.beamCursorHeight / 12)) // - this.missileFins.data[1]
+          ])
+          this.dragX = this.spriteX - (Math.floor(this.beamCursorWidth / 12)) // - this.missileFins.data[0],
+          this.dragY = this.spriteY - (Math.floor(this.beamCursorHeight / 12)) // - this.missileFins.data[1]
       }
-      this.setActiveBeamUpdate({
-        x: this.spriteX - this.getActiveBeamOffsetX,
-        y: this.spriteY - this.getActiveBeamOffsetY
-      })
-      this.dragX = this.spriteX - this.getActiveBeamOffsetX
-      this.dragY = this.spriteY - this.getActiveBeamOffsetY
     },
     actionSpriteDrag () {
       if (typeof this.dragX === 'undefined') {

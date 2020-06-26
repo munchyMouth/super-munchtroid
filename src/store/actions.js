@@ -122,6 +122,7 @@ export default {
   setError ({ commit }, error) { commit('SET_ERROR', error) },
   setEventObserver ({ commit }, obs) { commit('SET_EVENT_OBSERVER', obs) },
   setLoading ({ commit }, loading) { commit('SET_LOADING', loading) },
+  setMissileFinsData ({ commit }, d) { commit('SET_MISSILE_FINS_DATA', d) },
   setMissileFinsShow ({ commit, dispatch }, v) {
     if (v) dispatch('setActiveSprite')
     commit('SET_MISSILE_FINS_SHOW', v)

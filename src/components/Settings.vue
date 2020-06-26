@@ -116,17 +116,40 @@
           class="collapsible"
         >
           <hr>
-          <button
-            :disabled="missileFins ? false : 'disabled'"
-            :class="`fins${missileFins.show ? ' --show' : ''}`"
-            @click="setMissileFinsShow(!missileFins.show)"
-          >
-            <img
-              src="../assets/missileFins.png"
-              :style="{ height: '25px', paddingTop: '6px', paddingRight: '2px' }"
-            >
-          </button>
-          &nbsp;Missile Fins
+          <div class="fins__wrapper">
+            <div class="fins__line">
+              <div>
+                <button
+                  :disabled="missileFins ? false : 'disabled'"
+                  :class="`fins${missileFins.show ? ' --show' : ''}`"
+                  @click="setMissileFinsShow(!missileFins.show)"
+                >
+                  <img
+                    src="../assets/missileFins.png"
+                    :style="{ height: '25px', paddingTop: '6px', paddingRight: '2px' }"
+                  >
+                </button>
+                &nbsp;Missile Fins
+              </div>
+              <div class="sprite-manager__offsets">
+                <div><strong>x:</strong> {{ missileFins.data[0] + 4 }}</div>
+                <div><strong>y:</strong> {{ missileFins.data[1] + 4 }}</div>
+              </div>
+            </div>
+            <br>
+            <div>
+              <div class="fins__save">
+                <button :class="`no-style ${missileFins._updated ? '--active' : ''}`">
+                  <icon name="save" /> Save fin
+                </button>
+              </div>
+              <div v-if="!missileFins.loadByFrame && currentFrameIndex === 0">
+                <button :class="`no-style ${missileFins._updated ? '--active' : ''}`">
+                  <icon name="save" /> Save fin across ALL frames
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </q-collapsible>
       <div class="settings__frame-tree__beam-offset">

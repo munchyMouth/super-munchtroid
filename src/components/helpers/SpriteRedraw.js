@@ -61,6 +61,17 @@ export default {
       )
     }
   },
+  redrawMissileFinCursor (R) {
+    if (this.missileFinsVisible) {
+      this.context.drawImage(
+        this.getBeamCursor,
+        ((this.spriteRatio * (this.missileFins.data[0])) + this.spriteZeroX),
+        ((this.spriteRatio * (this.missileFins.data[1])) + this.spriteZeroY),
+        R / 3 * this.getBeamCursor.width,
+        R / 3 * this.getBeamCursor.height
+      )
+    }
+  },
   redrawSprite ({ _address, data, hFlip, R, vFlip, xOffset, yOffset }) {
     (vFlip ? data.slice().reverse() : data).forEach(function (line, y) {
       (hFlip ? line.slice().reverse() : line).forEach(function (pixel, x) {
@@ -89,6 +100,7 @@ export default {
       }.bind(this))
     }.bind(this))
     this.redrawBeamCursor(R)
+    this.redrawMissileFinCursor(R)
   },
   setSpriteBoxMaskColor (palette) {
     const p = palette.replace('#', '')

@@ -102,7 +102,8 @@ export default stampit({ /* extends RomData, SamusProps */
         return {
           _address: p.missileFins.offset,
           _id: address,
-          data: Uint8Array.from(data).map(it => it > 255 ? -(65535 - it) : it),
+          _updated: false,
+          data: data.toJSON().data.map(it => it > 155 ? -(255 - it) : it),
           loadByFrame: p.missileFins.loadByFrame,
           show: false
         }

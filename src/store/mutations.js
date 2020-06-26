@@ -99,6 +99,10 @@ export default {
   SET_MISSILE_FINS (state, f) {
     state.missileFins = f
   },
+  SET_MISSILE_FINS_DATA (state, d) {
+    state.missileFins._updated = true
+    state.missileFins.data = d
+  },
   SET_MISSILE_FINS_SHOW (state, v) {
     state.missileFins.show = v
   },

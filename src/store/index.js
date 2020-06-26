@@ -76,6 +76,7 @@ const store = {
     missileFins: {
       _address: undefined,
       _id: undefined,
+      _updated: false,
       data: [],
       loadByFrame: false,
       show: false

@@ -56,6 +56,21 @@
 .settings__frame-tree__save > button.--active {
   color: red;
 }
+.fins__wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.fins__line {
+  display: flex;
+  justify-content: space-between;
+}
+.fins__wrapper .--active {
+  color: red;
+}
+.fins__save {
+  margin-bottom: 5px;
+}
 .fins.--show {
   background: red;
 }
