@@ -196,9 +196,6 @@
         GLOBALS
       </div>
       <hr>
-      <div class="globals__title">
-        Cycle RGB
-      </div>
       <div class="globals__buttons">
         <button
           @click="decPalette(0, 1)"
@@ -268,7 +265,7 @@
         >
           -
         </button>
-        <div>- RGB -</div>
+        <div> RGB </div>
         <button
           @click="incWholePalette()"
           @mousedown="incWholePaletteHold()"
