@@ -60,6 +60,8 @@
   display: flex;
   width: 100%;
   flex-direction: column;
+  border: 1px solid #999;
+  padding: 10px;
 }
 .fins__line {
   display: flex;

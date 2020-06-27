@@ -115,59 +115,85 @@
           v-if="validateMissileFinsData"
           class="collapsible"
         >
-          <hr>
-          <div class="fins__wrapper">
-            <div class="fins__line">
-              <div>
-                <button
-                  :disabled="missileFins ? false : 'disabled'"
-                  :class="`fins${missileFins.show ? ' --show' : ''}`"
-                  @click="setMissileFinsShow(!missileFins.show)"
-                >
-                  <img
-                    src="../assets/missileFins.png"
-                    :style="{ height: '25px', paddingTop: '6px', paddingRight: '2px' }"
+          <q-collapsible @hide="setMissileFinsShow(false)">
+            <template slot="header">
+              <span class="collapsible">
+                <img
+                  src="../assets/missileFins.png"
+                  :style="{ height: '25px', paddingTop: '12px', paddingRight: '2px' }"
+                >&nbsp;
+                Missile Fins
+              </span>
+            </template>
+            <div class="fins__wrapper">
+              <div class="fins__line">
+                <div>
+                  <button
+                    :disabled="missileFins ? false : 'disabled'"
+                    :class="`fins${missileFins.show ? ' --show' : ''}`"
+                    @click="setMissileFinsShow(!missileFins.show)"
                   >
-                </button>
-                &nbsp;Missile Fins
+                    <img
+                      src="../assets/missileFins.png"
+                      :style="{ height: '25px', paddingTop: '6px', paddingRight: '2px' }"
+                    >
+                  </button>
+                </div>
+                <div class="sprite-manager__offsets">
+                  <div><strong>x:</strong> {{ missileFins.data[0] }}</div>
+                  <div><strong>y:</strong> {{ missileFins.data[1] }}</div>
+                  <div><strong>id:</strong> ${{ missileFins._id.toString(16) }}</div>
+                </div>
               </div>
-              <div class="sprite-manager__offsets">
-                <div><strong>x:</strong> {{ missileFins.data[0] + 4 }} ({{ missileFins.data[0] }})</div>
-                <div><strong>y:</strong> {{ missileFins.data[1] + 4 }} ({{ missileFins.data[1] }})</div>
-                <div><strong>id:</strong> ${{ missileFins._id.toString(16) }}</div>
+              <br>
+              <div>
+                <div class="fins__save">
+                  <button
+                    :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
+                    @click="saveFin()"
+                  >
+                    <icon name="save" />
+                    &nbsp;
+                    Save
+                  </button>
+                  <button
+                    class="no-style"
+                    :disabled="!missileFinsHasUpdates"
+                    @click="undoMissileFins"
+                  >
+                    undo
+                    <icon
+                      scale="0.6"
+                      name="undo"
+                    />
+                  </button>
+                </div>
+                <div v-if="!missileFins.loadByFrame && currentFrameIndex === 0 && frames.length > 1">
+                  <button
+                    :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
+                    title="save frame 1 fin coordinates across ALL frames of this pose"
+                    @click="saveFin(true)"
+                  >
+                    <icon name="save" />
+                    &nbsp;
+                    save
+                    <icon
+                      name="running"
+                      scale="0.8"
+                    />
+                    <span style="font-size:10px">#1</span>
+                    &rarr;
+                    <icon
+                      name="running"
+                      scale="0.8"
+                    />
+                    <span style="font-size:10px">#n</span>
+                    &#8230;
+                  </button>
+                </div>
               </div>
             </div>
-            <br>
-            <div>
-              <div class="fins__save">
-                <button
-                  :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
-                  @click="saveFin()"
-                >
-                  <icon name="save" /> Save fin
-                </button>
-                <button
-                  class="no-style"
-                  :disabled="!missileFinsHasUpdates"
-                  @click="undoMissileFins"
-                >
-                  undo
-                  <icon
-                    scale="0.6"
-                    name="undo"
-                  />
-                </button>
-              </div>
-              <div v-if="!missileFins.loadByFrame && currentFrameIndex === 0">
-                <button
-                  :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
-                  @click="saveFin(true)"
-                >
-                  <icon name="save" /> Save fin across ALL frames
-                </button>
-              </div>
-            </div>
-          </div>
+          </q-collapsible>
         </div>
       </q-collapsible>
       <div class="settings__frame-tree__beam-offset">
@@ -228,6 +254,7 @@ import 'vue-awesome/icons/minus'
 import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/save'
 import 'vue-awesome/icons/meteor'
+import 'vue-awesome/icons/running'
 import 'vue-awesome/icons/regular/check-circle'
 import 'vue-awesome/icons/regular/circle'
 import Icon from 'vue-awesome/components/Icon'

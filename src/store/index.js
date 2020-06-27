@@ -87,6 +87,7 @@ const store = {
     frames: [],
     palettes: [],
     paletteClipboard: [],
+    palettesDefault: [],
     pointerClipboard: {
       dma: {
         top: {

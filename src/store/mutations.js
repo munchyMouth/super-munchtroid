@@ -210,6 +210,7 @@ export default {
   SET_PALETTE_CLIPBOARD (state, o) { state.paletteClipboard = o },
   SET_PALETTES (state, o) {
     state.palettes = o
+    state.palettesDefault = cloneDeep(o)
     state.updatePalette = false
   },
   SET_SELECTED_TILE (state, o) { state.selectedTile = o },

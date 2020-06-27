@@ -183,9 +183,7 @@ export default {
       })
     }
   },
-  setSettings ({ commit }, o) {
-    commit('SET_SETTINGS', o)
-  },
+  setSettings ({ commit }, o) { commit('SET_SETTINGS', o) },
   setSpriteProperty ({ commit, state }, o) {
     commit('SET_SPRITE_PROPERTY', { ...o })
     if (!o.hasOwnProperty('redraw') || o.redraw) {
@@ -265,9 +263,7 @@ export default {
   toggleShowHelp ({ commit }) { commit('TOGGLE_SHOW_HELP') },
   toggleSprite ({ commit }) { commit('TOGGLE_SPRITE') },
   toggleVram ({ commit }) { commit('TOGGLE_VRAM') },
-  undoMissileFins ({ commit }) {
-    commit('UNDO_MISSILE_FINS')
-  },
+  undoMissileFins ({ commit }) { commit('UNDO_MISSILE_FINS') },
   updateUndoMissileFins ({ commit }) { commit('UPDATE_UNDO_MISSILE_FINS') },
   zeroBeamUpdates ({ commit }) {
     commit('ZERO_BEAM_UPDATES')

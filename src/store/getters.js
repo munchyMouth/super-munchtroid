@@ -45,6 +45,25 @@ export default {
   },
   currentFrame: state => (state.vram)
     ? state.vram : undefined,
+  defaultActiveColor: state => (i = 0) => {
+    return state.palettesDefault && state.palettesDefault.length
+      ? state.palettesDefault[state.activePaletteIndex || 0].palette[i]
+      : undefined
+  },
+  defaultActiveCycle: state => {
+    return state.palettesDefault && state.palettesDefault.length
+      ? state.palettesDefault[state.activePaletteIndex || 0].palette
+      : undefined
+  },
+  editor16x16TileIsValid: state => ({ half, index, part }) => {
+    if (part === 'part1') {
+      for (let i = 1; i < 3; i++) {
+        const { tiles } = state.vram[half].parts[`part${i}`]
+        if (tiles.length < index + 2) return false
+      }
+      return true
+    } else return false
+  },
   editorHFlip: state => state.editorFlip.h,
   editorVFlip: state => state.editorFlip.v,
   getActiveBeamOffset: state => xY =>
@@ -223,15 +242,6 @@ export default {
           state.vram[_half].parts[`part${i}`]
         const modifier = _half === 'bottom' ? 8 : 0
         if (tiles.length + modifier < vramIndex + 2) return false
-      }
-      return true
-    } else return false
-  },
-  editor16x16TileIsValid: state => ({ half, index, part }) => {
-    if (part === 'part1') {
-      for (let i = 1; i < 3; i++) {
-        const { tiles } = state.vram[half].parts[`part${i}`]
-        if (tiles.length < index + 2) return false
       }
       return true
     } else return false

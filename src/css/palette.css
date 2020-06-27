@@ -1,3 +1,6 @@
+.palette__wrapper {
+  display: flex;
+}
 .palette {
   width: 100%;
   padding-left: 16px;
@@ -77,15 +80,20 @@
 .palette__settings__misc > button {
   margin-right: -16px;
 }
+.palette__buttons {
+  width: 20px;
+  height: 30px;
+  margin-left: 15px;
+}
 .palette__sliders__buttons {
   width: 20px;
   height: 60px;
 }
-.palette__sliders__save {
+.palette__sliders__save, button.palette__sliders__save:disabled {
   border: 1px solid #ccc !important;
   margin-right: 8px;
 }
-.palette__sliders__save.--active {
+.palette__sliders__save button.--active {
   color: red;
 }
 .palette__sliders__undo {
@@ -127,4 +135,23 @@
   color: #555;
   line-height: 100px;
   text-align: center;
+}
+.globals {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid gray;
+  background-color: #aaa;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.globals .globals__title {
+  font-weight: bold;
+}
+.globals .globals__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
 }

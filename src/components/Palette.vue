@@ -1,211 +1,297 @@
 <template>
-  <div class="palette">
-    <div>
-      <div class="palette__current-colors">
-        <div
-          class="no-style"
-          :style="`background: ${getActiveColorFromPaletteInPalettes('left')}`"
-        >
-          &nbsp;
-        </div>
-        <div
-          class="no-style"
-          :style="`background: ${getActiveColorFromPaletteInPalettes('right')}`"
-        >
-          &nbsp;
-        </div>
-      </div>
-      <div class="palette__settings">
-        <div class="palette__settings__16">
-          <button @click="currentPaletteUp">
-            <icon name="caret-up" />
-          </button>
-          <button @click="currentPaletteDown">
-            <icon name="caret-down" />
-          </button>
-        </div>
-        <div
-          v-if="hasCurrentPalette"
-          class="palette__settings__colors"
-        >
-          <button
-            v-for="(color, i) in activePalette"
-            :key="i"
-            :class="`no-style ${i === activeColorIndex ? '--active' : ''}`"
-            :style="`background: ${color}`"
-            @click="setAnActivePaletteColor($event, i)"
-            @contextmenu="setAnActivePaletteColor($event, i)"
+  <div class="palette__wrapper">
+    <div class="palette">
+      <div>
+        <div class="palette__current-colors">
+          <div
+            class="no-style"
+            :style="`background: ${getActiveColorFromPaletteInPalettes('left')}`"
           >
             &nbsp;
-          </button>
+          </div>
           <div
-            class="palette__settings__misc"
-            title="Active Palette Index"
+            class="no-style"
+            :style="`background: ${getActiveColorFromPaletteInPalettes('right')}`"
           >
-            <label>
-              <i
-                aria-hidden="true"
-                class="q-icon material-icons"
-              >palette</i>
-              {{ activePaletteIndex + 1 }} /
-              {{ palettes ? palettes.length : 1 }}
-            </label>
+            &nbsp;
+          </div>
+        </div>
+        <div class="palette__settings">
+          <div class="palette__settings__16">
+            <button @click="currentPaletteUp">
+              <icon name="caret-up" />
+            </button>
+            <button @click="currentPaletteDown">
+              <icon name="caret-down" />
+            </button>
+          </div>
+          <div
+            v-if="hasCurrentPalette"
+            class="palette__settings__colors"
+          >
+            <button
+              v-for="(color, i) in activePalette"
+              :key="i"
+              :class="`no-style ${i === activeColorIndex ? '--active' : ''}`"
+              :style="`background: ${color}`"
+              @click="setAnActivePaletteColor($event, i)"
+              @contextmenu="setAnActivePaletteColor($event, i)"
+            >
+              &nbsp;
+            </button>
+            <div
+              class="palette__settings__misc"
+              title="Active Palette Index"
+            >
+              <label :title="`cycle no. ${ activePaletteIndex + 1 } of ${palettes ? palettes.length : 1 }`">
+                <i
+                  aria-hidden="true"
+                  class="q-icon material-icons"
+                >palette</i>
+                {{ activePaletteIndex + 1 }} /
+                {{ palettes ? palettes.length : 1 }}
+              </label>
+            </div>
+          </div>
+          <div class="palette__buttons">
+            <button
+              class="no-style palette__sliders__copy-paste"
+              style="color: black"
+              title="copy current palette"
+              @click="setPaletteClipboard(activePalette)"
+            >
+              <icon name="copy" />
+            </button>
+            <button
+              class="no-style palette__sliders__copy-paste"
+              style="color: black"
+              title="paste to current palette"
+              :disabled="paletteClipboard.length ? false : 'disabled'"
+              @click="pasteClipboardPalette"
+            >
+              <icon name="paste" />
+            </button>
           </div>
         </div>
       </div>
+      <div class="palette__sliders">
+        <div class="palette__sliders__save">
+          <button
+            :class="`no-style ${updatePalette ? ' --active ' : ''}palette__sliders__buttons`"
+            title="Save the currently loaded palette cycle(s)"
+            :disabled="updatePalette ? false : 'disabled'"
+            @click="savePalettes()"
+          >
+            <i
+              aria-hidden="true"
+              class="q-icon material-icons"
+            >save</i>
+          </button>
+        </div>
+        <div>
+          <div>
+            <label>R</label>
+            <q-slider
+              v-model="RR"
+              class="palette__sliders__slider"
+              color="red"
+              :min="0"
+              :max="255"
+              label
+              :label-value="formattedHexColor(RR)"
+              @input="focused = 'red'"
+            />
+          </div>
+          <div>
+            <label>G</label>
+            <q-slider
+              v-model="GG"
+              class="palette__sliders__slider"
+              color="green"
+              :min="0"
+              :max="255"
+              label
+              :label-value="formattedHexColor(GG)"
+              @input="focused = 'green'"
+            />
+          </div>
+          <div>
+            <label>B</label>
+            <q-slider
+              v-model="BB"
+              class="palette__sliders__slider"
+              color="blue"
+              :min="0"
+              :max="255"
+              label
+              :label-value="formattedHexColor(BB)"
+              @input="focused = 'blue'"
+            />
+          </div>
+        </div>
+        <div style="palette-globals">
+          <button
+            :class="`no-style palette__sliders__misc palette__sliders__buttons ${lock ? '--locked' : ''}`"
+            :title="`lock sliders (${lock ? 'locked' : 'unlocked'})`"
+            @click="lock = !lock"
+          >
+            <icon :name="lock ? 'lock' : 'lock-open'" />
+          </button>
+        </div>
+        <div style="palette-globals">
+          <button
+            class="no-style palette__sliders__undo palette__sliders__buttons"
+            style="color: red"
+            title="undo palette change for current cycle"
+            @click="resetActiveColor()"
+          >
+            <icon name="undo" />
+          </button>
+        </div>
+      </div>
+      <div class="palette__sprite-mode">
+        Sprite Mode Mask Color:
+        <q-radio
+          v-model="spriteMaskColor"
+          keep-color
+          val="blue"
+          color="blue"
+        />
+        <q-radio
+          v-model="spriteMaskColor"
+          keep-color
+          val="green"
+          color="green"
+        />
+        <q-radio
+          v-model="spriteMaskColor"
+          keep-color
+          val="red"
+          color="red"
+        />
+        <q-radio
+          v-model="spriteMaskColor"
+          keep-color
+          val="yellow"
+          color="yellow"
+        />
+        <q-radio
+          v-model="spriteMaskColor"
+          keep-color
+          val="purple"
+          color="purple"
+        />
+        <q-radio
+          v-model="spriteMaskColor"
+          class="palette__radio--crossed"
+          keep-color
+          val="none"
+          color="black"
+        />
+      </div>
     </div>
-    <div class="palette__sliders">
-      <div>
+
+    <div class="globals">
+      <div class="globals__title">
+        GLOBALS
+      </div>
+      <hr>
+      <div class="globals__title">
+        Cycle RGB
+      </div>
+      <div class="globals__buttons">
         <button
-          v-if="updatePalette"
-          class="no-style palette__sliders__save --active palette__sliders__buttons"
-          title="Save ALL of the currently loaded palette(s)"
-          @click="savePalettes()"
+          @click="decPalette(0, 1)"
+          @mousedown="decPaletteHold(0, 1)"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
         >
-          <i
-            aria-hidden="true"
-            class="q-icon material-icons"
-          >save</i>
+          -
         </button>
-        <!-- Show a functionally useless button for the user after save. It's a human thing! -->
+        <div>- R -</div>
         <button
-          v-else
-          class="no-style palette__sliders__save palette__sliders__buttons"
-          title="Save ALL of the currently loaded palette(s)"
+          @click="incPalette(0, 1)"
+          @mousedown="incPaletteHold(0, 1)"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
         >
-          <i
-            aria-hidden="true"
-            class="q-icon material-icons"
-          >save</i>
+          +
         </button>
       </div>
-      <div>
-        {{ focused }}
-        <div>
-          <label>R</label>
-          <q-slider
-            v-model="RR"
-            class="palette__sliders__slider"
-            color="red"
-            :min="0"
-            :max="255"
-            label
-            :label-value="formattedHexColor(RR)"
-            @input="handleLocked"
-          />
-        </div>
-        <div>
-          <label>G</label>
-          <q-slider
-            v-model="GG"
-            class="palette__sliders__slider"
-            color="green"
-            :min="0"
-            :max="255"
-            label
-            :label-value="formattedHexColor(GG)"
-            @input="focused = 'green'"
-          />
-        </div>
-        <div>
-          <label>B</label>
-          <q-slider
-            v-model="BB"
-            class="palette__sliders__slider"
-            color="blue"
-            :min="0"
-            :max="255"
-            label
-            :label-value="formattedHexColor(BB)"
-            @input="focused"
-          />
-        </div>
-      </div>
-      <div style="palette-globals">
+      <hr>
+      <div class="globals__buttons">
         <button
-          :class="`no-style palette__sliders__misc palette__sliders__buttons ${lock ? '--locked' : ''}`"
-          :title="`lock sliders (${lock ? 'locked' : 'unlocked'})`"
-          @click="lock = !lock"
+          @click="decPalette(2, 3)"
+          @mousedown="decPaletteHold(2, 3)"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
         >
-          <icon name="lock" />
+          -
+        </button>
+        <div>- G -</div>
+        <button
+          @click="incPalette(2, 3)"
+          @mousedown="incPaletteHold(2, 3)"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
+        >
+          +
         </button>
       </div>
-      <div style="palette-globals">
+      <hr>
+      <div class="globals__buttons">
         <button
-          class="no-style palette__sliders__undo palette__sliders__buttons"
-          style="color: red"
-          title="undo palette change for current cycle"
-          @click="resetActiveColor()"
+          @click="decPalette(4, 5)"
+          @mousedown="decPaletteHold(4, 5)"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
         >
-          <icon name="undo" />
+          -
+        </button>
+        <div>- B -</div>
+        <button
+          @click="incPalette(4, 5)"
+          @mousedown="incPaletteHold(4, 5)"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
+        >
+          +
         </button>
       </div>
-      <div class="palette__sliders__buttons">
+      <hr>
+      <div class="globals__buttons">
         <button
-          class="no-style palette__sliders__copy-paste"
-          style="color: black"
-          title="copy current palette"
-          @click="setPaletteClipboard(activePalette)"
+          @click="decWholePalette()"
+          @mousedown="decWholePaletteHold()"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
         >
-          <icon name="copy" />
+          -
         </button>
+        <div>- RGB -</div>
         <button
-          class="no-style palette__sliders__copy-paste"
-          style="color: black"
-          title="paste to current palette"
-          :disabled="paletteClipboard.length ? false : 'disabled'"
-          @click="pasteClipboardPalette"
+          @click="incWholePalette()"
+          @mousedown="incWholePaletteHold()"
+          @mouseup="clearPaletteHold()"
+          @mouseleave="clearPaletteHold()"
         >
-          <icon name="paste" />
+          +
         </button>
       </div>
-    </div>
-    <div class="palette__sprite-mode">
-      Sprite Mode Mask Color:
-      <q-radio
-        v-model="spriteMaskColor"
-        keep-color
-        val="blue"
-        color="blue"
-      />
-      <q-radio
-        v-model="spriteMaskColor"
-        keep-color
-        val="green"
-        color="green"
-      />
-      <q-radio
-        v-model="spriteMaskColor"
-        keep-color
-        val="red"
-        color="red"
-      />
-      <q-radio
-        v-model="spriteMaskColor"
-        keep-color
-        val="yellow"
-        color="yellow"
-      />
-      <q-radio
-        v-model="spriteMaskColor"
-        keep-color
-        val="purple"
-        color="purple"
-      />
-      <q-radio
-        v-model="spriteMaskColor"
-        class="palette__radio--crossed"
-        keep-color
-        val="none"
-        color="black"
-      />
+      <hr>
+      <button
+        class="globals__title"
+        @click="resetActiveCycle"
+      >
+        RESET
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { ipcRenderer } from 'electron'
-import { clone, cloneDeep } from 'lodash'
+import { clone } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 
 import 'vue-awesome/icons/caret-down'
@@ -214,6 +300,7 @@ import 'vue-awesome/icons/copy'
 import 'vue-awesome/icons/paste'
 import 'vue-awesome/icons/undo'
 import 'vue-awesome/icons/lock'
+import 'vue-awesome/icons/lock-open'
 import Icon from 'vue-awesome/components/Icon'
 
 export default {
@@ -225,7 +312,6 @@ export default {
     return {
       activeColorIndex: 0,
       activePalette: [],
-      defaultPalette: undefined,
       focused: undefined,
       initialisingPalette: true, // prevents updates being fired on palette defaults
       old: {
@@ -237,7 +323,8 @@ export default {
       GG: 0,
       BB: 0,
       spriteMaskColor: 'blue',
-      lock: false
+      lock: false,
+      paletteHold: undefined
     }
   },
   computed: {
@@ -245,12 +332,15 @@ export default {
       'activePaletteColor',
       'activePaletteIndex',
       'currentPalette',
+      'defaultActiveColor',
+      'defaultActiveCycle',
       'filePath',
       'getActivePaletteChunked',
       'getActivePaletteInPalettes',
       'getActiveColorFromPaletteInPalettes',
       'paletteClipboard',
       'palettes',
+      'palettesDefault',
       'refreshPalette',
       'updatePalette'
     ]),
@@ -258,9 +348,6 @@ export default {
       return (this.hasCurrentPalette)
         ? this.getActivePaletteChunked(this.activeColorIndex)
         : undefined
-    },
-    defaultActiveColor () {
-      return this.defaultPalette[this.activeColorIndex]
     },
     hasCurrentPalette () {
       return this.getActivePaletteInPalettes &&
@@ -270,7 +357,6 @@ export default {
   watch: {
     activePaletteIndex (newVal) {
       this.activePalette = this.getActivePaletteInPalettes.palette
-      this.defaultPalette = cloneDeep(this.activePalette)
       this.initialisingPalette = true
     },
     currentColor (newVal) {
@@ -287,9 +373,18 @@ export default {
       this.activePalette = this.getActivePaletteInPalettes.palette
       this.initialisingPalette = true
     },
-    RR (newVal) { this.setCompleteHexColor('RR', newVal) },
-    GG (newVal) { this.setCompleteHexColor('GG', newVal) },
-    BB (newVal) { this.setCompleteHexColor('BB', newVal) },
+    RR (newVal, oldVal) {
+      this.handleLockedColors('red', ['GG', 'BB'], oldVal, newVal)
+      this.setCompleteHexColor('RR', newVal)
+    },
+    GG (newVal, oldVal) {
+      this.handleLockedColors('green', ['RR', 'BB'], oldVal, newVal)
+      this.setCompleteHexColor('GG', newVal)
+    },
+    BB (newVal, oldVal) {
+      this.handleLockedColors('blue', ['RR', 'GG'], oldVal, newVal)
+      this.setCompleteHexColor('BB', newVal)
+    },
     spriteMaskColor (newVal) { this.setSpriteMaskColor(newVal) }
   },
   updated () {
@@ -308,23 +403,134 @@ export default {
       'setSpriteMaskColor'
     ]),
     currentPaletteDown () {
-      this.setActivePaletteIndex(
-        this.activePaletteIndex - 1 >= 0
-          ? this.activePaletteIndex - 1
-          : this.palettes.length - 1)
+      if (this.palettes.length > 1) {
+        this.setActivePaletteIndex(
+          this.activePaletteIndex - 1 >= 0
+            ? this.activePaletteIndex - 1
+            : this.palettes.length - 1)
+      }
     },
     currentPaletteUp (evt) {
-      this.setActivePaletteIndex(
-        this.activePaletteIndex + 1 < this.palettes.length
-          ? this.activePaletteIndex + 1
-          : 0)
+      if (this.palettes.length > 1) {
+        this.setActivePaletteIndex(
+          this.activePaletteIndex + 1 < this.palettes.length
+            ? this.activePaletteIndex + 1
+            : 0)
+      }
     },
     formattedHexColor (col) {
       const c = col.toString(16)
       return c.length < 2 ? `0${c}` : c
     },
-    handleLocked (newValue) {
-      console.log('new', newValue)
+    handleLockedColors (color, otherColors, oldVal, newVal, v) {
+      if (this.lock && color === this.focused) {
+        otherColors.forEach(function (c) {
+          if (oldVal > newVal && this[c] > 0) {
+            v = this[c] - (oldVal - newVal)
+            if (v >= 0) this[c] = v
+          } else if (oldVal < newVal && this[c] < 255) {
+            v = this[c] + (newVal - oldVal)
+            if (v <= 255) this[c] = v
+          }
+        }.bind(this))
+      }
+    },
+    decPalette (hi, lo) {
+      this.lock = false
+      const p = clone(this.activePalette)
+      this.setActivePalette(
+        p.map((it, j) => {
+          let col = it[hi + 1] + it[lo + 1]
+          if (col !== '00') {
+            col = (parseInt(col, 16) - 1).toString(16)
+            col = col.length === 1 ? '0' + col : col
+            return it
+              .split('')
+              .map((char, i) => (i === hi + 1 ? col[0] : (i === lo + 1 ? col[1] : char)))
+              .toString()
+              .replace(/,/g, '')
+          } else return it
+        }))
+    },
+    incPalette (hi, lo) {
+      this.lock = false
+      const p = clone(this.activePalette)
+      this.setActivePalette(
+        p.map((it, j) => {
+          let col = it[hi + 1] + it[lo + 1]
+          if (col !== 'ff') {
+            col = (parseInt(col, 16) + 1).toString(16)
+            col = col.length === 1 ? '0' + col : col
+            return it
+              .split('')
+              .map((char, i) => (i === hi + 1 ? col[0] : (i === lo + 1 ? col[1] : char)))
+              .toString()
+              .replace(/,/g, '')
+          } else return it
+        }))
+    },
+    decWholePalette () {
+      this.lock = false
+      const p = clone(this.activePalette)
+      this.setActivePalette(
+        p.map((it, j) => {
+          for (let j = 0; j < 5; j += 2) {
+            let col = it[j + 1] + it[j + 2]
+            if (col !== '00') {
+              col = (parseInt(col, 16) - 1).toString(16)
+              col = col.length === 1 ? '0' + col : col
+              it = it
+                .split('')
+                .map((char, i) => (i === j + 1 ? col[0] : (i === j + 2 ? col[1] : char)))
+                .toString()
+                .replace(/,/g, '')
+            }
+          }
+          return it
+        }))
+    },
+    incWholePalette () {
+      this.lock = false
+      const p = clone(this.activePalette)
+      this.setActivePalette(
+        p.map((it) => {
+          for (let j = 0; j < 5; j += 2) {
+            let col = it[j + 1] + it[j + 2]
+            if (col !== 'ff') {
+              col = (parseInt(col, 16) + 1).toString(16)
+              col = col.length === 1 ? '0' + col : col
+              it = it
+                .split('')
+                .map((char, i) => (i === j + 1 ? col[0] : (i === j + 2 ? col[1] : char)))
+                .toString()
+                .replace(/,/g, '')
+            }
+          }
+          return it
+        }))
+    },
+    decPaletteHold (hi, lo) {
+      this.paletteHold = setInterval(function () {
+        this.decPalette(hi, lo)
+      }.bind(this), 50)
+    },
+    decWholePaletteHold () {
+      this.paletteHold = setInterval(function () {
+        this.decWholePalette()
+      }.bind(this), 50)
+    },
+    incWholePaletteHold () {
+      this.paletteHold = setInterval(function () {
+        this.incWholePalette()
+      }.bind(this), 50)
+    },
+    incPaletteHold (hi, lo) {
+      this.paletteHold = setInterval(function () {
+        this.incPalette(hi, lo)
+      }.bind(this), 50)
+    },
+    clearPaletteHold () {
+      clearInterval(this.paletteHold)
     },
     pasteClipboardPalette () {
       this.setActivePalette(clone(this.paletteClipboard))
@@ -338,14 +544,18 @@ export default {
       })
     },
     resetActiveColor () {
+      this.lock = false
       const col =
-        this.defaultActiveColor
+        this.defaultActiveColor(this.activeColorIndex)
           .replace('#', '')
           .match(/[0-9A-F]{2}/gi)
           .map(it => parseInt(it, 16))
       this.RR = col[0]
       this.GG = col[1]
       this.BB = col[2]
+    },
+    resetActiveCycle () {
+      this.setActivePalette(clone(this.defaultActiveCycle))
     },
     savePalettes () {
       this.setLoading(true)
