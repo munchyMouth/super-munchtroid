@@ -43,7 +43,7 @@
               class="palette__settings__misc"
               title="Active Palette Index"
             >
-              <label :title="`cycle no. ${ activePaletteIndex + 1 } of ${palettes ? palettes.length : 1 }`">
+              <label :title="`palette no. ${ activePaletteIndex + 1 } of ${palettes ? palettes.length : 1 }`">
                 <i
                   aria-hidden="true"
                   class="q-icon material-icons"
@@ -53,32 +53,11 @@
               </label>
             </div>
           </div>
-          <div class="palette__buttons">
-            <button
-              class="no-style palette__sliders__copy-paste"
-              style="color: black"
-              title="copy current palette"
-              @click="setPaletteClipboard(activePalette)"
-            >
-              <icon name="copy" />
-            </button>
-            <button
-              class="no-style palette__sliders__copy-paste"
-              style="color: black"
-              title="paste to current palette"
-              :disabled="paletteClipboard.length ? false : 'disabled'"
-              @click="pasteClipboardPalette"
-            >
-              <icon name="paste" />
-            </button>
-          </div>
         </div>
-      </div>
-      <div class="palette__sliders">
-        <div class="palette__sliders__save">
+        <div class="palette__save">
           <button
             :class="`no-style ${updatePalette ? ' --active ' : ''}palette__sliders__buttons`"
-            title="Save the currently loaded palette cycle(s)"
+            title="Save the currently loaded palette set"
             :disabled="updatePalette ? false : 'disabled'"
             @click="savePalettes()"
           >
@@ -88,6 +67,8 @@
             >save</i>
           </button>
         </div>
+      </div>
+      <div class="palette__sliders">
         <div>
           <div>
             <label>R</label>
@@ -148,6 +129,28 @@
             <icon name="undo" />
           </button>
         </div>
+        <div
+          class="palette__sliders__buttons"
+          style="border: 1px solid #ccc; padding-left: 20px; padding-right: 5px;"
+        >
+          <button
+            class="no-style palette__sliders__copy-paste"
+            style="color: black"
+            title="copy current colour"
+            @click="copyColor"
+          >
+            <icon name="copy" />
+          </button>
+          <button
+            class="no-style palette__sliders__copy-paste"
+            style="color: black"
+            title="paste to current colour"
+            :disabled="colorClipboard ? false : 'disabled'"
+            @click="pasteColorClipboard"
+          >
+            <icon name="paste" />
+          </button>
+        </div>
       </div>
       <div class="palette__sprite-mode">
         Sprite Mode Mask Color:
@@ -193,7 +196,27 @@
 
     <div class="globals">
       <div class="globals__title">
-        GLOBALS
+        PALETTE
+      </div>
+      <hr>
+      <div class="globals__buttons --evenly">
+        <button
+          class="no-style"
+          style="color: black"
+          title="copy current palette"
+          @click="copyPalette"
+        >
+          <icon name="copy" />
+        </button>
+        <button
+          class="no-style"
+          style="color: black"
+          title="paste to current palette"
+          :disabled="paletteClipboard.length ? false : 'disabled'"
+          @click="pasteClipboardPalette"
+        >
+          <icon name="paste" />
+        </button>
       </div>
       <hr>
       <div class="globals__buttons">
@@ -339,6 +362,7 @@ export default {
       'palettes',
       'palettesDefault',
       'refreshPalette',
+      'colorClipboard',
       'updatePalette'
     ]),
     currentColor () {
@@ -395,10 +419,34 @@ export default {
       'setActivePalette',
       'setActivePaletteColor',
       'setActivePaletteIndex',
+      'setColorClipboard',
       'setPaletteClipboard',
       'setPaletteColorChunk',
       'setSpriteMaskColor'
     ]),
+    copyColor () {
+      this.setColorClipboard(
+        this.getActivePaletteInPalettes.palette[this.activeColorIndex || 0])
+      this.$nextTick(() => {
+        this.$q.notify({
+          message: 'color copied',
+          position: 'bottom',
+          color: 'positive',
+          timeout: 1000
+        })
+      })
+    },
+    copyPalette () {
+      this.setPaletteClipboard(clone(this.activePalette))
+      this.$nextTick(() => {
+        this.$q.notify({
+          message: 'palette copied',
+          position: 'bottom',
+          color: 'positive',
+          timeout: 1000
+        })
+      })
+    },
     currentPaletteDown () {
       if (this.palettes.length > 1) {
         this.setActivePaletteIndex(
@@ -528,6 +576,19 @@ export default {
     },
     clearPaletteHold () {
       clearInterval(this.paletteHold)
+    },
+    pasteColorClipboard () {
+      const p = clone(this.getActivePaletteInPalettes.palette)
+      p[this.activeColorIndex || 0] = this.colorClipboard
+      this.setActivePalette(p)
+      this.$nextTick(() => {
+        this.$q.notify({
+          message: 'color pasted',
+          position: 'bottom',
+          color: 'positive',
+          timeout: 1000
+        })
+      })
     },
     pasteClipboardPalette () {
       this.setActivePalette(clone(this.paletteClipboard))

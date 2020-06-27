@@ -50,6 +50,7 @@ const store = {
         return img
       })()
     },
+    colorClipboard: undefined,
     confirmed: {
       callback () {},
       message: '',

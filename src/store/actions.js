@@ -103,6 +103,7 @@ export default {
       commit('SET_MISSILE_FINS_SHOW', false)
     } else commit('CLEAR_BEAM_OFFSET_INDEX')
   },
+  setColorClipboard ({ commit }, c) { commit('SET_COLOR_CLIPBOARD', c) },
   // the copy function below should only copy tile data, any more information would repoint the tile into which it is pasted!
   setCopiedTileData ({ commit }) { commit('SET_COPIED_TILE_DATA') },
   setCurrentFrameIndex ({ commit }, i) {

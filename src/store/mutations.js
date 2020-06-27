@@ -170,6 +170,9 @@ export default {
       })
     }
   },
+  SET_COLOR_CLIPBOARD (state, color) {
+    state.colorClipboard = color
+  },
   SET_CONFIRMED (state, { message, callback }) {
     state.confirmed.message = message
     state.confirmed.callback = callback

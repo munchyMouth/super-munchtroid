@@ -54,7 +54,9 @@
   z-index: 5
 }
 .palette__sliders {
-  margin-top: -40px;
+  border-top: 1px solid #ccc;
+  margin: -30px 10px 0 0;
+  padding-top: 10px;
 }
 .palette__sliders, .palette__sliders > div > div {
   display: flex;
@@ -83,17 +85,27 @@
 .palette__buttons {
   width: 20px;
   height: 30px;
-  margin-left: 15px;
+  margin-left: 8px;
+  margin-top: -5px;
+}
+.palette__buttons button {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.palette__buttons button svg {
+  padding: 0;
 }
 .palette__sliders__buttons {
   width: 20px;
   height: 60px;
 }
-.palette__sliders__save, button.palette__sliders__save:disabled {
+.palette__save, button.palette__save:disabled {
   border: 1px solid #ccc !important;
   margin-right: 8px;
+  padding: 0 5px;
+  height: 64px;
 }
-.palette__sliders__save button.--active {
+.palette__save button.--active {
   color: red;
 }
 .palette__sliders__undo {
@@ -140,7 +152,7 @@
   width: 100px;
   padding: 5px;
   border: 1px solid gray;
-  background-color: #aaa;
+  background-color: #eee;
   font-size: 10px;
   display: flex;
   flex-direction: column;
@@ -148,10 +160,14 @@
 }
 .globals .globals__title {
   font-weight: bold;
+  text-align: center;
 }
 .globals .globals__buttons {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+}
+.globals .globals__buttons.--evenly {
+  justify-content: space-evenly;
 }
