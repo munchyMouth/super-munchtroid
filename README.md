@@ -1,16 +1,29 @@
-<h1>SPARTA : Samus Palette &amp; Art App</h1>
+<h1>SPARTA : Samus Palette &amp; Art & Repointing Tool App</h1>
 <h2>(formerly known as Super Munchtroid)</h2>
 
-<img alt="Super Munchtroid header" title="Super Munchtroid" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
+<img alt="Super Munchtroid header" title="SPARTA" src="https://raw.githubusercontent.com/munchyMouth/super-munchtroid/master/src-electron/icons/linux-512x512.png" />
 
 ----
 
 ### Downloads
+#### 2.28.0
+- <a href="">Super Munchtroid-linux-x64 2.20.2</a>
+- <a href="">Super Munchtroid-win32-x64 2.20.2</a>
+
+### Documentation
+- <a href="">Latest Manual</a>
+- <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
+- <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
+- <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
+
+2.28.0 Features
+- beam cursor management for sparks and beams
+- missile fin controls
+- massively improved palette controls and palette menu bug fixes
+- the SPARTA Repointing Tool
+
 
 #### 2.20.2
-- <a href="https://drive.google.com/file/d/1NKHthUq5tOZAy5KBSqESEwuMSmPYB7jH/view?usp=sharing">Super Munchtroid-linux-x64 2.20.2</a>
-- <a href="https://drive.google.com/file/d/1yN5X2NJoYto6vw9h4nRLWRewvjRsebyG/view?usp=sharing">Super Munchtroid-win32-x64 2.20.2</a>
-
 2.20.2 Features
 - arrow key control of vram (while focused)
 - rotate 90° control for editor
@@ -21,10 +34,6 @@
 - shortcut `ctrl + o` to open files
 
 #### 2.18.0
-- <a href="https://drive.google.com/open?id=1yvxQh9qBgSkzvQD_4s0Kb3Ni3Sm3g7NL">Super Munchtroid-linux-x64 2.18.0</a>
-- <a href="https://drive.google.com/open?id=11d2VTfRsw14s0V_2nAzzBge0oG1cJImp">Super Munchtroid-win32-x64 2.18.0</a>
-
-2.18.0 Features
 - project renamed "SPARTA" :P
 - support for setting beam offsets
 - collapsible panels for sprite manager & beam editor
@@ -32,10 +41,6 @@
 - some general code tidying (under the hood stuff, cos this project got massive!)
 
 #### 2.16.2
-- <a href="https://drive.google.com/open?id=1JtP0M8kAeYHhb__YaAZrqsl8mQrDIsmv">Super Munchtroid-linux-x64 2.16.2</a>
-- <a href="https://drive.google.com/open?id=1LoxE0vFCaNcPG911m_AtJ_B-l2OMBITu">Super Munchtroid-win32-x64 2.16.2</a>
-
-2.16.2 Features
 - ctrl+left/right events matched up to frame inc/dec
 - ctrl+shift+s setup for doing save to sprites and vram
 - added help modal and events
@@ -100,10 +105,3 @@ Download, unzip, navigate to the file directory in terminal and type the followi
 ```
 
 ---------
-
-### Documentation
-
-- <a href="https://drive.google.com/open?id=1n4kWcyuypXbNrRbYPHspHtcB6qqd5KOo">Manual (updated to 2.18.0)</a>
-- <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
-- <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
-- <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
