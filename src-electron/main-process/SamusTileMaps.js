@@ -98,14 +98,13 @@ export default stampit({ /* extends RomData, SamusProps */
       if (p) {
         const address = parseInt(p.missileFins.offset, 16) + (2 + (offset / 2))
         const data = await this.getOffsetData(address, 2)
-        debugger
         return {
           _address: p.missileFins.offset,
           _id: address,
           _updated: false,
-          data: data.toJSON().data.map(it => it > 155 ? -(255 - it) : it),
-          loadByFrame: p.missileFins.loadByFrame,
-          show: false
+          data: data.toJSON().data.map(it => it > 128 ? -(255 - it) : it),
+          length: p.missileFins.length,
+          loadByFrame: p.missileFins.loadByFrame
         }
       } else return undefined
     }.bind(this)

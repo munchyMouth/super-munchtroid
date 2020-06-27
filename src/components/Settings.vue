@@ -112,7 +112,7 @@
           </tree>
         </template>
         <div
-          v-if="missileFins"
+          v-if="validateMissileFinsData"
           class="collapsible"
         >
           <hr>
@@ -132,19 +132,37 @@
                 &nbsp;Missile Fins
               </div>
               <div class="sprite-manager__offsets">
-                <div><strong>x:</strong> {{ missileFins.data[0] + 4 }}</div>
-                <div><strong>y:</strong> {{ missileFins.data[1] + 4 }}</div>
+                <div><strong>x:</strong> {{ missileFins.data[0] + 4 }} ({{ missileFins.data[0] }})</div>
+                <div><strong>y:</strong> {{ missileFins.data[1] + 4 }} ({{ missileFins.data[1] }})</div>
+                <div><strong>id:</strong> ${{ missileFins._id.toString(16) }}</div>
               </div>
             </div>
             <br>
             <div>
               <div class="fins__save">
-                <button :class="`no-style ${missileFins._updated ? '--active' : ''}`">
+                <button
+                  :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
+                  @click="saveFin()"
+                >
                   <icon name="save" /> Save fin
+                </button>
+                <button
+                  class="no-style"
+                  :disabled="!missileFinsHasUpdates"
+                  @click="undoMissileFins"
+                >
+                  undo
+                  <icon
+                    scale="0.6"
+                    name="undo"
+                  />
                 </button>
               </div>
               <div v-if="!missileFins.loadByFrame && currentFrameIndex === 0">
-                <button :class="`no-style ${missileFins._updated ? '--active' : ''}`">
+                <button
+                  :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
+                  @click="saveFin(true)"
+                >
                   <icon name="save" /> Save fin across ALL frames
                 </button>
               </div>
@@ -224,7 +242,6 @@ import SearchBox from './SearchBox.vue'
 import Tree from './Tree.vue'
 import TreeLi from './TreeLi.vue'
 import Metadata from './Metadata.vue'
-// import MissileFins from './MissileFins.vue'
 
 export default {
   name: 'settings',
@@ -232,7 +249,6 @@ export default {
     BeamManager,
     Icon,
     Metadata,
-    // MissileFins,
     PlusMinusField,
     SearchBox,
     SpriteManager,
@@ -262,6 +278,7 @@ export default {
       'filePath',
       'frames',
       'missileFins',
+      'missileFinsHasUpdates',
       'refreshFrame',
       'settings',
       'shortcutTriggerFullSave',
@@ -295,6 +312,9 @@ export default {
         : (this.settings.SPECIAL_POSES[this.currentPose || 0]
           ? (this.settings.SPECIAL_POSES[this.currentPose || 0].index || 0)
           : 0)
+    },
+    validateMissileFinsData () {
+      return this.missileFins && this.missileFins.hasOwnProperty('data') && this.missileFins.data.length
     }
   },
   provide () {
@@ -326,7 +346,8 @@ export default {
       'setError',
       'setMissileFinsShow',
       'setSamus',
-      'setSpriteRatio'
+      'setSpriteRatio',
+      'undoMissileFins'
     ]),
     ...mapMutations({ setLoading: 'SET_LOADING' }),
     actionPaletteUpdate (elem) {
@@ -453,6 +474,36 @@ export default {
         optionsetIndex: this.currentPose,
         specialPoseFrameOverride: this.frameDMAOffset / 4
       })
+    },
+    saveFin (overwrite = false) {
+      if (this.missileFinsHasUpdates) {
+        if (overwrite) {
+          this.confirm({
+            message: 'this will set all frames of this pose to the same missile fin data as this frame. Are you sure?',
+            callback: function (ok) {
+              if (ok) {
+                this.setLoading(true)
+                ipcRenderer.send(
+                  'Save Missile Fins',
+                  {
+                    filePath: this.filePath,
+                    missileFins: this.missileFins,
+                    overwrite
+                  })
+              }
+            }.bind(this)
+          })
+        } else {
+          this.setLoading(true)
+          ipcRenderer.send(
+            'Save Missile Fins',
+            {
+              filePath: this.filePath,
+              missileFins: this.missileFins,
+              overwrite
+            })
+        }
+      }
     },
     saveSprites () {
       if (this.updateSprite) {

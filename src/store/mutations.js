@@ -97,16 +97,28 @@ export default {
     state.refreshFrame = !state.refreshFrame
   },
   SET_MISSILE_FINS (state, f) {
+    const show = f && state.missileFins ? state.missileFins.show : false
     state.missileFins = f
+      ? {
+        ...f,
+        show: show,
+        undo: clone(f.data)
+      }
+      : undefined
   },
   SET_MISSILE_FINS_DATA (state, d) {
-    state.missileFins._updated = true
     state.missileFins.data = d
   },
   SET_MISSILE_FINS_SHOW (state, v) {
     state.missileFins.show = v
   },
-  UPDATE_MISSILE_FIN_DATA (state, a) {},
+  UNDO_MISSILE_FINS (state) {
+    state.missileFins.data = clone(state.missileFins.undo)
+    state.missileFinsResetToggle = !state.missileFinsResetToggle
+  },
+  UPDATE_UNDO_MISSILE_FINS (state) {
+    state.missileFins.undo = clone(state.missileFins.data)
+  },
   SET_POINTER_CLIPBOARD_BY_HALF (state, { dma, frame, half }) {
     state.pointerClipboard.dma[half] = clone(dma[half])
     state.pointerClipboard.frame[half] = frame[half]

@@ -173,6 +173,25 @@ ipcMain.on('Save Beams', (event, { filePath, beams }) => {
   }
 })
 
+ipcMain.on('Save Missile Fins', (event, { filePath, missileFins, overwrite }) => {
+  try {
+    Samus({ filePath })
+      .saveMissileFinsToRom(missileFins, overwrite)
+      .then(function () {
+        event.sender.send('Missile Fins Saved', true)
+      }, function (e) {
+        console.trace(e)
+        event.sender.send('Missile Error', {
+          type: 'MissileMainSaveException',
+          title: 'Failed to save Missile Fins: Error in main. ',
+          message: [e.message]
+        })
+      })
+  } catch (e) {
+    console.trace(e)
+  }
+})
+
 ipcMain.on('Save Palettes', (event, { filePath, palettes }) => {
   try {
     Palette({ filePath })

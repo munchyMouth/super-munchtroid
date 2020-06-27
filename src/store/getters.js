@@ -1,3 +1,5 @@
+import { xor } from 'lodash'
+
 import { handleIrregularHalfLogic } from '../components/Miscellaneous'
 
 // -----------------------------------------------------------------------------
@@ -196,6 +198,7 @@ export default {
       return result
     }, false),
   missileFinsVisible: state => state.missileFins ? state.missileFins.show : false,
+  missileFinsHasUpdates: state => !!xor(state.missileFins.data, state.missileFins.undo).length,
   noSelectedTile: state =>
     !state.selectedTile ||
     (state.selectedTile &&

@@ -56,6 +56,13 @@ export default stampit(
         )
       }
 
+      this.saveMissileFinsToRom = async function ({ _id, data, length }, overwrite) {
+        data = data.map(it => (it < 0) ? it + 255 : it)
+        if (overwrite) while (data.length < length - 2) data.push(data.length % 2 ? data[1] : data[0])
+        await this.setOffsetData(
+          Buffer.from(data), _id, data.length / 2)
+      }.bind(this)
+
       this.saveSpriteToROM = async function (isFirstPose, pojo) {
         const buff = pojoToSpriteBuffer(pojo)
         await setOffsetData(buff, pojo._id, buff.length)

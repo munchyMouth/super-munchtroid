@@ -79,8 +79,11 @@ const store = {
       _updated: false,
       data: [],
       loadByFrame: false,
-      show: false
+      length: 0,
+      show: false,
+      undo: []
     },
+    missileFinsResetToggle: false,
     frames: [],
     palettes: [],
     paletteClipboard: [],

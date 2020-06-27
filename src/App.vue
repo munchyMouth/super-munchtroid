@@ -57,7 +57,7 @@ export default {
   },
   updated () {
     try {
-      const events = ['Beams', 'Palettes', 'Pose', 'Repoint', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
+      const events = ['Beams', 'Missile', 'Palettes', 'Pose', 'Repoint', 'ROM', 'Sprite', 'Sprites', 'VRAM Tile', 'VRAM Tiles']
       events.forEach(function (it) {
         ipcRenderer.on(`${it} Error`, function (event, error) {
           this.setError(error)
@@ -86,6 +86,14 @@ export default {
           this.setLoading(false)
           this.refreshFrame()
           this.success('Data Repointed!')
+        }.bind(this))
+
+      this.renderEvent(
+        'Missile Fins Saved',
+        async function (event, object) {
+          this.setLoading(false)
+          this.updateUndoMissileFins()
+          this.success('Missile Fins Updated!')
         }.bind(this))
 
       this.renderEvent(
@@ -240,7 +248,8 @@ export default {
       'toggleLayoutDrawerOpen',
       'toggleSaveEventListener',
       'toggleSaveKeyEvent',
-      'toggleShowHelp'
+      'toggleShowHelp',
+      'updateUndoMissileFins'
     ]),
     fail ({ type, title, message }, color = 'negative', timeout = 120000) {
       if (message) {
