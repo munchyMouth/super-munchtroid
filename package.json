@@ -1,7 +1,7 @@
 {
-  "name": "samus-palette-art-application",
-  "version": "2.20.2",
-  "description": "A suite of tools for editing Samus in Super Metroid suite",
+  "name": "samus-palette-art-repointing-tool-app",
+  "version": "2.28.0",
+  "description": "Samus Palette, Art, Repointing Tool App",
   "productName": "SPARTA",
   "cordovaId": "org.cordova.quasar.app",
   "author": "munch.mc.mouthington@gmail.com",

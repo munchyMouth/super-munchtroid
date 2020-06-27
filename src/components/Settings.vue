@@ -142,7 +142,7 @@
                 <div class="sprite-manager__offsets">
                   <div><strong>x:</strong> {{ missileFins.data[0] }}</div>
                   <div><strong>y:</strong> {{ missileFins.data[1] }}</div>
-                  <div><strong>id:</strong> ${{ missileFins._id.toString(16) }}</div>
+                  <div>${{ missileFins._id.toString(16) }}</div>
                 </div>
               </div>
               <br>
