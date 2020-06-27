@@ -91,6 +91,20 @@
 .palette__sliders__undo {
   border: 1px solid red !important;
 }
+.palette__sliders__misc {
+  border: 1px solid #333 !important;
+  color: #333
+}
+
+.palette__sliders__misc.--locked {
+  border: 1px solid #333 !important;
+  background: #333;
+  color: white;
+}
+.palette__sliders__misc {
+  border: 1px solid #333 !important;
+  color: #333
+}
 .palette__sliders__undo > svg {
   width: 10px;
 }
@@ -99,6 +113,8 @@
 }
 .palette__sliders__slider {
   width: 290px
+}
+.palette-globals {
 }
 .palette__sprite-mode {
   margin-top: 10px;

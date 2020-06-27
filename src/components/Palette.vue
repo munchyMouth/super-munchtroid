@@ -80,6 +80,7 @@
         </button>
       </div>
       <div>
+        {{ focused }}
         <div>
           <label>R</label>
           <q-slider
@@ -90,6 +91,7 @@
             :max="255"
             label
             :label-value="formattedHexColor(RR)"
+            @input="handleLocked"
           />
         </div>
         <div>
@@ -102,6 +104,7 @@
             :max="255"
             label
             :label-value="formattedHexColor(GG)"
+            @input="focused = 'green'"
           />
         </div>
         <div>
@@ -114,10 +117,20 @@
             :max="255"
             label
             :label-value="formattedHexColor(BB)"
+            @input="focused"
           />
         </div>
       </div>
-      <div>
+      <div style="palette-globals">
+        <button
+          :class="`no-style palette__sliders__misc palette__sliders__buttons ${lock ? '--locked' : ''}`"
+          :title="`lock sliders (${lock ? 'locked' : 'unlocked'})`"
+          @click="lock = !lock"
+        >
+          <icon name="lock" />
+        </button>
+      </div>
+      <div style="palette-globals">
         <button
           class="no-style palette__sliders__undo palette__sliders__buttons"
           style="color: red"
@@ -200,6 +213,7 @@ import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/copy'
 import 'vue-awesome/icons/paste'
 import 'vue-awesome/icons/undo'
+import 'vue-awesome/icons/lock'
 import Icon from 'vue-awesome/components/Icon'
 
 export default {
@@ -212,11 +226,18 @@ export default {
       activeColorIndex: 0,
       activePalette: [],
       defaultPalette: undefined,
+      focused: undefined,
       initialisingPalette: true, // prevents updates being fired on palette defaults
+      old: {
+        RR: 0,
+        GG: 0,
+        BB: 0
+      },
       RR: 0,
       GG: 0,
       BB: 0,
-      spriteMaskColor: 'blue'
+      spriteMaskColor: 'blue',
+      lock: false
     }
   },
   computed: {
@@ -301,6 +322,9 @@ export default {
     formattedHexColor (col) {
       const c = col.toString(16)
       return c.length < 2 ? `0${c}` : c
+    },
+    handleLocked (newValue) {
+      console.log('new', newValue)
     },
     pasteClipboardPalette () {
       this.setActivePalette(clone(this.paletteClipboard))
