@@ -89,7 +89,7 @@
     "missileFins": {
       "offset": "0x84A25",
       "length": 22,
-      "loadByFrame": true
+      "loadByFrame": false
     }
   },
   {
@@ -98,7 +98,7 @@
     "missileFins": {
       "offset": "0x84A3B",
       "length": 22,
-      "loadByFrame": true
+      "loadByFrame": false
     }
   },
   {
@@ -115,7 +115,7 @@
     "missileFins": {
       "offset": "0x84A51",
       "length": 22,
-      "loadByFrame": true
+      "loadByFrame": false
     }
   },
   {
@@ -124,7 +124,7 @@
     "missileFins": {
       "offset": "0x84A67",
       "length": 22,
-      "loadByFrame": true
+      "loadByFrame": false
     }
   },
   {
@@ -133,7 +133,7 @@
     "missileFins": {
       "offset": "0x84A7D",
       "length": 22,
-      "loadByFrame": true
+      "loadByFrame": false
     }
   },
   {
@@ -142,7 +142,7 @@
     "missileFins": {
       "offset": "0x84A93",
       "length": 22,
-      "loadByFrame": true
+      "loadByFrame": false
     }
   },
   {
@@ -187,7 +187,7 @@
     "missileFins": {
       "offset": "0x84AC5",
       "length": 6,
-      "loadByFrame": false
+      "loadByFrame": true
     }
   },
   {
@@ -196,7 +196,7 @@
     "missileFins": {
       "offset": "0x84ACB",
       "length": 6,
-      "loadByFrame": false
+      "loadByFrame": true
     }
   },
   {

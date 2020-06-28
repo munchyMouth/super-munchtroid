@@ -11,7 +11,7 @@
 - <a href="">Super Munchtroid-win32-x64 2.28.2</a>
 
 ### Documentation
-- <a href="https://drive.google.com/file/d/19hRGTyo-TV06WPfCURc3j-lmFHVk6TuB/view">Latest Manual</a>
+- <a href="https://drive.google.com/file/d/1q5o2BElhCIlFJ5VkeQOhLHWhOe6W4RVp/view?usp=sharing">Latest Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
