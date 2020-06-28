@@ -4,7 +4,11 @@ The settings files in this folder control pretty much all of the stuff needed to
 
 - SamusPoses.json
   . contains the list of poses you find in the pose drop down menu
-  . flags poses that have missile fins (NOTE: Some fins are used for multiple poses; SPARTA only wires those poses up once. For a full list of missile fin poses, please visit http://patrickjohnston.org/bank/90#C9DD)
+  . flags poses that have missile fins
+  (NOTE: Some fins are used for multiple poses;
+    - SPARTA only wires those poses up once.
+    - For a full list of missile fin poses, please visit http://patrickjohnston.org/bank/90#C9DD
+    - *ALL* the missile fins addresses listed at the link above are Lo addresses that map to the PC addresses in SamusPoses.json)
 
 - SamusSpecialPoses.json
   . contains concealed loading pose and some more obscure poses that are not indexed in the conventional fashion
