@@ -167,8 +167,8 @@
     "name": "15: Facing right - normal jump - aiming up",
     "unused": false,
     "missileFins": {
-      "offset": "0x84AB5",
-      "length": 8,
+      "offset": "0x84AB7",
+      "length": 6,
       "loadByFrame": true
     }
   },
@@ -176,8 +176,8 @@
     "name": "16: Facing left - normal jump - aiming up",
     "unused": false,
     "missileFins": {
-      "offset": "0x84ABD",
-      "length": 8,
+      "offset": "0x84ABF",
+      "length": 6,
       "loadByFrame": true
     }
   },
