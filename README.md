@@ -18,7 +18,7 @@
 
 2.28.0 Features
 - beam cursor management for sparks and beams
-- missile fin controls
+- missile fin controls (NOTE: Some fins are used for multiple poses; SPARTA only wires those poses up once. For a full list of missile fin poses, please visit http://patrickjohnston.org/bank/90#C9DD))
 - massively improved palette controls and palette menu bug fixes
 - the SPARTA Repointing Tool
 
