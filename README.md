@@ -11,17 +11,18 @@
 - <a href="">Super Munchtroid-win32-x64 2.28.2</a>
 
 ### Documentation
-- <a href="">Latest Manual</a>
+- <a href="https://drive.google.com/file/d/19hRGTyo-TV06WPfCURc3j-lmFHVk6TuB/view">Latest Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
 
 2.28.0 Features
 - beam cursor management for sparks and beams
-- missile fin controls (NOTE: Some fins are used for multiple poses; SPARTA only wires those poses up once. For a full list of missile fin poses, please visit http://patrickjohnston.org/bank/90#C9DD . *ALL* the addresses listed at that point in the code are Lo addresses that map to the PC addresses recorded in SPARTA's SamusPoses.json))
 - massively improved palette controls and palette menu bug fixes
 - the SPARTA Repointing Tool
+- missile fin controls
 
+(NOTE: Some fins are used for multiple poses; SPARTA only wires those poses up once. For a full list of missile fin poses, please visit http://patrickjohnston.org/bank/90#C9DD . *ALL* the addresses listed at that point in the code are Lo addresses that map to the PC addresses recorded in SPARTA's SamusPoses.json))
 
 #### 2.20.2
 2.20.2 Features
