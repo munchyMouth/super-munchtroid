@@ -7,8 +7,8 @@
 
 ### Downloads
 #### 2.28.0
-- <a href="">Super Munchtroid-linux-x64 2.28.2</a>
-- <a href="">Super Munchtroid-win32-x64 2.28.2</a>
+- <a href="">Super Munchtroid-linux-x64 2.29.0</a>
+- <a href="">Super Munchtroid-win32-x64 2.29.0</a>
 
 ### Documentation
 - <a href="https://drive.google.com/file/d/1q5o2BElhCIlFJ5VkeQOhLHWhOe6W4RVp/view?usp=sharing">Latest Manual</a>
@@ -16,7 +16,7 @@
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
 
-2.28.0 Features
+2.29.0 Features
 - beam cursor management for sparks and beams
 - massively improved palette controls and palette menu bug fixes
 - the SPARTA Repointing Tool
