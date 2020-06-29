@@ -6,12 +6,12 @@
 ----
 
 ### Downloads
-#### 2.28.0
-- <a href="">Super Munchtroid-linux-x64 2.29.0</a>
-- <a href="">Super Munchtroid-win32-x64 2.29.0</a>
+#### 2.29.0
+- <a href="https://drive.google.com/file/d/1B1Sxza9HBlnPAGf-F-AL4XX19s422Dd7/view?usp=sharing">Super Munchtroid-linux-x64 2.29.0</a>
+- <a href="https://drive.google.com/file/d/1k6wGAJtaIYDEXRKm4BrF3Bu2Rgo6UblN/view?usp=sharing">Super Munchtroid-win32-x64 2.29.0</a>
 
 ### Documentation
-- <a href="https://drive.google.com/file/d/1q5o2BElhCIlFJ5VkeQOhLHWhOe6W4RVp/view?usp=sharing">Latest Manual</a>
+- <a href="https://drive.google.com/file/d/1dpVqQFGf1IFnNqHQtrXlWy0m_3EAYzyP/view?usp=sharing">Latest Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
