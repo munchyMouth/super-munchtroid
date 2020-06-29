@@ -93,6 +93,15 @@ export default stampit({ /* extends RomData, SamusProps */
     }.bind(this)
 
     // TODO
+    // "DEATH_POSE": {
+    //   "NO_OF_TILE_ROWS": 10,
+    //   "START_OFFSET": "0xD8000",
+    //   "SIZE": "0x1400",
+    //   "TILEMAPS": {
+    //     "FACING_LEFT": "0825",
+    //     "FACING_RIGHT": "081C"
+    //   }
+    // }
     this.loadSamusDeathPose = async function (direction, index) {
       const { START_OFFSET, SIZE, NO_OF_FRAMES } = DEATH_POSE
       const startOffset = parseInt(START_OFFSET, 16)
