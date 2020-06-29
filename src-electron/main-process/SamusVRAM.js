@@ -4,6 +4,7 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
   init () {
     // PRIVATE -----------------------------------------------------------------
     const { chunk } = this
+    const { MISSILE_FINS } = this.loadSettingsFile('TableData')
 
     function chunkTileDataToROMWords (td) {
       return chunk(
@@ -103,6 +104,21 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
       data._id = this.dmaEntries._id
       data._dma = this.dmaEntries.dma
       return data
+    }.bind(this)
+
+    this.getMissileFinTile = async function (offset = 0, pose, POSES = {}) {
+      const p = POSES.find((it, i) => i === pose && it.hasOwnProperty('missileFins'))
+      if (p) {
+        console.log('MY FRAME', offset / 2)
+        const finIndex =
+          p.missileFins.tile[offset / 4 >= p.missileFins.tile.length ? 0 : offset / 4]
+        const finAddress = MISSILE_FINS[finIndex]
+        return {
+          _id: 0xD1A00,
+          data: this.bytesToPixels(
+            await this.getOffsetData(parseInt(finAddress, 16), 32))
+        }
+      }
     }.bind(this)
 
     this.pixelate = function (bytes, row = []) {

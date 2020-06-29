@@ -7,6 +7,9 @@
     "name": "01: Facing right - normal",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x849DD",
       "length": 20,
       "loadByFrame": false
@@ -16,6 +19,9 @@
     "name": "02: Facing left - normal",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x849F1",
       "length": 20,
       "loadByFrame": false
@@ -25,6 +31,9 @@
     "name": "03: Facing right - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, false],
+      "tile": [3, 0],
       "offset": "0x84A07",
       "length": 6,
       "loadByFrame": true
@@ -34,6 +43,9 @@
     "name": "04: Facing left - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [true, true],
+      "vFlip":  [false, false],
+      "tile": [3, 0],
       "offset": "0x84A0F",
       "length": 6,
       "loadByFrame": true
@@ -43,6 +55,9 @@
     "name": "05: Facing right - aiming up-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84A15",
       "length": 4,
       "loadByFrame": false
@@ -52,6 +67,9 @@
     "name": "06: Facing left - aiming up-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84A19",
       "length": 4,
       "loadByFrame": false
@@ -61,6 +79,9 @@
     "name": "07: Facing right - aiming down-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84A1D",
       "length": 4,
       "loadByFrame": false
@@ -70,6 +91,9 @@
     "name": "08: Facing left - aiming down-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84A21",
       "length": 4,
       "loadByFrame": false
@@ -87,6 +111,9 @@
     "name": "0B: Moving right - gun extended forward (not aiming)",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84A25",
       "length": 22,
       "loadByFrame": false
@@ -96,6 +123,9 @@
     "name": "0C: Moving left - gun extended forward (not aiming)",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84A3B",
       "length": 22,
       "loadByFrame": false
@@ -113,6 +143,9 @@
     "name": "0F: Moving right - aiming up-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84A51",
       "length": 22,
       "loadByFrame": false
@@ -122,6 +155,9 @@
     "name": "10: Moving left - aiming up-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84A67",
       "length": 22,
       "loadByFrame": false
@@ -131,6 +167,9 @@
     "name": "11: Moving right - aiming down-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84A7D",
       "length": 22,
       "loadByFrame": false
@@ -140,6 +179,9 @@
     "name": "12: Moving left - aiming down-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84A93",
       "length": 22,
       "loadByFrame": false
@@ -149,6 +191,9 @@
     "name": "13: Facing right - normal jump - not aiming - not moving - gun extended",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84AA9",
       "length": 6,
       "loadByFrame": false
@@ -158,6 +203,9 @@
     "name": "14: Facing left  - normal jump - not aiming - not moving - gun extended",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84AAF",
       "length": 6,
       "loadByFrame": false
@@ -167,6 +215,9 @@
     "name": "15: Facing right - normal jump - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, false],
+      "tile": [0],
       "offset": "0x84AB7",
       "length": 6,
       "loadByFrame": true
@@ -176,6 +227,9 @@
     "name": "16: Facing left - normal jump - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [true, true],
+      "vFlip":  [false, false],
+      "tile": [0],
       "offset": "0x84ABF",
       "length": 6,
       "loadByFrame": true
@@ -185,6 +239,9 @@
     "name": "17: Facing right - normal jump - aiming down",
     "unused": false,
     "missileFins": {
+      "hFlip": [true, true],
+      "vFlip":  [false, true],
+      "tile": [2, 0],
       "offset": "0x84AC5",
       "length": 6,
       "loadByFrame": true
@@ -194,6 +251,9 @@
     "name": "18: Facing left  - normal jump - aiming down",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, true],
+      "tile": [2, 0],
       "offset": "0x84ACB",
       "length": 6,
       "loadByFrame": true
@@ -259,6 +319,9 @@
     "name": "27: Facing right - crouching",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84B5D",
       "length": 20,
       "loadByFrame": false
@@ -268,6 +331,9 @@
     "name": "28: Facing left - crouching",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84B71",
       "length": 20,
       "loadByFrame": false
@@ -285,6 +351,9 @@
     "name": "2B: Facing right - falling - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, false],
+      "tile": [3, 0],
       "offset": "0x84B1F",
       "length": 8,
       "loadByFrame": true
@@ -294,6 +363,9 @@
     "name": "2C: Facing left - falling - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [0],
       "offset": "0x84B29",
       "length": 8,
       "loadByFrame": true
@@ -303,6 +375,9 @@
     "name": "2D: Facing right - falling - aiming down",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, true],
+      "vFlip":  [true, false],
+      "tile": [2, 0],
       "offset": "0x84B31",
       "length": 6,
       "loadByFrame": false
@@ -312,6 +387,9 @@
     "name": "2E: Facing left - falling - aiming down",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, true],
+      "tile": [2, 0],
       "offset": "0x84B37",
       "length": 6,
       "loadByFrame": false
@@ -425,6 +503,9 @@
     "name": "49: Facing left - moonwalk",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84BA5",
       "length": 14,
       "loadByFrame": true
@@ -434,6 +515,9 @@
     "name": "4A: Facing right - moonwalk",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84BB3",
       "length": 14,
       "loadByFrame": true
@@ -443,6 +527,9 @@
     "name": "4B: Facing right - normal jump transition",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84AD1",
       "length": 8,
       "loadByFrame": true
@@ -472,6 +559,9 @@
     "name": "51: Facing right - normal jump - not aiming - moving forward",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84AD9",
       "length": 6,
       "loadByFrame": false
@@ -481,6 +571,9 @@
     "name": "52: Facing left - normal jump - not aiming - moving forward",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84ADF",
       "length": 6,
       "loadByFrame": false
@@ -498,6 +591,9 @@
     "name": "55: Facing right - normal jump transition - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, false],
+      "tile": [3, 0],
       "offset": "0x84C15",
       "length": 6,
       "loadByFrame": false
@@ -507,6 +603,9 @@
     "name": "56: Facing left - normal jump transition - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [true, true],
+      "vFlip":  [false, false],
+      "tile": [3, 0],
       "offset": "0x84C1B",
       "length": 6,
       "loadByFrame": false
@@ -580,6 +679,9 @@
     "name": "67: Facing right - falling - gun extended",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84AFD",
       "length": 16,
       "loadByFrame": false
@@ -589,6 +691,9 @@
     "name": "68: Facing left - falling - gun extended",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84B0D",
       "length": 16,
       "loadByFrame": false
@@ -598,6 +703,9 @@
     "name": "69: Facing left - normal jump - aiming up-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84AE5",
       "length": 6,
       "loadByFrame": false
@@ -607,6 +715,9 @@
     "name": "6A: Facing left - normal jump - aiming up-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84AEB",
       "length": 6,
       "loadByFrame": false
@@ -616,6 +727,9 @@
     "name": "6B: Facing right - normal jump - aiming down-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84AF1",
       "length": 6,
       "loadByFrame": false
@@ -625,6 +739,9 @@
     "name": "6C: Facing left - normal jump - aiming down-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84AF7",
       "length": 6,
       "loadByFrame": false
@@ -634,6 +751,9 @@
     "name": "6D: Facing right - falling - aiming up-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84B3D",
       "length": 8,
       "loadByFrame": false
@@ -643,6 +763,9 @@
     "name": "6E: Facing left - falling - aiming up-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84B45",
       "length": 8,
       "loadByFrame": false
@@ -652,6 +775,9 @@
     "name": "6F: Facing right - falling - aiming down-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84B4D",
       "length": 8,
       "loadByFrame": false
@@ -661,6 +787,9 @@
     "name": "70: Facing left - falling - aiming down-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84B55",
       "length": 8,
       "loadByFrame": false
@@ -670,6 +799,9 @@
     "name": "71: Facing right - standing to crouching - aiming up-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84B85",
       "length": 4,
       "loadByFrame": false
@@ -679,6 +811,9 @@
     "name": "72: Facing left - standing to crouching - aiming up-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84B89",
       "length": 4,
       "loadByFrame": false
@@ -688,6 +823,9 @@
     "name": "73: Facing right - standing to crouching - aiming down-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84B8D",
       "length": 4,
       "loadByFrame": false
@@ -697,6 +835,9 @@
     "name": "74: Facing left - standing to crouching - aiming down-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84B91",
       "length": 4,
       "loadByFrame": false
@@ -706,6 +847,9 @@
     "name": "75: Facing left - moonwalk - aiming up-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84BC1",
       "length": 14,
       "loadByFrame": true
@@ -715,6 +859,9 @@
     "name": "76: Facing right - moonwalk - aiming up-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [3],
       "offset": "0x84BCF",
       "length": 14,
       "loadByFrame": true
@@ -724,6 +871,9 @@
     "name": "77: Facing left - moonwalk - aiming down-left",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84BDD",
       "length": 14,
       "loadByFrame": true
@@ -733,6 +883,9 @@
     "name": "78: Facing right - moonwalk - aiming down-right",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [2],
       "offset": "0x84BEB",
       "length": 14,
       "loadByFrame": true
@@ -790,6 +943,9 @@
     "name": "85: Facing right - crouching - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [false, false],
+      "vFlip":  [false, false],
+      "tile": [3, 0],
       "offset": "0x84B97",
       "length": 6,
       "loadByFrame": true
@@ -799,6 +955,9 @@
     "name": "86: Facing left - crouching - aiming up",
     "unused": false,
     "missileFins": {
+      "hFlip": [true],
+      "vFlip":  [false],
+      "tile": [0],
       "offset": "0x84B9F",
       "length": 6,
       "loadByFrame": false
@@ -924,6 +1083,9 @@
     "name": "A4: Facing right - Landing from normal jump",
     "unused": false,
     "missileFins": {
+      "hFlip": [false],
+      "vFlip":  [false],
+      "tile": [1],
       "offset": "0x84BF9",
       "length": 12,
       "loadByFrame": true

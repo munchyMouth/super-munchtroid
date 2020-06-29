@@ -92,49 +92,23 @@ export default stampit({ /* extends RomData, SamusProps */
       return arr
     }.bind(this)
 
-    // TODO
-    // "DEATH_POSE": {
-    //   "NO_OF_TILE_ROWS": 10,
-    //   "START_OFFSET": "0xD8000",
-    //   "SIZE": "0x1400",
-    //   "TILEMAPS": {
-    //     "FACING_LEFT": "0825",
-    //     "FACING_RIGHT": "081C"
-    //   }
-    // }
-    this.loadSamusDeathPose = async function (direction, index) {
-      const { START_OFFSET, SIZE, NO_OF_FRAMES } = DEATH_POSE
-      const startOffset = parseInt(START_OFFSET, 16)
-      return {
-        _address: `$${startOffset.toString(16)}`,
-        _id: startOffset,
-        frames: new Array(NO_OF_FRAMES),
-        frameIndex: index,
-        pose: { name: `Facing ${direction}` },
-        vram: {
-          tiles: chunk(await getOffsetData(startOffset, parseInt(SIZE, 16)), 0x20)
-            .map(function (it, i) {
-              return {
-                _address: `$${(startOffset + (i * 0x20)).toString(16)}`,
-                _id: startOffset + (i * 0x20),
-                data: bytesToPixels(it)
-              }
-            })
-        },
-        tileMaps: await loadDeathTileMaps(direction, index)
-      }
-    }
-
     this.loadMissileFinOffsets = async function (offset = 0, pose, POSES = {}) {
-      debugger
       const p = POSES.find((it, i) => i === pose && it.hasOwnProperty('missileFins'))
       if (p) {
         const address = parseInt(p.missileFins.offset, 16) + (2 + (offset / 2))
         const data = await this.getOffsetData(address, 2)
+        const computedFlips = ['hFlip', 'vFlip'].reduce(
+          (o, flip) => {
+            o[flip] = p.missileFins[flip][offset / 4 >= p.missileFins[flip].length ? 0 : offset / 4]
+            return o
+          },
+          {})
         return {
+          ...computedFlips,
           _address: p.missileFins.offset,
           _id: address,
           _updated: false,
+          tileNumber: p.missileFins.tile[offset / 4 >= p.missileFins.tile.length ? 0 : offset / 4],
           data: data.toJSON().data.map(it => it > 128 ? -(255 - it) : it),
           length: p.missileFins.length,
           loadByFrame: p.missileFins.loadByFrame

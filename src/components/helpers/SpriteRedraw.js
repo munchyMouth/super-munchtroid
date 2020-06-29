@@ -63,13 +63,38 @@ export default {
   },
   redrawMissileFinCursor (R) {
     if (this.missileFinsVisible) {
-      this.context.drawImage(
-        this.getBeamCursor,
-        ((this.spriteRatio * (this.missileFins.data[0])) + this.spriteZeroX),
-        ((this.spriteRatio * (this.missileFins.data[1])) + this.spriteZeroY),
-        R / 3 * this.getBeamCursor.width,
-        R / 3 * this.getBeamCursor.height
-      )
+      // debugger
+      const { data, hFlip, vFlip, tile, tileNumber } = this.missileFins
+
+      const computeHOffset = () => {
+        if (tileNumber === 0) return 1
+        if (tileNumber === 1 && hFlip) return 1
+        return 0
+      }
+      const computeVOffset = () => {
+        if (tileNumber === 1) return 1
+        if (tileNumber === 3 && hFlip) return 1
+        return 0
+      }
+
+      this.redrawSprite({
+        data: tile.data,
+        hFlip: hFlip,
+        vFlip: vFlip,
+        R,
+        xOffset: data[0] - computeHOffset(),
+        yOffset: data[1] - computeVOffset()
+      })
+
+      // ((this.spriteRatio * (this.missileFins.data[0])) + this.spriteZeroX),
+      // ((this.spriteRatio * (this.missileFins.data[1])) + this.spriteZeroY)
+      // this.context.drawImage(
+      //   this.getBeamCursor,
+      //   ((this.spriteRatio * (this.missileFins.data[0])) + this.spriteZeroX),
+      //   ((this.spriteRatio * (this.missileFins.data[1])) + this.spriteZeroY),
+      //   R / 3 * this.getBeamCursor.width,
+      //   R / 3 * this.getBeamCursor.height
+      // )
     }
   },
   redrawSprite ({ _address, data, hFlip, R, vFlip, xOffset, yOffset }) {
@@ -78,7 +103,8 @@ export default {
         if (pixel) {
           const _palette = this.getActivePaletteInPalettes.palette[pixel]
           this.context.fillStyle = !this.activeSpriteAddress ||
-            this.activeSpriteAddress === _address
+            this.activeSpriteAddress === _address ||
+            _address === 'ignore'
             ? _palette
             : `#${this.setSpriteBoxMaskColor(_palette)}`
           this.context.fillRect(

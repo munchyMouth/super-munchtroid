@@ -144,6 +144,7 @@
                   <div><strong>y:</strong> {{ missileFins.data[1] }}</div>
                   <div>${{ missileFins._id.toString(16) }}</div>
                 </div>
+                {{ missileFins.tile }}
               </div>
               <br>
               <div>
