@@ -34,5 +34,19 @@
   "FRAME_PROGRESS_TABLE": "0x9594E",
   "INDEX_OFFSET_TABLE_BOT": "0x9145D",
   "INDEX_OFFSET_TABLE_TOP": "0x91263",
+  "MISSILE_FINS": [
+    "0xD1A00",
+    "0xD1C00",
+    "0xD1E00",
+    "0xD2000",
+    "0xD2200",
+    "0xD2400",
+    "0xD2600",
+    "0xD2800",
+    "0xD2A00",
+    "0xD2C00",
+    "0xD2E00",
+    "0xD3000"
+  ],
   "REDUNDANT_LIFT_POSE_TORSO_TILE": "0xD5620"
 }
