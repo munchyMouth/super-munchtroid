@@ -168,7 +168,7 @@
                     />
                   </button>
                 </div>
-                <div v-if="!missileFins.loadByFrame && currentFrameIndex === 0 && frames.length > 1">
+                <div v-if="!missileFins.uniqueFrames && currentFrameIndex === 0">
                   <button
                     :class="`no-style ${missileFinsHasUpdates ? '--active' : ''}`"
                     title="save frame 1 fin coordinates across ALL frames of this pose"

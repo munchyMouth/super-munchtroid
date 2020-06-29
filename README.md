@@ -6,15 +6,18 @@
 ----
 
 ### Downloads
-#### 2.29.0
-- <a href="https://drive.google.com/file/d/1B1Sxza9HBlnPAGf-F-AL4XX19s422Dd7/view?usp=sharing">Super Munchtroid-linux-x64 2.29.0</a>
-- <a href="https://drive.google.com/file/d/1k6wGAJtaIYDEXRKm4BrF3Bu2Rgo6UblN/view?usp=sharing">Super Munchtroid-win32-x64 2.29.0</a>
+#### 2.29.2
+- <a href="https://drive.google.com/file/d/1d7uZbvX6PZuuJ3DV6qEm_XSI8DxoE1mZ/view?usp=sharing">Super Munchtroid-linux-x64 2.29.2</a>
+- <a href="https://drive.google.com/file/d/162Hs_pkank55vkIUpntqlk3hKxof3FxE/view?usp=sharing">Super Munchtroid-win32-x64 2.29.2</a>
 
 ### Documentation
 - <a href="https://drive.google.com/file/d/1dpVqQFGf1IFnNqHQtrXlWy0m_3EAYzyP/view?usp=sharing">Latest Manual</a>
 - <a href="http://forum.metroidconstruction.com/index.php/topic,4917.0.html">News</a>
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
+
+2.29.2 patch:
+I found a few wildcards in the missile offset stuff: some poses with 1 frame actually have 3 frames of missile coordinates! you need to run the overwrite save stuff on poses 6D, 6E, 6F and 70 to make sure that the coordinates work properly in those instances.
 
 2.29.0 Features
 - beam cursor management for sparks and beams

@@ -12,7 +12,7 @@
       "tile": [1],
       "offset": "0x849DD",
       "length": 20,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -24,7 +24,7 @@
       "tile": [1],
       "offset": "0x849F1",
       "length": 20,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -36,7 +36,7 @@
       "tile": [3, 0],
       "offset": "0x84A07",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -48,7 +48,7 @@
       "tile": [3, 0],
       "offset": "0x84A0F",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -60,7 +60,7 @@
       "tile": [3],
       "offset": "0x84A15",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -72,7 +72,7 @@
       "tile": [3],
       "offset": "0x84A19",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -84,7 +84,7 @@
       "tile": [2],
       "offset": "0x84A1D",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -96,7 +96,7 @@
       "tile": [2],
       "offset": "0x84A21",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -116,7 +116,7 @@
       "tile": [1],
       "offset": "0x84A25",
       "length": 22,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -128,7 +128,7 @@
       "tile": [1],
       "offset": "0x84A3B",
       "length": 22,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -148,7 +148,7 @@
       "tile": [3],
       "offset": "0x84A51",
       "length": 22,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -160,7 +160,7 @@
       "tile": [3],
       "offset": "0x84A67",
       "length": 22,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -172,7 +172,7 @@
       "tile": [2],
       "offset": "0x84A7D",
       "length": 22,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -184,7 +184,7 @@
       "tile": [2],
       "offset": "0x84A93",
       "length": 22,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -196,7 +196,7 @@
       "tile": [1],
       "offset": "0x84AA9",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -208,7 +208,7 @@
       "tile": [1],
       "offset": "0x84AAF",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -220,7 +220,7 @@
       "tile": [3, 0],
       "offset": "0x84AB7",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -232,7 +232,7 @@
       "tile": [3, 0],
       "offset": "0x84ABF",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -244,7 +244,7 @@
       "tile": [3, 0],
       "offset": "0x84AC5",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -256,7 +256,7 @@
       "tile": [2, 0],
       "offset": "0x84ACB",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -324,7 +324,7 @@
       "tile": [1],
       "offset": "0x84B5D",
       "length": 20,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -336,7 +336,7 @@
       "tile": [1],
       "offset": "0x84B71",
       "length": 20,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -356,7 +356,7 @@
       "tile": [3, 0],
       "offset": "0x84B1F",
       "length": 8,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -368,19 +368,19 @@
       "tile": [3, 0],
       "offset": "0x84B29",
       "length": 8,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
     "name": "2D: Facing right - falling - aiming down",
     "unused": false,
     "missileFins": {
-      "hFlip": [false, true],
-      "vFlip": [true, false],
-      "tile": [2, 0],
+      "hFlip": [true, true],
+      "vFlip": [false, true],
+      "tile": [3, 0],
       "offset": "0x84B31",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -392,7 +392,7 @@
       "tile": [2, 0],
       "offset": "0x84B37",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -508,7 +508,7 @@
       "tile": [1],
       "offset": "0x84BA5",
       "length": 14,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -520,7 +520,7 @@
       "tile": [1],
       "offset": "0x84BB3",
       "length": 14,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -532,7 +532,7 @@
       "tile": [1],
       "offset": "0x84AD1",
       "length": 8,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -564,7 +564,7 @@
       "tile": [1],
       "offset": "0x84AD9",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -576,7 +576,7 @@
       "tile": [1],
       "offset": "0x84ADF",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -596,7 +596,7 @@
       "tile": [3, 0],
       "offset": "0x84C15",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -608,7 +608,7 @@
       "tile": [3, 0],
       "offset": "0x84C1B",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -684,7 +684,7 @@
       "tile": [1],
       "offset": "0x84AFD",
       "length": 16,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -696,7 +696,7 @@
       "tile": [1],
       "offset": "0x84B0D",
       "length": 16,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -708,7 +708,7 @@
       "tile": [3],
       "offset": "0x84AE5",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -720,7 +720,7 @@
       "tile": [3],
       "offset": "0x84AEB",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -732,7 +732,7 @@
       "tile": [2],
       "offset": "0x84AF1",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -744,7 +744,7 @@
       "tile": [2],
       "offset": "0x84AF7",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -753,10 +753,11 @@
     "missileFins": {
       "hFlip": [false],
       "vFlip": [false],
-      "tile": [2],
+      "tile": [3],
       "offset": "0x84B3D",
       "length": 8,
-      "loadByFrame": false
+      "uniqueFrames": false,
+      "comment": "this frame is special and has 3 sets of coordinates for a one frame pose"
     }
   },
   {
@@ -765,10 +766,11 @@
     "missileFins": {
       "hFlip": [true],
       "vFlip": [false],
-      "tile": [2],
+      "tile": [3],
       "offset": "0x84B45",
       "length": 8,
-      "loadByFrame": false
+      "uniqueFrames": false,
+      "comment": "this frame is special and has 3 sets of coordinates for a one frame pose"
     }
   },
   {
@@ -777,10 +779,11 @@
     "missileFins": {
       "hFlip": [true],
       "vFlip": [false],
-      "tile": [3],
+      "tile": [2],
       "offset": "0x84B4D",
       "length": 8,
-      "loadByFrame": false
+      "uniqueFrames": false,
+      "comment": "this frame is special and has 3 sets of coordinates for a one frame pose"
     }
   },
   {
@@ -789,10 +792,12 @@
     "missileFins": {
       "hFlip": [false],
       "vFlip": [false],
-      "tile": [3],
+      "tile": [2],
       "offset": "0x84B55",
       "length": 8,
-      "loadByFrame": false
+      "uniqueFrames": false,
+      "comment": "this frame is special and has 3 sets of coordinates for a one frame pose"
+
     }
   },
   {
@@ -804,7 +809,7 @@
       "tile": [3],
       "offset": "0x84B85",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -816,7 +821,7 @@
       "tile": [3],
       "offset": "0x84B89",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -828,7 +833,7 @@
       "tile": [2],
       "offset": "0x84B8D",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -840,7 +845,7 @@
       "tile": [2],
       "offset": "0x84B91",
       "length": 4,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -852,7 +857,7 @@
       "tile": [3],
       "offset": "0x84BC1",
       "length": 14,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -864,7 +869,7 @@
       "tile": [3],
       "offset": "0x84BCF",
       "length": 14,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -876,7 +881,7 @@
       "tile": [2],
       "offset": "0x84BDD",
       "length": 14,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -888,7 +893,7 @@
       "tile": [2],
       "offset": "0x84BEB",
       "length": 14,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -948,7 +953,7 @@
       "tile": [3, 0],
       "offset": "0x84B97",
       "length": 6,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -960,7 +965,7 @@
       "tile": [3, 0],
       "offset": "0x84B9F",
       "length": 6,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {
@@ -1088,7 +1093,7 @@
       "tile": [1],
       "offset": "0x84BF9",
       "length": 12,
-      "loadByFrame": true
+      "uniqueFrames": true
     }
   },
   {
@@ -1104,7 +1109,7 @@
       "vFlip": [false],
       "tile": [1],
       "length": 8,
-      "loadByFrame": false
+      "uniqueFrames": false
     }
   },
   {

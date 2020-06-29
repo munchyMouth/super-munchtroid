@@ -81,7 +81,7 @@ const store = {
       data: [],
       hRef: [],
       vRef: [],
-      loadByFrame: false,
+      uniqueFrames: false,
       length: 0,
       show: false,
       tileNumber: 0,

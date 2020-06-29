@@ -111,7 +111,7 @@ export default stampit({ /* extends RomData, SamusProps */
           tileNumber: p.missileFins.tile[offset / 4 >= p.missileFins.tile.length ? 0 : offset / 4],
           data: data.toJSON().data.map(it => it > 128 ? -(255 - it) : it),
           length: p.missileFins.length,
-          loadByFrame: p.missileFins.loadByFrame
+          uniqueFrames: p.missileFins.uniqueFrames
         }
       } else return undefined
     }.bind(this)
