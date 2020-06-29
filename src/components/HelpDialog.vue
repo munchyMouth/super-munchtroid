@@ -41,6 +41,10 @@
             <td>ctrl + right</td>
             <td>load next frame</td>
           </tr>
+          <tr>
+            <td>ctrl + m</td>
+            <td>show/hide missile fins (where available)</td>
+          </tr>
         </table>
         <br>
         <table>

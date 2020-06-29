@@ -30,12 +30,11 @@ export default stampit(
         const { frames, loadVRAMTiles, loadDMAEntries, loadTileMaps } =
           await this.setPose(pose).setFrames(frameCount)
         await loadDMAEntries(dmaOffset)
+        const fins = POSES ? await loadMissileFinOffsets(dmaOffset, pose, POSES) : undefined
+        if (fins) fins.tile = await this.getMissileFinTile(dmaOffset, pose, POSES)
 
         return {
-          fins: POSES ? {
-            ...(await loadMissileFinOffsets(dmaOffset, pose, POSES)),
-            tile: await this.getMissileFinTile(dmaOffset, pose, POSES)
-          } : undefined,
+          fins,
           frames: frameCount ? new Array(frameCount).fill(0) : frames,
           tileMaps: await loadTileMaps(dmaOffset),
           vram: await loadVRAMTiles()

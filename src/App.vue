@@ -23,6 +23,8 @@ export default {
       'edit16x16',
       'noSelectedTile',
       'loading',
+      'missileFins',
+      'missileFinsVisible',
       'currentFrameIndex',
       'eventObserver',
       'hasUnsavedSprites',
@@ -240,6 +242,7 @@ export default {
       'setEventObserver',
       'setError',
       'setLoading',
+      'setMissileFinsShow',
       'setPalettes',
       'setSamus',
       'setSettings',
@@ -310,6 +313,9 @@ export default {
           break
         case evt.keyCode === 37 && evt.ctrlKey: // ctrl+left
           this.decrementFrameToggle()
+          break
+        case evt.keyCode === 77 && evt.ctrlKey: // ctrl+m
+          if (this.missileFins) this.setMissileFinsShow(!this.missileFinsVisible)
           break
         case this.tileMaps && Object.keys(this.tileMaps).length && !this.noSelectedTile:
           this.handleEditorCommands(evt)

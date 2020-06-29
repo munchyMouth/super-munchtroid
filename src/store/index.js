@@ -79,9 +79,13 @@ const store = {
       _id: undefined,
       _updated: false,
       data: [],
+      hRef: [],
+      vRef: [],
       loadByFrame: false,
       length: 0,
       show: false,
+      tileNumber: 0,
+      tile: {},
       undo: []
     },
     missileFinsResetToggle: false,

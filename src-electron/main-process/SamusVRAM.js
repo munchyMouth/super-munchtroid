@@ -109,7 +109,6 @@ export default stampit({ /* extends RomData, SamusProps, SamusAnimations */
     this.getMissileFinTile = async function (offset = 0, pose, POSES = {}) {
       const p = POSES.find((it, i) => i === pose && it.hasOwnProperty('missileFins'))
       if (p) {
-        console.log('MY FRAME', offset / 2)
         const finIndex =
           p.missileFins.tile[offset / 4 >= p.missileFins.tile.length ? 0 : offset / 4]
         const finAddress = MISSILE_FINS[finIndex]
