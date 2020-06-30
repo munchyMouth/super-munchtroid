@@ -107,10 +107,10 @@ export default {
       : undefined
   },
   SET_MISSILE_FINS_DATA (state, d) {
-    state.missileFins.data = d
+    if (state.missileFins) state.missileFins.data = d
   },
   SET_MISSILE_FINS_SHOW (state, v) {
-    state.missileFins.show = v
+    if (state.missileFins) state.missileFins.show = v
   },
   UNDO_MISSILE_FINS (state) {
     state.missileFins.data = clone(state.missileFins.undo)
