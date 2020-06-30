@@ -7,7 +7,7 @@
 
 ### Downloads
 #### 2.29.3
-- <a href="">Super Munchtroid-linux-x64 2.29.3</a>
+- <a href="https://drive.google.com/file/d/1c2UWgE5lAHWXM2GGJnpZZ1oLs3DfsMZ9/view?usp=sharing">Super Munchtroid-linux-x64 2.29.3</a>
 - <a href="https://drive.google.com/file/d/1TrrWr1Nu62zbXalPpkh74Ata2KOjVBeQ/view?usp=sharing">Super Munchtroid-win32-x64 2.29.3</a>
 
 ### Documentation
