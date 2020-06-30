@@ -146,8 +146,8 @@ module.exports = function (ctx) {
         }
         cfg.resolve.extensions.push('json')
       },
-      packager: {
-        platform: 'win32'
+      packager: { // uncomment to build for windows
+        // platform: 'win32'
       },
       builder: {
         // https://www.electron.build/configuration/configuration

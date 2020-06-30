@@ -1,6 +1,6 @@
 {
   "name": "samus-palette-art-repointing-tool-app",
-  "version": "2.29.2",
+  "version": "2.29.3",
   "description": "Samus Palette, Art, Repointing Tool App",
   "productName": "SPARTA",
   "cordovaId": "org.cordova.quasar.app",
