@@ -6,9 +6,9 @@
 ----
 
 ### Downloads
-#### 2.29.3
-- <a href="https://drive.google.com/file/d/1c2UWgE5lAHWXM2GGJnpZZ1oLs3DfsMZ9/view?usp=sharing">Super Munchtroid-linux-x64 2.29.3</a>
-- <a href="https://drive.google.com/file/d/1TrrWr1Nu62zbXalPpkh74Ata2KOjVBeQ/view?usp=sharing">Super Munchtroid-win32-x64 2.29.3</a>
+#### 2.30.0
+- <a href="https://drive.google.com/file/d/1RibTqH1QpDa3hXXYX__6v7o7E_jCVr84/view?usp=sharing">Super Munchtroid-linux-x64 2.30.0</a>
+- <a href="https://drive.google.com/file/d/1Cm59UqplR5_t86wHG9BvfYSEIyT_kH0r/view?usp=sharing">Super Munchtroid-win32-x64 2.30.0</a>
 
 ### Documentation
 - <a href="https://drive.google.com/file/d/1dpVqQFGf1IFnNqHQtrXlWy0m_3EAYzyP/view?usp=sharing">Latest Manual</a>
