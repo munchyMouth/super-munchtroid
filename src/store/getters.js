@@ -14,6 +14,11 @@ import { handleIrregularHalfLogic } from '../components/Miscellaneous'
 export default {
   activeSpriteAddress: state => state.activeSprite
     ? state.activeSprite._address : undefined,
+  calculateDMAFrameIndex: state => {
+    return (state.tab === 'special')
+      ? state.currentFrameIndex + (state.settings.SPECIAL_POSES[state.currentPose || 0].dmaOffset / 4)
+      : state.currentFrameIndex
+  },
   computedSelectedTiles: state => {
     const { half, index, no, part } = state.selectedTile
     return (state.edit16x16)

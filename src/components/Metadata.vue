@@ -176,6 +176,11 @@
               >
             </strong>
           </div>
+          <label style="margin-top:5px;"><span class="metadata__flag">(PC)</span></label>
+          <input
+            v-model="frame.topLong"
+            disabled="disabled"
+          >
           <div>&nbsp;&nbsp;&nbsp;&#8600;</div>
         </div>
         <div>
@@ -203,6 +208,11 @@
               >
             </strong>
           </div>
+          <label style="margin-top:5px;"><span class="metadata__flag">(PC)</span></label>
+          <input
+            v-model="frame.bottomLong"
+            disabled="disabled"
+          >
           <div>&#8601;&nbsp;&nbsp;&nbsp;</div>
         </div>
       </div>
@@ -239,7 +249,9 @@ export default {
       },
       frame: {
         top: '',
-        bottom: ''
+        topLong: '',
+        bottom: '',
+        BottomLong: ''
       },
       loTop: true,
       loBot: true
@@ -247,7 +259,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentFrameIndex', 'filePath', 'tileMaps'])
+    ...mapGetters(['calculateDMAFrameIndex', 'currentFrameIndex', 'filePath', 'tileMaps'])
   },
   watch: {
     vram (newValue) {
@@ -264,6 +276,8 @@ export default {
       this.dma.bottom = clone(this.vram._dma.bottom)
       this.frame.top = this.tileMaps.top.tileMap._addressShort
       this.frame.bottom = this.tileMaps.bottom.tileMap._addressShort
+      this.frame.topLong = this.tileMaps.top.tileMap._address
+      this.frame.bottomLong = this.tileMaps.bottom.tileMap._address
     },
     paste ({ half, dma, frame }) {
       this.dma[half] = clone(dma[half])
@@ -280,7 +294,7 @@ export default {
                 {
                   filePath: this.filePath,
                   dma: {
-                    index: this.currentFrameIndex,
+                    index: this.calculateDMAFrameIndex,
                     _id: this.vram._id,
                     value: [this.dma.top.table, this.dma.top.entry, this.dma.bottom.table, this.dma.bottom.entry]
                   },

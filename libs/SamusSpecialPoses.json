@@ -8,8 +8,56 @@
   {
     "name": "Facing forward - Varia/Gravity suit - loading",
     "index": 155,
-    "dmaOffset": 8,
+    "dmaOffset": 4,
     "frameCount": 94
+  },
+  {
+    "name": "Facing right - low health",
+    "index": 1,
+    "dmaOffset": 20,
+    "frameCount": 4
+  },
+  {
+    "name": "Facing left - low health",
+    "index": 2,
+    "dmaOffset": 20,
+    "frameCount": 4
+  },
+  {
+    "name": "Facing right - crouching - low health",
+    "index": 39,
+    "dmaOffset": 20,
+    "frameCount": 4
+  },
+  {
+    "name": "Facing left - crouching - low health",
+    "index": 40,
+    "dmaOffset": 20,
+    "frameCount": 4
+  },
+  {
+    "name": "Facing right - wall jump into space jump",
+    "index": 131,
+    "dmaOffset": 52,
+    "frameCount": 8
+  },
+  {
+    "name": "Facing left - wall jump into space jump",
+    "index": 132,
+    "dmaOffset": 52,
+    "frameCount": 8
+  },
+  {
+    "name": "Facing right - wall jump into screw attack",
+    "index": 131,
+    "dmaOffset": 92,
+    "frameCount": 24
+  },
+  {
+    "name": "Facing left - wall jump into screw attack",
+    "index": 132,
+    "dmaOffset": 92,
+    "frameCount": 24
   },
   {
     "name": "Facing right - Samus trying to stand after MB attack - index 1 (?)",
