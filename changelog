@@ -1,3 +1,8 @@
+04/07/20 2.30 Features
+- Fix to repointing tool with Special poses
+- PC addresses exposed in repointing tool for tilemap
+- additional special poses to cover low health tilemaps(!) and wall jump space jump/screw attack poses
+
 29/06/20 2.29.0 Features
 - beam cursor management for sparks and beams
 - missile fin controls

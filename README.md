@@ -16,6 +16,11 @@
 - <a href="https://www.youtube.com/watch?v=YQ3cZvTpn-Y&feature=youtu.be">Video Tutorial</a>
 - <a href="https://youtu.be/vdhjD_CzNHM">2.6.1 up-to 2.10.0 update video</a>
 
+2.30 Features:
+- various bug fixes to repointing tool
+- PC addresses exposed in repointing tool for tilemap
+- additional special poses to cover low health tilemaps(!) and wall jump space jump/screw attack poses
+
 2.29.3 patch:
 Bug slipped through the net :/ so it goes sometimes. Fixed now.
 
