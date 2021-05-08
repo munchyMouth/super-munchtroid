@@ -13,7 +13,7 @@
     "build-win32": "quasar build -m electron win32 -t mat -b builder"
   },
   "dependencies": {
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "splitpanes": "^1.14.1",
     "stampit": "^4.2.0",
     "vue-awesome": "^3.5.1"
